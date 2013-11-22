@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<preface id="preface">
+  <title>Preface</title>
+  
+  <para>The aim of this document is to provide an effective guide for developers to help
+  them using the Logica Business Process Management Framework.
+  </para>
+  
+  <section id="preface-section-how-to-use">
+  	<title>How to use this book ?</title>   	
+   	<para>
+   	 If you are novice and want be initiated to framework you can use the getting starter chapter.
+  	</para>  	
+  	<para>
+  	If you already have some experience with BPM tools and want to improve your skills
+  	you can read the chapter upon advanced concept.
+  	</para>  	
+  	<para>
+  	For  deployment issues please refer to Installation procedure, setting up section, 
+  	exploitation and administration chapters.
+  	</para>  	
+  </section>  
+  
+  <!-- Convention de polices -->
+  <section id="preface-section-fontConventions">
+    <title>Font conventions</title>
+
+    <para>
+     The book follows naming conventions and font usage. Understanding these conventions up-front makes
+    it easier to read this book.
+    </para>
+
+    <!-- Italique -->
+    <variablelist>
+      <varlistentry>
+        <term>
+          <emphasis role="italic">Italic</emphasis>
+        </term>
+        <listitem>
+          <para>
+            Used for filenames, file extensions, url, application names,
+            important terms and finally keywords and first appearance of new terms.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><literal moreinfo="none">Constant width</literal></term>
+
+        <listitem>
+          <para>Used for Java class names, methods, variables, properties,
+          data types, database elements, and snippets of code that appear in
+          text.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><emphasis role="bold"> <literal moreinfo="none">Constant width
+        bold</literal> </emphasis></term>
+
+        <listitem>
+          <para>Used for commands you enter at the command line and to
+          highlight new code inserted in a running example.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><emphasis role="italic"> <literal moreinfo="none">Constant width
+        italic</literal> </emphasis></term>
+
+        <listitem>
+          <para>Used to annotate output.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  
+  <section id="preface-section--contactUs">
+    <title>How to Contact Us</title>
+
+    <para>To comment or ask for technical support about this book, send email
+    to:</para>
+
+    <blockquote>
+      <para><emphasis role="italic"> <email>bpf.support@logica.com</email>
+      </emphasis></para>
+    </blockquote>
+   
+  </section>
+
+  <section id="preface-section-acknowledgements">
+    <title>Acknowledgements</title>
+    <para>Logica would like to thank the following contributors. The people
+    listed below have provide feedback which has helped improve the quality of
+    this book. Thanks to Laurent Gauthier, Yohann Botquelen and Gary Grandjean.
+    </para>
+  </section>
+</preface>

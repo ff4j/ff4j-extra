@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<preface id="preface-copyright" role="copyrightpg">
+  <title>Copyright</title>
+
+  <para>Copyright 2013 ff4j</para>
+
+  <para>Online version published by Cedrick LUNVEN</para>
+
+  <para>Java(TM) and all Java-based trademarks and logos are trademarks or
+  registered trademarks of Sun Microsystems, Inc., in the United States and
+  other countries. Many of the designations used by manufacturers and sellers
+  to distinguish their products are claimed as trademarks. Where those
+  designations appear in this book, and Logica, was aware of a
+  trademark claim, the designations have been printed in caps or initial
+  caps.</para>
+
+  <para>While every precaution has been taken in the preparation of this book,
+  the publisher and authors assume no responsibility for errors or omissions,
+  or for damages resulting from the use of the information contained
+  herein.</para>
+
+    <para>This work is licensed under Apache2</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>You must attribute the work to Logica, Inc. with a link to
+        <ulink
+        url="http://www.sonatype.com">http://www.logica.com</ulink>.</para>
+      </listitem>
+
+      <listitem>
+        <para>You may not use this work for commercial purposes.</para>
+      </listitem>
+
+      <listitem>
+        <para>You may not alter, transform, or build upon this work.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>1. Licence : </para>
+    
+    <para>2. Restrictions.
+	Licensee shall not modify, copy, </para>
+		
+	<para>3. Warranty of Title.
+	 Developer hereby represents and warrants to Licensee that Developer is the owner of the Software or otherwise
+	 has the right to grant to Licensee the rights set forth in this Agreement. In the event any breach or threatened
+	 breach of the foregoing representation and warranty, Licensee's sole remedy shall be to require Developer or to
+	 either: i) procure, at Developer's expense, the right to use the Software, ii) replace the Software or any part
+	 thereof that is in breach and replace it with Software of comparable functionality that does not cause any breach,
+	 or iii) refund to Licensee the full amount of the license fee upon the return of the Software and all copies
+	 thereof to Developer.
+	</para>    
+   
+</preface>

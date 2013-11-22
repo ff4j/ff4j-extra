@@ -1,0 +1,3 @@
+class CannotCloseSessionException
+!!!170852.java!!!	CannotCloseSessionException(in finalMessage : String, in errorCode : String, in errorMessage : String)
+        super(finalMessage, errorCode, errorMessage);

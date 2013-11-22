@@ -1,0 +1,81 @@
+format 72
+
+classcanvas 134884 class_ref 144612 // BpmConnectionServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 58 206 2000
+end
+classcanvas 135140 class_ref 144740 // BpmQueueServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 88 118 2010
+end
+classcanvas 135268 class_ref 144868 // BpmTaskServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 625 205 2005
+end
+classcanvas 135396 class_ref 144996 // BpmProcessServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 190 276 2010
+end
+classcanvas 135524 class_ref 145124 // BpmUserGroupServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 603 118 2015
+end
+classcanvas 135652 class_ref 140900 // FilenetProcessEngineServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 521 308 2000
+end
+classcanvas 135780 class_ref 145252 // TibcoProcessEngineServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 302 357 2020
+end
+classcanvas 135908 class_ref 128484 // BpmTemplate
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 350 111 3005
+end
+classcanvas 136932 class_ref 144484 // BpmDaoSupport
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 344 16 3011
+end
+relationcanvas 136036 relation_ref 144868 // <unidirectional association>
+  from ref 135908 z 3006 to ref 134884
+  role_a_pos 209 185 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136164 relation_ref 144996 // <unidirectional association>
+  from ref 135908 z 3006 to ref 135140
+  role_a_pos 220 123 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136292 relation_ref 145124 // <unidirectional association>
+  from ref 135908 z 3006 to ref 135268
+  role_a_pos 553 194 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136420 relation_ref 145252 // <unidirectional association>
+  decenter_end 930
+  from ref 135908 z 3006 to ref 135396
+  role_a_pos 325 258 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136548 relation_ref 145380 // <unidirectional association>
+  from ref 135908 z 3006 to ref 135524
+  role_a_pos 531 123 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136676 relation_ref 145508 // <unidirectional association>
+  from ref 135908 z 3006 to ref 135780
+  role_a_pos 401 339 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136804 relation_ref 145636 // <unidirectional association>
+  from ref 135908 z 3006 to ref 135652
+  role_a_pos 589 290 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137060 relation_ref 144612 // <unidirectional association>
+  decenter_end 451
+  from ref 136932 z 3012 to ref 135908
+  role_a_pos 419 93 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

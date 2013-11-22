@@ -1,0 +1,12 @@
+class BPFServicesFactory
+!!!128356.java!!!	initialize(in settingsFile : String) : void
+        if (instance == null) {
+            String[] ctxFiles = new String[] {FILENAME_CONTEXT_CORE, settingsFile};
+            instance = new BPFServicesFactory();
+            instance.bpmTemplate = new ClassPathXmlApplicationContext(ctxFiles).
+                    getBean(BEANID_TEMPLATE, BpmTemplate.class);
+         }
+!!!128484.java!!!	getBpmTemplate() : BpmTemplate
+        Assert.state(instance != null,
+        "BPFServicesFactory has not been initialized, [use initialize('settings file')]");
+        return instance.bpmTemplate;

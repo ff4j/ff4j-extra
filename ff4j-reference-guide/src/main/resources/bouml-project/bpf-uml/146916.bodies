@@ -1,0 +1,5 @@
+class CustomPropertyIPE
+!!!221412.java!!!	CustomPropertyIPE(in pkey : String)
+        this.key = pkey;
+!!!221540.java!!!	getKey() : String
+        return key;

@@ -1,0 +1,5 @@
+class BpmLibraryType
+!!!166500.java!!!	BpmLibraryType(in pkey : String)
+        this.key = pkey;
+!!!166628.java!!!	getKey() : String
+        return key;

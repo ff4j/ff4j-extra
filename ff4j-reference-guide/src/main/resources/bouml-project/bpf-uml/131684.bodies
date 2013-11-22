@@ -1,0 +1,29 @@
+class ProcessDefinition
+!!!153188.java!!!	getName() : String
+        return name;
+!!!153316.java!!!	setName(in pname : String) : void
+        this.name = pname;
+!!!153444.java!!!	getDescription() : String
+        return description;
+!!!153572.java!!!	setDescription(in pdescription : String) : void
+        this.description = pdescription;
+!!!153700.java!!!	getMinorVersion() : int
+        return minorVersion;
+!!!153828.java!!!	setMinorVersion(in pminorVersion : int) : void
+        this.minorVersion = pminorVersion;
+!!!153956.java!!!	getMajorVersion() : int
+        return majorVersion;
+!!!154084.java!!!	setMajorVersion(in pmajorVersion : int) : void
+        this.majorVersion = pmajorVersion;
+!!!154212.java!!!	getFields() : Field
+        return fields;
+!!!154340.java!!!	setFields(in pfields : Map< String, Field >) : void
+        this.fields = pfields;
+!!!154468.java!!!	getSteps() : StepDefinition
+        return steps;
+!!!154596.java!!!	setSteps(in psteps : Map< String, StepDefinition >) : void
+        this.steps = psteps;
+!!!154724.java!!!	getMaps() : MapDefinition
+        return maps;
+!!!154852.java!!!	setMaps(in pmaps : Map< String, MapDefinition >) : void
+        this.maps = pmaps;

@@ -1,0 +1,18 @@
+class BpmDataSource
+!!!180836.java!!!	getConnection() : Connection
+        throw new UnsupportedOperationException("Do not use SQL element but CCI connection, use getBpmConnection");
+!!!180964.java!!!	getConnection(in user : String, in password : String) : Connection
+        // is BpmCCIConnection and BpmSqlConnection are required.
+        throw new UnsupportedOperationException("Do not use SQL element but CCI connection");
+!!!181092.java!!!	getLogWriter() : PrintWriter
+        return this.printWriter;
+!!!181220.java!!!	getLoginTimeout() : int
+        return this.loginTimeOutSeconds;
+!!!181348.java!!!	setLogWriter(in pOut : PrintWriter) : void
+        // Has already been defined in the constructor.
+!!!181476.java!!!	setLoginTimeout(in pSeconds : int) : void
+        this.loginTimeOutSeconds = pSeconds;
+!!!181604.java!!!	setReference(in pReference : Reference) : void
+        this.reference = pReference;
+!!!181732.java!!!	getReference() : Reference
+        return this.reference;

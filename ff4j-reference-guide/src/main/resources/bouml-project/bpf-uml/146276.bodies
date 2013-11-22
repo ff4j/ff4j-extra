@@ -1,0 +1,40 @@
+class Participation
+!!!227812.java!!!	Participation()
+        enableEverydays();
+!!!227940.java!!!	Participation(in puserNames : Set< String >, in startTime : Date, in endTime : Date)
+        this.userNames  = puserNames;
+        this.start      = startTime;
+        this.end        = endTime;
+        enableEverydays();
+!!!228068.java!!!	isEnabled(in day : DayOfWeek) : boolean
+        return (weekPolicy == (weekPolicy & day.getOffset()));
+!!!228196.java!!!	enableFromMondaysToFridays() : void
+        enable(DayOfWeek.MONDAY);
+        enable(DayOfWeek.TUESDAY);
+        enable(DayOfWeek.WEDNESDAY);
+        enable(DayOfWeek.THURSDAY);
+        enable(DayOfWeek.FRIDAY);
+!!!228324.java!!!	enableEverydays() : void
+        enableFromMondaysToFridays();
+        enable(DayOfWeek.SATURDAY);
+        enable(DayOfWeek.SUNDAY);
+!!!228452.java!!!	enable(in day : DayOfWeek) : void
+        weekPolicy = (weekPolicy | (1 << day.getOffset()));
+!!!228580.java!!!	disable(in day : DayOfWeek) : void
+        weekPolicy = (weekPolicy & ~(1 << day.getOffset()));
+!!!228708.java!!!	getStart() : Date
+        return start;
+!!!228836.java!!!	setStart(in pstart : Date) : void
+        this.start = pstart;
+!!!228964.java!!!	getEnd() : Date
+        return end;
+!!!229092.java!!!	setEnd(in pend : Date) : void
+        this.end = pend;
+!!!229220.java!!!	getUserNames() : Set< String >
+        return userNames;
+!!!229348.java!!!	setUserNames(in puserNames : Set< String >) : void
+        this.userNames = puserNames;
+!!!229476.java!!!	getWeekPolicy() : int
+        return weekPolicy;
+!!!229604.java!!!	setWeekPolicy(in pweekPolicy : int) : void
+        this.weekPolicy = pweekPolicy;

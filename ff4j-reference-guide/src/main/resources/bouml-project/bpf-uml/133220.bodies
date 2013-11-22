@@ -1,0 +1,3 @@
+class TaskResultSet
+!!!165860.java!!!	getTaskResults() : Task
+        return getResults();

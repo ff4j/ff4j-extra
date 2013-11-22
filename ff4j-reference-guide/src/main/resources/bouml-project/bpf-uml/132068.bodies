@@ -1,0 +1,26 @@
+class ProcessQuery
+!!!159204.java!!!	ProcessQuery(in procName : String)
+        setProcessName(procName);
+!!!159332.java!!!	ProcessQuery(in procName : String, in filterExp : String, in filterParam : Object)
+        this(procName);
+        setQueryExpression(filterExp);
+        setQueryParameters(filterParam);
+!!!159460.java!!!	ProcessQuery(in procName : String, in filterExp : String, in filterParam : Object, in pfieldnames : List< String >)
+        this(procName, filterExp, filterParam);
+        setFieldNames(pfieldnames);
+!!!159588.java!!!	isRetrievehistory() : boolean
+        return retrievehistory;
+!!!159716.java!!!	setRetrievehistory(in pretrievehistory : boolean) : void
+        this.retrievehistory = pretrievehistory;
+!!!159844.java!!!	getProcessName() : String
+        return processName;
+!!!159972.java!!!	setProcessName(in pprocessName : String) : void
+        this.processName = pprocessName;
+!!!160100.java!!!	getSortCriteria() : SortCriterion
+        return sortCriteria;
+!!!160228.java!!!	setSortCriteria(in psortCriteria : List< SortCriterion >) : void
+        this.sortCriteria = psortCriteria;
+!!!160356.java!!!	getFieldNames() : Collection< String >
+        return fieldNames;
+!!!160484.java!!!	setFieldNames(in pfieldNames : Collection< String >) : void
+        this.fieldNames = pfieldNames;

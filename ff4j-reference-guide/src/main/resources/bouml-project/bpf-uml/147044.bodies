@@ -1,0 +1,65 @@
+class DataSourceIPE
+!!!221668.java!!!	getServerHost() : String
+        return serverHost;
+!!!221796.java!!!	setServerHost(in pserverHost : String) : void
+        this.serverHost = pserverHost;
+!!!221924.java!!!	getConnectionPort() : int
+        return connectionPort;
+!!!222052.java!!!	setConnectionPort(in pconnectionPort : int) : void
+        this.connectionPort = pconnectionPort;
+!!!222180.java!!!	getNodeName() : String
+        return nodeName;
+!!!222308.java!!!	setNodeName(in pnodeName : String) : void
+        this.nodeName = pnodeName;
+!!!222436.java!!!	isUseDirector() : boolean
+        return useDirector;
+!!!222564.java!!!	setUseDirector(in puseDirector : boolean) : void
+        this.useDirector = puseDirector;
+!!!222692.java!!!	getRmiLogLevel() : SsoRmiLogLevel
+        return rmiLogLevel;
+!!!222820.java!!!	setRmiLogLevel(in prmiLogLevel : SsoRmiLogLevel) : void
+        this.rmiLogLevel = prmiLogLevel;
+!!!222948.java!!!	getRmiLogDirectory() : String
+        return rmiLogDirectory;
+!!!223076.java!!!	setRmiLogDirectory(in prmiLogDirectory : String) : void
+        this.rmiLogDirectory = prmiLogDirectory;
+!!!223204.java!!!	getRmiLogMaxSize() : short
+        return rmiLogMaxSize;
+!!!223332.java!!!	setRmiLogMaxSize(in prmiLogMaxSize : short) : void
+        this.rmiLogMaxSize = prmiLogMaxSize;
+!!!223460.java!!!	isRmiLogActive() : boolean
+        return rmiLogActive;
+!!!223588.java!!!	setRmiLogActive(in prmiLogActive : boolean) : void
+        this.rmiLogActive = prmiLogActive;
+!!!223716.java!!!	getRmiLogFileName() : String
+        return rmiLogFileName;
+!!!223844.java!!!	setRmiLogFileName(in prmiLogFileName : String) : void
+        this.rmiLogFileName = prmiLogFileName;
+!!!223972.java!!!	isModeTest() : boolean
+        return modeTest;
+!!!224100.java!!!	setModeTest(in pmodeTest : boolean) : void
+        this.modeTest = pmodeTest;
+!!!224228.java!!!	getMaxConnections() : int
+        return maxConnections;
+!!!224356.java!!!	setMaxConnections(in pmaxConnections : int) : void
+        this.maxConnections = pmaxConnections;
+!!!224484.java!!!	getErrorBundleName() : String
+        return errorBundleName;
+!!!224612.java!!!	setErrorBundleName(in perrorBundleName : String) : void
+        this.errorBundleName = perrorBundleName;
+!!!224740.java!!!	getLocale() : Locale
+        return locale;
+!!!224868.java!!!	setLocale(in plocale : Locale) : void
+        this.locale = plocale;
+!!!224996.java!!!	getBlocSize() : int
+        return blocSize;
+!!!225124.java!!!	setBlocSize(in pblocSize : int) : void
+        this.blocSize = pblocSize;
+!!!225252.java!!!	getImplementationMode() : String
+        return implementationMode;
+!!!225380.java!!!	setImplementationMode(in pimplementationMode : String) : void
+        this.implementationMode = pimplementationMode;
+!!!225508.java!!!	isWrapperFor(inout arg0 : Class< ? >) : boolean
+		return false;
+!!!225636.java!!!	unwrap(inout arg0 : Class< T >) : T
+		return null;

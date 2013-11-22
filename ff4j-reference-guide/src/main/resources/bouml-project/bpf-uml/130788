@@ -1,0 +1,406 @@
+format 72
+"process" // com::logica::bpm::exception::process
+  revision 1
+  modified_by 100 "lunvenc"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "d:/WORK/Workspaces/workspace-bpm/LOGICA/trunk/bpm-api/src/main/java/com/logica/bpm/exception/process/"
+  java_package "com.logica.bpm.exception.process"
+  classview 130148 "process"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 135780 "CannotStartProcessException"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Exception raised whenever try to start process and operation failed.
+
+<p>Failure could have different causes but if process definition
+is not found a {@link ProcessDefinitionNotFoundException} will be
+raised instead. It will take as parameters the processname but it's
+mostly the fields which are not well defined.
+with {@link InvalidFieldTypeException} or {@link FieldNotFoundException}.</p>
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 136932 // <generalisation>
+	relation 136932 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136932 // <generalisation>
+	  b parent class_ref 133860 // BpmRuntimeException
+      end
+
+      attribute 154084 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -1331427364794286228L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Unique class serial number over all JVM. "
+      end
+
+      operation 172260 "CannotStartProcessException"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "finalMessage" explicit_type "String"
+	  param in name "errorCode" explicit_type "String"
+	  param in name "errorMessage" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Unique Constructor.
+
+@param finalMessage
+     framework message
+@param errorCode
+     api error code
+@param errorMessage
+     api error message"
+      end
+    end
+
+    class 135908 "ProcessDefinitionNotFoundException"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Exception raised when {@link ProcessDefinition} is not found.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 137060 // <generalisation>
+	relation 137060 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137060 // <generalisation>
+	  b parent class_ref 133860 // BpmRuntimeException
+      end
+
+      attribute 154212 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 1031841382332694594L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      operation 172388 "ProcessDefinitionNotFoundException"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "finalMessage" explicit_type "String"
+	  param in name "errorCode" explicit_type "String"
+	  param in name "errorMessage" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Unique Constructor.
+
+@param finalMessage
+     framework message
+@param errorCode
+     api error code
+@param errorMessage
+     api error message"
+      end
+    end
+
+    class 136036 "ProcessDefinitionParsingException"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Exception raised when try to map ApiProcessDefinition object to framewoek.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 137188 // <generalisation>
+	relation 137188 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137188 // <generalisation>
+	  b parent class_ref 133732 // BpmParsingException
+      end
+
+      attribute 154340 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 521811674853035466L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing. *"
+      end
+
+      operation 172516 "ProcessDefinitionParsingException"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "finalMessage" explicit_type "String"
+	  param in name "errorCode" explicit_type "String"
+	  param in name "errorMessage" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Unique Constructor.
+
+@param finalMessage
+     framework message
+@param errorCode
+     api error code
+@param errorMessage
+     api error message"
+      end
+    end
+
+    class 136164 "ProcessNotFoundException"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Exception raised when {@link Process} is not found.
+
+@author <a href=\"cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 137316 // <generalisation>
+	relation 137316 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137316 // <generalisation>
+	  b parent class_ref 133860 // BpmRuntimeException
+      end
+
+      attribute 154468 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -6115398310371143771L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. *"
+      end
+
+      operation 172644 "ProcessNotFoundException"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "finalMessage" explicit_type "String"
+	  param in name "errorCode" explicit_type "String"
+	  param in name "errorMessage" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Unique Constructor.
+@param finalMessage
+     framework message
+@param errorCode
+     api error code
+@param errorMessage
+     api error message"
+      end
+    end
+
+    class 136292 "ProcessParsingException"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Exception raised when mapping from api Process to Framework {@link Process}.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 137444 // <generalisation>
+	relation 137444 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137444 // <generalisation>
+	  b parent class_ref 133732 // BpmParsingException
+      end
+
+      attribute 154596 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 7957901658477575257L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing. *"
+      end
+
+      operation 172772 "ProcessParsingException"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "finalMessage" explicit_type "String"
+	  param in name "errorCode" explicit_type "String"
+	  param in name "errorMessage" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Unique Constructor.
+@param finalMessage
+     framework message
+@param errorCode
+     api error code
+@param errorMessage
+     api error message"
+      end
+    end
+  end
+
+  deploymentview 129764 "process"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 134884 "CannotStartProcessException"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.exception.BpmRuntimeException;
+${definition}"
+      associated_classes
+	class_ref 135780 // CannotStartProcessException
+      end
+    end
+
+    artifact 135012 "ProcessDefinitionNotFoundException"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.exception.BpmRuntimeException;
+${definition}"
+      associated_classes
+	class_ref 135908 // ProcessDefinitionNotFoundException
+      end
+    end
+
+    artifact 135140 "ProcessDefinitionParsingException"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.exception.BpmParsingException;
+${definition}"
+      associated_classes
+	class_ref 136036 // ProcessDefinitionParsingException
+      end
+    end
+
+    artifact 135268 "ProcessNotFoundException"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.exception.BpmRuntimeException;
+${definition}"
+      associated_classes
+	class_ref 136164 // ProcessNotFoundException
+      end
+    end
+
+    artifact 135396 "ProcessParsingException"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.exception.BpmParsingException;
+${definition}"
+      associated_classes
+	class_ref 136292 // ProcessParsingException
+      end
+    end
+  end
+end

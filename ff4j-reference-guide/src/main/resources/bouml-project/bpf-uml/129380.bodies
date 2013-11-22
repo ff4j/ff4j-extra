@@ -1,0 +1,5 @@
+class BpmAttachmentType
+!!!165988.java!!!	BpmAttachmentType(in pkey : String)
+        this.key = pkey;
+!!!166116.java!!!	getKey() : String
+        return key;

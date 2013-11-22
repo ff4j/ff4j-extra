@@ -1,0 +1,891 @@
+format 72
+"domain" // com::logica::bpm::filenet::p8::domain
+  revision 1
+  modified_by 100 "lunvenc"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "d:/WORK/Workspaces/workspace-bpm/LOGICA/trunk/bpm-api/src/main/java/com/logica/bpm/filenet/p8/domain/"
+  java_package "com.logica.bpm.filenet.p8.domain"
+  classview 130916 "domain"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 138724 "Attachment"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "P8 Attachment Bean.
+
+@author <a href=\"mailto:cedrick.lunven@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 139876 // <generalisation>
+	relation 139876 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 139876 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 157284 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -1350395482269384204L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial. "
+      end
+
+      attribute 157412 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " attachment name. "
+      end
+
+      operation 175332 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property name.
+@return
+     the name value"
+      end
+
+      operation 175460 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property name.
+@param pname
+        the name to set"
+      end
+    end
+
+    class 138852 "CustomPropertyP8"
+      visibility public stereotype "enum"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Custom Property for an Engine. (some additional functions are provided by some editors and not other.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      attribute 157540 "FILENET_PROCESS_WORKFLOWDEV"
+	public type class_ref 138852 // CustomPropertyP8
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"filenet.process.workflowdefinition\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Custom Properties for FILENET. "
+      end
+
+      attribute 157668 "FILENET_ROSTER_NAME"
+	public type class_ref 138852 // CustomPropertyP8
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"filenet.roster.name\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Custom Properties for FILENET. "
+      end
+
+      attribute 157796 "FILENET_TASK_TYPE"
+	public type class_ref 138852 // CustomPropertyP8
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"filenet.task.type\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Custom Properties for FILENET. "
+      end
+
+      attribute 157924 "key"
+	private explicit_type "String"
+	stereotype "attribute"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " key of property. "
+      end
+
+      operation 175588 "CustomPropertyP8"
+	private explicit_return_type ""
+	nparams 1
+	  param in name "pkey" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Contructeur.
+
+@param pkey
+           properyt key."
+      end
+
+      operation 175716 "getKey"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour profile.
+@return the profile"
+      end
+    end
+
+    class 138980 "LogElement"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Bean reprensents filenet VWLogElement.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 140004 // <generalisation>
+	relation 140004 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140004 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 158052 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -9008923887396798662L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      attribute 158180 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " log name. "
+      end
+
+      attribute 158308 "message"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " log message. "
+      end
+
+      attribute 158436 "type"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " log type. "
+      end
+
+      attribute 158564 "wobNumber"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " wob. "
+      end
+
+      classrelation 140132 // fields (<unidirectional association>)
+	relation 140132 --->
+	  stereotype "Map"
+	  a role_name "fields" private
+	    comment " log fields. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String, ${type} > ${name}${value};
+"
+	    classrelation_ref 140132 // fields (<unidirectional association>)
+	  b parent class_ref 129636 // Field
+      end
+
+      operation 175844 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property name.
+@return
+     the name value"
+      end
+
+      operation 175972 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property name.
+@param pname
+        the name to set"
+      end
+
+      operation 176100 "getMessage"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property message.
+@return
+     the message value"
+      end
+
+      operation 176228 "setMessage"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pmessage" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property message.
+@param pmessage
+        the message to set"
+      end
+
+      operation 176356 "getType"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property type.
+@return
+     the type value"
+      end
+
+      operation 176484 "setType"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptype" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property type.
+@param ptype
+        the type to set"
+      end
+
+      operation 176612 "getWobNumber"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property wobNumber.
+@return
+     the wobNumber value"
+      end
+
+      operation 176740 "setWobNumber"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pwobNumber" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property wobNumber.
+@param pwobNumber
+        the wobNumber to set"
+      end
+
+      operation 176868 "getFields"
+	public return_type class_ref 129636 // Field
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fields.
+@return
+     the fields value"
+      end
+
+      operation 176996 "setFields"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfields" explicit_type "Map< String, Field >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fields.
+@param pfields
+        the fields to set"
+      end
+    end
+
+    class 139108 "ProcessP8"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "POJO Bean representing Ibm Filenet Process Bean.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 140260 // <generalisation>
+	relation 140260 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140260 // <generalisation>
+	  b parent class_ref 130404 // Process
+      end
+
+      attribute 158692 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -1786193945858527512L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      attribute 158820 "workflowDefinitionID"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " workflow definition id. "
+      end
+
+      operation 177124 "ProcessP8"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default constructor."
+      end
+
+      operation 177252 "ProcessP8"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "bpmProcess" type class_ref 130404 // Process
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Copy constructor.
+
+@param bpmProcess
+     default bpmProcess object."
+      end
+
+      operation 177380 "getWorkflowDefinitionID"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property workflowDefinitionID.
+@return
+     the workflowDefinitionID value"
+      end
+
+      operation 177508 "setWorkflowDefinitionID"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pworkflowDefinitionID" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property workflowDefinitionID.
+@param pworkflowDefinitionID
+        the workflowDefinitionID to set"
+      end
+    end
+
+    class 139236 "QueueP8"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "POJO Bean representing Ibm Filenet Queue Bean.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 140388 // <generalisation>
+	relation 140388 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140388 // <generalisation>
+	  b parent class_ref 130788 // Queue
+      end
+
+      attribute 158948 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 7651857869313838462L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      operation 177636 "QueueP8"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "bpmQueue" type class_ref 130788 // Queue
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Copy constructor.
+
+@param bpmQueue
+     copy constructor from SINGLE QUEUE."
+      end
+    end
+
+    class 139364 "Roster"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "POJO Bean representing Ibm Filenet Roster Bean.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 140516 // <generalisation>
+	relation 140516 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140516 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 159076 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 6351834258143561134L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+    end
+
+    class 139492 "TaskP8"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "POJO Bean representing Ibm Filenet Task Bean.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 140644 // <generalisation>
+	relation 140644 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140644 // <generalisation>
+	  b parent class_ref 131044 // Task
+      end
+
+      attribute 159204 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 3232047548780159319L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      attribute 159332 "rosterName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " roster name. "
+      end
+
+      attribute 159460 "type"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " p8 type. "
+      end
+
+      operation 177764 "TaskP8"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor."
+      end
+
+      operation 177892 "TaskP8"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "task" type class_ref 131044 // Task
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Copy Constructor.
+@param task
+     target object to be copied."
+      end
+
+      operation 178020 "getRosterName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property rosterName.
+@return the rosterName value"
+      end
+
+      operation 178148 "setRosterName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "prosterName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property rosterName.
+@param prosterName
+           the rosterName to set"
+      end
+
+      operation 178276 "getType"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property type.
+@return the type value"
+      end
+
+      operation 178404 "setType"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptype" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property type.
+@param ptype
+           the type to set"
+      end
+    end
+  end
+
+  deploymentview 130532 "domain"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 137828 "Attachment"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.domain.BpmObject;
+${definition}"
+      associated_classes
+	class_ref 138724 // Attachment
+      end
+    end
+
+    artifact 137956 "CustomPropertyP8"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 138852 // CustomPropertyP8
+      end
+    end
+
+    artifact 138084 "LogElement"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Map;
+import com.logica.bpm.domain.BpmObject;
+import com.logica.bpm.domain.Field;
+${definition}"
+      associated_classes
+	class_ref 138980 // LogElement
+      end
+    end
+
+    artifact 138212 "ProcessP8"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Map;
+${definition}"
+      associated_classes
+	class_ref 139108 // ProcessP8
+      end
+    end
+
+    artifact 138340 "QueueP8"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 139236 // QueueP8
+      end
+    end
+
+    artifact 138468 "Roster"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.domain.BpmObject;
+${definition}"
+      associated_classes
+	class_ref 139364 // Roster
+      end
+    end
+
+    artifact 138596 "TaskP8"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Map;
+${definition}"
+      associated_classes
+	class_ref 139492 // TaskP8
+      end
+    end
+  end
+
+  package_ref 131940 // item
+
+  package_ref 132068 // query
+end

@@ -1,0 +1,1531 @@
+format 72
+"query" // com::logica::bpm::domain::query
+  revision 1
+  modified_by 100 "lunvenc"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "d:/WORK/Workspaces/workspace-bpm/LOGICA/trunk/bpm-api/src/main/java/com/logica/bpm/domain/query/"
+  java_package "com.logica.bpm.domain.query"
+  classview 128996 "query"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 131940 "AbstractBpmQuery"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Query to be execute to the BPMEngine.
+@author Cedrick LUNVEN"
+      classrelation 133604 // <generalisation>
+	relation 133604 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 133604 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 139748 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 8844032668516581787L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. *"
+      end
+
+      attribute 139876 "maxresult"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Define Max Element Returned. *"
+      end
+
+      attribute 140004 "pageable"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Result will use pagination. *"
+      end
+
+      attribute 140132 "pagenumber"
+	private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Requested page number. *"
+      end
+
+      attribute 140260 "pagesize"
+	private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Requested page size. *"
+      end
+
+      attribute 140388 "queryExpression"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Query complex expression (parentesis, operators) with interrogation marks for parameters. *"
+      end
+
+      attribute 140516 "queryParameters"
+	private explicit_type "Object"
+	multiplicity "[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Query Parameters. *"
+      end
+
+      attribute 140644 "p8fetchType"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Element of filenet P8 queries. "
+      end
+
+      attribute 140772 "p8indexName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Element of filenet P8 queries. "
+      end
+
+      attribute 140900 "p8queryFlags"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Element of filenet P8 queries. "
+      end
+
+      attribute 141028 "p8minValue"
+	private explicit_type "Object"
+	multiplicity "[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Element of filenet P8 queries. "
+      end
+
+      attribute 141156 "p8maxValue"
+	private explicit_type "Object"
+	multiplicity "[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Element of filenet P8 queries. "
+      end
+
+      attribute 141284 "QUERY_GET_NO_SYSTEM_FIELDS"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1024"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "p8queryFlags constants
+ Include this value in the p8queryFlags to return objects without system fields. "
+      end
+
+      attribute 141412 "QUERY_GET_NO_TRANSLATED_SYSTEM_FIELDS"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 2048"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to return objects without translated system fields. "
+      end
+
+      attribute 141540 "QUERY_LOCK_OBJECTS"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 16"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to lock the work items returned from a search. "
+      end
+
+      attribute 141668 "QUERY_MAX_VALUES_INCLUSIVE"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 64"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to include maximum search values. "
+      end
+
+      attribute 141796 "QUERY_MIN_VALUES_INCLUSIVE"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 32"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to include minimum search values. "
+      end
+
+      attribute 141924 "QUERY_NO_OPTIONS"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to use the no search options option. "
+      end
+
+      attribute 142052 "QUERY_READ_BOUND"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to return work items that are bound to a user or machine. "
+      end
+
+      attribute 142180 "QUERY_READ_LOCKED"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to return locked and unlocked work items. "
+      end
+
+      attribute 142308 "QUERY_READ_UNWRITABLE"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8queryFlags to return writable and unwritable work items. "
+      end
+
+      attribute 142436 "FETCH_TYPE_INSTRUCTION_ELEMENT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "p8fetchType constants
+ Include this value in the p8fetchType to return instruction elements. "
+      end
+
+      attribute 142564 "FETCH_TYPE_QUEUE_ELEMENT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8fetchType to return queue elements. "
+      end
+
+      attribute 142692 "FETCH_TYPE_ROSTER_ELEMENT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8fetchType to return roster elements. "
+      end
+
+      attribute 142820 "FETCH_TYPE_STEP_ELEMENT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8fetchType to return step elements. "
+      end
+
+      attribute 142948 "FETCH_TYPE_WORKOBJECT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Include this value in the p8fetchType to return work objects. "
+      end
+
+      operation 156260 "getMaxresult"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour maxresult.
+@return the maxresult"
+      end
+
+      operation 156388 "setMaxresult"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pmaxresult" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour maxresult.
+@param pmaxresult
+           the maxresult à initi"
+      end
+
+      operation 156516 "isPageable"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour pageable.
+@return the pageable"
+      end
+
+      operation 156644 "setPageable"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppageable" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour pageable.
+@param ppageable
+           the pageable à initi"
+      end
+
+      operation 156772 "getPagenumber"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour pagenumber.
+@return the pagenumber"
+      end
+
+      operation 156900 "setPagenumber"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppagenumber" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour pagenumber.
+@param ppagenumber
+           the pagenumber à initi"
+      end
+
+      operation 157028 "getPagesize"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour pagesize.
+@return the pagesize"
+      end
+
+      operation 157156 "setPagesize"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppagesize" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour pagesize.
+@param ppagesize
+           the pagesize à initi"
+      end
+
+      operation 157284 "getQueryExpression"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour queryExpression.
+@return the queryExpression valeur de queryExpression"
+      end
+
+      operation 157412 "setQueryExpression"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pqueryExpression" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour queryExpression.
+@param pqueryExpression
+           the queryExpression to set"
+      end
+
+      operation 157540 "getQueryParameters"
+	public explicit_return_type "Object"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}[] ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property queryParameters.
+@return the queryParameters value"
+      end
+
+      operation 157668 "setQueryParameters"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pqueryParameters" explicit_type "Object"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property queryParameters.
+@param pqueryParameters
+           the queryParameters to set"
+      end
+
+      operation 157796 "getP8fetchType"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property p8fetchType.
+@return
+     the p8fetchType value"
+      end
+
+      operation 157924 "setP8fetchType"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "type" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property p8fetchType.
+@param type
+        the p8fetchType to set"
+      end
+
+      operation 158052 "getP8indexName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property p8indexName.
+@return
+     the p8indexName value"
+      end
+
+      operation 158180 "setP8indexName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property p8indexName.
+@param pname
+        the p8indexName to set"
+      end
+
+      operation 158308 "getP8queryFlags"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property p8queryFlags.
+@return
+     the p8queryFlags value"
+      end
+
+      operation 158436 "setP8queryFlags"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pflags" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property p8queryFlags.
+
+@param pflags
+        the p8queryFlags to set"
+      end
+
+      operation 158564 "getP8minValue"
+	public explicit_return_type "Object"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}[] ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property p8minValue.
+@return
+     the p8minValue value"
+      end
+
+      operation 158692 "setP8minValue"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pvalue" explicit_type "Object"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property p8minValue.
+@param pvalue
+        the p8minValue to set"
+      end
+
+      operation 158820 "getP8maxValue"
+	public explicit_return_type "Object"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}[] ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property p8maxValue.
+@return
+     the p8maxValue value"
+      end
+
+      operation 158948 "setP8maxValue"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pvalue" explicit_type "Object"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property p8maxValue.
+@param pvalue
+        the p8maxValue to set"
+      end
+    end
+
+    class 132068 "ProcessQuery"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Defining Query to get Process Object.
+@author Cedrick LUNVEN"
+      classrelation 133732 // <generalisation>
+	relation 133732 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 133732 // <generalisation>
+	  b parent class_ref 131940 // AbstractBpmQuery
+      end
+
+      attribute 143076 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -4634948129450331732L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      attribute 143204 "processName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Sould got processName. *"
+      end
+
+      attribute 143332 "fieldNames"
+	private explicit_type " String "
+	stereotype "Collection"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Requested field elements. *"
+      end
+
+      classrelation 133860 // sortCriteria (<unidirectional association>)
+	relation 133860 --->
+	  stereotype "List"
+	  a role_name "sortCriteria" private
+	    comment " list of criteria. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< ${type} > ${name}${value};
+"
+	    classrelation_ref 133860 // sortCriteria (<unidirectional association>)
+	  b parent class_ref 132196 // SortCriterion
+      end
+
+      attribute 143460 "retrievehistory"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " If process history is requested. *"
+      end
+
+      operation 159076 "ProcessQuery"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor."
+      end
+
+      operation 159204 "ProcessQuery"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "procName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default/Parameterized constructor wirh processname.
+@param procName
+     target workflow to search."
+      end
+
+      operation 159332 "ProcessQuery"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "procName" explicit_type "String"
+	  param in name "filterExp" explicit_type "String"
+	  param in name "filterParam" explicit_type "Object"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2}[] ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor with filter and parameters.
+
+@param procName
+     target process to search
+@param filterExp
+     filter expression with ? escapes chars.
+@param filterParam
+     values to replace ? in query expression."
+      end
+
+      operation 159460 "ProcessQuery"
+	public explicit_return_type ""
+	nparams 4
+	  param in name "procName" explicit_type "String"
+	  param in name "filterExp" explicit_type "String"
+	  param in name "filterParam" explicit_type "Object"
+	  param in name "pfieldnames" explicit_type "List< String >"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2}[] ${p2}, final ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor with filter,parameters and limited fields to retrieve.
+
+@param procName
+     target process to search
+@param filterExp
+     filter expression with ? escapes chars.
+@param filterParam
+     values to replace ? in query expression.
+@param pfieldnames
+     names of target fields."
+      end
+
+      operation 159588 "isRetrievehistory"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property retrievehistory.
+@return the retrievehistory value"
+      end
+
+      operation 159716 "setRetrievehistory"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pretrievehistory" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property retrievehistory.
+@param pretrievehistory
+           the retrievehistory to set"
+      end
+
+      operation 159844 "getProcessName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processName.
+@return the processName value"
+      end
+
+      operation 159972 "setProcessName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pprocessName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property processName.
+@param pprocessName
+           the processName to set"
+      end
+
+      operation 160100 "getSortCriteria"
+	public return_type class_ref 132196 // SortCriterion
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List< ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property sortCriteria.
+@return
+     the sortCriteria value"
+      end
+
+      operation 160228 "setSortCriteria"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "psortCriteria" explicit_type "List< SortCriterion >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property sortCriteria.
+@param psortCriteria
+        the sortCriteria to set"
+      end
+
+      operation 160356 "getFieldNames"
+	public explicit_return_type "Collection< String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fieldNames.
+@return
+     the fieldNames value"
+      end
+
+      operation 160484 "setFieldNames"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfieldNames" explicit_type "Collection< String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fieldNames.
+@param pfieldNames
+        the fieldNames to set"
+      end
+    end
+
+    class 132196 "SortCriterion"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Sort Criterion to handle order of task in resultSets.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      attribute 143588 "fieldName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " field Name. "
+      end
+
+      classrelation 133988 // fieldType (<unidirectional association>)
+	relation 133988 --->
+	  a role_name "fieldType" private
+	    comment " field type. 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 133988 // fieldType (<unidirectional association>)
+	  b parent class_ref 129764 // BpmFieldType
+      end
+
+      attribute 143716 "ascending"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " sort order. "
+      end
+
+      operation 161252 "getFieldName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fieldName.
+@return
+     the fieldName value"
+      end
+
+      operation 161380 "setFieldName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfieldName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fieldName.
+@param pfieldName
+        the fieldName to set"
+      end
+
+      operation 161508 "getFieldType"
+	public return_type class_ref 129764 // BpmFieldType
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fieldType.
+@return
+     the fieldType value"
+      end
+
+      operation 161636 "setFieldType"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfieldType" type class_ref 129764 // BpmFieldType
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fieldType.
+@param pfieldType
+        the fieldType to set"
+      end
+
+      operation 161764 "isAscending"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property ascending.
+@return
+     the ascending value"
+      end
+
+      operation 161892 "setAscending"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pascending" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property ascending.
+@param pascending
+        the ascending to set"
+      end
+    end
+
+    class 132324 "QueryBuilder"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Helper to build queries.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      operation 160612 "QueryBuilder"
+	private explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor."
+      end
+
+      operation 160740 "createTaskQueryOverQueue"
+	class_operation public return_type class_ref 132452 // TaskQuery
+	nparams 1
+	  param in name "queueName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Create task query for queue.
+
+@param queueName
+     target queue Name
+@return
+     the required task query."
+      end
+
+      operation 160868 "createPageableTaskQueryOverQueue"
+	class_operation public return_type class_ref 132452 // TaskQuery
+	nparams 3
+	  param in name "queueName" explicit_type "String"
+	  param in name "pageSize" explicit_type "int"
+	  param in name "pageNumber" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Create query.
+@param queueName
+     target queue name.
+@param pageSize
+     size of page.
+@param pageNumber
+     number for page.
+@return
+     task query"
+      end
+
+      operation 160996 "defineFilter"
+	class_operation public return_type class_ref 132452 // TaskQuery
+	nparams 3
+	  param in name "query" type class_ref 132452 // TaskQuery
+	  param in name "filterExpression" explicit_type "String"
+	  param in name "" explicit_type "Object...filterArguments"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Define filter.
+@param query
+     target query.
+@param filterExpression
+     filter expression
+@param filterArguments
+     filter arguments
+@return
+     task query"
+      end
+
+      operation 161124 "defineSortCriteria"
+	class_operation public return_type class_ref 132452 // TaskQuery
+	nparams 2
+	  param in name "query" type class_ref 132452 // TaskQuery
+	  param in name "" explicit_type "SortCriterion...fieldNames"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Define Task Criteria.
+@param query
+     query
+@param fieldNames
+     field names.
+@return
+     task query"
+      end
+    end
+
+    class 132452 "TaskQuery"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Query to be execute to the BPMEngine.
+
+@author Cedrick LUNVEN"
+      classrelation 134116 // <generalisation>
+	relation 134116 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 134116 // <generalisation>
+	  b parent class_ref 131940 // AbstractBpmQuery
+      end
+
+      attribute 143844 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -3367058449516159189L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      attribute 143972 "queueName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Retrieve data from a queue. "
+      end
+
+      classrelation 134244 // sortCriteria (<unidirectional association>)
+	relation 134244 --->
+	  stereotype "List"
+	  a role_name "sortCriteria" private
+	    comment " list of criteria. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< ${type} > ${name}${value};
+"
+	    classrelation_ref 134244 // sortCriteria (<unidirectional association>)
+	  b parent class_ref 132196 // SortCriterion
+      end
+
+      attribute 144100 "fieldNames"
+	private explicit_type " String "
+	stereotype "Collection"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " if null all fields other only limited list. "
+      end
+
+      operation 162020 "TaskQuery"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Task Query."
+      end
+
+      operation 162148 "TaskQuery"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "pqueueName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Build Taskquery in queue.
+
+@param pqueueName
+         queue name."
+      end
+
+      operation 162276 "TaskQuery"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "pqueueName" explicit_type "String"
+	  param in name "pTaskId" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Build Taskquery in queue with single taskID.
+
+@param pqueueName
+     queue name.
+@param pTaskId
+     task id."
+      end
+
+      operation 162404 "getQueueName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property queueName.
+@return
+     the queueName value"
+      end
+
+      operation 162532 "setQueueName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pqueueName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property queueName.
+@param pqueueName
+        the queueName to set"
+      end
+
+      operation 162660 "getSortCriteria"
+	public return_type class_ref 132196 // SortCriterion
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List< ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property sortCriteria.
+@return
+     the sortCriteria value"
+      end
+
+      operation 162788 "setSortCriteria"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "psortCriteria" explicit_type "List< SortCriterion >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property sortCriteria.
+@param psortCriteria
+        the sortCriteria to set"
+      end
+
+      operation 162916 "getFieldNames"
+	public explicit_return_type "Collection< String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fieldNames.
+@return
+     the fieldNames value"
+      end
+
+      operation 163044 "setFieldNames"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfieldNames" explicit_type "Collection< String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fieldNames.
+@param pfieldNames
+        the fieldNames to set"
+      end
+    end
+  end
+
+  deploymentview 128612 "query"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 130916 "AbstractBpmQuery"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.domain.BpmObject;
+${definition}"
+      associated_classes
+	class_ref 131940 // AbstractBpmQuery
+      end
+    end
+
+    artifact 131044 "ProcessQuery"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Collection;
+import java.util.List;
+${definition}"
+      associated_classes
+	class_ref 132068 // ProcessQuery
+      end
+    end
+
+    artifact 131172 "QueryBuilder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.Arrays;
+${definition}"
+      associated_classes
+	class_ref 132324 // QueryBuilder
+      end
+    end
+
+    artifact 131300 "SortCriterion"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.domain.type.BpmFieldType;
+${definition}"
+      associated_classes
+	class_ref 132196 // SortCriterion
+      end
+    end
+
+    artifact 131428 "TaskQuery"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Collection;
+import java.util.List;
+${definition}"
+      associated_classes
+	class_ref 132452 // TaskQuery
+      end
+    end
+  end
+end

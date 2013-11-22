@@ -1,0 +1,3 @@
+class SimpleP8QueueMapper
+!!!179684.java!!!	mapBpmQueue(in queue : Queue) : QueueP8
+        return new QueueP8(queue);

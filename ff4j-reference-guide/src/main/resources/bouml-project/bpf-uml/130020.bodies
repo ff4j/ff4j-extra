@@ -1,0 +1,5 @@
+class FormTask
+!!!136676.java!!!	getFields() : FormField
+        return fields;
+!!!136804.java!!!	setFields(in pfields : Map< String, FormField >) : void
+        this.fields = pfields;

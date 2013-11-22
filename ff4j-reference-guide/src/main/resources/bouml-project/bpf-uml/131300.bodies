@@ -1,0 +1,33 @@
+class User
+!!!150500.java!!!	User(in pLogin : String, in pPassword : String, in pEmail : String, in pDescription : String)
+        this.login = pLogin;
+        this.email = pEmail;
+        this.description = pDescription;
+!!!150628.java!!!	getLogin() : String
+        return login;
+!!!150756.java!!!	setLogin(in plogin : String) : void
+        this.login = plogin;
+!!!150884.java!!!	getDescription() : String
+        return description;
+!!!151012.java!!!	setDescription(in pdescription : String) : void
+        this.description = pdescription;
+!!!151140.java!!!	getEmail() : String
+        return email;
+!!!151268.java!!!	setEmail(in pemail : String) : void
+        this.email = pemail;
+!!!151396.java!!!	getAttributes() : Field
+        return attributes;
+!!!151524.java!!!	setAttributes(in pattributes : Map< String, Field >) : void
+        this.attributes = pattributes;
+!!!151652.java!!!	getGroups() : List< String >
+        return groups;
+!!!151780.java!!!	setGroups(in pgroups : List< String >) : void
+        this.groups = pgroups;
+!!!151908.java!!!	getRoles() : List< String >
+        return roles;
+!!!152036.java!!!	setRoles(in proles : List< String >) : void
+        this.roles = proles;
+!!!152164.java!!!	getQueues() : List< String >
+        return queues;
+!!!152292.java!!!	setQueues(in pqueues : List< String >) : void
+        this.queues = pqueues;

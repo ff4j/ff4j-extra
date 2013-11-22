@@ -1,0 +1,35 @@
+class ProcessHistoryEntry
+!!!141156.java!!!	compareTo(in phe : ProcessHistoryEntry) : int
+        return getExecutionTime().compareTo(phe.getExecutionTime());
+!!!141284.java!!!	getExecutionTime() : Date
+        return executionTime;
+!!!141412.java!!!	setExecutionTime(in pexecutionTime : Date) : void
+        this.executionTime = pexecutionTime;
+!!!141540.java!!!	getAction() : String
+        return action;
+!!!141668.java!!!	setAction(in paction : String) : void
+        this.action = paction;
+!!!141796.java!!!	getActor() : String
+        return actor;
+!!!141924.java!!!	setActor(in pactor : String) : void
+        this.actor = pactor;
+!!!142052.java!!!	getStepName() : String
+        return stepName;
+!!!142180.java!!!	setStepName(in pstepName : String) : void
+        this.stepName = pstepName;
+!!!142308.java!!!	getMessage() : String
+        return message;
+!!!142436.java!!!	setMessage(in pMessage : String) : void
+        this.message = pMessage;
+!!!142564.java!!!	getMessageID() : int
+        return messageID;
+!!!142692.java!!!	setMessageID(in pMessageID : int) : void
+        this.messageID = pMessageID;
+!!!142820.java!!!	getStepDescription() : String
+        return stepDescription;
+!!!142948.java!!!	setStepDescription(in pstepDescription : String) : void
+        this.stepDescription = pstepDescription;
+!!!143076.java!!!	getStepId() : String
+        return stepId;
+!!!143204.java!!!	setStepId(in pstepId : String) : void
+        this.stepId = pstepId;

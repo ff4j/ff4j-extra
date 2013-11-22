@@ -1,0 +1,5 @@
+class TaskNotFoundException
+!!!173540.java!!!	TaskNotFoundException(in finalMessage : String)
+        super(finalMessage);
+!!!173668.java!!!	TaskNotFoundException(in finalMessage : String, in errorCode : String, in errorMessage : String)
+        super(finalMessage, errorCode, errorMessage);

@@ -1,0 +1,3 @@
+class CannotContactServerException
+!!!171108.java!!!	CannotContactServerException(in finalMessage : String, in errorCode : String, in errorMessage : String)
+        super(finalMessage, errorCode, errorMessage);

@@ -1,0 +1,5 @@
+class RosterQuery
+!!!178916.java!!!	getRosterName() : String
+        return rosterName;
+!!!179044.java!!!	setRosterName(in prosterName : String) : void
+        this.rosterName = prosterName;

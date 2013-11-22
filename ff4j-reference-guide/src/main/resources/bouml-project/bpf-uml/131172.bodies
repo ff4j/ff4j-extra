@@ -1,0 +1,10 @@
+class Tasks
+!!!149860.java!!!	Tasks(inout initValue : Map< String, Task >)
+		this.taskMap = initValue;
+!!!149988.java!!!	getTask(in taskName : String) : Task
+		Assert.notNull(taskName, "Param #0['taskName'] is required and should ne be null");
+		return (taskMap != null) ? taskMap.get(taskName) : null;
+!!!150116.java!!!	getTaskMap() : Task
+		return taskMap;
+!!!150244.java!!!	setTaskMap(inout ptaskMap : Map< String, Task >) : void
+		this.taskMap = ptaskMap;

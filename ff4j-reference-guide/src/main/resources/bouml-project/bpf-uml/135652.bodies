@@ -1,0 +1,3 @@
+class BpmEntityException
+!!!172132.java!!!	BpmEntityException(in finalMessage : String, in errorCode : String, in errorMessage : String)
+        super(finalMessage, errorCode, errorMessage);

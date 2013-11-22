@@ -1,0 +1,39 @@
+class MonitoringAdvice
+!!!128100.java!!!	invoke(in pMInvoc : MethodInvocation) : Object
+        Method   method     = pMInvoc.getMethod();
+        Object[] pParameter = pMInvoc.getArguments();
+        Log logger = LogFactory.getLog(method.getDeclaringClass());
+        if (logger.isDebugEnabled()) {
+            logger.debug("<" + method.getName() + "> <<< START >>> ");
+            logger.debug("  + Class : " + method.getDeclaringClass().getName());
+            if (pParameter != null) {
+                for (int i = 0; i < pParameter.length; i++) {
+                    StringBuilder beginLog = new StringBuilder("  + Params #");
+                    beginLog.append(i);
+                    beginLog.append(" (");
+                    if (pParameter[i] != null) {
+                        beginLog.append(pParameter[i].getClass().getCanonicalName());
+                    } else {
+                        beginLog.append("null");
+                    }
+                    beginLog.append(") : ");
+                    beginLog.append(pParameter[i]);
+                    logger.debug(beginLog);
+                }
+            }
+        }
+        // executing method...
+        long before = System.currentTimeMillis();
+        Object returnedValue = pMInvoc.proceed();
+        long after  = System.currentTimeMillis();
+        // logging after
+        if (logger.isDebugEnabled()) {
+            if (!method.getReturnType().equals(Void.TYPE)) {
+                logger.debug("<" + method.getName() + "> - Returned value : '" + returnedValue + "'");
+            } else {
+                logger.debug("<" + method.getName() + "> - No returned value (void)");
+            }
+            logger.debug("<" + method.getName() + "> - Execution Time : '" + (after - before) + "' millisecond(s)");
+            logger.debug("<" + method.getName() + "> <<< END >>> ");
+        }
+        return returnedValue;

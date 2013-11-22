@@ -1,0 +1,39 @@
+class Field
+!!!133220.java!!!	Field(in pfieldName : String, in ptype : BpmFieldType, in objValue : Object)
+        this.name  = pfieldName;
+        this.type  = ptype;
+        this.array = (objValue != null) && objValue.getClass().isArray();
+        this.value = objValue;
+!!!133348.java!!!	setValue(in pvalue : Object) : void
+        this.value = pvalue;
+        if (pvalue instanceof Integer) {
+            this.value = new Double(((Integer) pvalue).intValue());
+        }
+!!!133476.java!!!	getDescription() : String
+        return description;
+!!!133604.java!!!	setDescription(in pdescription : String) : void
+        this.description = pdescription;
+!!!133732.java!!!	getName() : String
+        return name;
+!!!133860.java!!!	setName(in pname : String) : void
+        this.name = pname;
+!!!133988.java!!!	getLength() : int
+        return length;
+!!!134116.java!!!	setLength(in plength : int) : void
+        this.length = plength;
+!!!134244.java!!!	getType() : BpmFieldType
+        return type;
+!!!134372.java!!!	setType(in ptype : BpmFieldType) : void
+        this.type = ptype;
+!!!134500.java!!!	getValue() : Object
+        if (value == null && serializedValue != null) {
+            Field f = FieldMarshaller.unserializeField(serializedValue);
+            this.value = f.getValue();
+        }
+        return this.value;
+!!!134628.java!!!	isArray() : boolean
+        return array;
+!!!134756.java!!!	setArray(in parray : boolean) : void
+        this.array = parray;
+!!!134884.java!!!	setSerializedValue(in pserializedValue : String) : void
+        this.serializedValue = pserializedValue;

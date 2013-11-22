@@ -1,0 +1,711 @@
+format 72
+"result" // com::logica::bpm::domain::result
+  revision 1
+  modified_by 100 "lunvenc"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "d:/WORK/Workspaces/workspace-bpm/LOGICA/trunk/bpm-api/src/main/java/com/logica/bpm/domain/result/"
+  java_package "com.logica.bpm.domain.result"
+  classview 129124 "result"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 132580 "AbstractBpmResultSet"
+      abstract visibility public 
+      nformals 2
+      formal name "QUERY" type "" explicit_default_value ""
+        explicit_extends ""
+      formal name "RESULT" type "" explicit_default_value ""
+        explicit_extends ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Abstract element for results.
+
+@param <QUERY>
+     type of query to be processed.
+@param <RESULT>
+     type of result (could be {@link Process} or {@link Task}).
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      attribute 144228 "pageNumber"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Could be SubSet of task in the Queue. *"
+      end
+
+      attribute 144356 "pageTotal"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Total amount of pages. *"
+      end
+
+      attribute 144484 "totalCount"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Total Task Count in queue. *"
+      end
+
+      attribute 144612 "results"
+	private explicit_type " String, RESULT "
+	stereotype "LinkedHashMap"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Containing list of task. They have to be ordered. *"
+      end
+
+      attribute 144740 "currentQuery"
+	private explicit_type "QUERY"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " if created using query it will be filled. *"
+      end
+
+      attribute 144868 "nextPageQuery"
+	private explicit_type "QUERY"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " if created using query it will be filled. <i>(only if queryCurrent pageable)</i>. *"
+      end
+
+      attribute 144996 "previousPageQuery"
+	private explicit_type "QUERY"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " if created using query it will be filled. <i>(only if queryCurrent pageable)</i>. *"
+      end
+
+      operation 163172 "getPageNumber"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property pageNumber.
+@return the pageNumber value"
+      end
+
+      operation 163300 "setPageNumber"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppageNumber" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property pageNumber.
+@param ppageNumber
+           the pageNumber to set"
+      end
+
+      operation 163428 "getPageTotal"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property pageTotal.
+@return
+     the pageTotal value"
+      end
+
+      operation 163556 "setPageTotal"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppageTotal" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property pageTotal.
+@param ppageTotal
+        the pageTotal to set"
+      end
+
+      operation 163684 "getTotalCount"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property totalCount.
+@return
+     the totalCount value"
+      end
+
+      operation 163812 "setTotalCount"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptotalCount" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property totalCount.
+@param ptotalCount
+        the totalCount to set"
+      end
+
+      operation 163940 "getResults"
+	public explicit_return_type "LinkedHashMap< String, RESULT >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property results.
+@return
+     the results value"
+      end
+
+      operation 164068 "setResults"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "presults" explicit_type "LinkedHashMap< String, RESULT >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property results.
+@param presults
+        the results to set"
+      end
+
+      operation 164196 "getCurrentQuery"
+	public explicit_return_type "QUERY"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property currentQuery.
+@return
+     the currentQuery value"
+      end
+
+      operation 164324 "setCurrentQuery"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pcurrentQuery" explicit_type "QUERY"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property currentQuery.
+@param pcurrentQuery
+        the currentQuery to set"
+      end
+
+      operation 164452 "getNextPageQuery"
+	public explicit_return_type "QUERY"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property nextPageQuery.
+@return
+     the nextPageQuery value"
+      end
+
+      operation 164580 "setNextPageQuery"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pnextPageQuery" explicit_type "QUERY"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property nextPageQuery.
+@param pnextPageQuery
+        the nextPageQuery to set"
+      end
+
+      operation 164708 "getPreviousPageQuery"
+	public explicit_return_type "QUERY"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property previousPageQuery.
+@return
+     the previousPageQuery value"
+      end
+
+      operation 164836 "setPreviousPageQuery"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppreviousPageQuery" explicit_type "QUERY"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property previousPageQuery.
+@param ppreviousPageQuery
+        the previousPageQuery to set"
+      end
+
+      operation 164964 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment " {@inheritDoc} "
+      end
+    end
+
+    class 132708 "ParametrizedProcessResultSet"
+      visibility public 
+      nformals 1
+      formal name "PROCESS" type "" explicit_default_value ""
+        explicit_extends ""
+      nactuals 2
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 0 explicit_value ""
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 1 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Resultset of processes.
+
+@param <PROCESS>
+     type of process.
+
+@author <a href=\"mailto:celphys@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 134372 // <realization>
+	relation 134372 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 134372 // <realization>
+	  b parent class_ref 132580 // AbstractBpmResultSet
+      end
+
+      operation 165092 "ParametrizedProcessResultSet"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "rs" type class_ref 132836 // ProcessResultSet
+	  param in name "mapper" type class_ref 132964 // ProcessMapper
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1}< PROCESS > ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor from TaskResultSet.
+
+@param rs
+     process resultSet, chunk of process and further informations about pages.
+@param mapper
+     mapper."
+      end
+
+      operation 165220 "ParametrizedProcessResultSet"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "rs" type class_ref 132836 // ProcessResultSet
+	  param in name "type" explicit_type "Class< ? >"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment "Constructor from TaskResultSet.
+
+@param rs
+     process resultSet, chunk of process and further informations about pages.
+@param type
+     type of bean."
+      end
+
+      operation 165348 "getProcessResults"
+	public explicit_return_type "LinkedHashMap< String, PROCESS >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processResults.
+
+@return
+     the processResults value"
+      end
+    end
+
+    class 132836 "ProcessResultSet"
+      visibility public 
+      nactuals 2
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 0 explicit_value ""
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 1 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Resultset of processes.
+
+@author <a href=\"mailto:cedrick.lunvene@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 134628 // <realization>
+	relation 134628 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 134628 // <realization>
+	  b parent class_ref 132580 // AbstractBpmResultSet
+      end
+
+      operation 165732 "getProcessResults"
+	public return_type class_ref 130404 // Process
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}LinkedHashMap< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processResults.
+
+@return
+     the processResults value"
+      end
+    end
+
+    class 133092 "ParametrizedTaskResultSet"
+      visibility public 
+      nformals 1
+      formal name "TASK" type "" explicit_default_value ""
+        explicit_extends ""
+      nactuals 2
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 0 explicit_value ""
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 1 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Resultset of tasks.
+
+@param <TASK>
+     custom bean for task.
+
+@author <a href=\"mailto:celphys@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 134500 // <realization>
+	relation 134500 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 134500 // <realization>
+	  b parent class_ref 132580 // AbstractBpmResultSet
+      end
+
+      operation 165476 "ParametrizedTaskResultSet"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "rs" type class_ref 133220 // TaskResultSet
+	  param in name "mapper" type class_ref 133348 // TaskMapper
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1}< TASK > ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor from TaskResultSet.
+
+@param rs
+     process resultSet, chunk of process and further informations about pages.
+@param mapper
+     mapper."
+      end
+
+      operation 165604 "getTaskResults"
+	public explicit_return_type "LinkedHashMap< String, TASK >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processResults.
+
+@return
+     the processResults value"
+      end
+    end
+
+    class 133220 "TaskResultSet"
+      visibility public 
+      nactuals 2
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 0 explicit_value ""
+      actual class class_ref 132580 // AbstractBpmResultSet
+        rank 1 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Resultset of tasks.
+
+@author <a href=\"mailto:cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 134756 // <realization>
+	relation 134756 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 134756 // <realization>
+	  b parent class_ref 132580 // AbstractBpmResultSet
+      end
+
+      operation 165860 "getTaskResults"
+	public return_type class_ref 131044 // Task
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}LinkedHashMap< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processResults.
+
+@return
+     the processResults value"
+      end
+    end
+  end
+
+  deploymentview 128740 "result"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 131556 "AbstractBpmResultSet"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.LinkedHashMap;
+${definition}"
+      associated_classes
+	class_ref 132580 // AbstractBpmResultSet
+      end
+    end
+
+    artifact 131684 "ParametrizedProcessResultSet"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import com.logica.bpm.domain.query.ProcessQuery;
+import com.logica.bpm.orm.BpmEntityManager;
+import com.logica.bpm.services.mapper.ProcessMapper;
+${definition}"
+      associated_classes
+	class_ref 132708 // ParametrizedProcessResultSet
+      end
+    end
+
+    artifact 131812 "ParametrizedTaskResultSet"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import com.logica.bpm.domain.query.TaskQuery;
+import com.logica.bpm.services.mapper.TaskMapper;
+${definition}"
+      associated_classes
+	class_ref 133092 // ParametrizedTaskResultSet
+      end
+    end
+
+    artifact 131940 "ProcessResultSet"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.LinkedHashMap;
+import com.logica.bpm.domain.Process;
+import com.logica.bpm.domain.query.ProcessQuery;
+${definition}"
+      associated_classes
+	class_ref 132836 // ProcessResultSet
+      end
+    end
+
+    artifact 132068 "TaskResultSet"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.LinkedHashMap;
+import com.logica.bpm.domain.Task;
+import com.logica.bpm.domain.query.TaskQuery;
+${definition}"
+      associated_classes
+	class_ref 133220 // TaskResultSet
+      end
+    end
+  end
+end

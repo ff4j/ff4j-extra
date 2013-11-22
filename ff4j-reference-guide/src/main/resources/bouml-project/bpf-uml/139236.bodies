@@ -1,0 +1,3 @@
+class QueueP8
+!!!177636.java!!!	QueueP8(in bpmQueue : Queue)
+       super(bpmQueue);

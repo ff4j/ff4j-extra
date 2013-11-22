@@ -1,0 +1,108 @@
+class ResourceManager
+!!!194148.java!!!	initialize() : void
+        // Initialize element.
+        for (ManagedRessource < RESOURCE > resource : resourceList) {
+            resource.setAvailable(true);
+            resource.setCurrentweight(resource.getDefaultWeigth());
+            resource.setNbUse(0);
+        }
+        // Réorganisation par priorité
+        Collections.sort(resourceList);
+        initialized = true;
+!!!194276.java!!!	calculateBalancing() : void
+        double loadtoBalance = 0.0;
+        totalCount = 0;
+        unavailableCount = 0;
+        // Boucle 1 : Calcul de la répartition de charge
+        for (ManagedRessource < RESOURCE > resource : resourceList) {
+            resource.setNbUse(0);
+            if (!resource.isAvailable()) {
+                unavailableCount++;
+                loadtoBalance += resource.getDefaultWeigth();
+            }
+        }
+        double loadtoDistribute = loadtoBalance / new Double(resourceList.size() - unavailableCount).doubleValue();
+        // Boucle 2 affectation des charges
+        for (ManagedRessource < RESOURCE > resource2 : resourceList) {
+            if (resource2.isAvailable()) {
+                resource2.setCurrentweight(resource2.getDefaultWeigth() + loadtoDistribute);
+            }
+        }
+        Collections.sort(resourceList);
+!!!194404.java!!!	toString() : String
+        StringBuffer strBuildDer = new StringBuffer();
+        strBuildDer.append("\nLoadBalanced state : globalCount <" + globalCount + "> totalCount <" + totalCount + "> ");
+        strBuildDer.append(" unavailableCount <" + unavailableCount + ">");
+        for (ManagedRessource < RESOURCE > resource : resourceList) {
+            strBuildDer.append("\n" + resource.toString());
+            if (resource.isAvailable()) {
+                strBuildDer.append(" currentUse " + new Double(CENT * (resource.getNbUse() / totalCount)).intValue()
+                        + "%");
+            }
+        }
+        return strBuildDer.toString();
+!!!194660.java!!!	getManagedResource() : ManagedRessource
+        // Initialisation des composants si nécessaire
+        if (!initialized) {
+            initialize();
+        }
+        totalCount++;
+        globalCount++;
+        if (mode.equals(ResourceManagerFailOverMode.LOAD_BALANCING)) {
+            for (ManagedRessource < RESOURCE > resource : resourceList) {
+                if (!resource.isAvailable()) {
+                    long unavalaibility = System.currentTimeMillis()
+                            - resource.getUnavailabilityTriggerDate().getTime();
+                    if (unavalaibility > (MILLE * unavailabilityPeriod)) {
+                        // Rehabilitation du composant car timeout ecoule
+                        resource.setAvailable(true);
+                        calculateBalancing();
+                        // Recursive call to get next available ressource
+                        return getManagedResource();
+                    }
+                } else if ((CENT * (resource.getNbUse() / totalCount)) <= resource.getCurrentweight()) {
+                    // Nous sommes en dessous de la limite d'utilisation
+                    resource.setNbUse(resource.getNbUse() + 1);
+
+                    return resource;
+                }
+            }
+        } else if (mode.equals(ResourceManagerFailOverMode.ROUND_ROBIN)) {
+            double roundPercent = CENT / resourceList.size();
+            for (ManagedRessource < RESOURCE > resource2 : resourceList) {
+                if (resource2.isAvailable() && (CENT * (resource2.getNbUse() / totalCount)) <= roundPercent) {
+                    // Nous sommes en dessous de la limite d'utilisation
+                    resource2.setNbUse(resource2.getNbUse() + 1);
+                    return resource2;
+                }
+            }
+        }
+        // Pas de composant disponibles
+        throw new ResourceException("Cannot find any available resouce.");
+!!!194788.java!!!	handleComponentError(in component : ManagedRessource, in parentException : Throwable) : ManagedRessource
+        component.setAvailable(false);
+        component.setUnavailabilityCause(parentException.getMessage());
+        component.setUnavailabilityError(parentException);
+        component.setUnavailabilityTriggerDate(new Date());
+        calculateBalancing();
+        return getManagedResource();
+!!!194916.java!!!	getTotalCount() : double
+        return totalCount;
+!!!195044.java!!!	setTotalCount(in ptotalCount : int) : void
+        this.totalCount = ptotalCount;
+!!!195172.java!!!	getMode() : ResourceManagerFailOverMode
+        return mode;
+!!!195300.java!!!	setMode(in pmode : ResourceManagerFailOverMode) : void
+        this.mode = pmode;
+!!!195428.java!!!	getUnavailabilityPeriod() : int
+        return unavailabilityPeriod;
+!!!195556.java!!!	setUnavailabilityPeriod(in punavailabilityPeriod : int) : void
+        this.unavailabilityPeriod = punavailabilityPeriod;
+!!!195684.java!!!	getUnavailableCount() : int
+        return unavailableCount;
+!!!195812.java!!!	setUnavailableCount(in punavailableCount : int) : void
+        this.unavailableCount = punavailableCount;
+!!!195940.java!!!	getGlobalCount() : double
+        return globalCount;
+!!!196068.java!!!	setResourceList(in presourceList : Vector< ManagedRessource < RESOURCE > >) : void
+        this.resourceList = presourceList;

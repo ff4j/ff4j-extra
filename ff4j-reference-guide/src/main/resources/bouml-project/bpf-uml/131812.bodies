@@ -1,0 +1,5 @@
+class BpmStepType
+!!!166756.java!!!	BpmStepType(in pkey : String)
+        this.key = pkey;
+!!!166884.java!!!	getKey() : String
+        return key;

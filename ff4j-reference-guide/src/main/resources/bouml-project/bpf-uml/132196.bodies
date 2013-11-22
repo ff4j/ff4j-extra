@@ -1,0 +1,13 @@
+class SortCriterion
+!!!161252.java!!!	getFieldName() : String
+        return fieldName;
+!!!161380.java!!!	setFieldName(in pfieldName : String) : void
+        this.fieldName = pfieldName;
+!!!161508.java!!!	getFieldType() : BpmFieldType
+        return fieldType;
+!!!161636.java!!!	setFieldType(in pfieldType : BpmFieldType) : void
+        this.fieldType = pfieldType;
+!!!161764.java!!!	isAscending() : boolean
+        return ascending;
+!!!161892.java!!!	setAscending(in pascending : boolean) : void
+        this.ascending = pascending;

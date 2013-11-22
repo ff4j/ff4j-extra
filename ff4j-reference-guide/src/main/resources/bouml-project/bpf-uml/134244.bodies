@@ -1,0 +1,9 @@
+class BpmConnectionException
+!!!170340.java!!!	BpmConnectionException(in message : String, in apiCode : String, in apiMessage : String)
+        super(message, apiCode, apiMessage);
+!!!170468.java!!!	BpmConnectionException(in finalMessage : String)
+        super(finalMessage);
+!!!170596.java!!!	BpmConnectionException(in finalMessage : String, in t : Throwable)
+        super(finalMessage, t);
+!!!170724.java!!!	BpmConnectionException(in finalMessage : String, in papiErrorCode : String, in papiErrorMessage : String, in t : Throwable)
+        super(finalMessage, papiErrorCode, papiErrorMessage, t);

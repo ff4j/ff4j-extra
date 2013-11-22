@@ -1,0 +1,4436 @@
+format 72
+"domain" // com::logica::bpm::domain
+  revision 1
+  modified_by 100 "lunvenc"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "d:/WORK/Workspaces/workspace-bpm/LOGICA/trunk/bpm-api/src/main/java/com/logica/bpm/domain/"
+  java_package "com.logica.bpm.domain"
+  classview 128612 "domain"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 128868 "Attachment"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Bean for Default Bpm Field.
+
+@see com.logica.bpm.domain.BpmObject
+@author LOGICA"
+      classrelation 129124 // <generalisation>
+	relation 129124 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129124 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 128740 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -4787268933221683321L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Serial number. "
+      end
+
+      attribute 128868 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing name for attachment. *"
+      end
+
+      attribute 128996 "description"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing description for attachment. *"
+      end
+
+      attribute 129124 "libraryName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing library name for attachment. *"
+      end
+
+      classrelation 129252 // libraryType (<unidirectional association>)
+	relation 129252 --->
+	  a role_name "libraryType" private
+	    comment " Attribute representing library type for attachment. *
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129252 // libraryType (<unidirectional association>)
+	  b parent class_ref 129252 // BpmLibraryType
+      end
+
+      attribute 129252 "versionSeriesId"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing the version series of for attachment. *"
+      end
+
+      attribute 129380 "versionId"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing the version Id for the attachment. *"
+      end
+
+      classrelation 129380 // type (<unidirectional association>)
+	relation 129380 --->
+	  a role_name "type" private
+	    comment " Attachment type. * 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129380 // type (<unidirectional association>)
+	  b parent class_ref 129380 // BpmAttachmentType
+      end
+
+      operation 129764 "Attachment"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor."
+      end
+
+      operation 129892 "Attachment"
+	public explicit_return_type ""
+	nparams 7
+	  param in name "pName" explicit_type "String"
+	  param in name "pDescription" explicit_type "String"
+	  param in name "pLibraryName" explicit_type "String"
+	  param in name "pLibraryType" type class_ref 129252 // BpmLibraryType
+	  param in name "pVersionSeriesId" explicit_type "String"
+	  param in name "pVersionId" explicit_type "String"
+	  param in name "pType" type class_ref 129380 // BpmAttachmentType
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}, final ${t3} ${p3}, final ${t4} ${p4}, final ${t5} ${p5}, final ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Common constructor.
+@param pName
+         attachment name
+@param pDescription
+         attachment description
+@param pLibraryName
+         name of library
+@param pLibraryType
+         type of library
+@param pVersionSeriesId
+         version id of this ce object series.
+@param pVersionId
+         version id of this ce object.
+@param pType
+         attachment type.
+"
+      end
+
+      operation 130020 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property name.
+@return
+     the name value"
+      end
+
+      operation 130148 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property name.
+@param pname
+        the name to set"
+      end
+
+      operation 130276 "getDescription"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property description.
+@return
+     the description value"
+      end
+
+      operation 130404 "setDescription"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pdescription" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property description.
+@param pdescription
+        the description to set"
+      end
+
+      operation 130532 "getLibraryName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property libraryName.
+@return
+     the libraryName value"
+      end
+
+      operation 130660 "setLibraryName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plibraryName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property libraryName.
+@param plibraryName
+        the libraryName to set"
+      end
+
+      operation 130788 "getLibraryType"
+	public return_type class_ref 129252 // BpmLibraryType
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property libraryType.
+@return
+     the libraryType value"
+      end
+
+      operation 130916 "setLibraryType"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plibraryType" type class_ref 129252 // BpmLibraryType
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property libraryType.
+@param plibraryType
+        the libraryType to set"
+      end
+
+      operation 131044 "getVersionSeriesId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property versionSeriesId.
+@return
+     the versionSeriesId value"
+      end
+
+      operation 131172 "setVersionSeriesId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pversionSeriesId" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property versionSeriesId.
+@param pversionSeriesId
+        the versionSeriesId to set"
+      end
+
+      operation 131300 "getVersionId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property versionId.
+@return
+     the versionId value"
+      end
+
+      operation 131428 "setVersionId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pversionId" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property versionId.
+@param pversionId
+        the versionId to set"
+      end
+
+      operation 131556 "getType"
+	public return_type class_ref 129380 // BpmAttachmentType
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property type.
+@return
+     the type value"
+      end
+
+      operation 131684 "setType"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptype" type class_ref 129380 // BpmAttachmentType
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property type.
+@param ptype
+        the type to set"
+      end
+    end
+
+    class 128996 "BpmObject"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Parent Bean for classes defining a BPM Meta Model.
+
+<br>Every bean will be serializing and could use some 'customProperties', by this way
+the services signatures are unchanged for different implementation, bean are not changed.
+The toString() method is override to list every single attribute which containz getter.
+</br>
+
+@author <a href=\"mailto:cedrick.lunven@free.fr\">C&eacute;drick LUNVEN</a>
+@see com.logica.bpm.utils.ReflectUtils"
+      classrelation 128996 // <realization>
+	relation 128996 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128996 // <realization>
+	  b parent class_ref 129124 // Serializable
+      end
+
+      attribute 128484 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -2563264856641994835L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      attribute 128612 "customProperties"
+	private explicit_type " String, String "
+	stereotype "Map"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Could contained any kind of properties, will be usefull to define engine specific bean property. "
+      end
+
+      operation 129252 "BpmObject"
+	protected explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Default Constructor. "
+      end
+
+      operation 129380 "getCustomProperties"
+	public explicit_return_type "Map< String, String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property customProperties.
+@return
+     the customProperties value"
+      end
+
+      operation 129508 "setCustomProperties"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pcustomProperties" explicit_type "Map< String, String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property customProperties.
+@param pcustomProperties
+        the customProperties to set"
+      end
+
+      operation 129636 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " {@inheritDoc} "
+      end
+    end
+
+    class 129508 "Credentials"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Bean which contains credentials to create and open sessions to the BPM Engine. A Locale is
+also defined to get error message translating.
+
+@author <a href=\"mailto:cedrick.lunven@free.fr\">C&eacute;drick LUNVEN</a>"
+      classrelation 129508 // <realization>
+	relation 129508 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129508 // <realization>
+	  b parent class_ref 129124 // Serializable
+      end
+
+      attribute 129508 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 5174458579616251259L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      attribute 129636 "sessionTokenId"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " token for already open session. "
+      end
+
+      attribute 129764 "userName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " user to connect. "
+      end
+
+      attribute 129892 "userPassword"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " password for user. "
+      end
+
+      operation 131812 "Credentials"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Keep Default Constructor."
+      end
+
+      operation 131940 "Credentials"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "tokenId" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor with parameters.
+
+@param tokenId
+           session unique identifier (toekn)."
+      end
+
+      operation 132068 "Credentials"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "user" explicit_type "String"
+	  param in name "passwd" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor with parameters.
+@param user
+           userName.
+@param passwd
+           password."
+      end
+
+      operation 132196 "getUserName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour userName.
+@return the userName"
+      end
+
+      operation 132324 "setUserName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "puserName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en &eacute;criture pour userName.
+@param puserName
+           la valeur de userName"
+      end
+
+      operation 132452 "getUserPassword"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour userPassword.
+@return the userPassword"
+      end
+
+      operation 132580 "setUserPassword"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "puserPassword" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en &eacute;criture pour userPassword.
+@param puserPassword
+           la valeur de userPassword"
+      end
+
+      operation 132708 "getSessionTokenId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property sessionTokenId.
+@return
+     the sessionTokenId value"
+      end
+
+      operation 132836 "setSessionTokenId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "psessionTokenId" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property sessionTokenId.
+@param psessionTokenId
+        the sessionTokenId to set"
+      end
+
+      operation 132964 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment " {@inheritDoc} "
+      end
+    end
+
+    class 129636 "Field"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Bean for Default Bpm Field.
+
+@see com.logica.bpm.domain.BpmObject
+@author <a href=\"mailto:cedrick.lunven@free.fr\">C&eacute;drick LUNVEN</a>"
+      classrelation 129636 // <generalisation>
+	relation 129636 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129636 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 130020 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 1744660912865976249L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Serial number. "
+      end
+
+      attribute 130148 "description"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing description for field. *"
+      end
+
+      attribute 130276 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing name for field. *"
+      end
+
+      attribute 130404 "length"
+	private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " field length. "
+      end
+
+      attribute 130532 "array"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " if multivalue. "
+      end
+
+      attribute 130660 "value"
+	private explicit_type "Object"
+	cpp_decl ""
+	transient java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " value of object should not be pushished as service. "
+      end
+
+      attribute 130788 "serializedValue"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " use to be published through remote api. "
+      end
+
+      classrelation 129764 // type (<unidirectional association>)
+	relation 129764 --->
+	  a role_name "type" private
+	    comment " Type de champs. * 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129764 // type (<unidirectional association>)
+	  b parent class_ref 129764 // BpmFieldType
+      end
+
+      operation 133092 "Field"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default non-arg constructor madatory to be exposed as webServices."
+      end
+
+      operation 133220 "Field"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "pfieldName" explicit_type "String"
+	  param in name "ptype" type class_ref 129764 // BpmFieldType
+	  param in name "objValue" explicit_type "Object"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Common constructor with name, type value.
+@param pfieldName
+         name of field
+@param ptype
+         type of Field
+@param objValue
+         value for field as Object.
+@throws InvalidFieldTypeException"
+      end
+
+      operation 133348 "setValue"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pvalue" explicit_type "Object"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property value.
+@param pvalue
+        the value to set"
+      end
+
+      operation 133476 "getDescription"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property description.
+@return
+     the description value"
+      end
+
+      operation 133604 "setDescription"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pdescription" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property description.
+@param pdescription
+        the description to set"
+      end
+
+      operation 133732 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property name.
+@return
+     the name value"
+      end
+
+      operation 133860 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property name.
+@param pname
+        the name to set"
+      end
+
+      operation 133988 "getLength"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property length.
+@return
+     the length value"
+      end
+
+      operation 134116 "setLength"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plength" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property length.
+@param plength
+        the length to set"
+      end
+
+      operation 134244 "getType"
+	public return_type class_ref 129764 // BpmFieldType
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property type.
+@return
+     the type value"
+      end
+
+      operation 134372 "setType"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptype" type class_ref 129764 // BpmFieldType
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property type.
+@param ptype
+        the type to set"
+      end
+
+      operation 134500 "getValue"
+	public explicit_return_type "Object"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property value.
+@return
+     the value value"
+      end
+
+      operation 134628 "isArray"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property array.
+@return
+     the array value"
+      end
+
+      operation 134756 "setArray"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "parray" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property array.
+@param parray
+        the array to set"
+      end
+
+      operation 134884 "setSerializedValue"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pserializedValue" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property serializedValue.
+@param pserializedValue
+        the serializedValue to set"
+      end
+    end
+
+    class 129892 "FormField"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Description of a bpm field presenting in a form.
+
+@author <a href=\"mailto:celphys@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 129892 // <generalisation>
+	relation 129892 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129892 // <generalisation>
+	  b parent class_ref 129636 // Field
+      end
+
+      attribute 130916 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -2384434801676659482L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing. *"
+      end
+
+      attribute 131044 "readable"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " readable form field. *"
+      end
+
+      attribute 131172 "writable"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " writable form field. *"
+      end
+
+      attribute 131300 "required"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " required to complete task. "
+      end
+
+      attribute 131428 "hidden"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " hidden in the forme. "
+      end
+
+      operation 135012 "FormField"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default non-arg constructor madatory to be exposed as webServices."
+      end
+
+      operation 135140 "FormField"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "f" type class_ref 129636 // Field
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Copy constructor.
+
+@param f
+     field to be mapped."
+      end
+
+      attribute 131556 "values"
+	private explicit_type " String "
+	stereotype "Collection"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "If the field has a finish value list.
+String and not object as could be publish as webservice.
+"
+      end
+
+      operation 135268 "isReadable"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property readable.
+@return the readable value"
+      end
+
+      operation 135396 "setReadable"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "preadable" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property readable.
+@param preadable
+           the readable to set"
+      end
+
+      operation 135524 "isWritable"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property writable.
+@return the writable value"
+      end
+
+      operation 135652 "setWritable"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pwritable" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property writable.
+@param pwritable
+           the writable to set"
+      end
+
+      operation 135780 "getValues"
+	public explicit_return_type "Collection< String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property values.
+@return the values value"
+      end
+
+      operation 135908 "setValues"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pvalues" explicit_type "Collection< String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property values.
+@param pvalues
+           the values to set"
+      end
+
+      operation 136036 "isRequired"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property required.
+@return
+     the required value"
+      end
+
+      operation 136164 "setRequired"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "prequired" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property required.
+@param prequired
+        the required to set"
+      end
+
+      operation 136292 "isHidden"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property hidden.
+@return
+     the hidden value"
+      end
+
+      operation 136420 "setHidden"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "phidden" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property hidden.
+@param phidden
+        the hidden to set"
+      end
+    end
+
+    class 130020 "FormTask"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "POJO embedded in Task.
+
+@author <a href=\"cedrick.lunven@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 130020 // <generalisation>
+	relation 130020 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 130020 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 131684 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -6629010666508625933L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      classrelation 130148 // fields (<unidirectional association>)
+	relation 130148 --->
+	  stereotype "Map"
+	  a role_name "fields" private
+	    comment " form for the task : Could be accessed only when task is locked and allow to edit fields. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String , ${type} > ${name}${value};
+"
+	    classrelation_ref 130148 // fields (<unidirectional association>)
+	  b parent class_ref 129892 // FormField
+      end
+
+      operation 136548 "FormTask"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor."
+      end
+
+      operation 136676 "getFields"
+	public return_type class_ref 129892 // FormField
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fields.
+@return
+     the fields value"
+      end
+
+      operation 136804 "setFields"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfields" explicit_type "Map< String, FormField >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fields.
+@param pfields
+        the fields to set"
+      end
+    end
+
+    class 130148 "Group"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Role or Group.
+
+@author <a href=\"mailto:celphys@logica.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 130276 // <generalisation>
+	relation 130276 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 130276 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 131812 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 7073647124030053707L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing. *"
+      end
+
+      attribute 131940 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " unique group name. *"
+      end
+
+      attribute 132068 "description"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " description of group is exist in engine. *"
+      end
+
+      attribute 132196 "users"
+	private explicit_type " String "
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " associate group and users. "
+      end
+
+      classrelation 130404 // attributes (<unidirectional association>)
+	relation 130404 --->
+	  stereotype "Map"
+	  a role_name "attributes" private
+	    comment " custom attributes for group. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String, ${type} > ${name}${value};
+"
+	    classrelation_ref 130404 // attributes (<unidirectional association>)
+	  b parent class_ref 129636 // Field
+      end
+
+      operation 136932 "Group"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor."
+      end
+
+      operation 137060 "Group"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "groupName" explicit_type "String"
+	  param in name "groupDescription" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Common Constructor with groupName and groupDescription.
+
+@param groupName
+         unique group name through engine
+@param groupDescription
+         short description of the group"
+      end
+
+      operation 137188 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property name.
+@return the name value"
+      end
+
+      operation 137316 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property name.
+@param pname
+           the name to set"
+      end
+
+      operation 137444 "getDescription"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property description.
+@return the description value"
+      end
+
+      operation 137572 "setDescription"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pdescription" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property description.
+@param pdescription
+           the description to set"
+      end
+
+      operation 137700 "getUsers"
+	public explicit_return_type "List< String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property users.
+@return
+     the users value"
+      end
+
+      operation 137828 "setUsers"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pusers" explicit_type "List< String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property users.
+@param pusers
+        the users to set"
+      end
+
+      operation 137956 "getAttributes"
+	public return_type class_ref 129636 // Field
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property attributes.
+
+@return
+     the attributes value"
+      end
+
+      operation 138084 "setAttributes"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pattributes" explicit_type "Map< String, Field >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property attributes.
+
+@param pattributes
+        the attributes to set"
+      end
+    end
+
+    class 130276 "Participant"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Bean for Default Bpm Participant.
+
+@see com.logica.bpm.domain.BpmObject
+@author LOGICA"
+      classrelation 130532 // <generalisation>
+	relation 130532 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 130532 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 132324 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -4001792748212521953L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Serial number. "
+      end
+
+      attribute 132452 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing name for participant. "
+      end
+
+      operation 138212 "Participant"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "pParticipantName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Common constructor with name.
+@param pParticipantName
+         name of participant"
+      end
+
+      operation 138340 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property name.
+@return
+     the name value"
+      end
+
+      operation 138468 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property name.
+@param pname
+        the name to set"
+      end
+    end
+
+    class 130404 "Process"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Represent BPM Process Model.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 130660 // <generalisation>
+	relation 130660 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 130660 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 132580 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 535072291717458104L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      attribute 132708 "processId"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " processus id. "
+      end
+
+      attribute 132836 "procName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " ProcName. "
+      end
+
+      attribute 132964 "startTime"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " start time. "
+      end
+
+      attribute 133092 "endTime"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " process end time. "
+      end
+
+      attribute 133220 "originator"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " identifiant de la personne ayant lancé la procédure. "
+      end
+
+      attribute 133348 "description"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " description de l'instance de processus. "
+      end
+
+      classrelation 130788 // history (<unidirectional association>)
+	relation 130788 --->
+	  stereotype "List"
+	  a role_name "history" private
+	    comment " list of history entry. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< ${type} > ${name}${value};
+"
+	    classrelation_ref 130788 // history (<unidirectional association>)
+	  b parent class_ref 130532 // ProcessHistoryEntry
+      end
+
+      classrelation 130916 // fields (<unidirectional association>)
+	relation 130916 --->
+	  stereotype "Map"
+	  a role_name "fields" private
+	    comment " field map ordered. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String, ${type} > ${name}${value};
+"
+	    classrelation_ref 130916 // fields (<unidirectional association>)
+	  b parent class_ref 129636 // Field
+      end
+
+      operation 138596 "Process"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor (used by mappers)."
+      end
+
+      operation 138724 "Process"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "bpmProcess" type class_ref 130404 // Process
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Copy Constructor (use in specialisations).
+
+@param bpmProcess
+     other instance of bpmProcess"
+      end
+
+      operation 138852 "getField"
+	public return_type class_ref 129636 // Field
+	nparams 1
+	  param in name "fieldName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Get field from its name, could throw {@link FieldNotFoundException}.
+@param fieldName
+     name of field
+@return
+     target field with correct name (if exsits)."
+      end
+
+      operation 138980 "getFieldValue"
+	public explicit_return_type "Object"
+	nparams 1
+	  param in name "fieldName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Get field Value.
+@param fieldName
+     name of field
+@return
+     target field value"
+      end
+
+      operation 139108 "getProcessId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processId.
+@return the processId value"
+      end
+
+      operation 139236 "setProcessId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pprocessId" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property processId.
+@param pprocessId
+           the processId to set"
+      end
+
+      operation 139364 "getProcName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property procName.
+@return the procName value"
+      end
+
+      operation 139492 "setProcName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pprocName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property procName.
+@param pprocName
+           the procName to set"
+      end
+
+      operation 139620 "getStartTime"
+	public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property startTime.
+@return the startTime value"
+      end
+
+      operation 139748 "setStartTime"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pstartTime" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property startTime.
+@param pstartTime
+           the startTime to set"
+      end
+
+      operation 139876 "getEndTime"
+	public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property endTime.
+@return the endTime value"
+      end
+
+      operation 140004 "setEndTime"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pendTime" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property endTime.
+@param pendTime
+           the endTime to set"
+      end
+
+      operation 140132 "getOriginator"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property originator.
+@return the originator value"
+      end
+
+      operation 140260 "setOriginator"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "poriginator" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property originator.
+@param poriginator
+           the originator to set"
+      end
+
+      operation 140388 "getDescription"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property description.
+@return the description value"
+      end
+
+      operation 140516 "setDescription"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pdescription" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property description.
+@param pdescription
+           the description to set"
+      end
+
+      operation 140644 "getHistory"
+	public return_type class_ref 130532 // ProcessHistoryEntry
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List< ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property history.
+@return the history value"
+      end
+
+      operation 140772 "setHistory"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "phistory" explicit_type "List< ProcessHistoryEntry >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property history.
+@param phistory
+           the history to set"
+      end
+
+      operation 140900 "getFields"
+	public return_type class_ref 129636 // Field
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fields.
+@return the fields value"
+      end
+
+      operation 141028 "setFields"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfields" explicit_type "Map< String, Field >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fields.
+@param pfields
+           the fields to set"
+      end
+    end
+
+    class 130532 "ProcessHistoryEntry"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Represent Processus history entry.
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 131044 // <generalisation>
+	relation 131044 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131044 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      classrelation 131172 // <realization>
+	relation 131172 -_-|>
+	  a public
+	    java "${type}< ProcessHistoryEntry >"
+	    classrelation_ref 131172 // <realization>
+	  b parent class_ref 130660 // Comparable
+      end
+
+      attribute 133476 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 6367568330940814575L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      attribute 133604 "executionTime"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " time where action is done. "
+      end
+
+      attribute 133732 "action"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " description about action. "
+      end
+
+      attribute 133860 "actor"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " People who realize action. "
+      end
+
+      attribute 133988 "stepName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Target step for this step. "
+      end
+
+      attribute 134116 "stepId"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Id for this step. "
+      end
+
+      attribute 134244 "stepDescription"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Description for this . "
+      end
+
+      attribute 134372 "message"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Message for this history entry. "
+      end
+
+      attribute 134500 "messageID"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " MessageID for this history entry. "
+      end
+
+      operation 141156 "compareTo"
+	public explicit_return_type "int"
+	nparams 1
+	  param in name "phe" type class_ref 130532 // ProcessHistoryEntry
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " {@inheritDoc} "
+      end
+
+      operation 141284 "getExecutionTime"
+	public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property executionTime.
+@return the executionTime value"
+      end
+
+      operation 141412 "setExecutionTime"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pexecutionTime" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property executionTime.
+@param pexecutionTime
+           the executionTime to set"
+      end
+
+      operation 141540 "getAction"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property action.
+@return the action value"
+      end
+
+      operation 141668 "setAction"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "paction" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property action.
+@param paction
+           the action to set"
+      end
+
+      operation 141796 "getActor"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property actor.
+@return the actor value"
+      end
+
+      operation 141924 "setActor"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pactor" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property actor.
+@param pactor
+           the actor to set"
+      end
+
+      operation 142052 "getStepName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property stepName.
+@return
+     the stepName value"
+      end
+
+      operation 142180 "setStepName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pstepName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property stepName.
+@param pstepName
+        the stepName to set"
+      end
+
+      operation 142308 "getMessage"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property message.
+
+@return
+     the message value"
+      end
+
+      operation 142436 "setMessage"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pMessage" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property message.
+@param pMessage
+         the message to set"
+      end
+
+      operation 142564 "getMessageID"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property message.
+@return
+     the message value"
+      end
+
+      operation 142692 "setMessageID"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pMessageID" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property message.
+@param pMessageID
+        the message to set"
+      end
+
+      operation 142820 "getStepDescription"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property stepDescription.
+@return
+     the stepDescription value"
+      end
+
+      operation 142948 "setStepDescription"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pstepDescription" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property stepDescription.
+@param pstepDescription
+        the stepDescription to set"
+      end
+
+      operation 143076 "getStepId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property stepId.
+@return the stepId value"
+      end
+
+      operation 143204 "setStepId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pstepId" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property stepId.
+@param pstepId
+           the stepId to set"
+      end
+    end
+
+    class 130788 "Queue"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Represent BPM Queue Model.
+
+@author Cedrick LUNVEN"
+      classrelation 131300 // <generalisation>
+	relation 131300 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131300 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 134628 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 7351691937754028465L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      attribute 134756 "id"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Queue can have specific id. *"
+      end
+
+      attribute 134884 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Queue Name. *"
+      end
+
+      attribute 135012 "description"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Queue description can be populate. *"
+      end
+
+      attribute 135140 "group"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Queue is work queue. *"
+      end
+
+      attribute 135268 "taskCount"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Will display number of task (optional). *"
+      end
+
+      operation 143332 "Queue"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor (used by mappers)."
+      end
+
+      operation 143460 "Queue"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "bpmQueue" type class_ref 130788 // Queue
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Copy COnstructor (use in specialisations).
+
+@param bpmQueue
+     other instance of bpm Queue"
+      end
+
+      operation 143588 "getId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property id.
+@return the id value"
+      end
+
+      operation 143716 "setId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pid" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property id.
+@param pid
+           the id to set"
+      end
+
+      operation 143844 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property name.
+@return the name value"
+      end
+
+      operation 143972 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pname" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property name.
+@param pname
+           the name to set"
+      end
+
+      operation 144100 "getDescription"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property description.
+@return the description value"
+      end
+
+      operation 144228 "setDescription"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pdescription" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property description.
+@param pdescription
+           the description to set"
+      end
+
+      operation 144356 "isGroup"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property group.
+@return the group value"
+      end
+
+      operation 144484 "setGroup"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pgroup" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property group.
+@param pgroup
+           the group to set"
+      end
+
+      operation 144612 "getTaskCount"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property taskCount.
+@return the taskCount value"
+      end
+
+      operation 144740 "setTaskCount"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptaskCount" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property taskCount.
+@param ptaskCount
+           the taskCount to set"
+      end
+    end
+
+    class 130916 "Queues"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Represent a collection of {@link Queue}.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 131428 // <generalisation>
+	relation 131428 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131428 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 135396 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -2443143931248246129L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      classrelation 131556 // queueMap (<unidirectional association>)
+	relation 131556 --->
+	  stereotype "Map"
+	  a role_name "queueMap" private
+	    comment " attribute to get queue Map.  "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String , ${type} > ${name}${value};
+"
+	    classrelation_ref 131556 // queueMap (<unidirectional association>)
+	  b parent class_ref 130788 // Queue
+      end
+
+      operation 144868 "Queues"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Enable default constructor."
+      end
+
+      operation 144996 "Queues"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "initValue" explicit_type "Map< String, Queue >"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Parameterized constructor.
+
+@param initValue
+		init value for queue"
+      end
+
+      operation 145124 "getQueue"
+	public return_type class_ref 130788 // Queue
+	nparams 1
+	  param in name "queueName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Retrieve queue bi its name.
+
+@param queueName
+		target queue name
+@return
+		queue is present, null"
+      end
+
+      operation 145252 "getQueueMap"
+	public return_type class_ref 130788 // Queue
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter for queueMap.
+
+@return the queueMap	
+			the value of QueueMap"
+      end
+
+      operation 145380 "setQueueMap"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "queueMap" explicit_type "Map< String, Queue >"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter for queueMap.
+@param queueMap the queueMap to set"
+      end
+    end
+
+    class 131044 "Task"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "POJO represents bpm task concepts (unit of work, work item). It must be used as superclass of bean.
+
+@author Cedrick LUNVEN"
+      classrelation 131684 // <generalisation>
+	relation 131684 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131684 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 135524 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 2036807312298856999L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing serial number. "
+      end
+
+      attribute 135652 "taskId"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " unique identifier of the task in engine. "
+      end
+
+      attribute 135780 "processusName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " processus name. "
+      end
+
+      attribute 135908 "stepName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " step name for the task. "
+      end
+
+      attribute 136036 "processusId"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " unique identifier of the process in engine. "
+      end
+
+      attribute 136164 "locked"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " if task has been locked. (checkout) "
+      end
+
+      attribute 136292 "locker"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " if locked, contains locker userid. "
+      end
+
+      attribute 136420 "urgent"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " urgent status. "
+      end
+
+      attribute 136548 "suspended"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " suspended status, suspend could be considered a frozen. "
+      end
+
+      attribute 136676 "createdDate"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " creation date (arriving in the queue at first place). "
+      end
+
+      attribute 136804 "deadline"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " deadline of the task. "
+      end
+
+      attribute 136932 "priority"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " priority for the task. "
+      end
+
+      attribute 137060 "queueName"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " adressee for this task. "
+      end
+
+      classrelation 131812 // form (<unidirectional association>)
+	relation 131812 --->
+	  a role_name "form" private
+	    comment " describe form. 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 131812 // form (<unidirectional association>)
+	  b parent class_ref 130020 // FormTask
+      end
+
+      classrelation 131940 // fields (<unidirectional association>)
+	relation 131940 --->
+	  stereotype "Map"
+	  a role_name "fields" private
+	    comment " field to be displayed in queue. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String , ${type} > ${name}${value};
+"
+	    classrelation_ref 131940 // fields (<unidirectional association>)
+	  b parent class_ref 129636 // Field
+      end
+
+      attribute 137188 "queueFields"
+	private explicit_type " String, String "
+	stereotype "Map"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " field to be displayed in queue. "
+      end
+
+      operation 145508 "Task"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Contructor. (should not be used as taskId is invaariant."
+      end
+
+      operation 145636 "Task"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "bpmTask" type class_ref 131044 // Task
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Copy Constructor (use in specialisations).
+
+@param bpmTask
+     other instance of Task"
+      end
+
+      operation 145764 "Task"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "pid" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setting fixed id through constructor.
+@param pid
+           fixed task Id"
+      end
+
+      operation 145892 "getTaskId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property taskId.
+@return the taskId value"
+      end
+
+      operation 146020 "setTaskId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptaskId" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property taskId.
+@param ptaskId
+           the taskId to set"
+      end
+
+      operation 146148 "isLocked"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property locked.
+@return the locked value"
+      end
+
+      operation 146276 "setLocked"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plocked" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property locked.
+@param plocked
+           the locked to set"
+      end
+
+      operation 146404 "getLocker"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property locker.
+@return the locker value"
+      end
+
+      operation 146532 "setLocker"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plocker" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property locker.
+@param plocker
+           the locker to set"
+      end
+
+      operation 146660 "isUrgent"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property urgent.
+@return the urgent value"
+      end
+
+      operation 146788 "setUrgent"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "purgent" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property urgent.
+@param purgent
+           the urgent to set"
+      end
+
+      operation 146916 "isSuspended"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property suspended.
+@return the suspended value"
+      end
+
+      operation 147044 "setSuspended"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "psuspended" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property suspended.
+@param psuspended
+           the suspended to set"
+      end
+
+      operation 147172 "getCreatedDate"
+	public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property createdDate.
+@return the createdDate value"
+      end
+
+      operation 147300 "setCreatedDate"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pcreatedDate" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property createdDate.
+@param pcreatedDate
+           the createdDate to set"
+      end
+
+      operation 147428 "getDeadline"
+	public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property deadline.
+@return the deadline value"
+      end
+
+      operation 147556 "setDeadline"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pdeadline" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property deadline.
+@param pdeadline
+           the deadline to set"
+      end
+
+      operation 147684 "getFields"
+	public return_type class_ref 129636 // Field
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property fields.
+@return
+     the fields value"
+      end
+
+      operation 147812 "setFields"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pfields" explicit_type "Map< String, Field >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property fields.
+@param pfields
+        the fields to set"
+      end
+
+      operation 147940 "getProcessusName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processusName.
+@return
+     the processusName value"
+      end
+
+      operation 148068 "setProcessusName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pprocessusName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property processusName.
+@param pprocessusName
+        the processusName to set"
+      end
+
+      operation 148196 "getStepName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property stepName.
+@return
+     the stepName value"
+      end
+
+      operation 148324 "setStepName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pstepName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property stepName.
+@param pstepName
+        the stepName to set"
+      end
+
+      operation 148452 "getProcessusId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property processusId.
+@return
+     the processusId value"
+      end
+
+      operation 148580 "setProcessusId"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pprocessusId" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property processusId.
+@param pprocessusId
+        the processusId to set"
+      end
+
+      operation 148708 "getPriority"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property priority.
+@return
+     the priority value"
+      end
+
+      operation 148836 "setPriority"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppriority" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property priority.
+@param ppriority
+        the priority to set"
+      end
+
+      operation 148964 "getQueueName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property queueName.
+@return
+     the queueName value"
+      end
+
+      operation 149092 "setQueueName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pqueueName" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property queueName.
+@param pqueueName
+        the queueName to set"
+      end
+
+      operation 149220 "getForm"
+	public return_type class_ref 130020 // FormTask
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property form.
+@return
+     the form value"
+      end
+
+      operation 149348 "setForm"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pform" type class_ref 130020 // FormTask
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property form.
+@param pform
+        the form to set"
+      end
+
+      operation 149476 "getQueueFields"
+	public explicit_return_type "Map< String, String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property queueFields.
+@return
+     the queueFields value"
+      end
+
+      operation 149604 "setQueueFields"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pqueueFields" explicit_type "Map< String, String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property queueFields.
+@param pqueueFields
+        the queueFields to set"
+      end
+    end
+
+    class 131172 "Tasks"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Represent a collection of {@link Task}.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 132068 // <generalisation>
+	relation 132068 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132068 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 137316 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -2443143931248246129L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " serial number. "
+      end
+
+      classrelation 132196 // taskMap (<unidirectional association>)
+	relation 132196 --->
+	  stereotype "Map"
+	  a role_name "taskMap" private
+	    comment " attribute to get queue Map.  "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String , ${type} > ${name}${value};
+"
+	    classrelation_ref 132196 // taskMap (<unidirectional association>)
+	  b parent class_ref 131044 // Task
+      end
+
+      operation 149732 "Tasks"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Enable default constructor."
+      end
+
+      operation 149860 "Tasks"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "initValue" explicit_type "Map< String, Task >"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Parameterized constructor.
+
+@param initValue
+		init value for queue"
+      end
+
+      operation 149988 "getTask"
+	public return_type class_ref 131044 // Task
+	nparams 1
+	  param in name "taskName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Retrieve queue bi its name.
+
+@param taskName
+		target task name
+@return
+		queue is present, null"
+      end
+
+      operation 150116 "getTaskMap"
+	public return_type class_ref 131044 // Task
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter for taskMap.
+
+@return the taskMap
+			the value of taskMap"
+      end
+
+      operation 150244 "setTaskMap"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "ptaskMap" explicit_type "Map< String, Task >"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter for taskMap.
+
+@param ptaskMap the queueMap to set"
+      end
+    end
+
+    class 131300 "User"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "BPM User.
+
+@author <a href=\"mailto:celphys@gmail.com\">C&eacute;drick LUNVEN</a>"
+      classrelation 132324 // <generalisation>
+	relation 132324 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132324 // <generalisation>
+	  b parent class_ref 128996 // BpmObject
+      end
+
+      attribute 137444 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 7696031696473143406L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Attribute representing. *"
+      end
+
+      attribute 137572 "login"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " unique user id. *"
+      end
+
+      attribute 137700 "description"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " description. *"
+      end
+
+      attribute 137828 "email"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " adresse mail. *"
+      end
+
+      classrelation 132452 // attributes (<unidirectional association>)
+	relation 132452 --->
+	  stereotype "Map"
+	  a role_name "attributes" private
+	    comment " custom attributes for group. "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< String, ${type} > ${name}${value};
+"
+	    classrelation_ref 132452 // attributes (<unidirectional association>)
+	  b parent class_ref 129636 // Field
+      end
+
+      attribute 137956 "groups"
+	private explicit_type " String "
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " group list. "
+      end
+
+      attribute 138084 "roles"
+	private explicit_type " String "
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " role list. "
+      end
+
+      attribute 138212 "queues"
+	private explicit_type " String "
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " queue list. "
+      end
+
+      operation 150372 "User"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Default Constructor."
+      end
+
+      operation 150500 "User"
+	public explicit_return_type ""
+	nparams 4
+	  param in name "pLogin" explicit_type "String"
+	  param in name "pPassword" explicit_type "String"
+	  param in name "pEmail" explicit_type "String"
+	  param in name "pDescription" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, final ${t1} ${p1}, final ${t2} ${p2}, final ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Parameterized constructor.
+
+@param pLogin
+     user login
+@param pPassword
+     user password
+@param pEmail
+     user emal
+@param pDescription
+     user description"
+      end
+
+      operation 150628 "getLogin"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property login.
+@return the login value"
+      end
+
+      operation 150756 "setLogin"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plogin" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property login.
+@param plogin
+           the login to set"
+      end
+
+      operation 150884 "getDescription"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property description.
+@return the description value"
+      end
+
+      operation 151012 "setDescription"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pdescription" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property description.
+@param pdescription
+           the description to set"
+      end
+
+      operation 151140 "getEmail"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property email.
+@return the email value"
+      end
+
+      operation 151268 "setEmail"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pemail" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property email.
+@param pemail
+           the email to set"
+      end
+
+      operation 151396 "getAttributes"
+	public return_type class_ref 129636 // Field
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map< String, ${type} > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property attributes.
+@return
+     the attributes value"
+      end
+
+      operation 151524 "setAttributes"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pattributes" explicit_type "Map< String, Field >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property attributes.
+@param pattributes
+        the attributes to set"
+      end
+
+      operation 151652 "getGroups"
+	public explicit_return_type "List< String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property groups.
+@return
+     the groups value"
+      end
+
+      operation 151780 "setGroups"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pgroups" explicit_type "List< String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property groups.
+@param pgroups
+        the groups to set"
+      end
+
+      operation 151908 "getRoles"
+	public explicit_return_type "List< String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property roles.
+@return
+     the roles value"
+      end
+
+      operation 152036 "setRoles"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "proles" explicit_type "List< String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property roles.
+
+@param proles
+        the roles to set"
+      end
+
+      operation 152164 "getQueues"
+	public explicit_return_type "List< String >"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Getter method for property queues.
+
+@return
+     the queues value"
+      end
+
+      operation 152292 "setQueues"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pqueues" explicit_type "List< String >"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property queues.
+
+@param pqueues
+        the queues to set"
+      end
+    end
+  end
+
+  deploymentview 128356 "domain"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 128612 "BpmObject"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import com.logica.bpm.utils.ReflectUtils;
+${definition}"
+      associated_classes
+	class_ref 128996 // BpmObject
+      end
+    end
+
+    artifact 128740 "Attachment"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.domain.type.BpmAttachmentType;
+import com.logica.bpm.domain.type.BpmLibraryType;
+${definition}"
+      associated_classes
+	class_ref 128868 // Attachment
+      end
+    end
+
+    artifact 128868 "Credentials"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.Serializable;
+${definition}"
+      associated_classes
+	class_ref 129508 // Credentials
+      end
+    end
+
+    artifact 128996 "Field"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.logica.bpm.domain.type.BpmFieldType;
+import com.logica.bpm.utils.FieldMarshaller;
+${definition}"
+      associated_classes
+	class_ref 129636 // Field
+      end
+    end
+
+    artifact 129124 "FormField"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Collection;
+${definition}"
+      associated_classes
+	class_ref 129892 // FormField
+      end
+    end
+
+    artifact 129252 "FormTask"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Map;
+${definition}"
+      associated_classes
+	class_ref 130020 // FormTask
+      end
+    end
+
+    artifact 129380 "Group"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.List;
+import java.util.Map;
+${definition}"
+      associated_classes
+	class_ref 130148 // Group
+      end
+    end
+
+    artifact 129508 "Participant"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 130276 // Participant
+      end
+    end
+
+    artifact 129636 "Process"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import com.logica.bpm.exception.BpmExceptionMessageProvider;
+import com.logica.bpm.exception.field.FieldNotFoundException;
+${definition}"
+      associated_classes
+	class_ref 130404 // Process
+      end
+    end
+
+    artifact 129764 "ProcessHistoryEntry"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Date;
+${definition}"
+      associated_classes
+	class_ref 130532 // ProcessHistoryEntry
+      end
+    end
+
+    artifact 129892 "Queue"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 130788 // Queue
+      end
+    end
+
+    artifact 130020 "Queues"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Map;
+import org.springframework.util.Assert;
+${definition}"
+      associated_classes
+	class_ref 130916 // Queues
+      end
+    end
+
+    artifact 130148 "Task"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+${definition}"
+      associated_classes
+	class_ref 131044 // Task
+      end
+    end
+
+    artifact 130276 "Tasks"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Map;
+import org.springframework.util.Assert;
+${definition}"
+      associated_classes
+	class_ref 131172 // Tasks
+      end
+    end
+
+    artifact 130404 "User"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.List;
+import java.util.Map;
+${definition}"
+      associated_classes
+	class_ref 131300 // User
+      end
+    end
+  end
+
+  package_ref 129252 // type
+
+  package_ref 129380 // definition
+
+  package_ref 129508 // query
+
+  package_ref 129636 // result
+end

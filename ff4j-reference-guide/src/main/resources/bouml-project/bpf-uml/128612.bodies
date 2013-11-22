@@ -1,0 +1,14 @@
+class BPFServicesFactoryMock
+!!!128740.java!!!	getBpmTemplate() : BpmTemplate
+        if (instance == null) {
+            instance = new BPFServicesFactoryMock();
+            BpmTemplate mock = new BpmTemplate();
+            mock.setConnectionServices(new BpmConnectionServicesMock());
+            mock.setProcessServices(new BpmProcessServicesMock());
+            mock.setQueueServices(new BpmQueueServicesMock());
+            mock.setTaskServices(new BpmTaskServicesMock());
+            mock.setTibcoIpeServices(new TibcoIPEServicesMock());
+            mock.setFilenetPeServices(new FilenetP8ServicesMock());
+            instance.bpmTemplate = mock;
+        }
+        return instance.bpmTemplate;

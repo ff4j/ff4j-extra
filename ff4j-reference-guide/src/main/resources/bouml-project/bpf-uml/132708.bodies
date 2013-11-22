@@ -1,0 +1,34 @@
+class ParametrizedProcessResultSet
+!!!165092.java!!!	ParametrizedProcessResultSet(in rs : ProcessResultSet, in mapper : ProcessMapper)
+        setCurrentQuery(rs.getCurrentQuery());
+        setNextPageQuery(rs.getNextPageQuery());
+        setPreviousPageQuery(rs.getPreviousPageQuery());
+        setPageNumber(rs.getPageNumber());
+        setPageTotal(rs.getPageTotal());
+        setTotalCount(rs.getTotalCount());
+        if (rs.getResults() != null) {
+            LinkedHashMap < String, PROCESS > mapTasks = new LinkedHashMap < String, PROCESS >();
+            LinkedHashMap < String, com.logica.bpm.domain.Process > defaultMap = rs.getResults();
+            for (Entry < String, com.logica.bpm.domain.Process > currentTask : defaultMap.entrySet()) {
+                mapTasks.put(currentTask.getKey(), mapper.mapBpmProcess((currentTask.getValue())));
+            }
+            setResults(mapTasks);
+        }
+!!!165220.java!!!	ParametrizedProcessResultSet(in rs : ProcessResultSet, in type : Class< ? >)
+        setCurrentQuery(rs.getCurrentQuery());
+        setNextPageQuery(rs.getNextPageQuery());
+        setPreviousPageQuery(rs.getPreviousPageQuery());
+        setPageNumber(rs.getPageNumber());
+        setPageTotal(rs.getPageTotal());
+        setTotalCount(rs.getTotalCount());
+        if (rs.getResults() != null) {
+            LinkedHashMap < String, PROCESS > mapTasks = new LinkedHashMap < String, PROCESS >();
+            LinkedHashMap < String, com.logica.bpm.domain.Process > defaultMap = rs.getResults();
+            for (Entry < String, com.logica.bpm.domain.Process > currentProcess : defaultMap.entrySet()) {
+                mapTasks.put(currentProcess.getKey(),
+                        (PROCESS) BpmEntityManager.getInstance().populateProcessBean(type, currentProcess.getValue()));
+            }
+            setResults(mapTasks);
+        }
+!!!165348.java!!!	getProcessResults() : LinkedHashMap< String, PROCESS >
+        return getResults();

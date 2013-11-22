@@ -1,0 +1,14 @@
+class TaskIPE
+!!!233188.java!!!	TaskIPE(in task : Task)
+        super(task);
+
+        // Further mapping
+        Map < String, String > props = task.getCustomProperties();
+        if (props.containsKey(CustomPropertyIPE.TIBCO_TASK_CANCEL_VALIDATE.getKey())) {
+            this.cancelValidation = Boolean.parseBoolean(props.get(CustomPropertyIPE.TIBCO_TASK_CANCEL_VALIDATE
+                    .getKey()));
+        }
+!!!233316.java!!!	isCancelValidation() : boolean
+        return cancelValidation;
+!!!233444.java!!!	setCancelValidation(in pcancelValidation : boolean) : void
+        this.cancelValidation = pcancelValidation;

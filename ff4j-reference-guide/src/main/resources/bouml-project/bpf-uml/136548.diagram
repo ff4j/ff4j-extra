@@ -1,0 +1,48 @@
+format 72
+
+classcanvas 138724 class_ref 141028 // BpmDataSource
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 257.5 309 2000
+end
+classcanvas 138980 class_ref 141668 // BpmConnection
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 376.5 125 2000
+end
+classcanvas 139108 class_ref 142052 // BpmJcaCredentials
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 367.5 32 3005
+end
+classcanvas 139236 class_ref 142180 // BpmConnectionFactory
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 356.5 226 2006
+end
+classcanvas 139364 class_ref 142308 // BpmResourceAdapterMetaData
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 446.5 314 3005
+end
+relationcanvas 139492 relation_ref 142692 // <unidirectional association>
+  from ref 139236 z 3006 to ref 139364
+  role_a_pos 460 303 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139620 relation_ref 142948 // <unidirectional association>
+  from ref 139236 z 2007 to ref 138980
+  role_a_pos 436 167 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139748 relation_ref 142564 // <unidirectional association>
+  from ref 138980 z 3006 to ref 139108
+  role_a_pos 436 74 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140004 relation_ref 142820 // <unidirectional association>
+  from ref 139236 z 2007 stereotype "<<ConcurrentMap>>" xyz 378 193 2007 to ref 138980
+  role_a_pos 436 167 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140132 relation_ref 143076 // <unidirectional association>
+  from ref 139236 z 2007 to ref 138724
+  role_a_pos 341 285 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

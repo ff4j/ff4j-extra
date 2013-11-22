@@ -1,0 +1,19 @@
+class BpmDaoSupport
+!!!198756.java!!!	getBpmTemplate() : BpmTemplate
+        return bpmTemplate;
+!!!198884.java!!!	createTemplate(in sessionFactory : BpmConnectionFactory) : BpmTemplate
+        return new BpmTemplate(sessionFactory);
+!!!199012.java!!!	setSessionFactory(in sessionFactory : BpmConnectionFactory) : void
+        if (this.bpmTemplate == null || sessionFactory != this.bpmTemplate.getConnectionFactory()) {
+            this.bpmTemplate = createTemplate(sessionFactory);
+        }
+!!!199140.java!!!	getSessionFactory() : BpmConnectionFactory
+        BpmConnectionFactory factory = null;
+        if (this.bpmTemplate != null) {
+            factory = this.bpmTemplate.getConnectionFactory();
+        }
+        return factory;
+!!!199268.java!!!	setBpmTemplate(in pbpmTemplate : BpmTemplate) : void
+        this.bpmTemplate = pbpmTemplate;
+!!!199396.java!!!	getSession(in usr : BpmJcaCredentials) : BpmConnection
+        return this.getBpmTemplate().getConnectionFactory().getBpmConnection(usr);

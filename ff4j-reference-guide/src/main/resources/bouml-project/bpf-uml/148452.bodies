@@ -1,0 +1,150 @@
+class FieldMarshaller
+!!!244196.java!!!	unserializeField(in fieldValue : String) : Field
+        return new Field("NOTHING", BpmFieldType.TYPE_UNDEFINED, null);
+        /*if (!isArray()) {
+            if (BpmFieldType.TYPE_BOOLEAN.equals(this.type)) {
+                value = new Boolean(strValue);
+            } else if (BpmFieldType.TYPE_DATA.equals(this.type) || BpmFieldType.TYPE_TEXT.equals(this.type)) {
+                value = strValue;
+            } else if (BpmFieldType.TYPE_DATE.equals(this.type)) {
+                value = SDF_DATE.parseObject(strValue);
+            } else if (BpmFieldType.TYPE_DATETIME.equals(this.type)) {
+                value = SDF_DATETIME.parseObject(strValue);
+            } else if (BpmFieldType.TYPE_TIME.equals(this.type)) {
+                value = SDF_TIME.parseObject(strValue);
+            } else if (BpmFieldType.TYPE_TIMESTAMP.equals(this.type)) {
+                value = new Long(strValue);
+            } else if (BpmFieldType.TYPE_NUMBER.equals(this.type)) {
+                value = new Double(strValue);
+            }
+        } else {
+            // mutlivalue
+            String[] values = strValue.split(MULTISEPARATOR);
+
+            if (BpmFieldType.TYPE_BOOLEAN.equals(this.type)) {
+                Boolean[] bValues = new Boolean[values.length];
+                for (int idx =0;idx < values.length;idx++) {
+                    bValues[idx] = new Boolean(values[idx]);
+                }
+                value = bValues;
+            } else if (BpmFieldType.TYPE_DATA.equals(this.type) || BpmFieldType.TYPE_TEXT.equals(this.type)) {
+                String[] sValues = new String[values.length];
+                for (int idx =0;idx < values.length;idx++) {
+                    sValues[idx] = new String(values[idx]);
+                }
+                value = sValues;
+            } else if (BpmFieldType.TYPE_DATE.equals(this.type)) {
+                Date[] dValues = new Date[values.length];
+                for (int idx =0;idx < values.length;idx++) {
+                    dValues[idx] = SDF_DATE.parse(values[idx]);
+                }
+                value = dValues;
+            } else if (BpmFieldType.TYPE_DATETIME.equals(this.type)) {
+                Date[] dValues = new Date[values.length];
+                for (int idx =0;idx < values.length;idx++) {
+                    dValues[idx] = SDF_DATETIME.parse(values[idx]);
+                }
+                value = dValues;
+            } else if (BpmFieldType.TYPE_TIME.equals(this.type)) {
+                Date[] dValues = new Date[values.length];
+                for (int idx =0;idx < values.length;idx++) {
+                    dValues[idx] = SDF_TIME.parse(values[idx]);
+                }
+                value = dValues;
+            } else if (BpmFieldType.TYPE_TIMESTAMP.equals(this.type)) {
+                Long[] lValues = new Long[values.length];
+                for (int idx =0;idx < values.length;idx++) {
+                    lValues[idx] = new Long(values[idx]);
+                }
+                value = lValues;
+            } else if (BpmFieldType.TYPE_NUMBER.equals(this.type)) {
+                Double[] dValues = new Double[values.length];
+                for (int idx =0;idx < values.length;idx++) {
+                    dValues[idx] = new Double(values[idx]);
+                }
+            }
+        }
+    } catch (ParseException e) {
+        throw new InvalidFieldTypeException(name, value.getClass().getName(), type.getKey());
+    }
+        return null;*/
+!!!244324.java!!!	serializeField(in field : Field) : String
+        /*
+        StringBuilder val = new StringBuilder((field.getName() != null) ? field.getName() : UNDEFINED);
+        val.append(SEPARATOR);
+        val.append((description != null) ? description : UNDEFINED);
+        val.append(SEPARATOR);
+        val.append((type != null) ? type : UNDEFINED);
+        val.append(SEPARATOR);
+        val.append(array);
+        val.append(SEPARATOR);
+        val.append(length);
+        val.append(SEPARATOR);
+        try {
+            val.append((value != null) ? serializedValue() : UNDEFINED);
+        } catch (InvalidFieldTypeException e) {
+            val.append(ERROR);
+        }
+        return val.toString();
+
+        private String serializedValue() throws InvalidFieldTypeException {
+            /*if (value != null) {
+                if (!value.getClass().isArray()) {
+                    // not an array
+                    if (value instanceof String || value instanceof Boolean || value instanceof Double) {
+                        return String.valueOf(value);
+                    } else if (value instanceof Date) {
+                        if (BpmFieldType.TYPE_DATE.equals(this.type))
+                            return SDF_DATE.format((Date) value);
+                        else if (BpmFieldType.TYPE_TIME.equals(this.type))
+                            return SDF_TIME.format((Date) value);
+                        else if (BpmFieldType.TYPE_DATETIME.equals(this.type))
+                            return SDF_DATETIME.format((Date) value);
+                    }
+                    // if date and not correct TYPE or value not correct class
+                    throw new InvalidFieldTypeException(name, value.getClass().getName(), type.getKey());
+                }
+                // array
+                Object[] values = (Object[]) value;
+                StringBuilder builder = new StringBuilder();
+                if (BpmFieldType.TYPE_TEXT.equals(this.type) || BpmFieldType.TYPE_NUMBER.equals(this.type)    ||
+                    BpmFieldType.TYPE_DATA.equals(this.type) || BpmFieldType.TYPE_TIMESTAMP.equals(this.type) ||
+                    BpmFieldType.TYPE_TIBCO_COMMA.equals(this.type)) {
+                        for (Object item : values) {
+                            builder.append(item);
+                            builder.append(MULTISEPARATOR);
+                        }
+                        return builder.toString();
+                    } else if (BpmFieldType.TYPE_TIME.equals(this.type)) {
+                        for (Object item : values) {
+                            try {
+                                builder.append(SDF_TIME.format((Date) item));
+                                builder.append(MULTISEPARATOR);
+                            } catch (Exception pe) {
+                                throw new InvalidFieldTypeException(name, value.getClass().getName(), type.getKey());
+                            }
+                        }
+                        return builder.toString();
+                    } else if (BpmFieldType.TYPE_DATE.equals(this.type)) {
+                        for (Object item : values) {
+                            try {
+                                builder.append(SDF_DATE.format((Date) item));
+                                builder.append(MULTISEPARATOR);
+                            } catch (Exception pe) {
+                                throw new InvalidFieldTypeException(name, value.getClass().getName(), type.getKey());
+                            }
+                        }
+                    } else if (BpmFieldType.TYPE_DATETIME.equals(this.type)) {
+                        for (Object item : values) {
+                            try {
+                                builder.append(SDF_DATETIME.format((Date) item));
+                                builder.append(MULTISEPARATOR);
+                            } catch (Exception pe) {
+                                throw new InvalidFieldTypeException(name, value.getClass().getName(), type.getKey());
+                            }
+                            return builder.toString();
+                        }
+                    }
+                    throw new InvalidFieldTypeException(name, value.getClass().getName(), type.getKey());
+            }*/
+        return null;

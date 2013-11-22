@@ -1,0 +1,52 @@
+class Process
+!!!138724.java!!!	Process(in bpmProcess : Process)
+        setCustomProperties(bpmProcess.getCustomProperties());
+        setDescription(bpmProcess.getDescription());
+        setEndTime(bpmProcess.getEndTime());
+        setFields(bpmProcess.getFields());
+        setHistory(bpmProcess.getHistory());
+        setOriginator(bpmProcess.getOriginator());
+        setProcessId(bpmProcess.getProcessId());
+        setProcName(bpmProcess.getProcName());
+        setStartTime(bpmProcess.getStartTime());
+!!!138852.java!!!	getField(in fieldName : String) : Field
+        if (!fields.containsKey(fieldName)) {
+            throw new FieldNotFoundException(
+                    BpmExceptionMessageProvider.getInstance().getMessage(
+                            "error.technical.field.notfound", new Object[] {fieldName}), null, null);
+        }
+        return getFields().get(fieldName);
+!!!138980.java!!!	getFieldValue(in fieldName : String) : Object
+        return getField(fieldName).getValue();
+!!!139108.java!!!	getProcessId() : String
+        return processId;
+!!!139236.java!!!	setProcessId(in pprocessId : String) : void
+        this.processId = pprocessId;
+!!!139364.java!!!	getProcName() : String
+        return procName;
+!!!139492.java!!!	setProcName(in pprocName : String) : void
+        this.procName = pprocName;
+!!!139620.java!!!	getStartTime() : Date
+        return startTime;
+!!!139748.java!!!	setStartTime(in pstartTime : Date) : void
+        this.startTime = pstartTime;
+!!!139876.java!!!	getEndTime() : Date
+        return endTime;
+!!!140004.java!!!	setEndTime(in pendTime : Date) : void
+        this.endTime = pendTime;
+!!!140132.java!!!	getOriginator() : String
+        return originator;
+!!!140260.java!!!	setOriginator(in poriginator : String) : void
+        this.originator = poriginator;
+!!!140388.java!!!	getDescription() : String
+        return description;
+!!!140516.java!!!	setDescription(in pdescription : String) : void
+        this.description = pdescription;
+!!!140644.java!!!	getHistory() : ProcessHistoryEntry
+        return history;
+!!!140772.java!!!	setHistory(in phistory : List< ProcessHistoryEntry >) : void
+        this.history = phistory;
+!!!140900.java!!!	getFields() : Field
+        return fields;
+!!!141028.java!!!	setFields(in pfields : Map< String, Field >) : void
+        this.fields = pfields;

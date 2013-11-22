@@ -1,0 +1,18 @@
+window_sizes 1344 881 344 994 600 82
+diagrams
+  active  classdiagram_ref 143204 // bpf-exception
+    994 725 100 4 0 0
+end
+show_stereotypes
+selected 
+  package_ref 131428 // usergroup
+open
+  classview_ref 129380 // exception
+  classview_ref 129508 // attribute
+  classview_ref 129764 // field
+  classview_ref 129892 // form
+  classview_ref 130020 // orm
+  classview_ref 130276 // query
+  classview_ref 133220 // bpf-bean
+end
+end

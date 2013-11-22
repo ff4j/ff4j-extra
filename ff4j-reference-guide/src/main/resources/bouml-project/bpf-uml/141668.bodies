@@ -1,0 +1,24 @@
+class BpmConnection
+!!!184804.java!!!	BpmConnection(in mdata : BpmConnectionMetaData, in usrCtx : BpmJcaCredentials)
+        this.metaData = mdata;
+        this.userCtx = usrCtx;
+!!!184932.java!!!	getMetaData() : ConnectionMetaData
+        return metaData;
+!!!185060.java!!!	getResultSetInfo() : ResultSetInfo
+        throw new UnsupportedOperationException("No SGBD bounded, there no SQL it's a bpm engine.");
+!!!185188.java!!!	createInteraction() : Interaction
+        throw new UnsupportedOperationException("No interaction with other elements");
+!!!185316.java!!!	getLocalTransaction() : LocalTransaction
+        throw new UnsupportedOperationException("No transaction system provided");
+!!!185444.java!!!	getConnectionUuid() : String
+        return connectionUuid;
+!!!185572.java!!!	getUserCtx() : BpmJcaCredentials
+        return userCtx;
+!!!185700.java!!!	setUserCtx(in puserCtx : BpmJcaCredentials) : void
+        this.userCtx = puserCtx;
+!!!185828.java!!!	setConnectionUuid(in pconnectionUuid : String) : void
+        this.connectionUuid = pconnectionUuid;
+!!!185956.java!!!	getCreatedDate() : Date
+        return createdDate;
+!!!186084.java!!!	setCreatedDate(in pcreatedDate : Date) : void
+        this.createdDate = pcreatedDate;

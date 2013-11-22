@@ -1,0 +1,3 @@
+class ProcessDefinitionParsingException
+!!!172516.java!!!	ProcessDefinitionParsingException(in finalMessage : String, in errorCode : String, in errorMessage : String)
+        super(finalMessage, errorCode, errorMessage);

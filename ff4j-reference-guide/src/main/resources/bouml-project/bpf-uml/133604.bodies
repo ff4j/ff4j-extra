@@ -1,0 +1,33 @@
+class BpmExceptionMessageProvider
+!!!167268.java!!!	BpmExceptionMessageProvider(in errorBundleName : String, in locale : Locale)
+        String currentBundle = DEFAULT_ERROR_MESSAGES;
+        if (errorBundleName != null) {
+            currentBundle = errorBundleName;
+        }
+        Locale currentLocale = DEFAULT_LOCALE;
+        if (locale != null) {
+            currentLocale = locale;
+        }
+        errorBundle = ResourceBundle.getBundle(currentBundle, currentLocale);
+!!!167396.java!!!	getInstance() : BpmExceptionMessageProvider
+        if (instance == null) {
+            instance = new BpmExceptionMessageProvider(null, null);
+        }
+        return instance;
+!!!167524.java!!!	getInstance(in bundleName : String, in locale : Locale) : BpmExceptionMessageProvider
+        if (instance == null) {
+            instance = new BpmExceptionMessageProvider(bundleName, locale);
+        }
+        return instance;
+!!!167652.java!!!	getMessage(in pKey : String, in  : Object...pParams) : String
+        try {
+            String propMessage = errorBundle.getString(pKey);
+            if (pParams != null && pParams.length != 0) {
+                propMessage = MessageFormat.format(propMessage, pParams);
+            }
+            return propMessage;
+        } catch (MissingResourceException e) {
+            return "Key '" + pKey + "' not found in bundle '" + errorBundle + "'";
+        } catch (RuntimeException re) {
+            return "Cannot get message from " + pKey + " : " + re.getMessage();
+        }

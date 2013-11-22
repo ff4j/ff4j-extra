@@ -1,0 +1,5 @@
+class TechnicalProcessFieldName
+!!!198116.java!!!	TechnicalProcessFieldName(in pattribute : String)
+        this.attribute = pattribute;
+!!!198244.java!!!	getAttributeName() : String
+        return attribute;

@@ -1,0 +1,20 @@
+class Group
+!!!137060.java!!!	Group(in groupName : String, in groupDescription : String)
+        this.name = groupName;
+        this.description = groupDescription;
+!!!137188.java!!!	getName() : String
+        return name;
+!!!137316.java!!!	setName(in pname : String) : void
+        this.name = pname;
+!!!137444.java!!!	getDescription() : String
+        return description;
+!!!137572.java!!!	setDescription(in pdescription : String) : void
+        this.description = pdescription;
+!!!137700.java!!!	getUsers() : List< String >
+        return users;
+!!!137828.java!!!	setUsers(in pusers : List< String >) : void
+        this.users = pusers;
+!!!137956.java!!!	getAttributes() : Field
+        return attributes;
+!!!138084.java!!!	setAttributes(in pattributes : Map< String, Field >) : void
+        this.attributes = pattributes;

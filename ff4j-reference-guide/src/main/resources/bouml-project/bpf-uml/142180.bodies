@@ -1,0 +1,44 @@
+class BpmConnectionFactory
+!!!186212.java!!!	BpmConnectionFactory()
+        connectionMap = new ConcurrentHashMap < String, BpmConnection >();
+!!!186340.java!!!	BpmConnectionFactory(in pmetaData : BpmResourceAdapterMetaData)
+        this.metaData = pmetaData;
+        connectionMap = new ConcurrentHashMap < String, BpmConnection >();
+!!!186468.java!!!	BpmConnectionFactory(in pmetaData : BpmResourceAdapterMetaData, in defaultContext : BpmJcaCredentials)
+        if (defaultContext == null || defaultContext.getUserName() == null) {
+            throw new IllegalArgumentException("context should not be null");
+        }
+        this.metaData = pmetaData;
+        connectionMap = new ConcurrentHashMap < String, BpmConnection >();
+        defaultAdminBpmConnection = getBpmConnection(defaultContext);
+!!!186596.java!!!	getMetaData() : ResourceAdapterMetaData
+        return metaData;
+!!!186724.java!!!	getRecordFactory() : RecordFactory
+        throw new UnsupportedOperationException("Could not record factory from exception.");
+!!!186852.java!!!	setReference(in reference : Reference) : void
+        this.innerReference = reference;
+!!!186980.java!!!	getReference() : Reference
+        return innerReference;
+!!!187108.java!!!	getConnection() : BpmConnection
+        if (defaultAdminBpmConnection != null) {
+            return defaultAdminBpmConnection;
+        } else {
+            throw new UnsupportedOperationException("None default connection is available.");
+        }
+!!!187236.java!!!	getConnection(in cs : ConnectionSpec) : BpmConnection
+        if (cs == null) {
+            throw new IllegalArgumentException("Username should not be null");
+        }
+        BpmJcaCredentials bcs = (BpmJcaCredentials) cs;
+        if (connectionMap != null && connectionMap.get(bcs.getUserName().toUpperCase()) == null) {
+            BpmConnection conn = getBpmConnection(bcs);
+            this.connectionMap.put(bcs.getUserName().toUpperCase(), conn);
+            return conn;
+        } else {
+            // if a connection already exists for user, not not create another one.
+            return connectionMap.get(bcs.getUserName().toUpperCase());
+        }
+!!!187620.java!!!	getDataSource() : BpmDataSource
+        return dataSource;
+!!!187748.java!!!	setDataSource(in pdataSource : BpmDataSource) : void
+        this.dataSource = pdataSource;

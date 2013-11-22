@@ -1,0 +1,33 @@
+class OutstandingItemIPE
+!!!233572.java!!!	getNature() : OutstandingItemIPEType
+        return nature;
+!!!233700.java!!!	setNature(in pnature : OutstandingItemIPEType) : void
+        this.nature = pnature;
+!!!233828.java!!!	getStartTime() : Date
+        return startTime;
+!!!233956.java!!!	setStartTime(in pstartTime : Date) : void
+        this.startTime = pstartTime;
+!!!234084.java!!!	getDeadline() : Date
+        return deadline;
+!!!234212.java!!!	setDeadline(in pdeadline : Date) : void
+        this.deadline = pdeadline;
+!!!234340.java!!!	getProcName() : String
+        return procName;
+!!!234468.java!!!	setProcName(in pprocName : String) : void
+        this.procName = pprocName;
+!!!234596.java!!!	getStepName() : String
+        return stepName;
+!!!234724.java!!!	setStepName(in pstepName : String) : void
+        this.stepName = pstepName;
+!!!234852.java!!!	getMajorProcVersion() : int
+        return majorProcVersion;
+!!!234980.java!!!	setMajorProcVersion(in pmajorProcVersion : int) : void
+        this.majorProcVersion = pmajorProcVersion;
+!!!235108.java!!!	getMinorProcVersion() : int
+        return minorProcVersion;
+!!!235236.java!!!	setMinorProcVersion(in pminorProcVersion : int) : void
+        this.minorProcVersion = pminorProcVersion;
+!!!235364.java!!!	getCaseTag() : String
+        return caseTag;
+!!!235492.java!!!	setCaseTag(in pcaseTag : String) : void
+        this.caseTag = pcaseTag;

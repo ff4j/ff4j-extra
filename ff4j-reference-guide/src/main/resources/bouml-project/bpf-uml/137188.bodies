@@ -1,0 +1,3 @@
+class TaskParsingException
+!!!173796.java!!!	TaskParsingException(in finalMessage : String, in errorCode : String, in errorMessage : String)
+        super(finalMessage, errorCode, errorMessage);

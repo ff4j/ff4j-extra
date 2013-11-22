@@ -1,0 +1,43 @@
+class OutstandingItemIPEQuery
+!!!235620.java!!!	enableDynamicSubProcItems() : void
+        this.withDynamicSubProcItems = true;
+!!!235748.java!!!	enableEAIItems() : void
+        this.withEAIItems = true;
+!!!235876.java!!!	enableEventItems() : void
+        this.withEventItems = true;
+!!!236004.java!!!	enableGraftItems() : void
+        this.withGraftItems = true;
+!!!236132.java!!!	enableNormalItems() : void
+        this.withNormalItems = true;
+!!!236260.java!!!	enableSubProcCallItems() : void
+        this.withSubProcCallItems = true;
+!!!236388.java!!!	enableTransactionControlItems() : void
+        this.withTransactionControlItems = true;
+!!!236516.java!!!	isWithNormalItems() : boolean
+        return withNormalItems;
+!!!236644.java!!!	setWithNormalItems(in pwithNormalItems : boolean) : void
+        this.withNormalItems = pwithNormalItems;
+!!!236772.java!!!	isWithEventItems() : boolean
+        return withEventItems;
+!!!236900.java!!!	setWithEventItems(in pwithEventItems : boolean) : void
+        this.withEventItems = pwithEventItems;
+!!!237028.java!!!	isWithEAIItems() : boolean
+        return withEAIItems;
+!!!237156.java!!!	setWithEAIItems(in pwithEAIItems : boolean) : void
+        this.withEAIItems = pwithEAIItems;
+!!!237284.java!!!	isWithSubProcCallItems() : boolean
+        return withSubProcCallItems;
+!!!237412.java!!!	setWithSubProcCallItems(in pwithSubProcCallItems : boolean) : void
+        this.withSubProcCallItems = pwithSubProcCallItems;
+!!!237540.java!!!	isWithDynamicSubProcItems() : boolean
+        return withDynamicSubProcItems;
+!!!237668.java!!!	setWithDynamicSubProcItems(in pwithDynamicSubProcItems : boolean) : void
+        this.withDynamicSubProcItems = pwithDynamicSubProcItems;
+!!!237796.java!!!	isWithGraftItems() : boolean
+        return withGraftItems;
+!!!237924.java!!!	setWithGraftItems(in pwithGraftItems : boolean) : void
+        this.withGraftItems = pwithGraftItems;
+!!!238052.java!!!	isWithTransactionControlItems() : boolean
+        return withTransactionControlItems;
+!!!238180.java!!!	setWithTransactionControlItems(in pwithTransactionControlItems : boolean) : void
+        this.withTransactionControlItems = pwithTransactionControlItems;

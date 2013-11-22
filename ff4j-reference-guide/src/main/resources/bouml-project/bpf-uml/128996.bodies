@@ -1,0 +1,9 @@
+class BpmObject
+!!!129252.java!!!	BpmObject()
+        customProperties = new HashMap < String, String >();
+!!!129380.java!!!	getCustomProperties() : Map< String, String >
+        return customProperties;
+!!!129508.java!!!	setCustomProperties(in pcustomProperties : Map< String, String >) : void
+        this.customProperties = pcustomProperties;
+!!!129636.java!!!	toString() : String
+        return ReflectUtils.inspect(this);

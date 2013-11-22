@@ -1,0 +1,18 @@
+class BpmAccessor
+!!!196196.java!!!	afterPropertiesSet() : void
+        /* In WebService mode you work with a client without DataSource not ConnectionFactory
+         * the musn't be required in this class.
+        if (connectionFactory == null) {
+            throw new IllegalArgumentException("Property 'connectionFactory' is required");
+        }*/
+        if (connectionFactory != null) {
+            this.dataSource = connectionFactory.getDataSource();
+        }
+!!!196324.java!!!	getConnectionFactory() : BpmConnectionFactory
+        return connectionFactory;
+!!!196452.java!!!	setConnectionFactory(in pconnectionFactory : BpmConnectionFactory) : void
+        this.connectionFactory = pconnectionFactory;
+!!!196580.java!!!	getDataSource() : BpmDataSource
+        return dataSource;
+!!!196708.java!!!	setDataSource(in pdataSource : BpmDataSource) : void
+        this.dataSource = pdataSource;

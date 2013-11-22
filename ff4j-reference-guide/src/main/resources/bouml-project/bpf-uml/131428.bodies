@@ -1,0 +1,13 @@
+class MapDefinition
+!!!152420.java!!!	getName() : String
+        return name;
+!!!152548.java!!!	setName(in pname : String) : void
+        this.name = pname;
+!!!152676.java!!!	getDescription() : String
+        return description;
+!!!152804.java!!!	setDescription(in pdescription : String) : void
+        this.description = pdescription;
+!!!152932.java!!!	getSteps() : StepDefinition
+        return steps;
+!!!153060.java!!!	setSteps(in psteps : Map< String, StepDefinition >) : void
+        this.steps = psteps;

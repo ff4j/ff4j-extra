@@ -1,0 +1,64 @@
+class ManagedRessource
+!!!191332.java!!!	compareTo(in mr : ManagedRessource) : int
+        // Du plus grand au plus petit et toujours unavailable en premier (sinon plus utilisé)
+        int exitValue = 0;
+        if (mr.isAvailable() == available) {
+            exitValue = (mr.getPriority() - priority);
+        } else if (mr.isAvailable()) {
+            // Je suis 'invalide' je passe en premier
+            exitValue = -1;
+        } else {
+            exitValue = 1;
+        }
+        return exitValue;
+!!!191460.java!!!	toString() : String
+        // Affichage de l'état du Composant
+        StringBuffer strBuild = new StringBuffer();
+        strBuild.append(this.id);
+        strBuild.append("(" + new Double(this.defaultweigth).intValue() + "%)");
+        if (isAvailable()) {
+            strBuild.append(" currentweight " + new Double(this.currentweight).intValue() + "% " + rsc.toString());
+        } else {
+            strBuild.append(" ---");
+        }
+        return strBuild.toString();
+!!!191588.java!!!	getDefaultWeigth() : double
+        return defaultweigth;
+!!!191716.java!!!	setDefaultWeigth(in pweigth : double) : void
+        this.defaultweigth = pweigth;
+!!!191844.java!!!	getNbUse() : double
+        return nbUse;
+!!!191972.java!!!	setNbUse(in pnbUse : double) : void
+        this.nbUse = pnbUse;
+!!!192100.java!!!	getPriority() : int
+        return priority;
+!!!192228.java!!!	setPriority(in ppriority : int) : void
+        this.priority = ppriority;
+!!!192356.java!!!	getRessource() : RESOURCE
+        return rsc;
+!!!192484.java!!!	setRessource(in pwrappee : RESOURCE) : void
+        this.rsc = pwrappee;
+!!!192612.java!!!	isAvailable() : boolean
+        return available;
+!!!192740.java!!!	setAvailable(in pavailable : boolean) : void
+        this.available = pavailable;
+!!!192868.java!!!	getUnavailabilityCause() : String
+        return unavailabilityCause;
+!!!192996.java!!!	setUnavailabilityCause(in punavailabilityCause : String) : void
+        this.unavailabilityCause = punavailabilityCause;
+!!!193124.java!!!	getUnavailabilityError() : Throwable
+        return unavailabilityError;
+!!!193252.java!!!	setUnavailabilityError(in punavailabilityError : Throwable) : void
+        this.unavailabilityError = punavailabilityError;
+!!!193380.java!!!	getId() : String
+        return id;
+!!!193508.java!!!	setBeanName(in name : String) : void
+        this.id = name;
+!!!193636.java!!!	getUnavailabilityTriggerDate() : Date
+        return unavailabilityTriggerDate;
+!!!193764.java!!!	setUnavailabilityTriggerDate(in punavailabilityTriggerDate : Date) : void
+        this.unavailabilityTriggerDate = punavailabilityTriggerDate;
+!!!193892.java!!!	getCurrentweight() : double
+        return currentweight;
+!!!194020.java!!!	setCurrentweight(in pcurrentweight : double) : void
+        this.currentweight = pcurrentweight;

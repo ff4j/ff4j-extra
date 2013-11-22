@@ -1,0 +1,41 @@
+class QueueIPE
+!!!231652.java!!!	QueueIPE(in bpmQueue : Queue)
+        super(bpmQueue);
+
+        // Further mapping
+        Map < String, String > props = bpmQueue.getCustomProperties();
+        if (props.containsKey(CustomPropertyIPE.TIBCO_QUEUE_FIRSTDEADLINE.getKey())) {
+            this.firstDeadLine = props.get(CustomPropertyIPE.TIBCO_QUEUE_FIRSTDEADLINE.getKey());
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_QUEUE_COUNT_DEADLINE.getKey())) {
+            this.deadlineCount = Integer.parseInt(props.get(CustomPropertyIPE.TIBCO_QUEUE_COUNT_DEADLINE.getKey()));
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_QUEUE_COUNT_URGENT.getKey())) {
+            this.urgentCount = Integer.parseInt(props.get(CustomPropertyIPE.TIBCO_QUEUE_COUNT_URGENT.getKey()));
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_QUEUE_COUNT_UNOPENED.getKey())) {
+            this.unOpenedCount = Integer.parseInt(props.get(CustomPropertyIPE.TIBCO_QUEUE_COUNT_UNOPENED.getKey()));
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_QUEUE_TEST.getKey())) {
+            this.testQueue = Boolean.parseBoolean(props.get(CustomPropertyIPE.TIBCO_QUEUE_TEST.getKey()));
+        }
+!!!231780.java!!!	isTestQueue() : boolean
+        return testQueue;
+!!!231908.java!!!	setTestQueue(in ptestQueue : boolean) : void
+        this.testQueue = ptestQueue;
+!!!232036.java!!!	getFirstDeadLine() : String
+        return firstDeadLine;
+!!!232164.java!!!	setFirstDeadLine(in pfirstDeadLine : String) : void
+        this.firstDeadLine = pfirstDeadLine;
+!!!232292.java!!!	getUrgentCount() : int
+        return urgentCount;
+!!!232420.java!!!	setUrgentCount(in purgentCount : int) : void
+        this.urgentCount = purgentCount;
+!!!232548.java!!!	getDeadlineCount() : int
+        return deadlineCount;
+!!!232676.java!!!	setDeadlineCount(in pdeadlineCount : int) : void
+        this.deadlineCount = pdeadlineCount;
+!!!232804.java!!!	getUnOpenedCount() : int
+        return unOpenedCount;
+!!!232932.java!!!	setUnOpenedCount(in punOpenedCount : int) : void
+        this.unOpenedCount = punOpenedCount;

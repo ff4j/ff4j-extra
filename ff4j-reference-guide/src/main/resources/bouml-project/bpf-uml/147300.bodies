@@ -1,0 +1,49 @@
+class ProcessIPE
+!!!229860.java!!!	ProcessIPE(in bpmProcess : Process)
+        // Superclass attributes
+        super(bpmProcess);
+
+        // Further mapping
+        Map < String, String > props = bpmProcess.getCustomProperties();
+        if (props.containsKey(CustomPropertyIPE.TIBCO_PROCESS_ACTIVE.getKey())) {
+            this.active = Boolean.valueOf(props.get(CustomPropertyIPE.TIBCO_PROCESS_ACTIVE.getKey()));
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_PROCESS_SUSPEND.getKey())) {
+            this.suspend = Boolean.valueOf(props.get(CustomPropertyIPE.TIBCO_PROCESS_SUSPEND.getKey()));
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_ACTION_TYPE.getKey())) {
+            this.actionType = props.get(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_ACTION_TYPE.getKey());
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_PROCMAJOR.getKey())) {
+            this.majorVersion = props.get(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_PROCMAJOR.getKey());
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_PROCMINOR.getKey())) {
+            this.minorVersion = props.get(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_PROCMINOR.getKey());
+        }
+        if (props.containsKey(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_TIMEOFFSET.getKey())) {
+            this.timeOffset = props.get(CustomPropertyIPE.TIBCO_PROCESS_HISTORY_TIMEOFFSET.getKey());
+        }
+!!!229988.java!!!	isActive() : boolean
+        return active;
+!!!230116.java!!!	setActive(in pactive : boolean) : void
+        this.active = pactive;
+!!!230244.java!!!	getActionType() : String
+        return actionType;
+!!!230372.java!!!	setActionType(in pactionType : String) : void
+        this.actionType = pactionType;
+!!!230500.java!!!	getMajorVersion() : String
+        return majorVersion;
+!!!230628.java!!!	setMajorVersion(in pmajorVersion : String) : void
+        this.majorVersion = pmajorVersion;
+!!!230756.java!!!	getMinorVersion() : String
+        return minorVersion;
+!!!230884.java!!!	setMinorVersion(in pminorVersion : String) : void
+        this.minorVersion = pminorVersion;
+!!!231012.java!!!	getTimeOffset() : String
+        return timeOffset;
+!!!231140.java!!!	setTimeOffset(in ptimeOffset : String) : void
+        this.timeOffset = ptimeOffset;
+!!!231268.java!!!	isSuspend() : boolean
+        return suspend;
+!!!231396.java!!!	setSuspend(in psuspend : boolean) : void
+        this.suspend = psuspend;

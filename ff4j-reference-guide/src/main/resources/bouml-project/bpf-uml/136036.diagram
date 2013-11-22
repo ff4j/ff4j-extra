@@ -1,0 +1,45 @@
+format 72
+
+classcanvas 130148 class_ref 128356 // BPFServicesFactory
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 127 39 2010
+end
+classcanvas 130660 class_ref 128740 // BPFServicesFactoryWebServices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 279 175 2010 219 115
+end
+classcanvas 131172 class_ref 128612 // BPFServicesFactoryMock
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 424 40 3005 189 101
+end
+relationcanvas 130276 relation_ref 128356 // <unidirectional association>
+  decenter_begin 89
+  decenter_end 611
+  from ref 130148 z 2011 to point 64 45
+  line 130404 z 2011 to point 64 98
+  line 130532 z 2011 to ref 130148
+  role_a_pos 76 83 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130788 relation_ref 128868 // <unidirectional association>
+  decenter_begin 180
+  decenter_end 564
+  from ref 130660 z 2011 to point 229 193
+  line 130916 z 2011 to point 229 237
+  line 131044 z 2011 to ref 130660
+  role_a_pos 228 222 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131300 relation_ref 128612 // <unidirectional association>
+  decenter_begin 136
+  decenter_end 702
+  from ref 131172 z 3006 to point 390 51
+  line 131428 z 3006 to point 390 75
+  line 131684 z 3006 to point 390 109
+  line 131940 z 3006 to point 391 108
+  line 131812 z 3006 to point 391 108
+  line 131556 z 3006 to ref 131172
+  role_a_pos 373 93 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

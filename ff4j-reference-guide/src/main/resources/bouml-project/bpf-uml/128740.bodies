@@ -1,0 +1,58 @@
+class BPFServicesFactoryWebServices
+!!!128996.java!!!	initialize(in url : String) : void
+        if (instance == null) {
+            instance = new BPFServicesFactoryWebServices();
+            instance.bpmTemplate = new BpmTemplate();
+
+            // Connection Service Client.
+            ClientProxyFactoryBean connectionCPFB = new ClientProxyFactoryBean();
+            connectionCPFB.setServiceClass(BpmConnectionServices.class);
+            connectionCPFB.setAddress(url + "/" + BpmConnectionServices.WEBCONTEXT);
+            connectionCPFB.setServiceName(new QName(TARGETNAMESPACE, BpmConnectionServices.SERVICENAME));
+            instance.bpmTemplate.setConnectionServices((BpmConnectionServices) connectionCPFB.create());
+
+            // Task Service Client.
+            ClientProxyFactoryBean taskCPFB = new ClientProxyFactoryBean();
+            taskCPFB.setServiceClass(BpmTaskServices.class);
+            taskCPFB.setAddress(url + "/" + BpmTaskServices.WEBCONTEXT);
+            taskCPFB.setServiceName(new QName(TARGETNAMESPACE, BpmTaskServices.SERVICENAME));
+            instance.bpmTemplate.setTaskServices((BpmTaskServices) taskCPFB.create());
+
+            // Process Service Client
+            ClientProxyFactoryBean processCPFB = new ClientProxyFactoryBean();
+            processCPFB.setServiceClass(BpmProcessServices.class);
+            processCPFB.setAddress(url + "/" + BpmTaskServices.WEBCONTEXT);
+            processCPFB.setServiceName(new QName(TARGETNAMESPACE, BpmProcessServices.SERVICENAME));
+            instance.bpmTemplate.setProcessServices((BpmProcessServices) processCPFB.create());
+
+            // User Services Client
+            ClientProxyFactoryBean userCPFB = new ClientProxyFactoryBean();
+            userCPFB.setServiceClass(BpmUserGroupServices.class);
+            userCPFB.setAddress(url + "/" + BpmUserGroupServices.WEBCONTEXT);
+            userCPFB.setServiceName(new QName(TARGETNAMESPACE, BpmUserGroupServices.SERVICENAME));
+            instance.bpmTemplate.setUserServices((BpmUserGroupServices) userCPFB.create());
+
+            // Queue Services Client
+            ClientProxyFactoryBean queueCPFB = new ClientProxyFactoryBean();
+            queueCPFB.setServiceClass(BpmQueueServices.class);
+            queueCPFB.setAddress(url + "/" + BpmQueueServices.WEBCONTEXT);
+            queueCPFB.setServiceName(new QName(TARGETNAMESPACE, BpmQueueServices.SERVICENAME));
+            instance.bpmTemplate.setQueueServices((BpmQueueServices) queueCPFB.create());
+
+            // Tibco Service Client
+            ClientProxyFactoryBean tibcoCPFB = new ClientProxyFactoryBean();
+            tibcoCPFB.setServiceClass(TibcoProcessEngineServices.class);
+            tibcoCPFB.setAddress(url + "/" + TibcoProcessEngineServices.WEBCONTEXT);
+            tibcoCPFB.setServiceName(new QName(TARGETNAMESPACE, TibcoProcessEngineServices.SERVICENAME));
+            instance.bpmTemplate.setTibcoIpeServices((TibcoProcessEngineServices) tibcoCPFB.create());
+
+            // Filenet Service Client.
+            ClientProxyFactoryBean filenetCPFB = new ClientProxyFactoryBean();
+            filenetCPFB.setServiceClass(FilenetProcessEngineServices.class);
+            filenetCPFB.setAddress(url + "/" + FilenetProcessEngineServices.WEBCONTEXT);
+            filenetCPFB.setServiceName(new QName(TARGETNAMESPACE, FilenetProcessEngineServices.SERVICENAME));
+            instance.bpmTemplate.setFilenetPeServices(((FilenetProcessEngineServices) filenetCPFB.create()));
+        }
+!!!129124.java!!!	getBpmTemplate() : BpmTemplate
+        Assert.state(instance != null, "This class has not been initialized : initialize('URL')]");
+        return instance.bpmTemplate;

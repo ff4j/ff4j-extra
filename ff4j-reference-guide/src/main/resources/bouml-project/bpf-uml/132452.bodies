@@ -1,0 +1,17 @@
+class TaskQuery
+!!!162148.java!!!	TaskQuery(in pqueueName : String)
+        this.queueName  = pqueueName;
+!!!162276.java!!!	TaskQuery(in pqueueName : String, in pTaskId : String)
+        this.queueName  = pqueueName;
+!!!162404.java!!!	getQueueName() : String
+        return queueName;
+!!!162532.java!!!	setQueueName(in pqueueName : String) : void
+        this.queueName = pqueueName;
+!!!162660.java!!!	getSortCriteria() : SortCriterion
+        return sortCriteria;
+!!!162788.java!!!	setSortCriteria(in psortCriteria : List< SortCriterion >) : void
+        this.sortCriteria = psortCriteria;
+!!!162916.java!!!	getFieldNames() : Collection< String >
+        return fieldNames;
+!!!163044.java!!!	setFieldNames(in pfieldNames : Collection< String >) : void
+        this.fieldNames = pfieldNames;

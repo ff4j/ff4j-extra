@@ -1,0 +1,5 @@
+class DayOfWeek
+!!!167012.java!!!	DayOfWeek(in poffset : int)
+        this.offset = poffset;
+!!!167140.java!!!	getOffset() : int
+        return offset;

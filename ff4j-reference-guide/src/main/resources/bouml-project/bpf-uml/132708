@@ -1,0 +1,957 @@
+format 72
+"failover" // com::logica::bpm::jca::failover
+  revision 1
+  modified_by 100 "lunvenc"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "d:/WORK/Workspaces/workspace-bpm/LOGICA/trunk/bpm-api/src/main/java/com/logica/bpm/jca/failover/"
+  java_package "com.logica.bpm.jca.failover"
+  classview 131812 "failover"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 142820 "ManagedRessource"
+      visibility public 
+      nformals 1
+      formal name "RESOURCE" type "" explicit_default_value ""
+        explicit_extends ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Wrap target ressource to handle unavailability and so on.
+@param <RESOURCE>
+           wrapped object.
+@author C&eacute;drick LUNVEN"
+      classrelation 143716 // <realization>
+	relation 143716 -_-|>
+	  a public
+	    java "${type}< ManagedRessource < RESOURCE > >"
+	    classrelation_ref 143716 // <realization>
+	  b parent class_ref 130660 // Comparable
+      end
+
+      attribute 162660 "id"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Unique Ressource Id. "
+      end
+
+      attribute 162788 "defaultweigth"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Use as pound for laid balancing. *"
+      end
+
+      attribute 162916 "currentweight"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Access current usage of ressource. *"
+      end
+
+      attribute 163044 "nbUse"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Time accessing the resource whitout failover. *"
+      end
+
+      attribute 163172 "priority"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Priority, a ressource could be priorized instead of laod-balanced. *"
+      end
+
+      attribute 163300 "available"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Component Availability. *"
+      end
+
+      attribute 163428 "unavailabilityCause"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Error cause. *"
+      end
+
+      attribute 163556 "unavailabilityError"
+	private explicit_type "Throwable"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Error exception. *"
+      end
+
+      attribute 163684 "unavailabilityTriggerDate"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Time where error occurs. *"
+      end
+
+      attribute 163812 "rsc"
+	private explicit_type "RESOURCE"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Element encapsulé . *"
+      end
+
+      operation 191332 "compareTo"
+	public explicit_return_type "int"
+	nparams 1
+	  param in name "mr" type class_ref 142820 // ManagedRessource
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0}< RESOURCE > ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " {@inheritDoc} *"
+      end
+
+      operation 191460 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " {@inheritDoc} *"
+      end
+
+      operation 191588 "getDefaultWeigth"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour weigth.
+@return the weigth"
+      end
+
+      operation 191716 "setDefaultWeigth"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pweigth" explicit_type "double"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour weigth.
+@param pweigth
+           the weigth to set"
+      end
+
+      operation 191844 "getNbUse"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour nbUse.
+@return the nbUse"
+      end
+
+      operation 191972 "setNbUse"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pnbUse" explicit_type "double"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour nbUse.
+@param pnbUse
+           the nbUse to set"
+      end
+
+      operation 192100 "getPriority"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour priority.
+@return the priority"
+      end
+
+      operation 192228 "setPriority"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ppriority" explicit_type "int"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour priority.
+@param ppriority
+           the priority to set"
+      end
+
+      operation 192356 "getRessource"
+	public explicit_return_type "RESOURCE"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour wrappee.
+@return the wrappee"
+      end
+
+      operation 192484 "setRessource"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pwrappee" explicit_type "RESOURCE"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour wrappee.
+@param pwrappee
+           the wrappee to set"
+      end
+
+      operation 192612 "isAvailable"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour available.
+@return the available"
+      end
+
+      operation 192740 "setAvailable"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pavailable" explicit_type "boolean"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour available.
+@param pavailable
+           the available to set"
+      end
+
+      operation 192868 "getUnavailabilityCause"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour unavailabilityCause.
+@return the unavailabilityCause"
+      end
+
+      operation 192996 "setUnavailabilityCause"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "punavailabilityCause" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour unavailabilityCause.
+@param punavailabilityCause
+           the unavailabilityCause to set"
+      end
+
+      operation 193124 "getUnavailabilityError"
+	public explicit_return_type "Throwable"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour unavailabilityError.
+@return the unavailabilityError"
+      end
+
+      operation 193252 "setUnavailabilityError"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "punavailabilityError" explicit_type "Throwable"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour unavailabilityError.
+@param punavailabilityError
+           the unavailabilityError to set"
+      end
+
+      operation 193380 "getId"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour id.
+@return the id"
+      end
+
+      operation 193508 "setBeanName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Définition du nom du champ.
+@param name
+           l'identifiant spring"
+      end
+
+      operation 193636 "getUnavailabilityTriggerDate"
+	public explicit_return_type "Date"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour unavailabilityTriggerDate.
+@return the unavailabilityTriggerDate"
+      end
+
+      operation 193764 "setUnavailabilityTriggerDate"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "punavailabilityTriggerDate" explicit_type "Date"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour unavailabilityTriggerDate.
+@param punavailabilityTriggerDate
+           the unavailabilityTriggerDate to set"
+      end
+
+      operation 193892 "getCurrentweight"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour currentweight.
+@return the currentweight"
+      end
+
+      operation 194020 "setCurrentweight"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pcurrentweight" explicit_type "double"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour currentweight.
+@param pcurrentweight
+           the currentweight to set"
+      end
+    end
+
+    class 142948 "ResourceManager"
+      visibility public 
+      nformals 1
+      formal name "RESOURCE" type "" explicit_default_value ""
+        explicit_extends ""
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Composants embarqués pour la gestion du load balancing.
+@param <RESOURCE>
+           embedde Element.
+@author C&eacute;drick LUNVEN"
+      attribute 163940 "CENT"
+	class_attribute const_attribute private explicit_type "double"
+	init_value " 100.0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Constante 100 (double) pour pourcentages. *"
+      end
+
+      attribute 164068 "MILLE"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 1000"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Constante 1000 (int) pour les calculs de millisecond(s). *"
+      end
+
+      attribute 164196 "totalCount"
+	private explicit_type "double"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Détermine le nombre de fois où le composant a été utilisé. *"
+      end
+
+      attribute 164324 "globalCount"
+	private explicit_type "double"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Total qui ne peut être remis à 0 . *"
+      end
+
+      attribute 164452 "unavailableCount"
+	private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Détermine le nombre d'indispnibles (utilisé pour calcul). *"
+      end
+
+      attribute 164580 "unavailabilityPeriod"
+	private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Détermine le temps où un composant doit rester inactif (en seconde). *"
+      end
+
+      classrelation 143844 // mode (<unidirectional association>)
+	relation 143844 --->
+	  a role_name "mode" init_value " ResourceManagerFailOverMode.ROUND_ROBIN" private
+	    comment " Mode d'utilisation du Load-balancer. *
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 143844 // mode (<unidirectional association>)
+	  b parent class_ref 143076 // ResourceManagerFailOverMode
+      end
+
+      classrelation 143972 // resourceList (<unidirectional association>)
+	relation 143972 --->
+	  stereotype "Vector"
+	  a role_name "resourceList" private
+	    comment " Synchronized, ordered, ressource collection. *"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}< ${type} < RESOURCE > > ${name}${value};
+"
+	    classrelation_ref 143972 // resourceList (<unidirectional association>)
+	  b parent class_ref 142820 // ManagedRessource
+      end
+
+      attribute 164708 "initialized"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Détermine si le composant a été initialisé. *"
+      end
+
+      operation 194148 "initialize"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Permet d'initialiser le moteur. *"
+      end
+
+      operation 194276 "calculateBalancing"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Permet de recalculer la charge pour un composant."
+      end
+
+      operation 194404 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " {@inheritDoc} *"
+      end
+
+      operation 194532 "ResourceManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Contructeur public. *"
+      end
+
+      operation 194660 "getManagedResource"
+	public return_type class_ref 142820 // ManagedRessource
+	nparams 0
+	nexceptions 1
+	  explicit_exception "ResourceException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}< RESOURCE > ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " {@inheritDoc} *"
+      end
+
+      operation 194788 "handleComponentError"
+	public return_type class_ref 142820 // ManagedRessource
+	nparams 2
+	  param in name "component" type class_ref 142820 // ManagedRessource
+	  param in name "parentException" explicit_type "Throwable"
+	nexceptions 1
+	  explicit_exception "ResourceException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}< RESOURCE > ${name}${(}final ${t0}< RESOURCE > ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Ce composant permet la gestion des erreurs pour un composant. On le rend indisponible. Pour que le load-balancing
+fonctionne il faut répartir la charge sur les éléments restants (s'il en reste) et remettre les compteurs
+d'utilisation à 0. IL faut également remettre le total count à 1.
+@param component
+           composant qui a rencontré une erreur
+@param parentException
+           exception levée lors de l'exécution du composant
+@return gestion des erreurs
+@throws ResourceException
+            none ressource is available"
+      end
+
+      operation 194916 "getTotalCount"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour totalCount.
+@return the totalCount"
+      end
+
+      operation 195044 "setTotalCount"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "ptotalCount" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour totalCount.
+@param ptotalCount
+           the totalCount to set"
+      end
+
+      operation 195172 "getMode"
+	public return_type class_ref 143076 // ResourceManagerFailOverMode
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour mode.
+@return the mode"
+      end
+
+      operation 195300 "setMode"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pmode" type class_ref 143076 // ResourceManagerFailOverMode
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour mode.
+@param pmode
+           the mode to set"
+      end
+
+      operation 195428 "getUnavailabilityPeriod"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour unavailabilityPeriod.
+@return the unavailabilityPeriod"
+      end
+
+      operation 195556 "setUnavailabilityPeriod"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "punavailabilityPeriod" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour unavailabilityPeriod.
+@param punavailabilityPeriod
+           the unavailabilityPeriod to set"
+      end
+
+      operation 195684 "getUnavailableCount"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour unavailableCount.
+@return the unavailableCount"
+      end
+
+      operation 195812 "setUnavailableCount"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "punavailableCount" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en écriture pour unavailableCount.
+@param punavailableCount
+           the unavailableCount to set"
+      end
+
+      operation 195940 "getGlobalCount"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseur en lecture pour globalCount.
+@return the globalCount"
+      end
+
+      operation 196068 "setResourceList"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "presourceList" explicit_type "Vector< ManagedRessource < RESOURCE > >"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Setter method for property resourceList.
+@param presourceList
+           the resourceList to set"
+      end
+    end
+
+    class 143076 "ResourceManagerFailOverMode"
+      visibility public stereotype "enum"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Available FailOver Mode.
+@author Cedrick LUNVEN"
+      attribute 164836 "LOAD_BALANCING"
+	public type class_ref 143076 // ResourceManagerFailOverMode
+	cpp_decl ""
+	java_decl "  ${@}${name}${value},${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " load balancing. "
+      end
+
+      attribute 164964 "ROUND_ROBIN"
+	public type class_ref 143076 // ResourceManagerFailOverMode
+	cpp_decl ""
+	java_decl "  ${@}${name}${value},${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " round robin. "
+      end
+    end
+  end
+
+  deploymentview 131556 "failover"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 141284 "ManagedRessource"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Date;
+${definition}"
+      associated_classes
+	class_ref 142820 // ManagedRessource
+      end
+    end
+
+    artifact 141412 "ResourceManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Collections;
+import java.util.Date;
+import java.util.Vector;
+import javax.resource.ResourceException;
+${definition}"
+      associated_classes
+	class_ref 142948 // ResourceManager
+      end
+    end
+
+    artifact 141540 "ResourceManagerFailOverMode"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 143076 // ResourceManagerFailOverMode
+      end
+    end
+  end
+end

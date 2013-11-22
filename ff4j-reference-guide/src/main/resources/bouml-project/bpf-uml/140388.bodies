@@ -1,0 +1,3 @@
+class SimpleP8ProcessMapper
+!!!179428.java!!!	mapBpmProcess(in process : Process) : ProcessP8
+        return new ProcessP8(process);

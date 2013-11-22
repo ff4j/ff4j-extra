@@ -1,0 +1,19 @@
+class BpmConnectionServicesMock
+!!!208356.java!!!	login(in puser : Credentials) : Credentials
+        logger.info("MOCK METHODE LOGIN " + puser);
+        Assert.notNull(puser, "Param#0 'Credentials' is required to login to engine");
+        Assert.notNull(puser.getUserName(), "Param #0 'Credential' should contain at least a login");
+        puser.setUserPassword(null);
+        puser.setSessionTokenId("5a01a234-cae7-4eff-85f3-f4ca4d85a76f");
+        return puser;
+!!!208484.java!!!	logoff(in credentialWithTokenId : Credentials) : void
+        logger.info("MOCK METHODE LOGOFF " + credentialWithTokenId);
+        Assert.notNull(credentialWithTokenId, "Param #0 'Credentials' is required");
+        Assert.notNull(credentialWithTokenId.getSessionTokenId(),
+                "Param#0['Credentials'] - Property['sessionTokenId'] is required :"
+                + "cannot retrieve already opened session without token");
+!!!208612.java!!!	retrieveCredentials(in tokenId : String) : Credentials
+        Assert.notNull(tokenId, "Param#0['tokenId'] is required, cannot retrieve opened session without its token");
+        Credentials credentials = new Credentials("", null);
+        credentials.setSessionTokenId(tokenId);
+        return credentials;

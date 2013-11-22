@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="exceptions" lang="en">
+  <title>Exceptions Handling</title>
+  <para>
+   This part of the reference documentation covers Exception part. It will explain what the framework exception
+   offer and how to handle them.
+  </para>
+  
+  <section id="exceptions-ceue">
+  	<title>Checked VS unchecked</title>  	
+  	<para>
+  		In Java there are basically two types of exceptions: Checked exceptions and unchecked exceptions. The differences between 
+  		checked and unchecked exceptions are:
+  	</para>  	
+  	<para> 
+	  	<orderedlist>
+	  	<listitem><para>Checked exceptions must be explicitly caught or propagated. Unchecked exceptions do not have this requirement. They don't have to be caught or declared thrown.</para></listitem>
+	  	<listitem><para>Checked exceptions in Java extend the java.lang.Exception class. Unchecked exceptions extend the java.lang.RuntimeException.</para></listitem>
+	  	</orderedlist>
+  	</para>  	
+  	<para>
+  		There are many arguments for and against both checked and unchecked, and whether to use checked exceptions at all. 
+  		The framework use only unchecked exception.
+  	</para>
+  	
+  </section>
+  
+  <section id="exceptions-define">
+  	<title>Framework exceptions</title>
+  	<para>
+  	Consistent Exception Hierarchy. This framework provides a conversion from exceptions from the underlying
+	bpm api to its own exception hierarchy with the <classname>BpmRuntimeException</classname> as the root
+	exception. As can be expected, these runtime exceptions wrap the original exception so no information is
+	lost.
+	</para>
+	
+  	<para>
+       	 <figure id="fig-classdiagram-exception" floatstyle="center">
+      	 <title>template</title>
+      	 <mediaobject>
+       	  <imageobject role="web">
+           <imagedata align="center" fileref="figures/fig-classdiagram-exception.png" width="80%"/>
+          </imageobject>
+         </mediaobject>
+     	</figure>
+  	</para>
+  	
+  	<para>
+  	 Here is the class graph of the framework exception, all the exception use by the framework are unchecked. 
+  	 It mean that the developper have to know when and why he have to manage an exception.
+  	</para>
+  	
+  	<para>IMAGE 2</para>
+  	
+  	
+  </section>
+  
+   <section id="exceptions-webservices">
+  	<title>WebServices faults</title>
+  	<para>class diagrams</para>
+  	<para>api code, api message, fmkcode, fmk message</para>
+  </section>
+  
+  <section id="exceptions-sample">
+  	<title>Sample client handler</title>
+  	<para>sevral catch block => invalid credentials or cannot connect are different</para>
+  </section>
+  
+</chapter>
+  

@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="fasttrack" lang="en">
+
+  <title>BPF in 10 minutes </title>
+
+  <!-- introduction -->
+  <para>
+   We assume that because you're planning on using this framework you already know the basics of the Business Process Management (BPM). 
+   This chapter primary objective is to help you become familiar with the framework and understand its concepts. We'll show you that this 
+   tool can really improve your developments. By using a step-by-step approach, we'll illustrate how to install and use this component very quickly. 
+   To begin this chapter, you must have a BPM Engine running and reachable through the network. Code come first...Time to work !!
+  </para>
+  
+  <!-- introduction node -->
+  <note>
+   <para>
+    This framework provides an abstraction layer above different (or perhaps any) Business Process Management editors. To illustrate our examples
+    we had to choose one engine, the one held is Tibco iProcess Engine (11.0.0).
+   </para>
+  </note>
+  
+  <!-- SAMPLE1 -->
+  <section id="fasttrack-sect-oldschool">
+   <title>My first Application</title>
+    <para>First, download the distribution archive and unzip it on your file system. You should get something like this : </para>
+     <figure id="fig-fasttrack-package" floatstyle="center">
+      <title>Distribution archive overview</title>
+      <mediaobject>
+       <imageobject role="web">
+        <imagedata align="center" fileref="figures/fig-fasttrack-distribution.png" />
+       </imageobject>
+      </mediaobject>
+     </figure>
+       
+     <!-- install fmk -->
+     <itemizedlist>
+      <listitem>
+       <para>Open your favourite development integrated platform (as eclipse) and create a new Java Project.</para>
+      </listitem>
+      <listitem>
+       <para>Create a folder named <filename>lib</filename>, you will copy every required library in this folder.</para>
+      </listitem>
+      <listitem>
+       <para>From the distribution package copy Jar files from  <filename>jar</filename> and <filename>dist</filename>. The first folder 
+         contains commons (open-source) api as <varname>springframework</varname> or <varname>log4j</varname>. The second one contains 
+         only the jars of the framework.</para>
+      </listitem>
+      <listitem>
+       <para>Copy the api jars of you BPM provider in the <varname>lib</varname> folder too. 
+       (For instance when using Tibco iProcessEngine you'll have to find <varname>ssoRMI.jar</varname>).</para>
+      </listitem>
+      <listitem>
+       <para>When every jar are in the folder, reference them as 'dependencies' of your java project.</para>
+      </listitem>
+      <listitem>
+       <para>Finally, copy sample file(s) from <filename>samples/01-my-first-application</filename> to the <filename>src</filename> 
+       directory of your java project. There should be a JAVA Files but also 2 XML <varname>log4j.xml</varname> to configure 
+       logging and <varname>applicationContext-settings.xml</varname> to define BPM environment settings.</para>
+      </listitem> 
+     </itemizedlist>
+       
+      <para>You should get a java project like this (screenshot from eclipse) : </para>
+      <figure id="fig-tenmin-project">
+       <title>My first project : packaging</title>
+         <mediaobject>
+            <imageobject role="web">
+              <imagedata align="center" fileref="figures/fig-fasttrack-project.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+       
+       <para><filename>log4j.xml</filename> is used to set up logs, in our example the DEBUG level is set and only a console Appender is defined.
+       Open and edit the file '<filename>applicationContext-settings</filename>' to fill BPM engine environment variables (## expression(s)).
+       </para>
+       
+       <!-- namespace only for Tibco Yet -->
+       <warning>
+       	<para>A spring namespace is provided to help you.(prefix <varname>bpm</varname> but is only available for Tibco
+        iProcess yet.</para>
+       </warning>
+       
+       <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:bpm="http://www.logica.com/schema/bpm"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		 http://www.logica.com/schema/bpm            ./bpm-tags.xsd"&gt;
+	&lt;bpm:connection-factory id="bpf.connection.connectionFactory" &gt;	
+		&lt;!-- Product Settings for JCA Specification --&gt;
+		&lt;bpm:provider company="TIBCO" product="iProcessEngine" version="11.0.0" /&gt; 
+ 		&lt;!-- Set up Server --&gt;
+		&lt;bpm:datasource host="##ipe_host_ip##"
+            mode="##ssormi or jbase###"
+            node="##ipe_nodename##"
+            port="##ipe_spo/director_port##"
+            use-director="false/true"
+						rmiLogActive="false/true"
+            testmode="false"
+            locale="bpf.locale.fr" /&gt;					  									
+		&lt;!-- Set up rmiregistries to acces ssormi api --&gt;
+		&lt;bpm:ssofactories mode="LOAD_BALANCING" unavailability-period="3600"&gt;
+        	&lt;bpm:ssofactory id="##ssoServerFactory_servername##"
+        		priority="1"
+        		percent-of-use="100"
+			    clazz="com.sun.jndi.rmi.registry.RegistryContextFactory"
+        		rmi-server="rmi://##rmiregistry_host##:##rmiregistry_port##" /&gt;
+		&lt;/bpm:ssofactories&gt;
+	&lt;/bpm:connection-factory&gt;	
+&lt;/beans&gt;
+       </programlisting>
+       
+       <para>Now take a look at the java class <classname>MyFirstApplication</classname>. It's a standalone java application with a main method.
+       In this snippet we define a spring context and use it then instantiate the framework services beans. Then we check if a user exists in 
+       the BPM engine with the correct service.</para>
+        <programlisting language="java">
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.logica.bpm.domain.Credentials;
+import com.logica.bpm.services.BpmConnectionServices;
+import com.logica.bpm.services.BpmUserGroupServices;
+
+/**
+ * First Stand Alone Application
+ */
+public class MyFirstApplication {
+    
+    /**
+     * Main code of program.
+     *
+     * @param args
+     *      arguments
+     */
+    public static void main(String[] args) {
+        
+        /* =======================================================
+         *  Note : FileNames for Filenet P8 :
+         * =======================================================
+         * - bpm/filenet/p8/applicationContext-bpmservices.xml
+         * - bpm/filenet/p8/applicationContext-aop.xml
+         * 
+         * (0) - Define Spring Context
+         */
+        String FILE1   = "com/logica/bpm/applicationContext-bpm.xml";        
+        String FILE2   = "applicationContext-settings.xml";
+        String[] FILES = new String[] {FILE1, FILE2};
+        ApplicationContext appContext = new ClassPathXmlApplicationContext(FILES);
+
+        /* =======================================================
+         * Note Available services are :
+         * =======================================================
+         * - bpf.services.connection : Connection services
+         * - bpf.services.task       : Task related Services
+         * - bpf.services.queue      : Queue related Services
+         * - bpf.services.process    : Process related Services
+         * - bpf.services.user       : User and group related Services.
+         * 
+         * (1) - Get Services
+         */
+        BpmConnectionServices connServices = 
+            (BpmConnectionServices) appContext.getBean("bpf.services.connection");
+        BpmUserGroupServices  userServices = 
+            (BpmUserGroupServices) appContext.getBean("bpf.services.user");       
+        
+        // TODO Use Factory
+    }
+}
+       </programlisting>
+       
+      <para>When you achieve to run the application please check logs in the console. Let's illustrate what you've really executed.</para>      
+      
+      <itemizedlist>
+         <listitem>
+         	<para>First, the XML configuration file is parsed. <classname>ConnectionFactoryBeanDefinitionParser</classname> is used only when
+         	you use the <varname>bpm</varname> namespace. In the <filename>log4j.xml</filename> file we set spring framework error level
+         	at ERROR. By usin a INFO level you should also see spring context initialisation.
+            </para>
+            <para/>
+<screen><![CDATA[
+ConnectionFactoryNameSpaceHandler : Initializing Spring 'bpm' namespace.
+ConnectionFactoryBeanDefinitionParser : BpmResourceAdapterMetaData successfully.
+ConnectionFactoryBeanDefinitionParser : BpmConnectionMetaData successfully loaded.
+ConnectionFactoryBeanDefinitionParser : DataSource has been loaded for 'node1'
+ConnectionFactoryBeanDefinitionParser : Parsing 'ssoServerFactory' done
+ConnectionFactoryBeanDefinitionParser : 1 resource(s) has(ve) been loaded.
+]]></screen>
+	</listitem>
+	<listitem>
+         	<para>Initializing services (first call only). Once every beans are loaded (no lazy load enabled), the <classname>ConnectionFactory
+         	</classname> will be loaded. For Tibco iProcess a Connection Provider id defined to if settings are correct.
+         	</para>
+         	<para/>
+	<screen>
+<![CDATA[ProcessEngineConnectionFactory : Processing Framework Initialization...
+         ___    ___           __             _                 ___
+        / __\  / _ \/\/\     / /  ___   __ _(_) ___ __ _      / __\ __ __ _ _ ...
+       /__\// / /_)/    \   / /  / _ \ / _` | |/ __/ _` |    / _\| '__/ _` | '...
+      / \/  \/ ___/ /\/\ \ / /__| (_) | (_| | | (_| (_| |   / /  | | | (_| | |... 
+      \_____/\/   \/    \/ \____/\___/ \__, |_|\___\__,_|  /_/   |_|  \__,_|_|...
+                                       |___/
+                                                Solution BPM : TIBCO iProcessE...
+
+ProcessEngineConnectionFactory : TIBCO iProcessEngine API Implementation : 'swRMI'
+ProcessEngineConnectionFactory : Tibco Connection Provider (vNodeId) has been ...]]>
+</screen>
+  </listitem>
+  
+  <listitem>
+   <para>
+    As DEBUG level is set for the framework, every call we be logged in the same way :  
+    <orderedlist>
+     <listitem><para>The method name (here <methodname>login</methodname>) and the keyword 'START'. </para></listitem>
+     <listitem><para>The class name (here  <varname>com.logica.bpm.services.BpmConnectionServices</varname>).</para> </listitem>
+     <listitem><para>Each parameter with its index, its type and it's value (using <methodname>toString()</methodname> method).</para></listitem>
+     <listitem><para>The service logger itself...</para></listitem>
+     <listitem><para>The method name wrapped with parenthesis follow by service returned object (using <methodname>toString()</methodname> method).</para></listitem>
+     <listitem><para>The method name wrapped with parenthesis follow by the execution time</para></listitem>
+     <listitem><para>The method name wrapped with parenthesis follow by the keyword 'END'</para></listitem>
+     </orderedlist>
+    </para>
+    
+    <para>As the <classname>Credentials</classname> object contains only user login and user password (quite logic to invoke
+    a login method isn't it ?) a session is created. The session will be stored in a <classname>HashTable</classname> in the
+    framework itself and generate a tokenId. The <classname>Credentials</classname> object returned will contain login 
+    and sessionID : password has been erased to avoid storing password anywhere.  
+    </para>    
+    <para/>
+<screen><![CDATA[
+<login> <<< START >>>
+ + Class : com.logica.bpm.services.BpmConnectionServices
+ + Params #0 (com.logica.bpm.domain.Credentials) : Credentials for user <User1>
+Initialized Session from login/password for 'User1' (STATELESS)
+Initializing connection for 'User1'
+ssoFactory 'ssoServerFactory' sucessfully retrieved
+sSession successfully created.
+Connection has been sucessfully opened for 'User1'.
+<login> - Returned value : 'Credentials for user <User1>'
+<login> - Execution Time : '375' millisecond(s)
+<login> <<< END >>>
+]]>
+</screen>
+
+			</listitem>
+
+			<listitem>
+         	<para>Use statefull credential.</para>
+         	<para/>
+<screen><![CDATA[
+<isUserExist> <<< START >>> 
+ + Class : com.logica.bpm.services.BpmUserGroupServices
+  + Params #0 (com.logica.bpm.jca.cci.BpmJcaCredentials) : Credentials for user ...
+  + Params #1 (java.lang.String) : User1
+Initialized Session from  sessionID in credential, (STATEFULL) retrieving opened...
+Connection has been sucessfully retrieved for 'User1' from its token.
+'sNode' Initialization...
+'sNode' successfully instantiated : com.staffware.sso.rmi.sNode@105bd58
+<isUserExist> - Returned value : 'true'
+<isUserExist> - Execution Time : '172' millisecond(s)
+ ]]>
+</screen>
+     </listitem>
+
+			<listitem>
+         	<para>Logoff statefull credential.</para>
+         	<para/>
+<screen><![CDATA[
+<logoff> <<< START >>> 
+ + Class : com.logica.bpm.services.BpmConnectionServices
+ + Params #0 (com.logica.bpm.jca.cci.BpmJcaCredentials) : Credentials for user...
+Atempting to closing session : 4eb37ff6-1298-4ee4-8579-7fe16f9a0535
+Session successfully closed and deallocated
+<logoff> - No returned value (void)
+<logoff> - Execution Time : '15' millisecond(s)
+<logoff> <<< END >>> 
+ ]]>
+</screen>
+     
+     </listitem>
+
+	<listitem>
+         	<para>Same Service as stateless way (login/logoff automatic).</para>
+         	<para/>     
+  <screen><![CDATA[
+<isUserExist> <<< START >>> 
+ + Class : com.logica.bpm.services.BpmUserGroupServices
+ + Params #0 (com.logica.bpm.domain.Credentials) : Credentials for user <Tibco>
+ + Params #1 (java.lang.String) : Tibco
+Initialized Session from login/password for 'Tibco' (STATELESS)
+Initializing connection for 'Tibco'
+ssoFactory 'ssoServerFactory' sucessfully retrieved
+sSession successfully created.
+Connection has been sucessfully opened for 'Tibco'.
+'sNode' Initialization...
+'sNode' successfully ated : com.staffware.sso.rmi.sNode@179935d
+Atempting to closing session : 0691c703-7eb3-4598-a711-0a5e85661081
+Session successfully closed and deallocated
+<isUserExist> - Returned value : 'true'
+<isUserExist> - Execution Time : '141' millisecond(s)
+<isUserExist> <<< END >>> 
+   ]]>
+</screen>
+     </listitem>  
+     </itemizedlist>
+   </section>
+   
+   <section id="fasttrack-sect-support">  
+      <title>Support Classes</title>
+      <para>
+        The first application sample is quite verbose isn't it ? We'll simplify the code by using helpers and support classes.
+      </para>
+      <section id="fasttrack-sect-support-factory">  
+       <title>Use a Spring Service factory</title>
+       <para>
+       As you might notice, the first thing to do to work with the framework is to initialize a Spring Context. But why would it
+       be YOU to do the job ? A Service Factory Class is available and can be used if your application does not use springframework and does
+       not intent to. (Maybe you should think twice about it, Spring is very useful for handling many common situations).   
+       </para>
+       
+       <para>
+       	 <figure id="fig-classdiagram-factories" floatstyle="center">
+      	 <title>UML service model overview for ipe</title>
+      	 <mediaobject>
+       	  <imageobject role="web">
+           <imagedata align="center" fileref="figures/fig-classdiagram-factories.png" width="80%"/>
+          </imageobject>
+         </mediaobject>
+     	</figure>
+       </para>
+       
+        <programlisting language="java">
+ /* Instead of creating your own Spring Context.. use provided Factory */ 
+ BPFServicesFactory.initialize("applicationContext-settings.xml");
+        
+ /* Connect with user Tibco. */
+ Credentials credentials = new Credentials("Tibco", "Tibco");
+        
+ /* Want to know if user "dummy" exist */
+ BPFServicesFactory.getUserGroupServices().isUserExist(credentials, "dummy");
+        
+ /* Retrieve available Work Queues for user "Tibco". */
+ BPFServicesFactory.getQueueServices().retrieveQueues(credentials);
+        </programlisting>
+        <para>
+         Here no more concern about connection, we call the services in the simpliest way. Each service is a singleton and you can invoke 
+         <classname>BPFServicesFactory</classname> static methods, no problem.
+        </para>
+      </section>
+      <section id="fasttrack-sect-support-dao">
+        <title>Use <classname>BpmDaoSupport</classname> class</title>
+      	<para>
+      	 If your application already used spring framework to instantiate service (congratulation) you MUST extends the superclass 
+      	 <classname>BpmDaoSupport</classname> to use the framework, it's a very simple and powerful class. 
+      	 First create a new class, Let's call it <classname>MyFirstBpmDAO</classname> and extend class <classname>BpmDaoSupport</classname>.
+      	 That's it !! You now have a powerful class to manage BPM Engine.</para>
+      	<para/>
+      	
+      	 <para>
+       	 <figure id="fig-classdiagram-dao" floatstyle="center">
+      	 <title>UML service model overview for dao</title>
+      	 <mediaobject>
+       	  <imageobject role="web">
+           <imagedata align="center" fileref="figures/fig-classdiagram-services-dao.png" width="80%"/>
+          </imageobject>
+         </mediaobject>
+     	</figure>
+       </para>
+      	
+        <programlisting language="java">
+import com.logica.bpm.orm.support.BpmDaoSupport;
+
+/**
+ * My first DAO.
+ * 
+ * @author C&eacute;drick LUNVEN
+ */
+public class MyFirstBpmDAO extends BpmDaoSupport {
+}
+</programlisting>
+
+ <para>
+  Naturally you'll have to write a new bean definition in your spring context files. The only which will need to 
+  pay attention is to define a property<varname>bpmTemplate</varname> and reference bean <varname>bpf.template</varname>.
+  As you might already understand this field is cared by the superclass. From its bean you should access every framework
+  service and perform advanced ORM operations.
+ </para> 
+ <para/> 
+      	
+ <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans
+		  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		 http://www.springframework.org/schema/util	
+		  http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	<!-- [...] - Bean definitions - [...] -->
+	
+	<!-- Sample DAO -->
+	<bean id="myfirstapp.doa.bpm.dummydao" class="MyFirstBpmDAO">
+		<property name="bpmTemplate" ref="bpf.template" />
+	</bean>
+	
+	<!-- [...] - Bean definitions - [...] -->
+	
+</bean>      	  
+]]>
+      	</programlisting>      	
+      	<para>
+  		You will also have to add framework context files to your spring context too know bean "bpf.template". Here are the files :
+  		 <orderedlist>
+     		<listitem>
+     		 <para><classname>com/logica/bpm/applicationContext-bpm.xml</classname></para>
+     		</listitem>     		
+     		<listitem>
+     		 <para>
+     		  <classname>applicationContext-settings.xml</classname> (this settings file could be anything you like).
+     		 </para>
+     		</listitem>
+     	 </orderedlist>
+ 		</para>
+ 		
+ 		<para>
+ 		 In our example, we retrieve the task count of a lambda WorkQueue. <classname>BpmTemplate</classname> is now your new
+ 		 best friend. This utils class will help you access every single service of the framework. If you have already work with
+ 		 editor api(s) you would appreciate how simple it is.</para>
+ 		<para/>
+ 		
+      <programlisting language="java">
+import org.springframework.util.Assert;
+
+import com.logica.bpm.domain.Credentials;
+import com.logica.bpm.domain.Queue;
+import com.logica.bpm.exception.queue.QueueNotFoundException;
+import com.logica.bpm.orm.support.BpmDaoSupport;
+
+/**
+ * My first DAO.
+ * 
+ * @author C&eacute;drick LUNVEN
+ */
+public class MyFirstBpmDAO extends BpmDaoSupport {
+    
+    /** constant. (Kids, do not do this at home use property files...) */
+    private static final String DUMMY_WORKQ_NAME = "MANAGERS";
+    
+    /**
+     * Sample service : want to know task count of dummy workQ.
+     * 
+     * Note : This service could throw {@link QueueNotFoundException} exception
+     * if queue "MANAGERS" does not exist or user has not enough rights to access it.
+     *
+     * @param currentConnectedUserCredentials
+     *          current user credentials (login/password or login/tokenID). 
+     * @return
+     *          task count of queue "MANAGERS"
+     */
+    public int retrieveDummyWorkQTaskCount(Credentials currentConnectedUserCredentials) {
+        Assert.notNull(currentConnectedUserCredentials, 
+                "Parameter  #0 'currentConnectedUserCredentials' is required to call BPM Engine");
+        Queue dummyWorkQ = getBpmTemplate().getQueueServices().
+                                retrieveQueue(currentConnectedUserCredentials, DUMMY_WORKQ_NAME);
+        return dummyWorkQ.getTaskCount();
+    }
+}      	  
+      	  </programlisting>
+      </section>
+   </section>
+   
+   <section id="fasttrack-sect-maven">  
+	<title>Declare BPF using Maven2</title>
+	  <para>
+	  In the first place we explained which java libraries are required for the framework.
+	  Here is a sample <filename>pom.xml</filename> to use the framework.</para>
+	  <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		  http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- ~~ Project : Client Application          ~~ -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.my.clever.customer</groupId>
+  <artifactId>my-first-application</artifactId>
+  <name>First Application</name>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- ~~ Project : Properties                  ~~ -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <properties>
+  	<bpf.version>1.0</bpf.version>
+  	<tibco.version>11.0.0</tibco.version>
+  	<spring.version>2.5.6</spring.version>
+  </properties>
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- ~~ Dependencies Definition               ~~ -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <dependencies>
+    
+    <!-- You should have INSTALL THIS ONES IN YOUR REPOSITORY -->
+  	<dependency>
+  	  <groupId>com.tibco</groupId>
+  	  <artifactId>tibco-ssormi</artifactId>
+  	  <version>${tibco.version}</version>
+  	</dependency>
+
+	<!-- You should have INSTALL THIS ONES IN YOUR REPOSITORY -->  	  
+    <dependency>
+  	  <groupId>com.logica.bpm</groupId>
+	  <artifactId>bpm-api</artifactId>
+	  <version>${bpf.version}</version>
+    </dependency>
+
+	<!-- You should have INSTALL THIS ONES IN YOUR REPOSITORY -->    
+    <dependency>
+      <groupId>com.logica.bpm.tibco</groupId>
+      <artifactId>tibco-ipe-impl</artifactId>
+      <version>${bpf.version}</version>
+    </dependency>
+    
+    <!-- commons lib -->
+  	<dependency>
+  	 <groupId>commons-lang</groupId>
+  	 <artifactId>commons-lang</artifactId>
+  	 <version>2.4</version>
+  	</dependency>
+  	
+  	<!-- commons lib -->
+  	<dependency>
+  	 <groupId>commons-beanutils</groupId>
+  	 <artifactId>commons-beanutils</artifactId>
+  	 <version>1.7.0</version>
+  	 <exclusions>
+  	  <exclusion>
+  		 <groupId>commons-logging</groupId>
+  		 <artifactId>commons-logging</artifactId>
+  		</exclusion>
+  	 </exclusions>
+  	</dependency>  	
+  	
+  	<!-- commons lib -->
+  	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+	
+	<!-- commons lib -->
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.14</version>
+	</dependency>
+    
+    <!-- commons lib -->
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+  </dependencies> 
+
+</project>	  
+	  ]]>
+      </programlisting>
+   </section>
+   
+</chapter>

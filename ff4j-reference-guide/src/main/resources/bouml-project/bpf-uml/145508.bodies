@@ -1,0 +1,158 @@
+class BpmProcessServicesMock
+!!!208740.java!!!	retrieveProcessNames(in ctx : Credentials) : Collection< String >
+        logger.debug("MOCK METHOD retrieveProcessNames");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        List < String > processNames = new ArrayList < String >();
+        processNames.add("PROCESS1");
+        processNames.add("PROCESS2");
+        processNames.add("PROCESS3");
+        return processNames;
+!!!208868.java!!!	retrieveProcess(in ctx : Credentials, in processName : String, in processNumber : String, in retrieveHistory : boolean) : Process
+        logger.debug("BpmProcessServices - mock implementation - retrieveProcess()");
+        // Checking parameters (idem as Implementation)
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        Assert.notNull(processName, "Param#1['ProcessName'] is required : cannot retrieve process without its name.");
+        Assert.notNull(processNumber, "#Param#2['ProcesNumber'] : cannot retrieve process without its unique id.");
+        Collection < String > availableProcesses = retrieveProcessNames(ctx);
+        if (!availableProcesses.contains(processName)) {
+            throw new ProcessNotFoundException(
+                    "Even it's a mock please use one of the available NAME " + availableProcesses , null, null);
+        }
+        Process mockProcess = new Process();
+        mockProcess.setDescription("Mock Process of " + processName);
+        mockProcess.setOriginator(ctx.getUserName());
+        mockProcess.setProcessId(processNumber);
+        mockProcess.setProcName(processName);
+        mockProcess.setStartTime(new Date());
+        mockProcess.setEndTime(null);
+        Map < String , Field > fields = new HashMap < String, Field >();
+        fields.put("FIELD1", new Field("FIELD1", BpmFieldType.TYPE_TEXT, "VALUE1"));
+        fields.put("FIELD2", new Field("FIELD2", BpmFieldType.TYPE_BOOLEAN, true));
+        fields.put("FIELD3", new Field("FIELD3", BpmFieldType.TYPE_DATA, "Once upon a time a small team project..."));
+        fields.put("FIELD4", new Field("FIELD4", BpmFieldType.TYPE_NUMBER, new Double(1)));
+        fields.put("FIELD5", new Field("FIELD5", BpmFieldType.TYPE_DATE, new Date()));
+        mockProcess.setFields(fields);
+        List < ProcessHistoryEntry > pheList = new ArrayList < ProcessHistoryEntry >();
+        ProcessHistoryEntry phe1 = new ProcessHistoryEntry();
+        phe1.setAction("LockTask");
+        phe1.setActor("DummyActor");
+        phe1.setCustomProperties(new HashMap < String, String >());
+        phe1.setExecutionTime(new Date());
+        phe1.setMessage("Task 1234 has been locked by DummyActor");
+        phe1.setMessageID(1);
+        phe1.setStepDescription("First Step of Process " + processName);
+        phe1.setStepId("124");
+        phe1.setStepName("STEP1_PROC");
+        pheList.add(phe1);
+        mockProcess.setHistory(pheList);
+        return mockProcess;
+!!!208996.java!!!	retrieveProcessDefinition(in ctx : Credentials, in processName : String, in retrieveFields : boolean) : ProcessDefinition
+        logger.debug("MOCK METHOD retrieveProcessDefinition");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        Assert.notNull(processName, "Param#1['ProcessName'] is required : cannot retrieve process without its name.");
+        Collection < String > availableProcesses = retrieveProcessNames(ctx);
+        if (!availableProcesses.contains(processName)) {
+            throw new ProcessNotFoundException(
+                    "Even it's a mock please use one of the available NAME " + availableProcesses , null, null);
+        }
+        ProcessDefinition procdef = new ProcessDefinition();
+        procdef.setCustomProperties(new HashMap < String, String >());
+        procdef.setDescription("Sample Procedure Description");
+        if (retrieveFields) {
+            logger.info("Retrieving Fields as Asking");
+            Map < String , Field > fields = new HashMap < String, Field >();
+            fields.put("FIELD1", new Field("FIELD1", BpmFieldType.TYPE_TEXT, "VALUE1"));
+            fields.put("FIELD2", new Field("FIELD2", BpmFieldType.TYPE_BOOLEAN, true));
+            fields.put("FIELD3", new Field("FIELD3", BpmFieldType.TYPE_DATA, "Once upon a time a small team project"));
+            fields.put("FIELD4", new Field("FIELD4", BpmFieldType.TYPE_NUMBER, new Double(1)));
+            fields.put("FIELD5", new Field("FIELD5", BpmFieldType.TYPE_DATE, new Date()));
+            procdef.setFields(fields);
+        }
+        return procdef;
+!!!209124.java!!!	retrieveProcessDefinition(in ctx : Credentials, in processName : String, in majorVersion : int, in minorVersion : int, in retrieveFields : boolean) : ProcessDefinition
+        logger.debug("MOCK METHOD retrieveProcessDefinition BIS");
+        return retrieveProcessDefinition(ctx, processName, retrieveFields);
+!!!209252.java!!!	retrieveProcessHistory(in ctx : Credentials, in processName : String, in processNumber : String) : ProcessHistoryEntry
+        logger.debug("MOCK METHOD retrieveProcessHistory");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        Assert.notNull(processName, "Param#1['ProcessName'] is required : cannot retrieve process without its name.");
+        Assert.notNull(processNumber, "#Param#2['ProcesNumber'] : cannot retrieve process without its unique id.");
+        List < ProcessHistoryEntry > pheList = new ArrayList < ProcessHistoryEntry >();
+        ProcessHistoryEntry phe1 = new ProcessHistoryEntry();
+        phe1.setAction("LockTask");
+        phe1.setActor("DummyActor");
+        phe1.setCustomProperties(new HashMap < String, String >());
+        phe1.setExecutionTime(new Date());
+        phe1.setMessage("Task 1234 has been locked by DummyActor");
+        phe1.setMessageID(1);
+        phe1.setStepDescription("First Step of Process " + processName);
+        phe1.setStepId("124");
+        phe1.setStepName("STEP1_PROC");
+        pheList.add(phe1);
+        return pheList;
+!!!209380.java!!!	retrieveStepDefinition(in ctx : Credentials, in procName : String, in stepName : String) : StepDefinition
+        logger.debug("MOCK METHOD retrieveStepDefinition");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        Assert.notNull(procName, "Param#1['procName'] is required : cannot retrieve process without its name.");
+        Assert.notNull(procName, "Param#2['stepName'] is required : cannot retrieve step without its name.");
+
+        StepDefinition stepDef = new StepDefinition();
+        stepDef.setCustomProperties(new HashMap < String, String >());
+        stepDef.setDescription("Sample Step");
+        FormTask ft = new FormTask();
+        ft.setCustomProperties(new HashMap < String, String >());
+        Map < String , FormField > fields = new HashMap < String, FormField >();
+        fields.put("FIELD1", new FormField(new Field("FIELD1", BpmFieldType.TYPE_TEXT, "VALUE1")));
+        fields.put("FIELD2", new FormField(new Field("FIELD2", BpmFieldType.TYPE_BOOLEAN, true)));
+        fields.put("FIELD3", new FormField(new Field("FIELD3",
+                BpmFieldType.TYPE_DATA, "Once upon a time a small team project")));
+        fields.put("FIELD4", new FormField(new Field("FIELD4", BpmFieldType.TYPE_NUMBER, new Double(1))));
+        fields.put("FIELD5", new FormField(new Field("FIELD5", BpmFieldType.TYPE_DATE, new Date())));
+        ft.setFields(fields);
+        stepDef.setForm(ft);
+        stepDef.setId("STEPX");
+        stepDef.setName("SampleStep");
+        stepDef.setType(BpmStepType.TYPE_NORMAL);
+        return stepDef;
+!!!209508.java!!!	searchProcesses(in ctx : Credentials, in processQuery : ProcessQuery) : ProcessResultSet
+        logger.debug("MOCK METHOD searchProcesses");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx, "Param#1['processQuery'] is required, cannot search without a query");
+        ProcessResultSet prs = new ProcessResultSet();
+        prs.setCurrentQuery(processQuery);
+        prs.setNextPageQuery(processQuery);
+        prs.setPreviousPageQuery(processQuery);
+        prs.setPageNumber(1);
+        prs.setPageTotal(1);
+        prs.setTotalCount(1);
+        Process p = retrieveProcess(ctx, "PROCESS1", "123", true);
+        LinkedHashMap < String , Process> lhm = new LinkedHashMap  < String , Process>();
+        lhm.put(p.getProcessId(), p);
+        prs.setResults(lhm);
+        return prs;
+!!!209636.java!!!	startProcess(in ctx : Credentials, in processName : String, in description : String, in fields : Map< String, Field >) : String
+        logger.debug("MOCK METHOD startProcess");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        Assert.notNull(processName, "Param#1['ProcessName'] is required,cannot start process without its name.");
+        Assert.notNull(description, "Param#2['description'] is required, cannot start without its description.");
+        return "12345";
+!!!209764.java!!!	stopProcess(in ctx : Credentials, in processName : String, in processNumber : String) : void
+        logger.debug("MOCK METHOD stopProcess");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        Assert.notNull(processName, "Param#1['ProcessName'] is required : cannot retrieve process without its name.");
+        Assert.notNull(processNumber, "#Param#2['ProcesNumber'] : cannot retrieve process without its unique id.");
+!!!209892.java!!!	updateProcess(in ctx : Credentials, in processName : String, in processNumber : String, in fields : Map< String, Field >) : void
+        logger.debug("MOCK METHOD updateProcess");
+        Assert.notNull(ctx, "Param#0['Credentials'] - user credentials is required to connect to engine.");
+        Assert.notNull(ctx.getUserName(), "Param#0['Credentials'] - Property['UserName'] is required");
+        Assert.notNull(processName, "Param#1['ProcessName'] is required : cannot retrieve process without its name.");
+        Assert.notNull(processNumber, "#Param#2['ProcesNumber'] : cannot retrieve process without its unique id.");
+!!!210020.java!!!	sendProcessEvent(inout ctx : Credentials, in processName : String, in processNumber : String, in eventName : String, inout fields : Map<String, Field>) : void
+		logger.debug("MOCK METHOD sendProcessEvent (nothing to test)");

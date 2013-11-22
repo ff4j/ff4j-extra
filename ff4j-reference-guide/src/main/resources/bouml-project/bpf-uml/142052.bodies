@@ -1,0 +1,8 @@
+class BpmJcaCredentials
+!!!189156.java!!!	BpmJcaCredentials(in credential : Credentials)
+        setSessionTokenId(credential.getSessionTokenId());
+        setUserName(credential.getUserName());
+        setUserPassword(credential.getUserPassword());
+!!!189284.java!!!	BpmJcaCredentials(in userName : String, in userPassword : String)
+       setUserName(userName);
+       setUserPassword(userPassword);

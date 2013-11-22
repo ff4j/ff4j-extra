@@ -1,0 +1,60 @@
+format 72
+
+classcanvas 128100 class_ref 131940 // AbstractBpmQuery
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  hidden_attributes
+    attribute_ref 140644 // p8fetchType
+    attribute_ref 140772 // p8indexName
+    attribute_ref 140900 // p8queryFlags
+    attribute_ref 141028 // p8minValue
+    attribute_ref 141156 // p8maxValue
+    attribute_ref 141284 // QUERY_GET_NO_SYSTEM_FIELDS
+    attribute_ref 141412 // QUERY_GET_NO_TRANSLATED_SYSTEM_FIELDS
+    attribute_ref 141540 // QUERY_LOCK_OBJECTS
+    attribute_ref 141668 // QUERY_MAX_VALUES_INCLUSIVE
+    attribute_ref 141796 // QUERY_MIN_VALUES_INCLUSIVE
+    attribute_ref 141924 // QUERY_NO_OPTIONS
+    attribute_ref 142052 // QUERY_READ_BOUND
+    attribute_ref 142180 // QUERY_READ_LOCKED
+    attribute_ref 142308 // QUERY_READ_UNWRITABLE
+    attribute_ref 142436 // FETCH_TYPE_INSTRUCTION_ELEMENT
+    attribute_ref 142564 // FETCH_TYPE_QUEUE_ELEMENT
+    attribute_ref 142692 // FETCH_TYPE_ROSTER_ELEMENT
+    attribute_ref 142820 // FETCH_TYPE_STEP_ELEMENT
+    attribute_ref 142948 // FETCH_TYPE_WORKOBJECT
+  xyz 329 16 2000
+end
+classcanvas 128228 class_ref 132068 // ProcessQuery
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 32 91 2006 207 99
+end
+classcanvas 128484 class_ref 132196 // SortCriterion
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 330 233 3005
+end
+classcanvas 128868 class_ref 132452 // TaskQuery
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 593 83 3011 205 95
+end
+relationcanvas 128356 relation_ref 133732 // <generalisation>
+  from ref 128228 z 2007 to ref 128100
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128612 relation_ref 133860 // <unidirectional association>
+  from ref 128228 z 3006 stereotype "<<List>>" xyz 262 212.5 3006 to ref 128484
+  role_a_pos 270 224 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128996 relation_ref 134116 // <generalisation>
+  from ref 128868 z 3012 to ref 128100
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129124 relation_ref 134244 // <unidirectional association>
+  decenter_end 777
+  from ref 128868 z 3012 stereotype "<<List>>" xyz 492 226 3012 to ref 128484
+  role_a_pos 442 257 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
