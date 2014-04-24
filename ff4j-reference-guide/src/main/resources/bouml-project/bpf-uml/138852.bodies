@@ -1,5 +1,0 @@
-class CustomPropertyP8
-!!!175588.java!!!	CustomPropertyP8(in pkey : String)
-        this.key = pkey;
-!!!175716.java!!!	getKey() : String
-        return key;

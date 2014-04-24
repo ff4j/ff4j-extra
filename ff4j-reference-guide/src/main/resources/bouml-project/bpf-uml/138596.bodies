@@ -1,3 +1,0 @@
-class UserParsingException
-!!!175204.java!!!	UserParsingException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

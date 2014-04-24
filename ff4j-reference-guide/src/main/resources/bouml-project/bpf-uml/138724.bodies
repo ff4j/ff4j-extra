@@ -1,5 +1,0 @@
-class Attachment
-!!!175332.java!!!	getName() : String
-        return name;
-!!!175460.java!!!	setName(in pname : String) : void
-        this.name = pname;

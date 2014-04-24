@@ -1,3 +1,0 @@
-class CannotDeleteGroupException
-!!!174308.java!!!	CannotDeleteGroupException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

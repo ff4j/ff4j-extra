@@ -5,65 +5,76 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ~ COORDINATES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<groupId>org.ff4j</groupId>
-	<artifactId>ff4j-demo</artifactId>
-	<version>1.2.0-SNAPSHOT</version>
-	<name>ff4j-demo</name>
+	<artifactId>ff4j-console</artifactId>
+	<name>ff4j-console</name>
 	<packaging>war</packaging>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~        PROPERTIES        ~ -->
+	<!-- ~ PARENT ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<parent>
+		<groupId>org.ff4j</groupId>
+		<artifactId>ff4j-parent</artifactId>
+		<version>1.2.0-SNAPSHOT</version>
+	</parent>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ PROPERTIES				~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
-		<encoding>UTF-8</encoding>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
+		<jetty.port>8080</jetty.port>
 	</properties>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~       DEPENDENCIES       ~ -->
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	<!-- ~ DEPENDENCIES ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<dependencies>
+
+		<!-- ff4j -->
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-aop</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-jmx</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-web</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-security-spring</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- logs -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.5</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
-		</dependency>
-
-		<!-- Wev & CORE -->
-		<dependency>
-			<artifactId>ff4j-web</artifactId>
-			<groupId>org.ff4j</groupId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>ff4j-security-spring</artifactId>
-			<groupId>org.ff4j</groupId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>ff4j-jmx</artifactId>
-			<groupId>org.ff4j</groupId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<!-- SPRING MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>3.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.1.1.RELEASE</version>
 		</dependency>
 
 		<!-- TAGLIBS -->
@@ -75,18 +86,15 @@
 			<type>tld</type>
 		</dependency>
 		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>fmt</artifactId>
-			<version>1.1.1</version>
-			<scope>runtime</scope>
-			<type>tld</type>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Webservices exposition -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
-			<version>1.11</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>jaxb-impl</artifactId>
@@ -97,7 +105,6 @@
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-spring</artifactId>
-			<version>1.11</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
@@ -125,40 +132,26 @@
 	</dependencies>
 
 	<build>
-		<finalName>ff4j-demo</finalName>
+		<finalName>ff4j-console</finalName>
 		<plugins>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-						<showWarnings>true</showWarnings>
-					</configuration>
-				</plugin>
-
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
 				<configuration>
-					<contextPath>/ff4j-demo</contextPath>
+					<contextPath>/ff4j-console</contextPath>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
-					<stopPort>9966</stopPort>
-					<stopKey>foo</stopKey>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>8080</port>
+							<port>${jetty.port}</port>
 							<maxIdleTime>60000</maxIdleTime>
 						</connector>
 					</connectors>
 				</configuration>
 			</plugin>
-
 		</plugins>
-		
+
 	</build>
 
-	
+
 </project>

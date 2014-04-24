@@ -1,3 +1,0 @@
-class ProcessNotFoundException
-!!!172644.java!!!	ProcessNotFoundException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

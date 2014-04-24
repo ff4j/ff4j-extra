@@ -1,3 +1,0 @@
-class GroupAlreadyExistException
-!!!174564.java!!!	GroupAlreadyExistException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

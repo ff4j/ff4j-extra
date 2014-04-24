@@ -1,9 +1,0 @@
-class BpmParsingException
-!!!169700.java!!!	BpmParsingException(in finalMessage : String, in papiErrorCode : String, in papiErrorMessage : String)
-        super(finalMessage, papiErrorCode, papiErrorMessage);
-!!!169828.java!!!	BpmParsingException(in finalMessage : String)
-        super(finalMessage);
-!!!169956.java!!!	BpmParsingException(in finalMessage : String, in t : Throwable)
-        super(finalMessage, t);
-!!!170084.java!!!	BpmParsingException(in finalMessage : String, in papiErrorCode : String, in papiErrorMessage : String, in t : Throwable)
-        super(finalMessage, papiErrorCode, papiErrorMessage, t);

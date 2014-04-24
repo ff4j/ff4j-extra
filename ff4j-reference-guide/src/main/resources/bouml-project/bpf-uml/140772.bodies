@@ -1,3 +1,0 @@
-class SimpleP8TaskMapper
-!!!179940.java!!!	mapBpmTask(in task : Task) : TaskP8
-        return new TaskP8(task);

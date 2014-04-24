@@ -1,5 +1,0 @@
-class TechnicalTaskFieldName
-!!!198500.java!!!	TechnicalTaskFieldName(in pattribute : String)
-        this.attribute = pattribute;
-!!!198628.java!!!	getAttributeName() : String
-        return attribute;

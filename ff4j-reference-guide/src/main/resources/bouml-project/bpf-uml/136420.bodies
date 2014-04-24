@@ -1,3 +1,0 @@
-class InvalidQueryException
-!!!172900.java!!!	InvalidQueryException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

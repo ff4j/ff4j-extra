@@ -1,3 +1,0 @@
-class SimpleIPETaskMapper
-!!!238564.java!!!	mapBpmTask(in task : Task) : TaskIPE
-        return new TaskIPE(task);

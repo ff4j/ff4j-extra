@@ -1,3 +1,0 @@
-class CannotCreateGroupException
-!!!174052.java!!!	CannotCreateGroupException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

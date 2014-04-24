@@ -1,3 +1,0 @@
-class CannotStartProcessException
-!!!172260.java!!!	CannotStartProcessException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

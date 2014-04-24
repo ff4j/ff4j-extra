@@ -1,3 +1,0 @@
-class CannotDeleteUserException
-!!!174436.java!!!	CannotDeleteUserException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

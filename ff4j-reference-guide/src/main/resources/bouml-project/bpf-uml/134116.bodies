@@ -1,3 +1,0 @@
-class AttributeParsingException
-!!!170212.java!!!	AttributeParsingException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

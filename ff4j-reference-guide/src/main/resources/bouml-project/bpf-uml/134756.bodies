@@ -1,3 +1,0 @@
-class InvalidCredentialsException
-!!!171236.java!!!	InvalidCredentialsException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

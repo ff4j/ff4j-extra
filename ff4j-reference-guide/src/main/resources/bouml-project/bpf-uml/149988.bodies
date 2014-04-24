@@ -1,5 +1,0 @@
-class BpmServiceURLProviderDefaultImpl
-!!!246628.java!!!	retrieveURL() : String
-        return targetURL;
-!!!246756.java!!!	setTargetURL(in ptargetURL : String) : void
-        this.targetURL = ptargetURL;

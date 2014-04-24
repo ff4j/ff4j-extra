@@ -1,5 +1,0 @@
-class BpmFieldType
-!!!166244.java!!!	BpmFieldType(in pkey : String)
-        this.key = pkey;
-!!!166372.java!!!	getKey() : String
-        return key;

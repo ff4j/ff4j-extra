@@ -1,5 +1,0 @@
-class LogElementQuery
-!!!178660.java!!!	getLogName() : String
-        return logName;
-!!!178788.java!!!	setLogName(in plogName : String) : void
-        this.logName = plogName;

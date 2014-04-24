@@ -1,3 +1,0 @@
-class GroupParsingException
-!!!174820.java!!!	GroupParsingException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

@@ -1,3 +1,0 @@
-class GroupNotFoundException
-!!!174692.java!!!	GroupNotFoundException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

@@ -1,3 +1,0 @@
-class CannotCreateUserException
-!!!174180.java!!!	CannotCreateUserException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

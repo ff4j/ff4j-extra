@@ -1,3 +1,0 @@
-class CannotConnectException
-!!!170980.java!!!	CannotConnectException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

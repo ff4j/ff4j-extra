@@ -1,3 +1,0 @@
-class FormValidationException
-!!!172004.java!!!	FormValidationException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

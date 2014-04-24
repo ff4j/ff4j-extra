@@ -1,0 +1,11 @@
+[administrators]
+user=password
+
+[viewers]
+user=password
+
+[store]
+type=remote-http, remote-jmx, jdbc, mongodb
+url=xyz
+authkey=abc
+authCertificate=xyz

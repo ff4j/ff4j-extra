@@ -1,3 +1,0 @@
-class CannotLockTaskException
-!!!173412.java!!!	CannotLockTaskException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

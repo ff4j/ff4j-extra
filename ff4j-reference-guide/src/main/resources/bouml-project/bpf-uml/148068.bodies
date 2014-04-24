@@ -1,3 +1,0 @@
-class SimpleIPEQueueMapper
-!!!238436.java!!!	mapBpmQueue(in queue : Queue) : QueueIPE
-        return new QueueIPE(queue);

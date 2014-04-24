@@ -1,7 +1,0 @@
-class Participant
-!!!138212.java!!!	Participant(in pParticipantName : String)
-        this.name  = pParticipantName;
-!!!138340.java!!!	getName() : String
-        return name;
-!!!138468.java!!!	setName(in pname : String) : void
-        this.name = pname;

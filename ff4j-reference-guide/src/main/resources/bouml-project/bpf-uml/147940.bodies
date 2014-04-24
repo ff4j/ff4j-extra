@@ -1,3 +1,0 @@
-class SimpleIPEProcessMapper
-!!!238308.java!!!	mapBpmProcess(in process : Process) : ProcessIPE
-        return new ProcessIPE(process);

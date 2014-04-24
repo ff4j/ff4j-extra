@@ -1,3 +1,0 @@
-class InvalidFieldTypeException
-!!!171876.java!!!	InvalidFieldTypeException(in finalMessage : String, in errorCode : String, in errorMessage : String)
-        super(finalMessage, errorCode, errorMessage);

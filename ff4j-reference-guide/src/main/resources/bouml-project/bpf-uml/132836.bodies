@@ -1,3 +1,0 @@
-class ProcessResultSet
-!!!165732.java!!!	getProcessResults() : Process
-        return getResults();
