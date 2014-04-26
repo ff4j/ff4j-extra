@@ -43,7 +43,7 @@ body {
 		</a>
 		
 	
-		<p><br/><u>Below here sentences are displayed only if feature is enable using TAGLIB :</u> 	
+		<p><br/>Below here sentences are displayed only if feature is enable using TAGLIB : 	
 		
 		<ff4j:enable featureid="sayHello">
 			<p class="alert alert-success">Hello visitor ! Feature 'sayHello' is enable
