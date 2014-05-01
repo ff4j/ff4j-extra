@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<decorators defaultdir="/decorators" >
+
+    <excludes>
+        <pattern>/403.jsp</pattern>
+        <pattern>/resources/*</pattern>
+    </excludes> 
+    
+    <decorator name="default" page="layout-default.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+    
+     <decorator name="login" page="layout-login.jsp">
+        <pattern>/login</pattern>
+        <pattern>/40*.jsp</pattern>
+     </decorator>
+    
+</decorators>

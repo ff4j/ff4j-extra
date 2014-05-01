@@ -200,8 +200,6 @@ Bootstrap Admin Template by EGrappler.com
 	width: 100%; 
 	display: table;
 	margin-top: 1.5em;
-	
-	
 }
 
 .big-stats-container .widget-content {
@@ -220,20 +218,15 @@ Bootstrap Admin Template by EGrappler.com
 	border-right: 1px solid #CCC;
 	border-left: 1px solid #FFF;
 }
-#big_stats  i { font-size:30px; display:block; line-height: 40px; color:#b2afaa;}
+#big_stats  i { 
+	font-size:30px; display:block; line-height: 40px; color:#b2afaa;
+}
 #big_stats .stat:hover i {color:#19bc9c;}
 
-h6.bigstats{margin: 20px;
-border-bottom: 1px solid #eee;
-padding-bottom: 20px;
-margin-bottom: 26px;}
-
-#big_stats .stat:first-child {
-	border-left: none;
-}
-
-#big_stats .stat:last-child {
-	border-right: none;
+h6.bigstats{
+	margin			: 20px;
+	padding-bottom	: 10px;
+	margin-bottom	: 10px;
 }
 
 #big_stats .stat h4

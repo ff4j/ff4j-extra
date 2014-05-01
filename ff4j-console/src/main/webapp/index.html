@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
+	<title>Administration Console - DashBoard</title>
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/font-awesome.css" 		rel="stylesheet">
+	
+	<link href="css/pages/dashboard.css" 	rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+	<link href="css/style.css" 				rel="stylesheet">
+	
+</head>
+<body>
+
+<!-- ************** Navigation BAR ************** -->
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+    	
+    	<!-- Button if width is no more sufficient (collapse) -->
+    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"  style="margin-top:15px">
+    		<span class="icon-bar"></span>
+    		<span class="icon-bar"></span>
+    		<span class="icon-bar"></span>
+    	</a>
+    	
+    	<!-- Link to Home -->
+        <a class="brand" href="index.html" >
+        	<img src="./img/icons/ff4j-logo.png" style="height:60px">
+        	&nbsp;&nbsp;&nbsp;Administration
+        </a>
+        
+        <!-- Right part of the nav bar -->
+        <div class="nav-collapse"  style="margin-top:15px">
+	        <!-- Search for -->
+	        <form class="navbar-search pull-right" >
+	          <input type="text" class="search-query" placeholder="Search a Feature" >
+	        </form>
+      	</div>
+      	<!--/.nav-collapse -->
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+
+
+<!-- ************** SUB Navigation BAR ************** -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li class="active">
+        	<a href="index.html">
+        		<i class="icon-dashboard"></i>
+        		<span>Dashboard</span>
+        	</a>
+        </li>
+        <li>
+        	<a href="features.html">
+        		<i class="icon-list-alt"></i>
+        		<span>Features</span>
+        	</a>
+        </li>
+        <li>
+        	<a href="reports.html">
+        		<i class="icon-bar-chart"></i>
+        		<span>Monitoring</span>
+        	</a>
+        </li>
+        <li>
+        	<a href="reports.html">
+        		<i class="icon-cog"></i>
+        		<span>Settings</span>
+        	</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+
+
+<!-- ************** MAIN ************** -->
+
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+      
+        <div class="span6">
+        
+          <!--  General Informations -->
+          <div class="widget widget-nopad">
+           
+            <div class="widget-header"> <i class="icon-home"></i>
+              <h3> General Information</h3>
+            </div>
+           
+            <div class="widget-content">
+              <div class="widget big-stats-container">
+                <div class="widget-content">
+                	<h6 class="bigstats">This console could be connected to remote FF4J instance through <a href="#">HTTP (RESTFul API)</a> or <a href="#"> JMX </a> (not all application are web).
+                	<br/> You can also connect it directly to stores.
+                	</h6>
+                	<table style="border-collapse:separate;border-spacing:0 10px;text-transform:none">
+                		<tr>
+                		 <td style="width:100px;text-align:right;margin-right:15px"><h4>
+                		 <a >
+                		 	Uptime&nbsp;
+                		 </a>
+                		 </td>
+                		 <td style="width:25px"><img src="./img/icons/uptime.png" style="width:20px"></td>
+                		 <td style="width:300px;color:#696969;
+                		 		text-align:right;
+                		 		-webkit-border-radius: 6px;
+                		 		-moz-border-radius: 6px;
+                		 		border-radius: 6px;
+                		 		background-color:#eef8ee;
+                		 		padding:5px;
+                		 		text-transform:lowercase;"><h4> 39 day(s) 18 Hour(s) 48 min 27 sec </td>
+                		 </tr>
+                		 <tr>
+                		 <td style="width:100px;text-align:right"><h4>
+                		 <a class="ff4j-tooltip" tooltip="Externalize your features in any database">Store&nbsp;&nbsp;</a></td>
+                		 <td style="width:25px"><img src="./img/icons/database.png" style="width:20px;height:20px"></td>
+                		 <td style="width:300px;color:#696969;
+                		 		text-align:right;
+                		 		-webkit-border-radius: 6px;
+                		 		-moz-border-radius: 6px;
+                		 		border-radius: 6px;
+                		 		background-color:#eef8ee;
+                		 		padding:5px;">
+                		 	<h4>
+                		 	InMemoryFeatureStore
+                		 	</td>
+                		 </tr>
+                		 <tr>
+                		 <td style="width:100px;text-align:right"><h4>
+                		 <a class="ff4j-tooltip" tooltip="Limit overhead with a cache (inMemory, redis, ehcache...)">Caching&nbsp;&nbsp;</td>
+                		 <td style="width:25px"><img src="./img/icons/random.png" style="width:20px;height:20px"></td>
+                		 <td style="width:300px;color:#00ab8b;
+                		 		text-align:right;
+                		 		-webkit-border-radius: 6px;
+                		 		-moz-border-radius: 6px;
+                		 		border-radius: 6px;
+                		 		background-color:#eeeeee;
+                		 		padding:5px;">
+                		 	<h4> None </td>
+                		 </tr>
+                		  <tr>
+                		 <td style="width:100px;text-align:right"><h4>
+                		 <a class="ff4j-tooltip" tooltip="Define ACL on you features (Spring-Security)">Security&nbsp;&nbsp;</td>
+                		 <td style="width:25px"><img src="./img/icons/padlock.png" style="width:20px;height:20px"></td>
+                		 <td style="width:300px;color:#00ab8b;
+                		 		text-align:right;
+                		 		-webkit-border-radius: 6px;
+                		 		-moz-border-radius: 6px;
+                		 		border-radius: 6px;
+                		 		background-color:#eeeeee;
+                		 		padding:5px;">
+                		 	<h4> None </td>
+                		 </tr>
+                		  <tr>
+                		 <td style="width:100px;text-align:right"><h4>
+                		 <a class="ff4j-tooltip" tooltip="Export metrics on feature usage to graph">Monitoring&nbsp;&nbsp;</td>
+                		 <td style="width:25px"><img src="./img/icons/monitoring.png" style="width:20px;height:20px"></td>
+                		 <td style="width:300px;color:#00ab8b;
+                		 		text-align:right;
+                		 		-webkit-border-radius: 6px;
+                		 		-moz-border-radius: 6px;
+                		 		border-radius: 6px;
+                		 		background-color:#eeeeee;
+                		 		padding:5px;">
+                		 	<h4> InMemoryEventRepository</td>
+                		 </tr>
+                	</table>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+          
+          
+          <div class="widget widget-nopad">
+            <div class="widget-header"> <i class="icon-list-alt"></i>
+              <h3> Monitoring</h3>
+            </div>
+            <div class="widget-content">
+              Hello
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          
+          
+          <!-- /widget -->
+          <div class="widget">
+            <div class="widget-header"> <i class="icon-file"></i>
+              <h3> Content</h3>
+            </div>
+            <div class="widget-content">
+              hello
+            </div>
+          </div>
+          
+        </div>
+         <!-- /collone 1 .. span6 -->
+        
+        <!-- /span6 -->
+        <div class="span6">
+          <div class="widget">
+            <div class="widget-header"> <i class="icon-bookmark"></i>
+              <h3>Important Shortcuts</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span
+                                        class="shortcut-label">Apps</span> </a><a href="javascript:;" class="shortcut"><i
+                                            class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span
+                                                class="shortcut-label">Users</span> </a><a href="javascript:;" class="shortcut"><i
+                                                    class="shortcut-icon icon-file"></i><span class="shortcut-label">Notes</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i> <span class="shortcut-label">Photos</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span> </a> </div>
+              <!-- /shortcuts --> 
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget -->
+          <div class="widget">
+            <div class="widget-header"> <i class="icon-signal"></i>
+              <h3> Area Chart Example</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <canvas id="area-chart" class="chart-holder" height="250" width="538"> </canvas>
+              <!-- /area-chart --> 
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget -->
+          <div class="widget widget-table action-table">
+            <div class="widget-header"> <i class="icon-th-list"></i>
+              <h3>A Table Example</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th> Free Resource </th>
+                    <th> Download</th>
+                    <th class="td-actions"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> Fresh Web Development Resources </td>
+                    <td> http://www.egrappler.com/ </td>
+                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+                  </tr>
+                  <tr>
+                    <td> Fresh Web Development Resources </td>
+                    <td> http://www.egrappler.com/ </td>
+                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+                  </tr>
+                  <tr>
+                    <td> Fresh Web Development Resources </td>
+                    <td> http://www.egrappler.com/ </td>
+                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+                  </tr>
+                  <tr>
+                    <td> Fresh Web Development Resources </td>
+                    <td> http://www.egrappler.com/ </td>
+                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+                  </tr>
+                  <tr>
+                    <td> Fresh Web Development Resources </td>
+                    <td> http://www.egrappler.com/ </td>
+                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+                  </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget --> 
+          <div class="widget widget-nopad">
+            <div class="widget-header"> <i class="icon-list-alt"></i>
+              <h3> Recent News</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <ul class="news-items">
+                <li>
+                  
+                  <div class="news-item-date"> <span class="news-item-day">29</span> <span class="news-item-month">Aug</span> </div>
+                  <div class="news-item-detail"> <a href="http://www.egrappler.com/thursday-roundup-40/" class="news-item-title" target="_blank">Thursday Roundup # 40</a>
+                    <p class="news-item-preview"> This is our web design and development news series where we share our favorite design/development related articles, resources, tutorials and awesome freebies. </p>
+                  </div>
+                  
+                </li>
+                <li>
+                  
+                  <div class="news-item-date"> <span class="news-item-day">15</span> <span class="news-item-month">Jun</span> </div>
+                  <div class="news-item-detail"> <a href="http://www.egrappler.com/retina-ready-responsive-app-landing-page-website-template-app-landing/" class="news-item-title" target="_blank">Retina Ready Responsive App Landing Page Website Template – App Landing</a>
+                    <p class="news-item-preview"> App Landing is a retina ready responsive app landing page website template perfect for software and application developers and small business owners looking to promote their iPhone, iPad, Android Apps and software products.</p>
+                  </div>
+                  
+                </li>
+                <li>
+                  
+                  <div class="news-item-date"> <span class="news-item-day">29</span> <span class="news-item-month">Oct</span> </div>
+                  <div class="news-item-detail"> <a href="http://www.egrappler.com/open-source-jquery-php-ajax-contact-form-templates-with-captcha-formify/" class="news-item-title" target="_blank">Open Source jQuery PHP Ajax Contact Form Templates With Captcha: Formify</a>
+                    <p class="news-item-preview"> Formify is a contribution to lessen the pain of creating contact forms. The collection contains six different forms that are commonly used. These open source contact forms can be customized as well to suit the need for your website/application.</p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget -->
+        </div>
+        <!-- /span6 --> 
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /main-inner --> 
+</div>
+<!-- /main -->
+<div class="extra">
+  <div class="extra-inner">
+    <div class="container">
+      <div class="row">
+                    <div class="span3">
+                        <h4>Main</h4>
+                        <ul>
+                            <li><img src="./img/icons/ff4j-logo.png" style="height:20px;width:20px">&nbsp;<a href="http://ff4j.org"> ff4j.org</a></li>
+                            <li><img src="./img/icons/manual.png" style="height:20px;width:20px">&nbsp;<a href="https://github.com/clun/ff4j"> Reference Guide</a></li>
+                            <li><img src="./img/icons/apiary.jpeg" style="height:20px;width:20px">&nbsp;<a href="http://docs.ff4j.apiary.io/"> Documentation API</a></li>
+                        </ul>
+                    </div>
+                    <!-- /span3 -->
+                    <div class="span3">
+                        <h4>Get Support</h4>
+                        <ul>
+                            <li><img src="./img/icons/google-groups.png" style="height:20px;width:20px">&nbsp;<a href="javascript:;"> Ask a question</a></li>
+                            <li><img src="./img/icons/stackoverflow.png" style="height:20px;width:20px">&nbsp;<a href="javascript:;"> StackOverflow</a></li>
+                            <li><img src="./img/icons/email.png" style="height:20px;width:20px">&nbsp;<a href="javascript:;"> Contact</a></li>
+                        </ul>
+                    </div>
+                    <!-- /span3 -->
+                    <div class="span3">
+                        <h4>
+                            Social</h4>
+                        <ul>
+                            <li><img src="./img/icons/twitter.png" style="height:20px;width:20px">&nbsp;<a href="javascript:;"> Follow us on Twitter</a></li>
+                            <li><img src="./img/icons/github.png" style="height:20px;width:20px">&nbsp;<a href="https://github.com/clun/ff4j"> Sources on Github</a></li>
+                        </ul>
+                    </div>
+                    </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /extra-inner --> 
+</div>
+<!-- /extra -->
+<div class="footer">
+  <div class="footer-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12"> &copy; 2014 <a href="http://www.ff4j.org/">Feature Flipping 4 Java </a></div>
+        <!-- /span12 --> 
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /footer-inner --> 
+</div>
+<!-- /footer --> 
+<!-- Le javascript
+================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script src="js/jquery-1.7.2.min.js"></script> 
+<script src="js/excanvas.min.js"></script> 
+<script src="js/chart.min.js" type="text/javascript"></script> 
+<script src="js/bootstrap.js"></script>
+<script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
+ 
+<script src="js/base.js"></script> 
+<script>     
+
+        var lineChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+				{
+				    fillColor: "rgba(220,220,220,0.5)",
+				    strokeColor: "rgba(220,220,220,1)",
+				    pointColor: "rgba(220,220,220,1)",
+				    pointStrokeColor: "#fff",
+				    data: [65, 59, 90, 81, 56, 55, 40]
+				},
+				{
+				    fillColor: "rgba(151,187,205,0.5)",
+				    strokeColor: "rgba(151,187,205,1)",
+				    pointColor: "rgba(151,187,205,1)",
+				    pointStrokeColor: "#fff",
+				    data: [28, 48, 40, 19, 96, 27, 100]
+				}
+			]
+
+        }
+
+        var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
+
+
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+				{
+				    fillColor: "rgba(220,220,220,0.5)",
+				    strokeColor: "rgba(220,220,220,1)",
+				    data: [65, 59, 90, 81, 56, 55, 40]
+				},
+				{
+				    fillColor: "rgba(151,187,205,0.5)",
+				    strokeColor: "rgba(151,187,205,1)",
+				    data: [28, 48, 40, 19, 96, 27, 100]
+				}
+			]
+
+        }    
+
+        $(document).ready(function() {
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        var calendar = $('#calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+          },
+          selectable: true,
+          selectHelper: true,
+          select: function(start, end, allDay) {
+            var title = prompt('Event Title:');
+            if (title) {
+              calendar.fullCalendar('renderEvent',
+                {
+                  title: title,
+                  start: start,
+                  end: end,
+                  allDay: allDay
+                },
+                true // make the event "stick"
+              );
+            }
+            calendar.fullCalendar('unselect');
+          },
+          editable: true,
+          events: [
+            {
+              title: 'All Day Event',
+              start: new Date(y, m, 1)
+            },
+            {
+              title: 'Long Event',
+              start: new Date(y, m, d+5),
+              end: new Date(y, m, d+7)
+            },
+            {
+              id: 999,
+              title: 'Repeating Event',
+              start: new Date(y, m, d-3, 16, 0),
+              allDay: false
+            },
+            {
+              id: 999,
+              title: 'Repeating Event',
+              start: new Date(y, m, d+4, 16, 0),
+              allDay: false
+            },
+            {
+              title: 'Meeting',
+              start: new Date(y, m, d, 10, 30),
+              allDay: false
+            },
+            {
+              title: 'Lunch',
+              start: new Date(y, m, d, 12, 0),
+              end: new Date(y, m, d, 14, 0),
+              allDay: false
+            },
+            {
+              title: 'Birthday Party',
+              start: new Date(y, m, d+1, 19, 0),
+              end: new Date(y, m, d+1, 22, 30),
+              allDay: false
+            },
+            {
+              title: 'EGrappler.com',
+              start: new Date(y, m, 28),
+              end: new Date(y, m, 29),
+              url: 'http://EGrappler.com/'
+            }
+          ]
+        });
+      });
+    </script><!-- /Calendar -->
+</body>
+</html>

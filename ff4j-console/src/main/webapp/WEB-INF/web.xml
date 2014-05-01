@@ -3,8 +3,16 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 
-	<display-name>ff4j-admin-console</display-name>
+ 	<!-- Display Name in application server -->
+	<display-name>FF4J Administration Console</display-name>
 
+	<!-- Externalisation des constantes -->
+	<context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>application-resources</param-value>
+    </context-param>
+    
+    <!-- SpringBeans -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
