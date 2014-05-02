@@ -223,10 +223,18 @@ Bootstrap Admin Template by EGrappler.com
 }
 #big_stats .stat:hover i {color:#19bc9c;}
 
+#big_stats .stat:first-child {
+	border-left: none;
+}
+
+#big_stats .stat:last-child {
+	border-right: none;
+}
+
 h6.bigstats{
 	margin			: 20px;
 	padding-bottom	: 10px;
-	margin-bottom	: 10px;
+	margin-bottom	: 0px;
 }
 
 #big_stats .stat h4

@@ -1,0 +1,27 @@
+# ---------------------------------------
+# This is the only configuration file
+# ---------------------------------------
+
+# ---------------------------------------
+# Users with authorizations
+# ---------------------------------------
+authenticated: true
+
+authenticated-users:
+  admin:
+    - login: 'admin'
+      password: 'admin'
+    - login: 'sa'
+      password: 'sa'
+  viewer:
+    - login: 'guest'
+      password: 'guest'
+
+access-rest:
+   - id: 'localhost'
+     url: 'http://localhost/ff4j-console/ff4j'
+     authenticated: true
+     authKey : "JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF"
+
+access-jmx:
+

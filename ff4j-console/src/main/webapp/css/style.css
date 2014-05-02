@@ -243,28 +243,29 @@ textarea {
 */
 
 .extra {
-
-	border-top: 1px solid #585858;
+	border-top: 1px solid #696969;
 	border-bottom: 1px solid #000;
-
 }
 
 .extra-inner {
-	padding: 20px 0;
-	
+	padding: 5px 0;
 	font-size: 11px;
 	color: #BBB;
-	
 	background: #1A1A1A;
 }
 
 .extra a {
-	color: #666;
+	color: #999;
 }
+
+.extra a:hover {
+	color: #FFF;
+	text-decoration: none;
+}
+
 
 .extra h4 {
 	margin-bottom: 1em;
-	
 	font-weight: 400;
 }
 
@@ -275,11 +276,8 @@ textarea {
 
 .extra li {
 	margin-bottom: .6em;
-	
 	list-style: none;
 }
-
-
 
 
 /*------------------------------------------------------------------
@@ -288,20 +286,18 @@ textarea {
 
 .footer {
 	margin-top: 0;
-	
 	border-top: 1px solid #292929;
 }
 
 .footer-inner {
-	padding: 15px 0;
-	
+	padding: 5px 0;
 	font-size: 12px;
 	background: #111;
-	color: #999;
+	color: #ddd;
 }
 
 .footer a {
-	color: #999;
+	color: #ddd;
 }
 
 .footer a:hover {
