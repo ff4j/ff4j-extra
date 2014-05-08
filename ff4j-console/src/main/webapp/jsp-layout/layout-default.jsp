@@ -1,4 +1,4 @@
-<%@ include file="/common/taglibs.jsp"%>
+<%@ include file="/includes.jsp"%>
 <html>
 <head>
   <%@ include file="/common/header.jsp" %>

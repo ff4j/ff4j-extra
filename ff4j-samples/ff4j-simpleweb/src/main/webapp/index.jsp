@@ -1,10 +1,11 @@
 <%@ taglib prefix="ff4j" uri="http://www.ff4j.org/taglibs/ff4j" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <title>FF4J - Sample WebApp</title>
-<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 body {
  padding-top: 60px;
@@ -24,7 +25,7 @@ body {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Simple Web Application</a>
+				<a class="brand" href="#">Demo Web Application</a>
 			</div>
 		</div>
 	</div>
@@ -32,18 +33,15 @@ body {
 	<div class="container">
 	
 	   <div class="jumbotron">
-        
-		<p> This a simple web application for <a href="http://ff4j.org">ff4j</a>. 
-		
+    	
 		<p>2 features are created <b>'sayHello'</b> and <b>'sayGoodBye'.</b>
 		
 		<p> 
 		 <a href="<%=request.getContextPath()%>/ff4j-console" class="btn btn-primary" >
 			<i class="icon-th-large icon-white"></i>&nbsp;Access Web Console
 		</a>
-		
 	
-		<p><br/><u>Below here sentences are displayed only if feature is enable using TAGLIB :</u> 	
+		<p><br/><u>Below sentences are displayed only if feature is enable using TAGLIB :</u> 	
 		
 		<ff4j:enable featureid="sayHello">
 			<p class="alert alert-success">Hello visitor ! Feature 'sayHello' is enable

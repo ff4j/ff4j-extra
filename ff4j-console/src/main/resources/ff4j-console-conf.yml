@@ -2,6 +2,9 @@
 # This is the only configuration file
 # ---------------------------------------
 
+# Default language of console fr,en,de
+language : 'fr'
+
 # ---------------------------------------
 # Users with authorizations
 # ---------------------------------------
@@ -18,10 +21,13 @@ authenticated-users:
       password: 'guest'
 
 access-rest:
-   - id: 'localhost'
+   - id: 'dev'
      url: 'http://localhost/ff4j-console/ff4j'
      authenticated: true
      authKey : "JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF"
+   - id: 'uat'
+     url: 'http://localhost/ff4j-console/ff4j'
 
 access-jmx:
+
 

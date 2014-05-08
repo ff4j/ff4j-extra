@@ -6,7 +6,7 @@
  	<!-- Display Name in application server -->
 	<display-name>FF4J Administration Console</display-name>
 
-	<!-- Externalisation des constantes -->
+	<!-- Resources -->
 	<context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>application-resources</param-value>
@@ -18,21 +18,13 @@
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 
+	<!-- Spring Context -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<!-- Administrate features -->
-	<servlet>
-		<servlet-name>admin-console</servlet-name>
-		<servlet-class>org.ff4j.web.AdministrationConsoleServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>admin-console</servlet-name>
-		<url-pattern>/admin-console</url-pattern>
-	</servlet-mapping>
 	
-	<!-- FF4J Services -->
+	<!-- For testing purposes --> FF4J Services -->
 	<servlet>
 		<servlet-name>Web Services</servlet-name>
 		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
@@ -45,10 +37,44 @@
 		<servlet-name>Web Services</servlet-name>
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
+	
 
 	<!-- Welcome file -->
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<!-- Define error pages -->
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    
+	<!-- Enable JSP Config -->
+	<jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+        </jsp-property-group>
+    </jsp-config>
+    
+    <!-- Track Session through cookie -->
+	<session-config>
+        <session-timeout>15</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!--<secure>true</secure>-->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+	
 
 </web-app>
