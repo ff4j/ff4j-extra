@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<chapter id="exceptions" lang="en">
+<chapter id="2-05" lang="en">
   <title>Exceptions Handling</title>
   <para>
    This part of the reference documentation covers Exception part. It will explain what the framework exception

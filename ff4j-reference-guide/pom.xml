@@ -4,16 +4,216 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~ COORDINATES ~ -->
+	<!-- ~ COORDINATES              ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<artifactId>ff4j-reference-guide</artifactId>
 	<groupId>org.ff4j</groupId>
+	<artifactId>ff4j-reference-guide</artifactId>
 	<name>ff4j-reference-guide</name>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
+	
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ BUILD                    ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<build>
 
+		<!-- Deliverable name -->
+		<finalName>reference-guide</finalName>
+		
+		<!-- Choose Resources -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>docbook/*.xml</include>
+					<include>xsl/html_chunk.xsl</include>
+					<include>xsl/fopdf.xsl</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>docbook/*.xml</exclude>
+					<exclude>xsl/html_chunk.xsl</exclude>
+					<exclude>xsl/fopdf.xsl</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+
+			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<!-- Generate fop metrics before embedded in PDF -->
+			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<plugin>
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-fop-support</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<ansi>true</ansi>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<!-- DocBook plugin to generate docs -->
+			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<plugin>
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-maven-plugin</artifactId>
+				<version>2.0.9</version>
+
+				<!-- dependencies to generation PDF -->
+				<dependencies>
+					<dependency>
+						<groupId>docbook</groupId>
+						<artifactId>docbook-xml</artifactId>
+						<version>4.5</version>
+					</dependency>
+					<!-- will produce PDF using fop -->
+					<dependency>
+						<groupId>org.apache.fop</groupId>
+						<artifactId>fop-pdf-images</artifactId>
+						<version>1.3</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.fop</groupId>
+						<artifactId>fop-pdf-images-res</artifactId>
+						<version>1.3</version>
+						<classifier>res</classifier>
+					</dependency>
+					<dependency>
+						<groupId>pdfbox</groupId>
+						<artifactId>pdfbox</artifactId>
+						<version>0.7.4-dev</version>
+						<classifier>dev</classifier>
+					</dependency>
+				</dependencies>
+
+				<executions>
+
+					<!-- add pdf generation to compile -->
+					<execution>
+						<id>generate-pdf</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate-pdf</goal>
+						</goals>
+						<configuration>
+							<imgSrcPath>${basedir}/target/classes/docbook/</imgSrcPath>
+							<foCustomization>${basedir}/target/classes/xsl/fopdf.xsl</foCustomization>
+							<useExtensions>1</useExtensions>
+							<bodyFontFamily>TimesNewRoman</bodyFontFamily>
+							<monospaceFontFamily>CourierNew</monospaceFontFamily>
+							<titleFontFamily>ArialBold</titleFontFamily>
+							<fonts>
+								<font>
+									<name>ArialBold</name>
+									<style>normal</style>
+									<weight>normal</weight>
+									<embedFile>${basedir}/src/fonts/ArialBold.ttf</embedFile>
+									<metricsFile>${basedir}/target/fonts/ArialBold-metrics.xml</metricsFile>
+								</font>
+								<font>
+									<name>CourierNew</name>
+									<style>normal</style>
+									<weight>normal</weight>
+									<embedFile>${basedir}/src/fonts/Courier.ttf</embedFile>
+									<metricsFile>${basedir}/target/fonts/Courier-metrics.xml</metricsFile>
+								</font>
+								<font>
+									<name>CourierNew</name>
+									<style>normal</style>
+									<weight>bold</weight>
+									<embedFile>${basedir}/src/fonts/Courier-Bold.ttf</embedFile>
+									<metricsFile>${basedir}/target/fonts/Courier-Bold-metrics.xml</metricsFile>
+								</font>
+								<font>
+									<name>CourierNew</name>
+									<style>italic</style>
+									<weight>normal</weight>
+									<embedFile>${basedir}/src/fonts/Courier-Oblique.ttf</embedFile>
+									<metricsFile>${basedir}/target/fonts/Courier-Oblique-metrics.xml</metricsFile>
+								</font>
+								<font>
+									<name>TimesNewRoman</name>
+									<style>normal</style>
+									<weight>normal</weight>
+									<embedFile>${basedir}/src/fonts/TimesNewRoman.ttf</embedFile>
+									<metricsFile>${basedir}/target/fonts/TimesNewRoman-metrics.xml</metricsFile>
+								</font>
+							</fonts>
+						</configuration>
+					</execution>
+
+					<!-- add xhtml generation to compile -->
+					<execution>
+						<id>generate-html</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<configuration>
+							<chunkedOutput>true</chunkedOutput>
+							<chunkSectionDepth>2</chunkSectionDepth>
+							<chunkSeparateLots>1</chunkSeparateLots>
+							<useIdAsFilename>1</useIdAsFilename>
+							<htmlCustomization>${basedir}/target/classes/xsl/html_chunk.xsl</htmlCustomization>
+						</configuration>
+					</execution>
+				</executions>
+
+				<configuration>
+					<sourceDirectory>${basedir}/target/classes/docbook</sourceDirectory>
+					<includes>book.xml</includes>
+					<xincludeSupported>true</xincludeSupported>
+				</configuration>
+
+			</plugin>
+
+			<!-- once the book is ready we will concatenate with cover -->
+			<plugin>
+				<groupId>org.codehaus.cjcook</groupId>
+				<artifactId>pdf-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>concat-pdfs</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>concatenate</goal>
+						</goals>
+						<configuration>
+							<outputDir>${basedir}/target</outputDir>
+							<outputFilename>ff4j-reference-guide-${project.version}.pdf</outputFilename>
+							<pdfs>
+								<pdf>${basedir}/src/main/resources/cover/cover.pdf</pdf>
+								<pdf>${project.build.directory}/docbkx/pdf/book.pdf</pdf>
+							</pdfs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+	
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ REPOSITORIES             ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<repositories>
 
+		<!-- Sonatype -->
 		<repository>
 			<id>sonatype-public</id>
 			<name>Sonatype Public</name>
@@ -22,7 +222,6 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-
 		<repository>
 			<id>sonatype-forge</id>
 			<name>Sonatype Forge</name>
@@ -32,6 +231,7 @@
 			</snapshots>
 		</repository>
 
+		<!-- CodeHause -->
 		<repository>
 			<id>Codehaus Snapshots</id>
 			<url>http://snapshots.repository.codehaus.org</url>
@@ -43,6 +243,7 @@
 			</releases>
 		</repository>
 
+		<!-- Central -->
 		<repository>
 			<id>Central</id>
 			<url>http://repo1.maven.org/maven2</url>
@@ -99,208 +300,6 @@
 
 	</pluginRepositories>
 
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~~ Overriding Build settings ~~ -->
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-	<profiles>
-		<profile>
-			<id>doc</id>
-
-			<build>
-
-				<!-- ~~ Tune final name ~~ -->
-				<finalName>reference-guide</finalName>
-
-				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<!-- Filter ressources to be used -->
-				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-						<filtering>true</filtering>
-						<includes>
-							<include>docbook/*.xml</include>
-							<include>xsl/html_chunk.xsl</include>
-							<include>xsl/fopdf.xsl</include>
-						</includes>
-					</resource>
-					<resource>
-						<directory>src/main/resources</directory>
-						<filtering>false</filtering>
-						<excludes>
-							<exclude>docbook/*.xml</exclude>
-							<exclude>xsl/html_chunk.xsl</exclude>
-							<exclude>xsl/fopdf.xsl</exclude>
-						</excludes>
-					</resource>
-				</resources>
-
-				<plugins>
-
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<!-- Generate fop metrics before embedded in PDF -->
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<plugin>
-						<groupId>com.agilejava.docbkx</groupId>
-						<artifactId>docbkx-fop-support</artifactId>
-						<executions>
-							<execution>
-								<phase>generate-resources</phase>
-								<goals>
-									<goal>generate</goal>
-								</goals>
-								<configuration>
-									<ansi>true</ansi>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<!-- DocBook plugin to generate docs -->
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<plugin>
-						<groupId>com.agilejava.docbkx</groupId>
-						<artifactId>docbkx-maven-plugin</artifactId>
-						<version>2.0.9</version>
-
-						<!-- dependencies to generation PDF -->
-						<dependencies>
-							<dependency>
-								<groupId>docbook</groupId>
-								<artifactId>docbook-xml</artifactId>
-								<version>4.5</version>
-							</dependency>
-							<!-- will produce PDF using fop -->
-							<dependency>
-								<groupId>org.apache.fop</groupId>
-								<artifactId>fop-pdf-images</artifactId>
-								<version>1.3</version>
-							</dependency>
-							<dependency>
-								<groupId>org.apache.fop</groupId>
-								<artifactId>fop-pdf-images-res</artifactId>
-								<version>1.3</version>
-								<classifier>res</classifier>
-							</dependency>
-							<dependency>
-								<groupId>pdfbox</groupId>
-								<artifactId>pdfbox</artifactId>
-								<version>0.7.4-dev</version>
-								<classifier>dev</classifier>
-							</dependency>
-						</dependencies>
-
-						<executions>
-
-							<!-- add pdf generation to compile -->
-							<execution>
-								<id>generate-pdf</id>
-								<phase>compile</phase>
-								<goals>
-									<goal>generate-pdf</goal>
-								</goals>
-								<configuration>
-									<imgSrcPath>${basedir}/target/classes/docbook/</imgSrcPath>
-									<foCustomization>${basedir}/target/classes/xsl/fopdf.xsl</foCustomization>
-									<useExtensions>1</useExtensions>
-									<bodyFontFamily>TimesNewRoman</bodyFontFamily>
-									<monospaceFontFamily>CourierNew</monospaceFontFamily>
-									<titleFontFamily>ArialBold</titleFontFamily>
-									<fonts>
-										<font>
-											<name>ArialBold</name>
-											<style>normal</style>
-											<weight>normal</weight>
-											<embedFile>${basedir}/src/fonts/ArialBold.ttf</embedFile>
-											<metricsFile>${basedir}/target/fonts/ArialBold-metrics.xml</metricsFile>
-										</font>
-										<font>
-											<name>CourierNew</name>
-											<style>normal</style>
-											<weight>normal</weight>
-											<embedFile>${basedir}/src/fonts/Courier.ttf</embedFile>
-											<metricsFile>${basedir}/target/fonts/Courier-metrics.xml</metricsFile>
-										</font>
-										<font>
-											<name>CourierNew</name>
-											<style>normal</style>
-											<weight>bold</weight>
-											<embedFile>${basedir}/src/fonts/Courier-Bold.ttf</embedFile>
-											<metricsFile>${basedir}/target/fonts/Courier-Bold-metrics.xml</metricsFile>
-										</font>
-										<font>
-											<name>CourierNew</name>
-											<style>italic</style>
-											<weight>normal</weight>
-											<embedFile>${basedir}/src/fonts/Courier-Oblique.ttf</embedFile>
-											<metricsFile>${basedir}/target/fonts/Courier-Oblique-metrics.xml</metricsFile>
-										</font>
-										<font>
-											<name>TimesNewRoman</name>
-											<style>normal</style>
-											<weight>normal</weight>
-											<embedFile>${basedir}/src/fonts/TimesNewRoman.ttf</embedFile>
-											<metricsFile>${basedir}/target/fonts/TimesNewRoman-metrics.xml</metricsFile>
-										</font>
-									</fonts>
-								</configuration>
-							</execution>
-
-							<!-- add xhtml generation to compile -->
-							<execution>
-								<id>generate-html</id>
-								<phase>compile</phase>
-								<goals>
-									<goal>generate-html</goal>
-								</goals>
-								<configuration>
-									<chunkedOutput>true</chunkedOutput>
-									<chunkSectionDepth>2</chunkSectionDepth>
-									<chunkSeparateLots>1</chunkSeparateLots>
-									<useIdAsFilename>1</useIdAsFilename>
-									<htmlCustomization>${basedir}/target/classes/xsl/html_chunk.xsl</htmlCustomization>
-								</configuration>
-							</execution>
-						</executions>
-
-						<configuration>
-							<sourceDirectory>${basedir}/target/classes/docbook</sourceDirectory>
-							<includes>book.xml</includes>
-							<xincludeSupported>true</xincludeSupported>
-						</configuration>
-
-					</plugin>
-
-					<!-- once the book is ready we will concatenate with cover -->
-					<plugin>
-						<groupId>org.codehaus.cjcook</groupId>
-						<artifactId>pdf-plugin</artifactId>
-						<version>1.0</version>
-						<executions>
-							<execution>
-								<id>concat-pdfs</id>
-								<phase>compile</phase>
-								<goals>
-									<goal>concatenate</goal>
-								</goals>
-								<configuration>
-									<outputDir>${basedir}/target</outputDir>
-									<outputFilename>ff4j-reference-guide-${project.version}.pdf</outputFilename>
-									<pdfs>
-										<pdf>${basedir}/src/main/resources/cover/cover.pdf</pdf>
-										<pdf>${project.build.directory}/docbkx/pdf/book.pdf</pdf>
-									</pdfs>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-
-			</build>
-
-		</profile>
-	</profiles>
+	
 
 </project>

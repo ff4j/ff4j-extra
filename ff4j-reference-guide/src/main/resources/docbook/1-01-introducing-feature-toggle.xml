@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<chapter id="overview" lang="en">
+<chapter id="1-01" lang="en">
 
-	<title>Introduction</title>
+	<title>Introduction to Feature Toggle</title>
 
 	<section id="id">
 		<title>Title</title>

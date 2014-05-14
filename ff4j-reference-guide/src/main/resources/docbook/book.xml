@@ -1,68 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<book id="bpf-0001-prog-refguide" >
+<book id="ff4j-reference-guide">
 
-  <title>Programmer Reference Guide</title>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ Title                    ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<title>FF4j Reference Guide</title>
 
-  <!-- information for this book -->
-  <bookinfo>
-   
-    <edition>0.1</edition>
-    <releaseinfo>V 1.0</releaseinfo>
-    
-    <authorgroup>
-      <author>
-        <firstname>Cedrick</firstname>
-        <surname>Lunven</surname>
-        <email>cedrick.lunven@logica.com</email>        
-      </author>
-      <author>
-        <firstname>Mickael</firstname>
-        <surname>MooPenn</surname>
-        <email>mickael.moopenn@logica.com</email>        
-      </author>
-      <author>
-        <firstname>Laurent</firstname>
-        <surname>Gauthier</surname>
-        <email>laurent.gauthier@logica.com</email>        
-      </author>
-      <author>
-        <firstname>Yohann</firstname>
-        <surname>Botquelen</surname>
-        <email>yohann.botquelen@logica.com</email>        
-      </author>
-    </authorgroup>
-    
-    <publisher>
-      <publishername>Logica</publishername>
-    </publisher>
-    
-    <abstract role="description-short">
-      <para>
-      	This guide will help any developper using Logica Business Process Management Framework. It explains how to use it but also
-      	how to install or administrate.  
-      </para>
-    </abstract>    
-   
-  </bookinfo>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ General Informations     ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<bookinfo>
+		<edition>0.1</edition>
+		<releaseinfo>V 1.0</releaseinfo>
+		<authorgroup>
+			<author>
+				<firstname>Cedrick</firstname>
+				<surname>Lunven</surname>
+				<email>cedrick.lunven@logica.com</email>
+			</author>
+		</authorgroup>
+		<publisher>
+			<publishername>ff4j</publishername>
+		</publisher>
+		<abstract role="description-short">
+			<para>
+				This guide is meant to stands as reference guide a will cover all aspect
+				of the framework.
+				Even if it contains as much code as possible, if you look for a quick
+				hands on you may consider to go read the getting started page on
+				ff4j.org web site.
+			</para>
+		</abstract>
+	</bookinfo>
   
+   <!--  Table of content -->
    <toc/>
 
-  <!-- Preface -->
-  <xi:include href="00-copyright.xml" 				xmlns:xi="http://www.w3.org/2001/XInclude" />
-  <xi:include href="01-preface.xml" 				xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- ~ Split Book per chapter   ~ -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   
-  <!-- Chapters -->
-  <xi:include href="02-chapter-overview.xml" 		xmlns:xi="http://www.w3.org/2001/XInclude" />
-  <xi:include href="03-chapter-tenminutes.xml" 		xmlns:xi="http://www.w3.org/2001/XInclude" />
-  <xi:include href="04-chapter-gettingstarted.xml" 	xmlns:xi="http://www.w3.org/2001/XInclude" />
-  <xi:include href="05-chapter-querysystem.xml" 	xmlns:xi="http://www.w3.org/2001/XInclude" />
-  <xi:include href="06-chapter-orm.xml" 			xmlns:xi="http://www.w3.org/2001/XInclude" />
-  <xi:include href="07-chapter-exceptions.xml" 		xmlns:xi="http://www.w3.org/2001/XInclude" />    
-  <xi:include href="08-chapter-administration.xml" 	xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <!-- PART I - INTRODUCTION -->
+  <xi:include href="1-00-copyright.xml" 				xmlns:xi="http://www.w3.org/2001/XInclude" />
   
-  <!-- Appendices -->
-  <!-- <xi:include href="appendice-A-classdiagrams.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />-->  
+  <!-- PART II - CORE -->
+  <xi:include href="2-01-core-main-concepts.xml" 		xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="2-02-core-aop.xml"			 		xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="2-03-core-stores.xml"		 		xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="2-04-core-security.xml"		 		xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="2-05-core-strategies.xml"	 		xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="2-06-core-caching.xml"		 		xmlns:xi="http://www.w3.org/2001/XInclude" />
+  
    
 </book>
