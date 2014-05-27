@@ -4,23 +4,23 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~ COORDINATES              ~ -->
+	<!-- ~ COORDINATES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<groupId>org.ff4j</groupId>
 	<artifactId>ff4j-reference-guide</artifactId>
 	<name>ff4j-reference-guide</name>
 	<version>1.2.0</version>
 	<packaging>jar</packaging>
-	
-	
+
+
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~ BUILD                    ~ -->
+	<!-- ~ BUILD ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<build>
 
 		<!-- Deliverable name -->
 		<finalName>reference-guide</finalName>
-		
+
 		<!-- Choose Resources -->
 		<resources>
 			<resource>
@@ -44,6 +44,49 @@
 		</resources>
 
 		<plugins>
+
+			<!-- Shutdown eclipse warning (works with intelliJ) -->
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<configuration>
+					<lifecycleMappingMetadata>
+						<pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>com.agilejava.docbkx</groupId>
+									<artifactId>docbkx-maven-plugin</artifactId>
+									<versionRange>2.0.9</versionRange>
+									<goals>
+										<goal>generate-pdf</goal>
+										<goal>generate-html</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore />
+								</action>
+							</pluginExecution>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>org.codehaus.cjcook</groupId>
+									<artifactId>pdf-plugin</artifactId>
+									<versionRange>1.0</versionRange>
+									<goals>
+										<goal>concat-pdfs</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore />
+								</action>
+							</pluginExecution>
+
+
+
+
+						</pluginExecutions>
+					</lifecycleMappingMetadata>
+				</configuration>
+			</plugin>
 
 			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 			<!-- Generate fop metrics before embedded in PDF -->
@@ -205,11 +248,67 @@
 			</plugin>
 		</plugins>
 
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.agilejava.docbkx
+										</groupId>
+										<artifactId>
+											docbkx-maven-plugin
+										</artifactId>
+										<versionRange>
+											[2.0.9,)
+										</versionRange>
+										<goals>
+											<goal>generate-pdf</goal>
+											<goal>generate-html</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.cjcook
+										</groupId>
+										<artifactId>
+											pdf-plugin
+										</artifactId>
+										<versionRange>
+											[1.0,)
+										</versionRange>
+										<goals>
+											<goal>concatenate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
-	
+
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~ REPOSITORIES             ~ -->
+	<!-- ~ REPOSITORIES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<repositories>
 
@@ -300,6 +399,6 @@
 
 	</pluginRepositories>
 
-	
+
 
 </project>

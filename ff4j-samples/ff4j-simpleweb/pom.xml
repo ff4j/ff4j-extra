@@ -41,6 +41,22 @@
 				<artifactId>logback-classic</artifactId>
 				<version>1.0.13</version>
 			</dependency>
+			
+			<!-- TAGLIBS -->
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>c</artifactId>
+			<version>1.1.1</version>
+			<scope>runtime</scope>
+			<type>tld</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
 		
 	</dependencies>
 

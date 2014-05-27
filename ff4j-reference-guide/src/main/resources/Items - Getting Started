@@ -1,0 +1,23 @@
+Getting Started
+[HTML]
+
+
+Core
+- Hello World
+- Integration With Spring Framework
+- Feature Flipping Through AOP
+
+Web Capabilities :
+- Embedded Console
+- Taglibs
+- RestFul API
+- StandAlone console
+
+Enhance features :
+- Create security
+- Define custom strategies
+
+Architecture patterns : 
+- External Feature in Database
+- Use Caching
+- Publish as JMX

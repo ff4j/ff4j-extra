@@ -4,28 +4,16 @@
 <chapter id="1-01" lang="en">
 
 	<title>Introduction to Feature Toggle</title>
-
-	<section id="id">
-		<title>Title</title>
-		<para>todo...</para>
-	</section>
-
-	<section id="intro-featuretoggle">
-		<title>Introduction to feature toggle</title>
-		<para>blabla</para>
-
-		<section id="intro-featuretoggle-def">
-			<title>Definition</title>
+	
+		<section id="intro-featuretoggle-ref">
+			<title>References</title>
 			<para>todo...</para>
 			<variablelist>
 				<varlistentry>
 					<term>Marti Fowler Reference</term>
 					<listitem>
-						<para>The automation of a business process during which documents,
-							information or tasks
-							are passed from one participant to another
-							for action, according to
-							a set of procedural rules.</para>
+						<para>url
+						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
@@ -46,685 +34,81 @@
 		<section id="intro-featuretoggle-usecases">
 			<title>Why using Feature Flipping ?</title>
 			<para>todo...</para>
-			
+
 			<section id="intro-featuretoggle-usecases-continuousdelivery">
 				<title>Continuous Delivery</title>
 				<para>todo...</para>
 				<variablelist>
-				<varlistentry>
-					<term>Trunk Based Development</term>
-					<listitem>
-						<para>je develope dans le trunk + je développe tout le temps</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>Zero DownTime Deployment</term>
-					<listitem>
-						<para>Green/Blue deployment, DN Abstraction, Dak Launch, Canary Release</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>Thin Client Deployment</term>
-					<listitem>
-						<para>Facebook</para>
-					</listitem>
-				</varlistentry>
+					<varlistentry>
+						<term>Trunk Based Development</term>
+						<listitem>
+							<para>je develope dans le trunk + je développe tout le temps
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Zero DownTime Deployment</term>
+						<listitem>
+							<para>Green/Blue deployment, DN Abstraction, Dark Launch, Canary
+								Release</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Thin Client Deployment</term>
+						<listitem>
+							<para>Facebook mobile application</para>
+						</listitem>
+					</varlistentry>
 				</variablelist>
 			</section>
-			
+
 			<section id="intro-featuretoggle-usecases-infrastructure">
 				<title>Infrastructures</title>
 				<para>todo...</para>
 				<variablelist>
-				<varlistentry>
-					<term>Graceful degradation</term>
-					<listitem>
-						<para>service catalog, focus on main UC</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>Waiting room</term>
-					<listitem>
-						<para>Green/Blue deployment, DN Abstraction, Dak Launch, Canary Release</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>Thin Client Deployment</term>
-					<listitem>
-						<para>Facebook</para>
-					</listitem>
-				</varlistentry>
+					<varlistentry>
+						<term>Graceful degradation</term>
+						<listitem>
+							<para>service catalog, focus on main UC</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Waiting room</term>
+						<listitem>
+							<para>Green/Blue deployment, DN Abstraction, Dak Launch, Canary
+								Release</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Thin Client Deployment</term>
+						<listitem>
+							<para>Facebook</para>
+						</listitem>
+					</varlistentry>
 				</variablelist>
 			</section>
-		</section>
 
-	</section>
 
-</section>
-
-	<section id="overview-sect-bpmconcept">
-		<title>Bpm Glossary (standards wfmc.org)</title>
-		<para>This section identifies basic concepts and terminology
-			associated with workflow as a general topic.</para>
-
-		<section id="overview-sect-bpmconcept-basic">
-			<title>Concepts Definition</title>
-			<para>
+			<section id="intro-featuretoggle-usecases-business">
+				<title>Business</title>
+				<para>SOA, structure services, conditional utilisation, </para>
 				<variablelist>
 					<varlistentry>
-						<term>Process (General Term)</term>
+						<term>Business Rules</term>
 						<listitem>
-							<para>The automation of a business process during which
-								documents, information or tasks
-								are passed from one participant to another for action, according to
-								a set of procedural rules.</para>
+							<para>A/B Testing, Conditional display (time), </para>
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Business Process</term>
+						<term>Configuration</term>
 						<listitem>
-							<para>A set of one or more linked procedures or activities which
-								collectively realize a business objective
-								normally within the context of an organisational structure defining
-								functional roles and relationships.</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term>Process Definition</term>
-						<listitem>
-							<para>The representation of a business process in a form which
-								supports automated manipulation, such as modelling,
-								or enactment by a workflow management system. The process
-								definition consists of a network of activities and their
-								relationships, criteria to indicate the start and termination of
-								the process, and information about the individual
-								activities, such as participants, associated IT applications, data, etc.</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term>Activity</term>
-						<listitem>
-							<para>A description of a treatment, actor and time unit that
-								forms one logical step within a process. An activity may be a
-								manual
-								activity, which does not support computer automation, or a workflow
-								(automated) activity. A workflow activity requires
-								human and/or machine resources(s) to support process execution; where
-								human resource is required an activity is allocated
-								to a workflow participant.</para>
-							<para>Synonym: Step, Node, Operation, Instruction</para>
+							<para>Green/Blue deployment, DN Abstraction, Dak Launch, Canary
+								Release</para>
 						</listitem>
 					</varlistentry>
 				</variablelist>
-			</para>
-		</section>
+			</section>
 
-		<section id="overview-sect-bpmconcept-instance">
-			<title>Instance Definitions </title>
-			<para>
-				<variablelist>
-
-					<varlistentry>
-						<term>Workflow (Process Instance)</term>
-						<listitem>
-							<para>The representation of a single enactment of a process. (See
-								also general entry on Instance).</para>
-							<para>Synonym: Case, Workflow Definition Instance, Instruction
-								Sheet Instance</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term>Workflow Participant (addressee)</term>
-						<listitem>
-							<para>A resource which performs the treatment represented by a
-								workflow activity instance. This work is normally manifested as
-								one or more work items assigned to the workflow participant via
-								the worklist.</para>
-							<para>Synonym: Actor, Agent, Player, User, Role Player, Work
-								Performer</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term>Task (Activity Instance)</term>
-						<listitem>
-							<para>The representation of an activity within a (single)
-								enactment of a process, i.e. within a process instance.
-								Mostly it also represents the work to be processed (by a workflow
-								participant) in the context of an activity within
-								a process instance.</para>
-							<para>Synonym: Step Instance, Node Instance, Task Instance, Work
-								Element Instance, Work Item</para>
-						</listitem>
-					</varlistentry>
-
-					<varlistentry>
-						<term>WorkList (Work Queue)</term>
-						<listitem>
-							<para> A list of work items associated with a given workflow
-								participant (or in some cases with a group of workflow
-								participants
-								who may share a common worklist). The worklist forms part of the
-								interface between a workflow engine and the worklist handler.</para>
-							<para>Synonym: Work Queue, In-Tray, To-Do List</para>
-						</listitem>
-					</varlistentry>
-
-					<varlistentry>
-						<term>WorkList Handler</term>
-						<listitem>
-							<para>A software component that manages the interaction between
-								the user (or group of users) and the worklist maintained by a
-								workflow engine.
-								It enables work items to be passed from the workflow management
-								system to users and notifications of completion or other work
-								status
-								conditions to be passed between the user and the workflow management
-								system.</para>
-							<para>Synonym: WFM Front End, WFM Application, Workflow To-Do
-								List Application, Task Manager, Active Work Performer</para>
-						</listitem>
-					</varlistentry>
-
-				</variablelist>
-			</para>
-		</section>
-
-	</section>
-
-	<section id="overview-sect-bpmmeta">
-		<title>BPM Abstraction Layer</title>
-
-		<section id="overview-sect-bpmconcept-meta">
-			<title>Concept model definition</title>
-			<para>
-				Most of bpm engines provide a core of same functionalities. A Bpm
-				Metamodel can be defined with the standards BPM objects and used to
-				create a set of generic services.
-			</para>
-			<para>
-				<figure id="fig-definition-metamodel" floatstyle="center">
-					<title>BPM Concepts Model</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center" fileref="figures/fig-definition-metamodel.png"
-								width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-		</section>
-
-		<section id="overview-sect-bpmconcept-class">
-			<title>UML Class diagram</title>
-			<para>Those few services are compatible with most BPM engines. At the
-				moment Logica has implemented this
-				framework for three engines: Tibco iProcess Engine, IBM Filenet Process
-				Engine, JBoss jBPM.
-			</para>
-			<para>
-				<figure id="fig-classdiagram-metamodel" floatstyle="center">
-					<title>BPM Core Class Diagram</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center" fileref="figures/fig-classdiagram-core.png"
-								width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-		</section>
-
-	</section>
-
-	<section id="overview-sect-requirements">
-		<title>Requirements</title>
-		<para>In order ro understand the bpm framework you should be familiar
-			with several tools</para>
-		<variablelist>
-			<varlistentry>
-				<term>Spring Framework</term>
-				<listitem>
-					<para>The Spring is light weight, non-invasive IoC Container and
-						AOP framework. It provides support for JPA,
-						Hibernate, Web services, Schedulers, Ajax, Struts, JSF and many other
-						frameworks. The Spring MVC components can
-						be used to develop MVC based web applications. Spring framework
-						provides many features that makes the development
-						of enterprise application easy.
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>Maven</term>
-				<listitem>
-					<para>Apache Maven is a software project management and
-						comprehension tool. Based on the concept of a project object model
-						(POM),
-						Maven can manage a project's build, reporting and documentation from a
-						central piece of information.
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>Apache CXF</term>
-				<listitem>
-					<para>Apache CXF is an open source services framework. CXF helps
-						you build and develop services using front-end programming APIs,
-						like JAX-WS and JAX-RS. Those services can be published
-						implementing a variety of protocols such as SOAP, XML/HTTP,
-						RESTful HTTP, or CORBA and work
-						over a variety of transports channels such as HTTP, JMS or JBI.
-					</para>
-					<para>CXF includes a broad feature set, but it is primarily focused
-						on the following areas:</para>
-					<para>
-						<itemizedlist>
-							<listitem>
-								<para>Web Services Standards Support: CXF supports a variety of
-									web service standards including SOAP,
-									the WSI Basic Profile, WSDL, WS-Addressing, WS-Policy,
-									WS-ReliableMessaging, WS-Security, WS-SecurityPolicy, and
-									WS-SecureConversation.</para>
-							</listitem>
-							<listitem>
-								<para>Front-ends: CXF supports a variety of "front-end"
-									programming models. CXF implements the JAX-WS
-									APIs (TCK compliant). It also includes a "simple front-end" which
-									allows creation of clients and
-									endpoints without annotations. CXF supports both contract first
-									development with WSDL and code first
-									development starting from Java. For REST, CXF also supports a JAX-RS (TCK
-									compliant) front-end.
-								</para>
-							</listitem>
-							<listitem>
-								<para>Ease of use: CXF is designed to be intuitive and easy to
-									use. There are simple APIs to quickly build code-first
-									services,
-									Maven plug-ins to make tooling integration easier, JAX-WS API
-									support, Spring 2.x XML support to make configuration
-									a snap, and much more.
-								</para>
-							</listitem>
-							<listitem>
-								<para>Binary and Legacy Protocol Support: CXF has been designed
-									to provide a pluggable architecture that supports not only XML
-									but also non-XML type bindings, such as JSON and CORBA, in
-									combination with any type of protocol.
-								</para>
-							</listitem>
-						</itemizedlist>
-					</para>
-				</listitem>
-			</varlistentry>
-		</variablelist>
-	</section>
-
-	<section id="overview-sect-archi">
-		<title>Architecture Overview</title>
-		<para>It's important to understand that the framework provides 2
-			modes: Embedded and Remote.</para>
-		<section id="overview-sect-archi-embedded">
-			<title>Embedded Architecture</title>
-			<para>
-				The editor api is include in the libraries of customer. There is a
-				strong dependency beetween the application and the bpm engine :
-				a new version of the bpm engine will force the customer application
-				to be updated. The BPM abstract layer previously defined is still
-				used but it's impossible to easily change BPM engine implementation.
-			</para>
-			<para>
-				<figure id="fig-archi-embedded" floatstyle="center">
-					<title>Embedded Architecture</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center" fileref="figures/fig-archi-embedded.png"
-								width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-		</section>
-
-		<section id="overview-sect-archi-remote">
-			<title>Remote Architecture</title>
-			<para>
-				The services are published as webservices using open source framework
-				Apache CXF. It uses the SOAP (JAX-WS) protocol which is far less
-				verbose than previous SOAP standard(jax-rpc). There a real
-				abstraction over BPM Engine : The customer could use different
-				versions of a given
-				bpm or any bpm engine implementation without changing anything. It only
-				uses java interfaces and needn't to be aware of which implementation
-				used.
-				The only settings to configure is webservice target URL.
-			</para>
-
-			<para>
-				<figure id="fig-archi-remote" floatstyle="center">
-					<title>Remote access to bpm engine</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center" fileref="figures/fig-archi-remote.png"
-								width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-		</section>
-
-	</section>
-
-	<section id="overview-sect-deps">
-		<title>Library Dependencies</title>
-
-		<section id="overview-sect-deps-core">
-			<title>Core dependencies</title>
-			<para>If you use both embbeded and remote framework implementations
-				there is a set of required java libriries. (related to bpm-api)</para>
-
-			<para>
-				<figure id="fig-dependencies" floatstyle="center">
-					<title>Dependency graph</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center" fileref="figures/fig-dependencies.png"
-								width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-
-			<table id="commons-dependencies">
-				<title>commons dependencies (standalone)</title>
-				<tgroup cols="3">
-					<thead>
-						<row>
-							<entry>Jar File</entry>
-							<entry>Default Version</entry>
-							<entry>Description</entry>
-						</row>
-					</thead>
-					<tbody>
-						<row>
-							<entry>
-								<filename>commons-logging</filename>
-							</entry>
-							<entry>1.1.1</entry>
-							<entry>The Logging package is an ultra-thin bridge between
-								different logging implementations.
-								A library that uses the commons-logging API can be used with any
-								logging implementation at
-								runtime. Commons-logging comes with support for a number of popular
-								logging implementations,
-								and writing adapters for others.</entry>
-						</row>
-						<row>
-							<entry>
-								<filename>log4j</filename>
-							</entry>
-							<entry>1.2.14</entry>
-							<entry>With log4j it is possible to enable logging at runtime
-								without modifying the
-								application binary. The log4j package is designed so that these statements
-								can remain
-								in shipped code without incurring a heavy performance cost.
-								Logging behavior can be
-								controlled by editing a configuration file, without any application binary
-								update.</entry>
-						</row>
-						<row>
-							<entry>
-								<filename>commons-lang</filename>
-							</entry>
-							<entry>2.4</entry>
-							<entry>The standard Java libraries fail to provide enough methods
-								for manipulation of its
-								core classes. The Lang Component provides these extra methods. The
-								Lang Component provides
-								a host of helper utilities for the java.lang API, notably String
-								manipulation methods, basic
-								numerical methods, object reflection, creation and serialization, and
-								System properties.
-								Additionally it contains an inheritable enum type, an exception structure
-								that supports multiple
-								types of nested-Exceptions, basic enhancements to java.util.Date and
-								a series of utilities
-								dedicated to help with building methods, such as hashCode, toString and
-								equals.</entry>
-						</row>
-						<row>
-							<entry>
-								<filename>commons-beanutils</filename>
-							</entry>
-							<entry>1.8.0</entry>
-							<entry>Bean collections is a library combining BeanUtils with
-								Commons Collections to provide
-								services for collections of beans. One class (BeanComparator) was
-								previously released, the rest
-								are new. This new distribution strategy should allow this
-								sub-component to evolve naturally
-								without the concerns about size and scope that might otherwise happen.</entry>
-						</row>
-						<row>
-							<entry>
-								<filename>SPRING : spring-core, spring-bean, spring-asm,
-									spring-aop, spring-context</filename>
-							</entry>
-							<entry>3.0.0.RELEASE</entry>
-							<entry>The Spring is light weight, non-invasive IoC Container and
-								AOP framework. It provides support
-								for JPA, Hibernate, Web services, Schedulers, Ajax, Struts, JSF and
-								many other frameworks.
-								The Spring MVC components can be used to develop MVC based web
-								applications. Spring framework
-								provides many features that makes the development of enterprise
-								application easy work.</entry>
-						</row>
-						<row>
-							<entry>
-								<filename>connector-api</filename>
-							</entry>
-							<entry>1.0</entry>
-							<entry>The J2EE Connector architecture provides a Java solution
-								to the connectivity issuebetween
-								the many application servers and EISs already in use.</entry>
-						</row>
-					</tbody>
-				</tgroup>
-			</table>
-
-		</section>
-
-		<section id="overview-sect-deps-tibco">
-			<title>Tibco iProcess embedded dependencies</title>
-			<para>As previously defined in architecture chapter, if you use
-				embedded mode, you 'll have to add
-				the chosen editor api and its dependencies in the classpath.
-			</para>
-
-			<para>
-				<figure id="fig-dependencies-tibco" floatstyle="center">
-					<title>Dependency graph</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center" fileref="figures/fig-dependencies-tibco.png"
-								width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-
-		</section>
-		<section id="overview-sect-deps-p8">
-			<title>Filenet P8 standalone library dependencies</title>
-			<para>
-				Process Engine relies on Content Engine for authentication and directory
-				service
-				access operations. Therefore the following two CE primary jar files are
-				required:
-				Jace.jar and Log4j-${version}.jar.In addition, communication with Content
-				Engine
-				can occur via EJB protocol or Web Services (CEWS) protocol. The
-				following table
-				lists the required JAR files according to your transport protocol option
-				taken :
-			</para>
-
-			<para>
-				<figure id="fig-dependencies-filenet" floatstyle="center">
-					<title>Dependency graph</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center" fileref="figures/fig-dependencies-filenet.png"
-								width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-
-			<table id="p8-cews">
-				<title>CEWS Transport</title>
-				<tgroup cols="2">
-					<thead>
-						<row>
-							<entry>.jar File</entry>
-							<entry>Description</entry>
-						</row>
-					</thead>
-					<tbody>
-						<row>
-							<entry>Jace.jar</entry>
-							<entry>The core FileNet JAR files for the Content Engine Java
-								API; includes the common JAR and transport JAR.</entry>
-						</row>
-						<row>
-							<entry>log4j-${version}.jar</entry>
-							<entry>
-								The LOG4J framework for Content Engine Java API logging, where
-								<varname>${version}</varname>
-								is the supported version installed with the FileNet P8 Platform
-								software. Example: log4j-1.2.14.jar.
-							</entry>
-						</row>
-						<row>
-							<entry>wasp.jar</entry>
-							<entry>
-								Systinet web service interface transport classes. Required only
-								when running the Java API over the CEWS protocol.
-								The wasp.jar file is supplied by the Content Engine installation
-								package. The following required files are among
-								those JAR files referenced (directly or indirectly) by the CLASSPATH
-								directive in wasp.jar's manifest file and
-								used by Systinet WASP:
-								<itemizedlist>
-									<listitem>
-										<para>jaxrpc.jar</para>
-									</listitem>
-									<listitem>
-										<para>jetty.jar</para>
-									</listitem>
-									<listitem>
-										<para>runner.jar</para>
-									</listitem>
-									<listitem>
-										<para>saaj.jar</para>
-									</listitem>
-									<listitem>
-										<para>wsdl_api.jar</para>
-									</listitem>
-								</itemizedlist>
-							</entry>
-						</row>
-						<row>
-							<entry>activation.jar</entry>
-							<entry>The Java Bean Activation Framework standard extension.</entry>
-						</row>
-						<row>
-							<entry>builtin_serialization.jar</entry>
-							<entry>Systinet WASP built-in serializers and deserializers</entry>
-						</row>
-					</tbody>
-				</tgroup>
-			</table>
-
-			<table id="p8-ejb">
-				<title>EJB Transport</title>
-				<tgroup cols="2">
-					<thead>
-						<row>
-							<entry>.jar File</entry>
-							<entry>Description</entry>
-						</row>
-					</thead>
-					<tbody>
-						<row>
-							<entry>Jace.jar</entry>
-							<entry>The core FileNet JAR files for the Content Engine Java
-								API; includes the common JAR and transport JAR.</entry>
-						</row>
-						<row>
-							<entry>log4j-${version}.jar</entry>
-							<entry>
-								The LOG4J framework for Content Engine Java API logging, where
-								<varname>${version}</varname>
-								is the supported version installed with the FileNet P8 Platform
-								software. Example: log4j-1.2.14.jar.
-							</entry>
-						</row>
-						<row>
-							<entry rowsep="2">An application server-specific .jar file</entry>
-							<entry>
-								WebSphere: Install the WebSphere Application Client version and patch
-								that matches the CE application server. Use the WebSphere
-								JRE. During runtime, use the java.ext.dirs JVM parameter mentioned
-								in the next section
-							</entry>
-						</row>
-						<row>
-							<entry>An application server-specific .jar file</entry>
-							<entry>WebLogic: wlclient.jar or weblogic.jar</entry>
-						</row>
-						<row>
-							<entry>An application server-specific .jar file</entry>
-							<entry>JBoss: jbossall-client.jar</entry>
-						</row>
-					</tbody>
-				</tgroup>
-			</table>
-
-			<para>
-				Once the communication has been established to the Content Engine,
-				the following jar are
-				required to communicate with the Process Engine:
-				<filename>pe.jar</filename>
-			</para>
-
-		</section>
-		<section id="overview-sect-deps-webservices">
-			<title>Webservices dependencies</title>
-			<para>Apache CXF is the webServices implementation used to expose
-				services through HTTP. It has been chosen
-				as it's quick and easy to use. It can handle JAX-WS which is less
-				verbose than previous JAX-RPC standard. It can
-				publish and Java INterface to WebService via wsdl4j composnent
-			</para>
-
-			<para>
-				<figure id="fig-dependencies-cxf" floatstyle="center">
-					<title>Dependency graph</title>
-					<mediaobject>
-						<imageobject role="web">
-							<imagedata align="center"
-								fileref="figures/fig-dependencies-webservices.png" width="80%" />
-						</imageobject>
-					</mediaobject>
-				</figure>
-			</para>
-
-		</section>
-	</section>
-
-
+		</section><!-- business -->
 
 </chapter>

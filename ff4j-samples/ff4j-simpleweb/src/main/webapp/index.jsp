@@ -41,7 +41,7 @@ body {
 			<i class="icon-th-large icon-white"></i>&nbsp;Access Web Console
 		</a>
 	
-		<p><br/><u>Below sentences are displayed only if feature is enable using TAGLIB :</u> 	
+		<p><br/>Below sentences are displayed only if feature is enable using TAGLIB : 	
 		
 		<ff4j:enable featureid="sayHello">
 			<p class="alert alert-success">Hello visitor ! Feature 'sayHello' is enable

@@ -43,7 +43,8 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   
   <!-- PART I - INTRODUCTION -->
-  <xi:include href="1-00-copyright.xml" 				xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="1-00-copyright.xml" 					xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="1-01-introducing-feature-toggle.xml" 	xmlns:xi="http://www.w3.org/2001/XInclude" />
   
   <!-- PART II - CORE -->
   <xi:include href="2-01-core-main-concepts.xml" 		xmlns:xi="http://www.w3.org/2001/XInclude" />

@@ -15,6 +15,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>ff4j-console</servlet-name>
 		<url-pattern>/ff4j-console</url-pattern>

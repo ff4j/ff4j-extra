@@ -1,71 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:d="http://docbook.org/ns/docbook"
-	        xmlns:fo="http://www.w3.org/1999/XSL/Format" 
+		        xmlns:fo="http://www.w3.org/1999/XSL/Format" 
                 version="1.0">
-
+                
 	<xsl:import href="urn:docbkx:stylesheet" />
-
-    <!--###################################################
-                     Extensions
-   ################################################### -->
-
-    <!-- These extensions are required for table printing and other stuff -->
+   
     <xsl:param name="use.extensions">1</xsl:param>
     <xsl:param name="tablecolumns.extension">1</xsl:param>
     <xsl:param name="callout.extensions">1</xsl:param>
-
     <xsl:param name="header.rule">0</xsl:param>
-
-    <!-- FOP provide only PDF Bookmarks at the moment -->
-
     <xsl:param name="fop1.extensions">1</xsl:param>
-
     <xsl:param name="use.role.for.mediaobject">1</xsl:param>
     <xsl:param name="preferred.mediaobject.role" select="'print'"/>
-    <!--###################################################
-                     Table Of Contents
-   ################################################### -->
 
-    <!-- Generate the TOCs for named components only -->
+	<!-- Table of Content -->
     <xsl:param name="generate.toc">
         book toc
     </xsl:param>
-
-    <!-- Show only Sections up to level 3 in the TOCs -->
     <xsl:param name="toc.section.depth">2</xsl:param>
-
-    <!-- Dot and Whitespace as separator in TOC between Label and Title-->
     <xsl:param name="autotoc.label.separator" select="'.  '"/>
-
     <xsl:param name="highlight.source">1</xsl:param>
 
-
+    
     <!--###################################################
                   Paper & Page Size
    ################################################### -->
 
     <!-- Paper type, no headers on blank pages, no double sided printing -->
     <xsl:param name="page.height" select="'9.681in'"/>
-    <xsl:param name="page.width" select="'7.444in'"/>
-    <xsl:param name="headers.on.blank.pages">0</xsl:param>
-    <xsl:param name="footers.on.blank.pages">0</xsl:param>
-
-    <!-- Space between paper border and content (chaotic stuff, don't touch) -->
+    <xsl:param name="page.width"  select="'7.444in'"/>
     <xsl:param name="region.before.extent">0.0in</xsl:param>
     <xsl:param name="body.margin.top">0.0in</xsl:param>
-
     <xsl:param name="body.margin.bottom">0.4in</xsl:param>
     <xsl:param name="region.after.extent">0.3in</xsl:param>
-
 	<xsl:param name="page.margin.bottom" select="'0.75in'" />
 	<xsl:param name="page.margin.top" select="'0.75in'" />
 	<xsl:param name="page.margin.inner" select="'0.875in'" />
 	<xsl:param name="page.margin.outer" select="'0.875in'" />
-
     <xsl:param name="body.start.indent" select="'0pt'" />
-
-    <!-- No intendation of Titles -->
     <xsl:param name="title.margin.left">0pc</xsl:param>
 
     <!--###################################################
@@ -165,7 +138,7 @@
         <xsl:param name="gentext-key" select="''"/>
 		<xsl:variable name="Version">
 			<xsl:if test="//releaseinfo">
-				<xsl:text>Business Process Mangement Framework : Programmer Guide (</xsl:text><xsl:value-of select="//releaseinfo" /><xsl:text>)</xsl:text>
+				<xsl:text>Ff4j Reference Guide : (</xsl:text><xsl:value-of select="//releaseinfo" /><xsl:text>)</xsl:text>
 			</xsl:if>
 		</xsl:variable>
         <xsl:choose>
