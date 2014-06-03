@@ -13,6 +13,7 @@ public class SimpleFF4jProvider implements ConsoleFF4JProvider {
      */
     public SimpleFF4jProvider() {
         ff4j = new FF4j("ff4j.xml");
+        ff4j.setAuthorizationsManager(new MockAuthorisationManager());
     }
 
     /**
