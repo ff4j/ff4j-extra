@@ -58,11 +58,146 @@ I - Introduction to Feature Toggle
 
 III - CORE CONCEPTS
 
- 3.1 - 
-
- IV - WEB
-
-  V - ADVANCED FEATURES
+ 3.1 - Groups
+ 
+ 3.2 Aspect Oriented Programming (AOP)
+ 
+  3.2.1 - Limits of intrusive feature toggle
+  3.2.2 - Sample
   
+ 3.3 - Permissions
+ 
+  3.3.1 - Overview
+  Principle, use cases (canary release, beta feature), sequence diagram
+  
+  3.3.2 - PermissionManager
+  Presentation, UML Diagram, reuse external
+  
+  3.3.3 - Sample
+  Xml update, custom permission manager, unit testin
+  
+  3.3.4 - Spring Security
+  
+ 3.4 - Custom Strategy
+ 
+  3.4.1 - Overview
+  Reference to conclusion #1, sequence diagram
+  
+  3.4.2 - FeatureFlippingStrategy Interface
+    
+    3.4.2.1 - UML Diagram, method definition
+    Initparams
+    
+    3.4.2.2 - Execution context
+    
+  3.4.3 - Sample
+  
+  3.4.4 - Overriding Strategy
+  
+  3.4.5 - Available Implementations
+  
+   3.4.5.1 - Expression Language
+   3.4.5.2 - ReleaseDate
+   3.4.5.3 - ClientList
+   3.4.5.4 - ServerList
+   3.4.5.5 - Ponderation
+   
+ 3.5 - Feature Stores
+  
+  3.5.1 - Introduction
+  
+   3.5.1.1 - Objectives
+   Status, crud, storage
+   
+   3.5.1.2 - Architecture Patterns
+  
+  3.5.2 - InMemoryFeatureStore
+  
+  3.5.3 - RDBMS Stores (jdbc)
+  
+   3.5.3.1 - Core JDBC
+   
+   3.5.3.2 - Spring JDBC
+  
+  3.5.4 - MongoDB FeatureStore
+  
+   3.5.4.1 - Overview
+   
+   3.5.4.2 - Sample Code
+  
+  3.5.5 - Remote HTTP (client) FeatureStore
+  
+   3.5.5.1 - Overview
+   Architecture, REST-API see later
+   
+   3.5.5.2 - Sample code
+ 
+ 3.6 - Caching
+ 
+  3.6.1 - Architecture Concerns
+  Overhead, distributed systems
+  
+  3.6.2 - Working with EHCache
+  
+  3.6.3 - Working with Redis
+  
+ 
+ 3.7 - Monitoring
+ 
+  3.7.1 - Overview
+  
+  3.7.2 - Metrics
+  Usage vs actions, exporter
+  
+  3.7.3 - Curves and Graphing
+
+IV - WEB
+
+ 4.1 - Embedded Console
+ 
+  4.1.1 - Overview
+  Phylosophy, capability, architecture, limits as security
+  
+  4.1.2 - Sample Code
+  
+  4.1.3 - User Guide
+  Export/Import, CRUD, enable/disable
+  
+ 4.2 - TagLib Library
+ 
+  4.2.1 - Introduction
+  web, standar
+  
+  4.2.2 - Tags
+  enable, disable
+  
+ 4.3 - RestFul Api
+ 
+  4.3.1 - Introduction
+  All operation available, other languages
+  
+  4.3.2 - State Diagram
+  
+  4.3.3 - Api BluePrint
+  
+  4.3.4 - Security
+  Security token
+  
+  4.3.5 - Samples Clients
+  HttpClient, CURL, Javascript....
+
+ 4.4 - WebConsole Full Stack
+ 
+  4.4.1 - Introduction
+  4.4.2 - Configuration
+  4.4.3 - UserGuide
+
+V - ADVANCED FEATURES
+  
+  5.1 - JMX Support
+  
+   5.1.1 - Overview
+   5.1.2 - Sample Code
+   
   
   
