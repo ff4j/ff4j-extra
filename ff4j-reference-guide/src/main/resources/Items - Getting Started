@@ -1,23 +1,68 @@
-Getting Started
-[HTML]
+I - Introduction to Feature Toggle
+
+ 1.1 - Definition and Principle
+
+ 1.2 - References
+ Martin Fowler, webgiants book, blogs
+  
+ 1.3 - Uses Cases
+ 
+  1.3.1 - Continous Delivery
+    
+    1.3.1.1 - Core Concept
+    Trunk-based development and frequent deliveries.
+    
+    1.3.1.2 - Zero Downtime deployment
+    darklaunch, canary release, dn abstraction, blue/.gree deployment
+    
+    1.3.1.3 - Thin Client Deployment
+    facebook
+    
+  1.3.2 - 'Ops' and Infrastructure
+  
+    1.3.2.1 - Graceful Degradation
+    
+    1.3.2.2 - Service catalog
+  
+  1.3.3 - Business Toggle
+  
+    1.3.3.1 - Overview
+    why business and not only technical, based on business rules and implementations
+    
+    1.3.3.2 - A/B Testing
+    
+    1.3.3.3 - Business Rules
+    samples like region, client, servers
+    
+ Conclusion
+ 
+ II - GETTING STARTED
+  
+  2.1 - Feature
+  Definition, UML Diagram, description attributes, ff4j definition, status
+  
+  2.2 - Feature Store
+  Definition, UML Diagram, presenting CRUD OPERATIONS
+  
+  2.3 - Ff4j
+  Presentation, S.P.O.A, injecting other components, UML Diagram
+  
+  2.4 - Hello World
+  Introduction
+  Example fichier XML enableFeature(), enableGroup(),
+  Note everything available from ff4j. createFeature()
+  
+  2.5 - Spring Integration
+  Framework do no required anything, ff4j, store and others can be defined as Spring beans, sample
 
 
-Core
-- Hello World
-- Integration With Spring Framework
-- Feature Flipping Through AOP
+III - CORE CONCEPTS
 
-Web Capabilities :
-- Embedded Console
-- Taglibs
-- RestFul API
-- StandAlone console
+ 3.1 - 
 
-Enhance features :
-- Create security
-- Define custom strategies
+ IV - WEB
 
-Architecture patterns : 
-- External Feature in Database
-- Use Caching
-- Publish as JMX
+  V - ADVANCED FEATURES
+  
+  
+  
