@@ -15,17 +15,10 @@
     <xsl:param name="preferred.mediaobject.role" select="'print'"/>
 
 	<!-- Table of Content -->
-    <xsl:param name="generate.toc">
-        book toc
-    </xsl:param>
+    <xsl:param name="generate.toc">book toc</xsl:param>
     <xsl:param name="toc.section.depth">2</xsl:param>
     <xsl:param name="autotoc.label.separator" select="'.  '"/>
     <xsl:param name="highlight.source">1</xsl:param>
-
-    
-    <!--###################################################
-                  Paper & Page Size
-   ################################################### -->
 
     <!-- Paper type, no headers on blank pages, no double sided printing -->
     <xsl:param name="page.height" select="'9.681in'"/>
@@ -35,7 +28,7 @@
     <xsl:param name="body.margin.bottom">0.4in</xsl:param>
     <xsl:param name="region.after.extent">0.3in</xsl:param>
 	<xsl:param name="page.margin.bottom" select="'0.75in'" />
-	<xsl:param name="page.margin.top" select="'0.75in'" />
+	<xsl:param name="page.margin.top"  select="'0.75in'" />
 	<xsl:param name="page.margin.inner" select="'0.875in'" />
 	<xsl:param name="page.margin.outer" select="'0.875in'" />
     <xsl:param name="body.start.indent" select="'0pt'" />
@@ -52,13 +45,10 @@
     <!-- Line height in body text -->
     <xsl:param name="line-height">1.3</xsl:param>
 
-<!--	<xsl:param name="body.font.family" select="'serif'" /> -->
 	<xsl:param name="body.font.master" select="'10'" />
 	<xsl:param name="body.font.small" select="'8'" />
 	<xsl:param name="dingbat.font.family" select="''" />
 	<xsl:param name="symbol.font.family" select="''" />
-<!--	<xsl:param name="title.font.family" select="'sans-serif'" /> -->
-<!--	<xsl:param name="monospace.font.family" select="'monospace'" /> -->
 	<xsl:param name="double.sided" select="'1'" />
 
 	<xsl:attribute-set name="normal.para.spacing">
@@ -68,8 +58,10 @@
 
 	<xsl:attribute-set name="component.title.properties">
 		<xsl:attribute name="keep-with-next.within-column">always</xsl:attribute>
-		<xsl:attribute name="space-before.optimum"><xsl:value-of
-			select="concat($body.font.master, 'pt')"></xsl:value-of></xsl:attribute>
+		<xsl:attribute name="space-before.optimum">
+		 <xsl:value-of select="concat($body.font.master, 'pt')">
+		 </xsl:value-of>
+		</xsl:attribute>
 		<xsl:attribute name="space-before.minimum"><xsl:value-of
 			select="concat($body.font.master, 'pt * 0.8')"></xsl:value-of></xsl:attribute>
 		<xsl:attribute name="space-before.maximum"><xsl:value-of
@@ -95,26 +87,15 @@
 	<xsl:attribute-set name="chap.title.properties">
 	</xsl:attribute-set>
 
-	<!--
-		################################################### Custom Title Page
-		###################################################
-	-->
-	<xsl:template name="book.titlepage.recto">
-    </xsl:template>
+	<!-- TitlePage -->
+	<xsl:template name="book.titlepage.recto"></xsl:template>
+    <xsl:template name="book.titlepage.before.verso"></xsl:template>
+    <xsl:template name="book.titlepage.verso"></xsl:template>
+    <xsl:template name="book.titlepage.separator"></xsl:template>
 
-    <!-- Prevent blank pages in output -->
-    <xsl:template name="book.titlepage.before.verso">
+	<!-- Header -->
+	<xsl:template name="header.content">
     </xsl:template>
-    <xsl:template name="book.titlepage.verso">
-    </xsl:template>
-    <xsl:template name="book.titlepage.separator">
-    </xsl:template>
-
-    <!--###################################################
-                     Header
-   ################################################### -->
-
-    <!-- More space in the center header for long text -->
     <xsl:attribute-set name="header.content.properties">
         <xsl:attribute name="font-family">
             <xsl:value-of select="$body.font.family"/>
@@ -122,15 +103,9 @@
         <xsl:attribute name="margin-left">-5em</xsl:attribute>
         <xsl:attribute name="margin-right">-5em</xsl:attribute>
     </xsl:attribute-set>
-
     <xsl:param name="ulink.footnotes">1</xsl:param>
-
-    <!--###################################################
-                     Custom Footer
-   ################################################### -->
-    <xsl:template name="header.content">
-    </xsl:template>
-
+    
+    <!-- Footer -->
     <xsl:template name="footer.content">
         <xsl:param name="pageclass" select="''"/>
         <xsl:param name="sequence" select="''"/>
@@ -373,9 +348,6 @@
     <xsl:param name="list.item.spacing">0.5em</xsl:param>
     <xsl:param name="compact.list.item.spacing">0.5em</xsl:param>
 
-    <!--###################################################
-             colored and hyphenated links
-   ################################################### -->
     <xsl:template match="ulink">
         <fo:basic-link external-destination="{@url}"
                        xsl:use-attribute-sets="xref.properties"

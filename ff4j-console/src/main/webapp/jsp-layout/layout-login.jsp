@@ -1,5 +1,5 @@
 <%@ include file="/jsp-layout/includes-taglibs.jsp"%>
-<decorator:usePage id="template-login-sip" />
+<decorator:usePage id="template-login" />
 
 <html lang="en">
 

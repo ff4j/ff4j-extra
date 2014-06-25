@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="2-01" lang="en">
+
+  <title>A title</title>
+
+  <!-- introduction -->
+  <para>
+   Intoduction</para>
+  
+  <!-- introduction node -->
+  <note>
+   <para>
+   	Sample note
+   </para>
+  </note>
+  
+  <!-- SAMPLE1 -->
+  <section id="section">
+   <title>Here a title</title>
+    
+    <para>here a short description </para>
+     
+     <!-- FIGURE -->
+     <figure id="figure-id" floatstyle="center">
+      <title>figure caption</title>
+      <mediaobject>
+       <imageobject role="web">
+        <imagedata align="center" fileref="figures/myimage.png" />
+       </imageobject>
+      </mediaobject>
+     </figure>
+       
+     <!-- LIST -->
+     <itemizedlist>
+      <listitem>
+       <para>List Item</para>
+      </listitem>
+      <listitem>
+       <para>Custom item <filename>lib</filename> tot taota as <varname>springframework</varname>  or a class 	<classname>MyFirstApplication</classname>. .</para>
+      </listitem>
+     </itemizedlist>
+       
+    <!-- WARNING -->
+    <warning>
+    	<para>A spring namespace is provided to help you.(prefix <varname>bpm</varname> but is only available for Tibco</para>
+    </warning>
+
+	<!-- XML File -->       
+    <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:bpm="http://www.logica.com/schema/bpm"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		 http://www.logica.com/schema/bpm            ./bpm-tags.xsd"&gt;
+	&lt;tag attribute="id-tate" &gt;
+	&lt;/tag&gt;	
+&lt;/beans&gt;
+       </programlisting>
+       
+       
+    <!-- JAVA File --> 
+    <programlisting language="java">
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+
+/**
+ * First Stand Alone Application
+ */
+public class MyFirstApplication {
+    
+    /**
+     * Main code of program.
+     *
+     * @param args
+     *      arguments
+     */
+    public static void main(String[] args) {
+        ApplicationContext appContext = new ClassPathXmlApplicationContext(FILES);
+        // TODO Use Factory
+    }
+}
+      </programlisting>
+      
+      <!-- CONSOLE LOG -->
+            <para/>
+<screen><![CDATA[
+[INFO] - Here is a sample line
+]]></screen>
+
+
+</section>
+
+</chapter>

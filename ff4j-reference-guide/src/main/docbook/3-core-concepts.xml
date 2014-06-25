@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="3" lang="en">
+
+	<title>Core Concepts</title>
+	
+	    <!-- *********************************************************************************** -->
+		<section id="3-1">
+			<title>Groups</title>
+			<para>Text here</para>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-2">
+			<title>Aspect Oriented Programming (AOP)</title>
+			<para>Text here</para>
+			
+			<section id="3-2-1">
+				<title>Overview</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-2-2">
+				<title>Sample Code</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-3">
+			<title>Permissions and security</title>
+			<para>Text here</para>
+			
+			<section id="3-3-1">
+				<title>Overview</title>
+				  <para>Principle, use cases (canary release, beta feature), sequence diagram
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-3-2">
+				<title>PermissionManager</title>
+				  <para>Presentation, UML Diagram, reuse external, 
+				  Principle, use cases (canary release, beta feature), sequence diagram
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-3-3">
+				<title>Sample Code</title>
+				  <para> Xml update, custom permission manager, unit testing
+				  Principle, use cases (canary release, beta feature), sequence diagram
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-3-4">
+				<title>Working with Spring Security</title>
+				  <para> Xml update, custom permission manager, unit testing
+				  Principle, use cases (canary release, beta feature), sequence diagram
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-4">
+			<title>Custom Strategy</title>
+			<para>Text here</para>
+			<section id="3-4-1">
+				<title>Overview</title>
+				  <para>Reference to conclusion #1, sequence diagram,
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-2">
+				<title>FeatureFlippingStrategy Interface</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-3">
+				<title>Sample Code</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-4">
+				<title>Overriding Strategy</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-5">
+				<title>Available Strategies</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <section id="3-4-5-1">
+					<title>Expression Language</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  <section id="3-4-5-2">
+					<title>ReleaseDate</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  <section id="3-4-5-3">
+					<title>ClientList</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  <section id="3-4-5-4">
+					<title>ServerList</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				   <section id="3-4-5-5">
+					<title>Ponderation</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-5">
+			<title>Feature Stores</title>
+			<para>Text here</para>
+			
+			<section id="3-5-1">
+				<title>Introduction</title>
+				<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  	<section id="3-5-1-1">
+					 <title>Objectives</title>
+				  	 <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				    </section>
+				    <section id="3-5-1-2">
+					 <title>Architecture Patterns</title>
+				  	 <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				    </section>
+			</section>
+			
+			<section id="3-5-2">
+			  <title>InMemoryFeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			
+			<section id="3-5-3">
+			  <title>>RDBMS FeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 <section id="3-5-3-1">
+				 <title>Core JDBC</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+				 <section id="3-5-3-2">
+				 <title>Spring JDBC</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+			</section>
+			
+			<section id="3-5-4">
+			  <title>MongoDB FeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 <section id="3-5-4-1">
+				  <title>Overview</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+				 <section id="3-5-4-2">
+				  <title>Sample Code</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+			</section>
+			
+			<section id="3-5-5">
+			  <title>Remote HTTP (client) FeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 <section id="3-5-5-1">
+				  <title>Overview</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+				 <section id="3-5-5-2">
+				  <title>Sample Code</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-6">
+			<title>Caching</title>
+			<para>Text here</para>
+			 
+			 <section id="3-6-1">
+			 	<title>Architecture Concerns</title>
+				<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+			
+			  <section id="3-6-2">
+				<title>Working with EHCache</title>
+				<para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			  </section>
+			  
+			  <section id="3-6-3">
+				<title>Working with Redis</title>
+				<para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+		      </section>
+			 
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-7">
+			<title>Monitoring</title>
+			<para>Text here</para>
+			
+			 <section id="3-7-1">
+			 	<title>Overview</title>
+				<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+			 
+			  <section id="3-7-2">
+			 	<title>Metrics</title>
+				<para>Usage vs actions, exporter
+				Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+			 
+			 <section id="3-7-3">
+			 	<title>Curves and Graphics</title>
+				<para>Usage vs actions, exporter
+				Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+		</section>
+		
+</chapter>

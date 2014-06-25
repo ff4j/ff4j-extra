@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book id="ff4j-reference-guide">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ Title                    ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<title>ff4j Reference Guide</title>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ General Informations     ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<bookinfo>
+		<title>ff4j Reference Guide</title>
+		<productname>Feature Flipping For Java</productname>
+		<edition>User Guide version 1.0 for ff4j v1.2.0</edition>
+		<pubdate>2014</pubdate>
+		<copyright>
+			<year>2013</year>
+			<year>2014</year>
+			<holder>ff4j.org</holder>
+		</copyright>
+		<releaseinfo>v1.2.0</releaseinfo>
+		<authorgroup>
+			<author>
+				<firstname>Cedrick</firstname>
+				<surname>Lunven</surname>
+				<email>cedrick.lunven@gmail.com</email>
+			</author>
+		</authorgroup>
+		<publisher>
+			<publishername>ff4j</publishername>
+		</publisher>
+		<legalnotice>
+			Copies of this document may be made for your own use and for distribution to others, provided that you do not 
+			charge any fee for such copies and further provided that each copy contains this.
+			Copyright Notice, whether distributed in print or electronically
+		</legalnotice>
+	</bookinfo>
+  
+   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+   <!--  Table of content            -->
+   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+   <toc/>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- ~ Split Book per chapter   ~ -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <xi:include href="0-copyright.xml" 					xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="1-introducing-feature-toggle.xml" 	xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="2-getting-started.xml" 				xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="3-core-concepts.xml" 				xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="4-web.xml" 							xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="5-advanced-concepts.xml" 			xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+</book>

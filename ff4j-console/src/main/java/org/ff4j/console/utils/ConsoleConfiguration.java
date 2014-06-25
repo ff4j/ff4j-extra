@@ -31,8 +31,5 @@ public class ConsoleConfiguration implements Serializable {
 
     /** serial number. */
     private static final long serialVersionUID = 6553174631428859508L;
-    /** Language of the console. */
-    private final String language = "fr";
-    
 
 }

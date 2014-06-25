@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="2" lang="en">
+
+	<title>Getting Started</title>
+	
+	    <!-- *********************************************************************************** -->
+		<section id="2-1">
+			<title>About Feature</title>
+			<para>Definition, UML Diagram, description attributes, ff4j definition, status</para>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="2-2">
+			<title>Introducing FeatureStore</title>
+			<para>Definition, UML Diagram, presenting CRUD OPERATIONS</para>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="2-3">
+			<title>Ff4j Class</title>
+			<para>Presentation, S.P.O.A, injecting other components, UML Diagram</para>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="2-4">
+			<title>First samples</title>
+			<para>Introduction, Example fichier XML enableFeature(), enableGroup(), Note everything available from ff4j. createFeature()</para>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="2-5">
+			<title>Integration with Spring</title>
+			<para>Text here</para>
+		</section>
+		
+</chapter>

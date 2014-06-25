@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
-<decorators defaultdir="/decorators" >
+<decorators defaultdir="/jsp-layout" >
 
     <excludes>
         <pattern>/403.jsp</pattern>
