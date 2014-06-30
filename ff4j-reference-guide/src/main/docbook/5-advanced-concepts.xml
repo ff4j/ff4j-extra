@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
 <chapter id="5" lang="en">
 
 	<title>Advanced Concepts</title>
-	
-	    <!-- *********************************************************************************** -->
-		<section id="5-1">
-			<title>JMX Support</title>
-			<para>Definition, UML Diagram, description attributes, ff4j definition, status</para>
-			
-			<section id="5-1-1">
-			 	<title>Overview</title>
-				<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
-			 </section>
-			 <section id="5-1-2">
-			 	<title>Sample Code</title>
-				<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
-			 </section>
-			 
+
+	<!-- *********************************************************************************** -->
+	<section id="5-1">
+		<title>JMX Support</title>
+		<para>Definition, UML Diagram, description attributes, ff4j
+			definition, status</para>
+
+		<section id="5-1-1">
+			<title>Overview</title>
+			<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna
+				mi, scelerisque vitae, ultrices vel, euismod vel, eros.
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque
+				dictum felis a nisi.
+			</para>
 		</section>
-		
-		
+		<section id="5-1-2">
+			<title>Sample Code</title>
+			<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna
+				mi, scelerisque vitae, ultrices vel, euismod vel, eros.
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque
+				dictum felis a nisi.
+			</para>
+		</section>
+
+	</section>
+
+
 </chapter>

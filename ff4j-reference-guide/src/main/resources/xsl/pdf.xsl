@@ -444,6 +444,19 @@ under the License.
 	<!-- TITLE INFORMATION FOR FIGURES, EXAMPLES ETC. -->
 
 	<xsl:attribute-set name="formal.title.properties" use-attribute-sets="normal.para.spacing">
+		
+		<xsl:attribute name="text-align">
+  		   <xsl:variable name ="align">
+   			  <xsl:value-of select=".//imagedata/@align"/>
+  			</xsl:variable>
+  			<xsl:choose>
+   			 <xsl:when test="self::figure and $align !=''">
+   			  <xsl:value-of select="$align"/>
+  			 </xsl:when>
+   			<xsl:otherwise>left</xsl:otherwise>
+  			</xsl:choose>
+ 		</xsl:attribute>
+ 
 		<xsl:attribute name="font-weight">normal</xsl:attribute>
 		<xsl:attribute name="font-style">italic</xsl:attribute>
 		<xsl:attribute name="font-size">

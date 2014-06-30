@@ -28,6 +28,12 @@
 				<artifactId>docbkx-maven-plugin</artifactId>
 				<version>2.0.15</version>
 				<configuration>
+					<entities>
+           			 <entity>
+             		   <name>version</name>
+              		   <value>${project.version}</value>
+                     </entity>
+          	        </entities>
 					<sourceDirectory>${basedir}/src/main/docbook</sourceDirectory>
 					<includes>book.xml</includes>
 					<xincludeSupported>true</xincludeSupported>

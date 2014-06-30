@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
 <chapter id="2" lang="en">
 
 	<title>Getting Started</title>
@@ -26,6 +25,123 @@
 		<!-- *********************************************************************************** -->
 		<section id="2-4">
 			<title>First samples</title>
+			<para>In this part we guide you to create a working example from scratch</para>
+			
+			<!-- LIST -->
+    		<itemizedlist>
+      		
+      		 <listitem>
+       			<para>Create a empty maven project</para>
+      			<screen><![CDATA[mvn archetype:create -Dpackaging=jar -Dversion=1.0 -DartifactId=ff4j-simple -DgroupId=org.ff4j.sample]]></screen>
+      		 </listitem>
+      		
+      		 <listitem>
+       			<para>Declare this dependency into your <filename>pom.xml</filename> file/</para>
+    			<programlisting language="xml">&lt;dependency&gt;
+ &lt;groupId>org.ff4j&lt;/groupId&gt;
+  &lt;artifactId>ff4j-core&lt;/artifactId&gt;
+  &lt;version>1.1.0&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
+      		 </listitem>
+      		
+      		 <listitem>
+       			<para>Create the following <filename>ff4j.xml</filename> file in 'src/test/resources' folder (create it does not exist)</para>
+       			<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+ &lt;feature uid="sayHello"   enable="true" description="my first feature" /&gt;
+ &lt;feature uid="sayGoodBye" enable="false" /&gt;
+&lt;/features&gt;</programlisting>
+       		 </listitem>
+       		 
+       		  <listitem>
+       			<para>Write the following Junit test : (you may have to update junit version in your pom file)</para>
+       			
+       			<!-- JAVA File --> 
+    <programlisting language="java">package org.ff4j.sample;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.ff4j.FF4j;
+import org.junit.Test;
+
+public class HelloWorldTest {
+
+    @Test
+    public void myFirstFF4JTest() {
+
+        FF4j ff4j = new FF4j("ff4j.xml");
+        assertEquals(2, ff4j.getFeatures().size());
+        assertTrue(ff4j.exist("sayHello"));
+        assertTrue(ff4j.check("sayHello"));
+
+        // Test value at runtime
+        if (ff4j.check("sayHello")) {
+            // Feature ok !
+            System.out.println("Hello World !");
+        } else {
+            fail();
+        }
+    }
+}</programlisting>
+
+<para>Features are loaded from xml configuration file (ff4j.xml) and registered in a store (default is in-memory).</para>
+
+<para>If a feature does not exist, the method <varname>check(..)</varname> will raise a FeatureNotFoundException but you can change this 
+behaviour by setting the autoCreate flag as true. If feature is not found the method will return false.</para>
+       		 </listitem>
+       		 
+       		 <listitem>
+       			<para>Update your unit test with this second method illustrating <varname>autoCreate</varname></para>
+       			 <programlisting language="java">@Test
+  public void autoCreateFeatureEnableTest() {
+
+    // Default : store = inMemory, load features from ff4j.xml file
+    FF4j ff4j = new FF4j("ff4j.xml");
+
+    try {
+        ff4j.check("autoCreatedFeature");
+        fail(); // error is Expected here
+    } catch(FeatureNotFoundException fnfe) {
+        System.out.println("Standard behaviour");
+    }
+
+    // Change default behavior
+    ff4j.autoCreate(true);
+
+    if (!ff4j.check("autoCreatedFeature")) {
+      System.out.println("Not available but code won't failed");
+    } else {
+      fail();
+    }
+  }</programlisting>
+  <para>Features can be created programmatically (for testing purposes for instance).</para>
+       		 </listitem>
+       		 
+       		  <listitem>
+       			<para>Update your unit test with this third method illustrating dynamic creation of features</para>
+       			<para>Remember : Once implementing a Feature flipping pattern, services must be tested WITH and WITHOUT features enabled</para>
+       			<programlisting language="java">@Test
+    public void createFeatureDynamically() {
+
+        // Initialize with empty store
+        FF4j ff4j = new FF4j();
+
+        // Dynamically register new features
+        ff4j.create("f1").enable("f1");
+
+        // Testing
+        assertTrue(ff4j.exist("f1"));
+        assertTrue(ff4j.check("f1"));
+    }</programlisting>
+       		</listitem>
+       		 
+       		
+    		</itemizedlist>	
+       
+
+      
 			<para>Introduction, Example fichier XML enableFeature(), enableGroup(), Note everything available from ff4j. createFeature()</para>
 		</section>
 		

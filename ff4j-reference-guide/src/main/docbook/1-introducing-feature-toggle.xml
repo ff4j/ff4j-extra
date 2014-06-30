@@ -1,56 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
 <chapter id="1" lang="en">
 
 	<title>Introduction</title>
 	
 	    <!-- *********************************************************************************** -->
 		<section id="1-1">
-			<title>Definition and Principles</title>
+			<title>Definition</title>
 			
-			<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
-			
+			<para>
+			 The principe of Feature Toggle is to enable or disable a features through configuration, eventually at runtime.
+			 This configuration could be a simple flag (boolean) but also a set of rules. The runtime toggle capability is really 
+			 interessant to change behaviour of the application without releasing. 
+			</para>
 			
 		</section>
 
 		<!-- *********************************************************************************** -->
 		<section id="1-2">
 			<title>References</title>
-			<para>Feature Toggle is not new new but recently, mostly due to continuous delivery concerns, it has be promoted. 
-			Here we reference the core references and what has inspired the creation of ff4j.</para>
 			
 			<section id="1-2-1">
 			  <title>Martin Fowler</title>
 			  <para>One common article when dealing with Feature Toggle has been written  by 
        		  Martin Fowler on his professional blog in 2010. He is an architect working at Thoughtworks and one of the first which introduce
-       		  the continuous integration. In the article he exposed the core principle but without providing advising any implementation. 
-       		  The full article can be found <ulink url="http://martinfowler.com/bliki/FeatureToggle.html">here</ulink>.</para>
+       		  the continuous integration. The full article can be consulted <ulink url="http://martinfowler.com/bliki/FeatureToggle.html">here</ulink>. 
+       		  </para>
+       		  <para>He defines feature toggle as : 
+       		  <emphasis role="italic"> The basic idea is to have a configuration file that defines a bunch of toggles for 
+       		  various features you have pending. The running application then uses these toggles in order to decide whether or not to 
+       		  show the new feature.
+       		   </emphasis></para>
        		   <figure id="figure-id" floatstyle="center" >
-      			 <title>Marting Fowler</title>
+      			 <title>Martin Fowler reference article</title>
       			 <mediaobject>
-      			   <imageobject role="web" >
-      			    <imagedata align="center" fileref="img/fig-martinfowler.png" />
+      			   <imageobject condition="web" >
+      			    <imagedata align="center" fileref="http://martinfowler.com/bliki/images/featureToggle/featureToggle.png" format="PNG" width="15cm" />
       			   </imageobject>
-      			   <textobject ><phrase>Capture of illustration within M.Fowler reference</phrase></textobject>
+      			   <imageobject condition="print" >
+      			    <imagedata align="center" fileref="http://martinfowler.com/bliki/images/featureToggle/featureToggle.png" format="PNG" contentwidth="15cm" contentdepth="7cm"/>
+      			   </imageobject>
       			 </mediaobject>
      		  </figure>
 			</section>
 			
 			<section id="1-2-2">
-			  <title>Web Giants Publications</title>
+			  <title>Blogs and articles</title>
 			 <para>As the feature toggle is mostly reintroduce by the continuous delivery mouvement, webgiants 
-			  such as GAFA (Google, Amazon, Facebook, Apple) but also <ulink url="http://metsy">Etsy</ulink> 
-			  detailed their realisation on their blog.</para>
+			  such as GAFA (Google, Amazon, Facebook, Apple) or Etsy. They have post quite a lot of information 
+			  of their realisations.</para>
 			  <itemizedlist>
+      			
       			<listitem>
-       			 <para>Etsy : USI - BLOG - </para>
+       			 <para>
+       			  <emphasis role="bold">Presentation of concept on InfoQ : </emphasis>
+       			  <ulink url="http://www.infoq.com/presentations/Feature-Bits">http://www.infoq.com/presentations/Feature-Bits</ulink></para>
+       			 </listitem>
+       			 <listitem>
+       	 		   <para>
+       			    <emphasis role="bold">Presentation on 99Design : </emphasis>
+       			    <ulink url="http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/">http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/ </ulink>
+       			   </para>
+       			  </listitem>
+       			  <listitem>
+       			 <para>
+       			  <emphasis role="bold">Article about Etsy : </emphasis>
+       			  <ulink url="http://codeascraft.com/2011/02/04/how-does-etsy-manage-development-and-operations/">http://codeascraft.com/2011/02/04/how-does-etsy-manage-development-and-operations</ulink> </para>
       			</listitem>
-      			<listitem>
-       			 <para>Spotify : </para>
+       			  <listitem>
+       			 <para>
+       			 	<emphasis role="bold">Article about Flickr</emphasis>
+       			 	<ulink url="http://code.flickr.com/blog/2009/12/02/flipping-out/">http://code.flickr.com/blog/2009/12/02/flipping-out/</ulink></para>
+       			 </listitem>
+       			  <listitem>
+       			 <para>
+       			   <emphasis role="bold">Octo Technology (fr)</emphasis> details the concepts in their:  
+       			   <ulink url="http://blog.octo.com/feature-flipping/">french article</ulink> but also in their 
+       			   <ulink url="http://www.octo.com/fr/publications/11-les-geants-du-web">book</ulink>
+       			  </para>
        			 </listitem>
      		  </itemizedlist>
+     		  <figure id="fig-octo-gdw" floatstyle="center" >
+      			 <title>WebGiants practices by Octo (fr)</title>
+     		   	  <mediaobject>
+      			   <imageobject role="web" >
+      			    <imagedata align="center" fileref="img/fig-octo-gdw.png" contentwidth="4cm" contentdepth="7cm" />
+      			   </imageobject>
+      			  </mediaobject>
+      			 </figure>
 			</section>
 			
 		</section>
@@ -61,63 +98,100 @@
 			<section id="1-3-1">
 			  	 <title>Continuous Delivery</title>
 				
-				 <para><emphasis role="bold">Definition proposal : </emphasis>As suggested by its name, the purpose of the continuous delivery practice is to release 
-				  softwares as often as required. The delivery process is automatic and triggered on demand, eventually after each developper commit. It allows 
-				  'non-event' releases : They are no more prepared or anticipated, but performed anytime needed. For instance, Amazon pushes code into production 
-				  in average, every 11.6 seconds.
-				 </para>
+				 <section id="1-3-1-0">
+				   <title>Definition</title>
+				   
+				   <para>As suggested by its name, the purpose of the continuous delivery practice is to release 
+				    softwares as often as required. The delivery process is automatic and triggered on demand, eventually after each developper commit. It allows 
+				    'non-event' releases : They are no more prepared or anticipated, but performed anytime needed. For instance, Amazon pushes code into production 
+				    in average, every 11.6 seconds.
+				   </para>
+				 </section>
 				   
 				 <section id="1-3-1-1">
 				   <title>Feature Branching vs Feature Toggle</title>
 				   <para>To be able to develop several features in the same time yet be compliant with the 
-				   short-time development cycle there are 2 possibilities :
-				   <itemizedlist>
-      			    <listitem>
-                     <para><varname>Feature Branching : </varname>The first solution is to create branches in the source control system (git, svn...) for
-                     each new feature. As the release is performed from sources hosted on the trunk, features under development are ignored and won't be part of the build. 
-                     When a feature is 'ready', the relateed branch and the trunk are merged. This operation can become very complex. Indeed, if several releases have be 
-                     made since the initial 'fork' of the current branch, source codes can be potentially very different. This can lead to a large number of conflicts to 
-                     deals with.
+				   short-time development cycle there are 2 possibilities.</para>
+				    
+				     <para><emphasis role="bold">Feature Branching </emphasis></para>
+				     <para>The first solution is to create branches in the source control system (git, svn...) for
+                      each new feature. As the release is performed from sources hosted on the trunk, features under development are ignored and won't be part of the build. 
+                      When a feature is 'ready', the relateed branch and the trunk are merged. This operation can become very complex. Indeed, if several releases have be 
+                      made since the initial 'fork' of the current branch, source codes can be potentially very different. This can lead to a large number of conflicts to 
+                      deals with.
                      </para>
-  					 <figure id="fig-featurebanching" floatstyle="center">
-      					<title>Feature Branching</title>
-      					<mediaobject><imageobject role="web"><imagedata align="center" fileref="img/fig-fbranching.png" /></imageobject></mediaobject>
-     				</figure>
-      			    </listitem>
-      			    <listitem>
-       				 <para><varname>Trunk-based-Development : </varname>The second solution is, on the contrary, to keep on developing in the trunk of the 
+				     <figure id="fig-featurebanching" floatstyle="center">
+      				   <title>Feature Branching</title>
+      					<mediaobject>
+      					  <imageobject role="web">
+      					    <imagedata align="center" fileref="img/fig-scm-feature-branching.png" contentwidth="15cm" contentdepth="5cm" />
+      					  </imageobject>
+      					</mediaobject>
+     				 </figure>
+				  
+      			     <para><emphasis role="bold">Trunk-based developement</emphasis></para>
+       				 <para>The second solution is, on the contrary, to keep on developing in the trunk of the 
        				 source control. The direct consequence is that incomplete or non-working (yet compiling) code could be embedded in a release and pushed into production. To avoid
        				 any incidents the relevant source code is wrapped in a always-false condition. The value of the condition is related to configuration. As soon as the code is ready,
-       				 the condition can be set to true and start executing. This is the first use case for feature toggling.</para>
-       				  <figure id="fig-featuretoggle" floatstyle="center">
-      					<title>Feature Branching</title>
-      					<mediaobject><imageobject role="web"><imagedata align="center" fileref="img/fig-ftoggle.png" /></imageobject></mediaobject>
+       				 the condition can be set to true and start executing. This is the first use case for feature toggling.
+       				 </para>
+       				 <figure id="fig-featuretoggle" floatstyle="center">
+      				  <title>Feature Branching</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-scm-feature-toggle.png" contentwidth="15cm" contentdepth="5cm" />
+      					</imageobject>
+      				   </mediaobject>
      				</figure>
-      				</listitem>
-     			    </itemizedlist>
-				    </para>
+     				
 				</section>
 				
 				<section id="1-3-1-2">
 				 <title>Zero Downtime deployment</title>
 				    
-				    <section id="1-3-1-2-1"><title>DarkLaunch</title>
-				     <para>here is dark launch</para>
-				    </section>
+				    <para><emphasis role="bold">Canary Release</emphasis></para>
+				  	<para>The concept of canary release is to enable a feature for a subset of the users population. Thoses users may have a particular role ()like "beta-tester", or
+				  	may be located in some place (like pilot), or like Amazon feature can be first propose to employees and then to customers. It's an excellent way to get feedback
+				  	from users but also real metrics on production environment. The feature toggle system wrapped any feature definition which can be enabled at runtime through configuration
+				  	console.</para>
+				  	 <figure id="fig-canary" floatstyle="center">
+      				  <title>Feature Branching</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-canary-release.png" contentwidth="15cm" contentdepth="7cm" />
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+
+				    <para><emphasis role="bold">DarkLaunch</emphasis></para>
+				     <para>The concept of Dark launch is to enable features progressively using for instance a percentage rate : example 10% of incoming requests will use the new version of the product.
+				     The advantage is to measure what happen for a limited flow of request and then anticipate any load, performance or capacity problems. As detailed later ff4j provides a 
+				     "PonderationStrategy"" to implement exactly this use case.
+				    </para>
 				    
-				  	<para>Text here</para>
-				  	 <para><emphasis role="bold">Canary Release</emphasis></para>
-				  	<para>Text here</para>
-				  	 <para><emphasis role="bold">DN Abstraction</emphasis></para>
-				  	<para>Text here</para>
-				  	 <para><emphasis role="bold">Blue/Green Deployments</emphasis></para>
-				  	<para>Text here</para>
-				  	 <para><emphasis role="bold">DarkLaunch</emphasis></para>
-				  	<para>Text here</para>
+				    <para><emphasis role="bold">Blue/Green Deployments</emphasis></para>
+				  	 <para>BlueGreen deployment is a term to describe the old way to perform "hot deploy" in high availability architectures. The application is deployed on several nodes of a cluster. 
+				  	  During deployment, each node is stopped, the new version of the product is released and the node is restarted. One common problem is a lack of consistency between nodes. Is the release
+				  	  required to change the datamodel for instance, the hot deploy is no more possible. Feature Toggle can be an answer. All servers will be updated in ther same way but without enabling the
+				  	  the modifications. When the environnement is ready all nodes of the cluster can activate the new feature as the same time.
+				  	 </para>
+				  	 
 				</section>
 				
 				<section id="1-3-1-3"><title>Thin Client deployment</title>
-					<para>Facebook use its own content downloader to override Apple application updat process</para>
+					<para>
+					 This use case is quite clever and must be studied when the release process is painful or the product is distributed to a large number of people. It has been used by Facebook 
+					 iOS application. When you want want to push your application in the appstore, you have to package and submit all new versions to apple teams. 
+					 It's a manual process which can take about 24 to 48H. Then the application is published and any single users must have to download the application from apple servers.
+					</para>
+					
+					<para> 
+					 On the contrary here the idea is to never published new versions of the application, but, instead, at startup, check current installed
+					 application against a web service and download new content if required without using the apple platform anymore.
+					</para>
+					
+					<para>Feature toggle is part of this process as most of incoming features are in the first version of application and disable. When the feature is ready, it's activated at startup
+					when the application ask for updates to servers.</para>
 				</section>
 				 
 		   </section> <!-- Continuous Delivery -->

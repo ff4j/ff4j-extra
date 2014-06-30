@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
- "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
 <book id="ff4j-reference-guide">
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -14,18 +13,18 @@
 	<bookinfo>
 		<title>ff4j Reference Guide</title>
 		<productname>Feature Flipping For Java</productname>
-		<edition>User Guide version 1.0 for ff4j v1.2.0</edition>
+		<edition>Reference Guide v1.2.0</edition>
 		<pubdate>2014</pubdate>
 		<copyright>
-			<year>2013</year>
+			<year>2013 - </year>
 			<year>2014</year>
-			<holder>ff4j.org</holder>
+			<holder> ff4j.org</holder>
 		</copyright>
 		<releaseinfo>v1.2.0</releaseinfo>
 		<authorgroup>
 			<author>
 				<firstname>Cedrick</firstname>
-				<surname>Lunven</surname>
+				<surname> Lunven </surname>
 				<email>cedrick.lunven@gmail.com</email>
 			</author>
 		</authorgroup>
