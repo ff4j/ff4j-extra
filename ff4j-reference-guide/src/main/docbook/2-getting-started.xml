@@ -1,25 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
-<chapter id="2" lang="en">
+<chapter id="2" xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
 
 	<title>Getting Started</title>
-	
-	    <!-- *********************************************************************************** -->
-		<section id="2-1">
-			<title>About Feature</title>
-			<para>Definition, UML Diagram, description attributes, ff4j definition, status</para>
-		</section>
+
+	<!-- *********************************************************************************** -->
+	<section id="2-1">
+		<title>About Feature</title>
+		<para>A feature represents any service, treatment, or functionality. It is identified by a unique reference name (or uid) within
+		the application runtime. In a feature toggle environnement each feature has a status or a state which indicate if it's enabled or 
+		not (ie: disabled). Toggling or flipping is the action to change the state of the feature.
+		</para>
 		
-		<!-- *********************************************************************************** -->
-		<section id="2-2">
-			<title>Introducing FeatureStore</title>
-			<para>Definition, UML Diagram, presenting CRUD OPERATIONS</para>
-		</section>
+		<figure id="fig-02-features" floatstyle="center">
+			<title>Feature UML Diagram</title>
+			<mediaobject>
+				<imageobject role="web">
+					<imagedata align="center" fileref="img/fig-02-features.png" contentwidth="4cm" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+
+	</section>
+
+	<!-- *********************************************************************************** -->
+	<section id="2-2">
+		<title>Introducing FeatureStore</title>
+		<para>The featureStore is the persistent unit to store the features with their attributes and status. It proposes a set of CRUD operations
+		to work with features but also groups of feature or permissions on features. As detailed in further cahpters, different implementations will
+		persist the data in different location such as relational database (rdbms, jdbc) , NoSQl databases (mongodb, redis), InMemory and even others.
+		to </para>
+		<figure id="fig-02-featurestore" floatstyle="center">
+			<title>Feature Store</title>
+			<mediaobject>
+				<imageobject role="web">
+					<imagedata align="center" fileref="img/fig-02-featurestore.png"
+						contentwidth="6cm" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</section>
 		
 		<!-- *********************************************************************************** -->
 		<section id="2-3">
-			<title>Ff4j Class</title>
-			<para>Presentation, S.P.O.A, injecting other components, UML Diagram</para>
+			<title>Ff4j core class</title>
+			<para>It's the <emphasis role="bold">single class</emphasis> to be used in your code. It's wrapped any other components of the framework,
+			 <varname>FeatureStore</varname> included). 
+			</para>
+			<figure id="fig-02-ff4j" floatstyle="center">
+			<title>Feature Store</title>
+			<mediaobject>
+				<imageobject role="web">
+					<imagedata align="center" fileref="img/fig-02-ff4j.png" contentwidth="12cm" />
+				</imageobject>
+			</mediaobject>
+		</figure>
 		</section>
 		
 		<!-- *********************************************************************************** -->
@@ -40,7 +74,7 @@
     			<programlisting language="xml">&lt;dependency&gt;
  &lt;groupId>org.ff4j&lt;/groupId&gt;
   &lt;artifactId>ff4j-core&lt;/artifactId&gt;
-  &lt;version>1.1.0&lt;/version&gt;
+  &lt;version>1.2.0&lt;/version&gt;
 &lt;/dependency&gt;</programlisting>
       		 </listitem>
       		
@@ -61,6 +95,7 @@
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import org.ff4j.FF4j;
@@ -111,7 +146,9 @@ behaviour by setting the autoCreate flag as true. If feature is not found the me
     ff4j.autoCreate(true);
 
     if (!ff4j.check("autoCreatedFeature")) {
-      System.out.println("Not available but code won't failed");
+       System.out.println("Not available but code won't failed, feature created");
+       assertTrue(ff4j.exist("autoCreatedFeature"));
+       assertFalse(ff4j.check("autoCreatedFeature"));
     } else {
       fail();
     }
@@ -137,18 +174,98 @@ behaviour by setting the autoCreate flag as true. If feature is not found the me
     }</programlisting>
        		</listitem>
        		 
-       		
-    		</itemizedlist>	
-       
-
+    		</itemizedlist>
       
-			<para>Introduction, Example fichier XML enableFeature(), enableGroup(), Note everything available from ff4j. createFeature()</para>
 		</section>
 		
 		<!-- *********************************************************************************** -->
 		<section id="2-5">
 			<title>Integration with Spring</title>
-			<para>Text here</para>
-		</section>
+			
+			<para>The <varname>ff4j</varname> component can be easily defined as a Spring Bean.</para>
+			
+			<!-- LIST -->
+    		<itemizedlist>
+      		
+      		 <listitem>
+       			<para>Add Spring dependencies to your project</para>
+       			<programlisting language="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+  &lt;version&gt;4.0.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+   &lt;version&gt;4.0.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;&lt;/programlisting&gt;</programlisting>
+      		 </listitem>
+      		 
+      		 <listitem>
+      		 <para>Add the following <varname>applicationContext.xml</varname> file to your <filename>src/test/resources</filename></para>
+      		 <programlisting language="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;
+
+  &lt;bean id="ff4j" class="org.ff4j.FF4j" &gt;
+    &lt;property name="store" ref="ff4j.store.inmemory" /&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="ff4j.store.inmemory" class="org.ff4j.store.InMemoryFeatureStore" &gt;
+    &lt;property name="location" value="ff4j.xml" /&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</programlisting>
+      		 
+      		 </listitem>
+      		 
+      		 <listitem>
+      		 <para>The features are registered within in-memory store.Write the following spring-oriented test</para>
+      		 <programlisting language="java">
+      		 package org.ff4j.sample;
+
+import static org.junit.Assert.fail;
+
+import org.ff4j.FF4j;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:*applicationContext.xml"})
+public class CoreSpringTest {
+
+    @Autowired
+    private FF4j ff4j;
+
+    @Test
+    public void testWithSpring() {
+        // Test value at runtime
+        if (ff4j.check("sayHello")) {
+            // Feature ok !
+            System.out.println("Hello World !");
+        } else {
+            fail();
+        }
+    }
+}</programlisting>
+      		 
+      		 </listitem>
+      		 
+      		 </itemizedlist>
+			
+		<warning><para>Sample Warning</para></warning>
+		
+		<tip><para>Sample Tip</para></tip>
+		
+		<note><title>Note Title</title><para>Sample note</para></note>
+		
+	</section>
 		
 </chapter>

@@ -1,0 +1,1332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book id="ff4j-reference-guide" version="5.0" xml:lang="en" xmlns="http://docbook.org/ns/docbook">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ Title                    ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<title>ff4j Reference Guide</title>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~ General Informations     ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<bookinfo>
+		<title>Ff4j Reference Guide</title>
+		<productname>Feature Flipping For Java</productname>
+		<edition>Reference Guide v1.2.0</edition>
+		<pubdate>2014</pubdate>
+		<copyright>
+			<year>2013 - </year>
+			<year>2014</year>
+			<holder> ff4j.org</holder>
+		</copyright>
+		<releaseinfo>v1.2.0</releaseinfo>
+		<authorgroup>
+			<author>
+				<firstname>Cedrick</firstname>
+				<surname> Lunven </surname>
+				<email>cedrick.lunven@gmail.com</email>
+			</author>
+		</authorgroup>
+		<publisher>
+			<publishername>ff4j</publishername>
+		</publisher>
+		<legalnotice>
+			Copies of this document may be made for your own use and for distribution to others, provided that you do not 
+			charge any fee for such copies and further provided that each copy contains this.
+			Copyright Notice, whether distributed in print or electronically
+		</legalnotice>
+	</bookinfo>
+  
+   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+   <!--  Table of content            -->
+   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+   <toc/>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- ~ Split Book per chapter   ~ -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <preface id="preface-copyright" role="copyrightpg" version="5.0" xml:lang="en" xml:base="0-copyright.xml">
+
+	<title>Copyright</title>
+
+	<para>Copyright 2014 ff4j</para>
+
+	<para>Online version published by Cedrick LUNVEN</para>
+
+	<para>Java(TM) and all Java-based trademarks and logos are trademarks
+		or registered trademarks of Sun Microsystems, Inc., in the United States and
+		other countries. Many of the designations used by manufacturers and sellers
+		to distinguish their products are claimed as trademarks. Where those
+		designations appear in this book, was aware of a
+		trademark claim, the designations have been printed in caps or initial
+		caps.
+	</para>
+
+	<para>
+	    While every precaution has been taken in the preparation of this
+		book,the publisher and authors assume no responsibility for errors or
+		omissions, or for damages resulting from the use of the information 
+		contained herein.
+	</para>	
+
+	<itemizedlist>
+		<listitem>
+			<para>You may not use this work for commercial purposes.</para>
+		</listitem>
+		<listitem>
+			<para>You may not alter, transform, or build upon this work.</para>
+		</listitem>
+	</itemizedlist>
+
+	<para>1. Licence : This work is licensed under Apache2</para>
+
+	<para>2. Restrictions : 
+		Licensee shall not modify, copy,
+	</para>
+
+	<para>3. Warranty of Title.
+		Developer hereby represents and warrants to Licensee that Developer is the
+		owner of the Software or otherwise
+		has the right to grant to Licensee the rights set forth in this
+		Agreement. In the event any breach or threatened
+		breach of the foregoing representation and warranty, Licensee's sole remedy
+		shall be to require Developer or to
+		either: i) procure, at Developer's expense, the right to use the Software,
+		ii) replace the Software or any part
+		thereof that is in breach and replace it with Software of comparable
+		functionality that does not cause any breach,
+		or iii) refund to Licensee the full amount of the license fee upon the
+		return of the Software and all copies
+		thereof to Developer.
+	</para>
+
+</preface>
+  <chapter id="1" version="5.0" xml:lang="en" xml:base="1-introducing-feature-toggle.xml">
+
+	<title>Introduction</title>
+	
+	    <!-- *********************************************************************************** -->
+		<section id="1-1">
+			<title>Definition</title>
+			
+			<para>
+			 The principe of Feature Toggle is to enable or disable a features through configuration, eventually at runtime.
+			 This configuration could be a simple flag (boolean) but also a set of rules. The runtime toggle capability is really 
+			 interessant to change behaviour of the application without releasing. 
+			</para>
+			
+		</section>
+
+		<!-- *********************************************************************************** -->
+		<section id="1-2">
+			<title>References</title>
+			
+			<section id="1-2-1">
+			  <title>Martin Fowler</title>
+			  <para>Martin Fowler, an architect working at Thoughtworks, has written on his professional blog in 2010, a introduction to the concept.
+			  The full article can be consulted <ulink url="http://martinfowler.com/bliki/FeatureToggle.html">here</ulink> M. Fowler is well known in the
+			  community as one father with the continuous integration. 
+       		  </para>
+       		  <para>He defines feature toggle as : 
+       		  <emphasis role="italic"> The basic idea is to have a configuration file that defines a bunch of toggles for 
+       		  various features you have pending. The running application then uses these toggles in order to decide whether or not to 
+       		  show the new feature.
+       		   </emphasis>
+       		   <figure id="figure-id" floatstyle="center">
+      			 <title>Martin Fowler reference article</title>
+      			 <mediaobject role="bordered">
+      			   <imageobject condition="web">
+      			    <imagedata align="center" fileref="img/fig-martinfowler.png" format="PNG" width="12cm"/>
+      			   </imageobject>
+      			 </mediaobject>
+     		  </figure>
+     		  </para>
+			</section>
+			
+			<section id="1-2-2">
+			  <title>Blogs and articles</title>
+			 <para>The feature toggle has been mostly promoted by the continuous delivery. Webgiants 
+			  such as GAFA (Google, Amazon, Facebook, Apple) or Etsy have post quite a lot of information 
+			  of their realisations.</para>
+			  <itemizedlist>
+      			
+      			<listitem>
+       			 <para>
+       			  <emphasis role="bold">Presentation of concept on InfoQ : </emphasis>
+       			  <ulink url="http://www.infoq.com/presentations/Feature-Bits">http://www.infoq.com/presentations/Feature-Bits</ulink></para>
+       			 </listitem>
+       			 <listitem>
+       	 		   <para>
+       			    <emphasis role="bold">Presentation on 99Design : </emphasis>
+       			    <ulink url="http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/">http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/ </ulink>
+       			   </para>
+       			  </listitem>
+       			  <listitem>
+       			 <para>
+       			  <emphasis role="bold">About Etsy : </emphasis>
+       			  This article is available <ulink url="http://codeascraft.com/2011/02/04/how-does-etsy-manage-development-and-operations/">  on codeascraft</ulink> </para>
+      			</listitem>
+       			  <listitem>
+       			 <para>
+       			 	<emphasis role="bold">About Flickr : </emphasis>
+       			 	<ulink url="http://code.flickr.com/blog/2009/12/02/flipping-out/">http://code.flickr.com/blog/2009/12/02/flipping-out/</ulink></para>
+       			 </listitem>
+       			  <listitem>
+       			 <para>
+       			   <emphasis role="bold">Octo Technology</emphasis> introduced the concepts in their:  
+       			   <ulink url="http://blog.octo.com/feature-flipping/">french article</ulink> but also in  
+       			   <ulink url="http://www.octo.com/fr/publications/11-les-geants-du-web">their book.</ulink>
+       			  </para>
+       			 </listitem>
+     		  </itemizedlist>
+     		  
+     		  <table frame="all"><title>Sample Table</title>
+<tgroup cols="5" align="left" colsep="1" rowsep="1">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<colspec colnum="5" colname="c5"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2" align="center">
+  Horizontal Span
+  <?dbhtml bgcolor="#EEEEEE" ?><?dbfo bgcolor="#EEEEEE" ?>
+  </entry>
+  <entry>a3</entry>
+  <entry>a4</entry>
+  <entry>a5</entry>
+</row>
+</thead>
+<tfoot>
+<row>
+  <entry>f1</entry>
+  <entry>f2</entry>
+  <entry>f3</entry>
+  <entry>f4</entry>
+  <entry>f5</entry>
+</row>
+</tfoot>
+<tbody>
+<row>
+  <entry>b1</entry>
+  <entry>b2</entry>
+  <entry>b3</entry>
+  <entry>b4</entry>
+  <entry morerows="1" valign="middle"><para>  <!-- Pernicous Mixed Content -->
+  Vertical Span</para></entry>
+</row>
+<row>
+  <entry>c1</entry>
+  <entry namest="c2" nameend="c3" align="center" morerows="1" valign="bottom">Span Both</entry>
+  <entry>c4</entry>
+</row>
+<row>
+  <entry>d1</entry>
+  <entry>d4</entry>
+  <entry>d5</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+     		  <figure id="fig-octo-gdw" floatstyle="center">
+      			 <title>WebGiants practices by Octo (fr)</title>
+     		   	  <mediaobject>
+      			   <imageobject role="web">
+      			    <imagedata align="center" fileref="img/fig-octo-gdw.png" contentwidth="4cm" contentdepth="7cm"/>
+      			   </imageobject>
+      			  </mediaobject>
+      			 </figure>
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="1-3">
+			<title>Use Cases</title>
+			<section id="1-3-1">
+			  	 <title>Continuous Delivery</title>
+				
+				 <section id="1-3-1-0">
+				   <title>Definition</title>
+				   
+				   <para>As suggested by its name, the purpose of the continuous delivery set of practices is to release 
+				    softwares as often as required. The delivery process is obviously automatic and triggered on demand, eventually after each developper commit. It allows 
+				    'non-event' releases : no more prepared or anticipated, but performed anytime needed. For instance, Amazon pushes code into production 
+				    in average, every 11.6 seconds.
+				   </para>
+				 </section>
+				   
+				 <section id="1-3-1-1">
+				   <title>Feature Branching vs Feature Toggle</title>
+				   <para>To be able to develop several features in the same time yet be compliant with the 
+				   short-time development cycle there are 2 possibilities.</para>
+				    
+				     <para><emphasis role="bold">Feature Branching </emphasis></para>
+				     <para>The first solution is to create branches in the source control system for
+                      each new feature. The release is performed from sources hosted on trunk : features under development are ignored and won't be part of the build. 
+                      When a feature is 'ready', the related branch is merged to the trunk. This operation may become very complex. Indeed, if several releases have be 
+                      made since the initial 'fork' of the current branch, source codes can be potentially very different. This leads to a large number of conflicts to 
+                      deals with.
+                     </para>
+				     <figure id="fig-featurebanching" floatstyle="center">
+      				   <title>Feature Branching</title>
+      					<mediaobject>
+      					  <imageobject role="web">
+      					    <imagedata align="center" fileref="img/fig-scm-feature-branching.png" contentwidth="10cm"/>
+      					  </imageobject>
+      					</mediaobject>
+     				 </figure>
+				  
+      			     <para><emphasis role="bold">Trunk-based developement</emphasis></para>
+       				 <para>The second solution is, on the contrary, to keep on developing in the trunk. The direct consequence is that incomplete or non-working (yet compiling) 
+       				 code will be embedded in a release and pushed into production. To avoid any incidents the relevant source code is wrapped in a always-false condition. 
+       				 The value of the condition is defined through configuration. As soon as the code is ready, the condition is set to true to start executing.
+       				 </para>
+       				 <figure id="fig-featuretoggle" floatstyle="center">
+      				  <title>Feature Toggle</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-scm-feature-toggle.png" contentwidth="10cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+     				
+				</section>
+				
+				<section id="1-3-1-2">
+				 <title>Zero Downtime deployment</title>
+				    
+				     <para><emphasis role="bold">Blue/Green Deployments</emphasis></para>
+				  	 <para>BlueGreen deployment is a term to describe the old way to perform "hot deploy" in high availability architectures. The application is deployed on several nodes of a cluster. 
+				  	  During deployment, each node is stopped, the new version of the product is released and the node is restarted. One common problem is a lack of consistency between nodes. Is the release
+				  	  required to change the datamodel for instance, the hot deploy is no more possible. Feature Toggle can be an answer. All servers will be updated in ther same way but without enabling the
+				  	  the modifications. When the environnement is ready all nodes of the cluster can activate the new feature as the same time.
+				  	 </para>
+				  	 
+				    <para><emphasis role="bold">Canary Release</emphasis></para>
+				  	<para>The concept of canary release is to enable a feature for a subset of the users population. Thoses users may have a particular role ()like "beta-tester", or
+				  	may be located in some place (like pilot), or like Amazon feature can be first propose to employees and then to customers. It's an excellent way to get feedback
+				  	from users but also real metrics on production environment. The feature toggle system wrapped any feature definition which can be enabled at runtime through configuration
+				  	console.</para>
+				  	 <figure id="fig-canary" floatstyle="center">
+      				  <title>Canary Release</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-zdd-canary-release.png" contentwidth="15cm" contentdepth="7cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+
+				    <para><emphasis role="bold">DarkLaunch</emphasis></para>
+				     <para>The concept of Dark launch is to enable features progressively. For instance, only a fixed rate of incoming requests will use the new version of the product.
+				     The main advantage is to measure the impact of evolutions for a limited flow of requests and then anticipate any load, performance or capacity problems. As detailed later, ff4j provides a 
+				     "PonderationStrategy"" to implement exactly this use case.
+				    </para>
+				    <figure id="fig-dlaunch" floatstyle="center">
+      				  <title>Dark Launch</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-zdd-dark-launch.png" contentwidth="15cm" contentdepth="7cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+				  	 
+				</section>
+				
+				<section id="1-3-1-3"><title>Thin Client deployment</title>
+					<para>
+					 This clever use case should be considered when the release process is painful or the application is installed on third party devices. It has been used by Facebook 
+					 for their iOS application. To publish an application on the appstore the process is always the same. Developpers package and submit the new version to apple teams which
+					 MANUALLY validate it. It can take up to 48H. Once the application is published, any single user must have to download the application - again - from Apple servers.
+					</para>
+					
+					<para> 
+					 The basic idea of <emphasis role="italic">Thin Client deployment</emphasis> is to never publish new versions of the application in stores, but, instead, at startup, check 
+					 current installed application against a web service and download new content if required.
+					</para>
+					
+					<para>Feature toggle should be part of the process. When the feature is ready, it's activated in the server. Target clients (not all if you do no want to) at startup
+					of their applications will get the updates.</para>
+					
+					<figure id="fig-tcd" floatstyle="center">
+      				  <title>Thin-client deployment</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-02-zdd-thin-client-deployment.png" contentwidth="15cm" contentdepth="7cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+				</section>
+				 
+		   </section>
+		   
+		   <section id="1-3-2">
+		   		<title>Ops and Infrastructure</title>
+		   
+		   		<section id="1-3-2-1"><title>Graceful Degradation</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. 
+				  
+				  <figure id="fig-graceful" floatstyle="center">
+      				  <title>Graceful Degradation</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-00-notcreated.png" contentwidth="8cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+     				
+				  </para>
+				</section>
+				
+				<section id="1-3-2-2"><title>Service Catalog</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  
+				  <figure id="fig-scatalog" floatstyle="center">
+      				  <title>Service Catalog</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-00-notcreated.png" contentwidth="8cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+     				
+				</section>
+				
+		   </section> <!-- Ops and infrastructure -->
+		   
+		   <section id="1-3-3"><title>Business Toggle</title>
+		   
+		   		<section id="1-3-3-1"><title>Overview</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				
+				</section>
+				
+				<section id="1-3-3-2"><title>Business Rules</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  
+				    <figure id="fig-brules" floatstyle="center">
+      				  <title>Business rules</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-00-notcreated.png" contentwidth="8cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+     				
+				</section>
+				
+				<section id="1-3-3-3"><title>A/B Testing</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  
+				   <figure id="fig-abtesting" floatstyle="center">
+      				  <title>A/B testing</title>
+      				   <mediaobject>
+      				    <imageobject role="web">
+      					  <imagedata align="center" fileref="img/fig-00-notcreated.png" contentwidth="8cm"/>
+      					</imageobject>
+      				   </mediaobject>
+     				</figure>
+				</section>
+				
+		   </section> <!-- Business Toggle -->
+			
+		</section>
+		
+</chapter>
+  <chapter id="2" version="5.0" xml:lang="en" xml:base="2-getting-started.xml">
+
+	<title>Getting Started</title>
+
+	<!-- *********************************************************************************** -->
+	<section id="2-1">
+		<title>About Feature</title>
+		<para>A feature represents any service, treatment, or functionality. It is identified by a unique reference name (or uid) within
+		the application runtime. In a feature toggle environnement each feature has a status or a state which indicate if it's enabled or 
+		not (ie: disabled). Toggling or flipping is the action to change the state of the feature.
+		</para>
+		
+		<figure id="fig-02-features" floatstyle="center">
+			<title>Feature UML Diagram</title>
+			<mediaobject>
+				<imageobject role="web">
+					<imagedata align="center" fileref="img/fig-02-features.png" contentwidth="4cm"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+
+	</section>
+
+	<!-- *********************************************************************************** -->
+	<section id="2-2">
+		<title>Introducing FeatureStore</title>
+		<para>The featureStore is the persistent unit to store the features with their attributes and status. It proposes a set of CRUD operations
+		to work with features but also groups of feature or permissions on features. As detailed in further cahpters, different implementations will
+		persist the data in different location such as relational database (rdbms, jdbc) , NoSQl databases (mongodb, redis), InMemory and even others.
+		to </para>
+		<figure id="fig-02-featurestore" floatstyle="center">
+			<title>Feature Store</title>
+			<mediaobject>
+				<imageobject role="web">
+					<imagedata align="center" fileref="img/fig-02-featurestore.png" contentwidth="6cm"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="2-3">
+			<title>Ff4j core class</title>
+			<para>It's the <emphasis role="bold">single class</emphasis> to be used in your code. It's wrapped any other components of the framework,
+			 <varname>FeatureStore</varname> included). 
+			</para>
+			<figure id="fig-02-ff4j" floatstyle="center">
+			<title>Feature Store</title>
+			<mediaobject>
+				<imageobject role="web">
+					<imagedata align="center" fileref="img/fig-02-ff4j.png" contentwidth="12cm"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="2-4">
+			<title>First samples</title>
+			<para>In this part we guide you to create a working example from scratch</para>
+			
+			<!-- LIST -->
+    		<itemizedlist>
+      		
+      		 <listitem>
+       			<para>Create a empty maven project</para>
+      			<screen><![CDATA[mvn archetype:create -Dpackaging=jar -Dversion=1.0 -DartifactId=ff4j-simple -DgroupId=org.ff4j.sample]]></screen>
+      		 </listitem>
+      		
+      		 <listitem>
+       			<para>Declare this dependency into your <filename>pom.xml</filename> file/</para>
+    			<programlisting language="xml">&lt;dependency&gt;
+ &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
+  &lt;artifactId&gt;ff4j-core&lt;/artifactId&gt;
+  &lt;version&gt;1.2.0&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
+      		 </listitem>
+      		
+      		 <listitem>
+       			<para>Create the following <filename>ff4j.xml</filename> file in 'src/test/resources' folder (create it does not exist)</para>
+       			<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+ &lt;feature uid="sayHello"   enable="true" description="my first feature" /&gt;
+ &lt;feature uid="sayGoodBye" enable="false" /&gt;
+&lt;/features&gt;</programlisting>
+       		 </listitem>
+       		 
+       		  <listitem>
+       			<para>Write the following Junit test : (you may have to update junit version in your pom file)</para>
+       			
+       			<!-- JAVA File --> 
+    <programlisting language="java">package org.ff4j.sample;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+
+import org.ff4j.FF4j;
+import org.junit.Test;
+
+public class HelloWorldTest {
+
+    @Test
+    public void myFirstFF4JTest() {
+
+        FF4j ff4j = new FF4j("ff4j.xml");
+        assertEquals(2, ff4j.getFeatures().size());
+        assertTrue(ff4j.exist("sayHello"));
+        assertTrue(ff4j.check("sayHello"));
+
+        // Test value at runtime
+        if (ff4j.check("sayHello")) {
+            // Feature ok !
+            System.out.println("Hello World !");
+        } else {
+            fail();
+        }
+    }
+}</programlisting>
+
+<para>Features are loaded from xml configuration file (ff4j.xml) and registered in a store (default is in-memory).</para>
+
+<para>If a feature does not exist, the method <varname>check(..)</varname> will raise a FeatureNotFoundException but you can change this 
+behaviour by setting the autoCreate flag as true. If feature is not found the method will return false.</para>
+       		 </listitem>
+       		 
+       		 <listitem>
+       			<para>Update your unit test with this second method illustrating <varname>autoCreate</varname></para>
+       			 <programlisting language="java">@Test
+  public void autoCreateFeatureEnableTest() {
+
+    // Default : store = inMemory, load features from ff4j.xml file
+    FF4j ff4j = new FF4j("ff4j.xml");
+
+    try {
+        ff4j.check("autoCreatedFeature");
+        fail(); // error is Expected here
+    } catch(FeatureNotFoundException fnfe) {
+        System.out.println("Standard behaviour");
+    }
+
+    // Change default behavior
+    ff4j.autoCreate(true);
+
+    if (!ff4j.check("autoCreatedFeature")) {
+       System.out.println("Not available but code won't failed, feature created");
+       assertTrue(ff4j.exist("autoCreatedFeature"));
+       assertFalse(ff4j.check("autoCreatedFeature"));
+    } else {
+      fail();
+    }
+  }</programlisting>
+  <para>Features can be created programmatically (for testing purposes for instance).</para>
+       		 </listitem>
+       		 
+       		  <listitem>
+       			<para>Update your unit test with this third method illustrating dynamic creation of features</para>
+       			<para>Remember : Once implementing a Feature flipping pattern, services must be tested WITH and WITHOUT features enabled</para>
+       			<programlisting language="java">@Test
+    public void createFeatureDynamically() {
+
+        // Initialize with empty store
+        FF4j ff4j = new FF4j();
+
+        // Dynamically register new features
+        ff4j.create("f1").enable("f1");
+
+        // Testing
+        assertTrue(ff4j.exist("f1"));
+        assertTrue(ff4j.check("f1"));
+    }</programlisting>
+       		</listitem>
+       		 
+    		</itemizedlist>
+      
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="2-5">
+			<title>Integration with Spring</title>
+			
+			<para>The <varname>ff4j</varname> component can be easily defined as a Spring Bean.</para>
+			
+			<!-- LIST -->
+    		<itemizedlist>
+      		
+      		 <listitem>
+       			<para>Add Spring dependencies to your project</para>
+       			<programlisting language="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+  &lt;version&gt;4.0.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+   &lt;version&gt;4.0.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;&lt;/programlisting&gt;</programlisting>
+      		 </listitem>
+      		 
+      		 <listitem>
+      		 <para>Add the following <varname>applicationContext.xml</varname> file to your <filename>src/test/resources</filename></para>
+      		 <programlisting language="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;
+
+  &lt;bean id="ff4j" class="org.ff4j.FF4j" &gt;
+    &lt;property name="store" ref="ff4j.store.inmemory" /&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="ff4j.store.inmemory" class="org.ff4j.store.InMemoryFeatureStore" &gt;
+    &lt;property name="location" value="ff4j.xml" /&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</programlisting>
+      		 
+      		 </listitem>
+      		 
+      		 <listitem>
+      		 <para>The features are registered within in-memory store.Write the following spring-oriented test</para>
+      		 <programlisting language="java">
+      		 package org.ff4j.sample;
+
+import static org.junit.Assert.fail;
+
+import org.ff4j.FF4j;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:*applicationContext.xml"})
+public class CoreSpringTest {
+
+    @Autowired
+    private FF4j ff4j;
+
+    @Test
+    public void testWithSpring() {
+        // Test value at runtime
+        if (ff4j.check("sayHello")) {
+            // Feature ok !
+            System.out.println("Hello World !");
+        } else {
+            fail();
+        }
+    }
+}</programlisting>
+      		 
+      		 </listitem>
+      		 
+      		 </itemizedlist>
+			
+		<warning><para>Sample Warning</para></warning>
+		
+		<tip><para>Sample Tip</para></tip>
+		
+		<note><title>Note Title</title><para>Sample note</para></note>
+		
+	</section>
+		
+</chapter>
+  <chapter id="3" version="5.0" xml:lang="en" xml:base="3-core-concepts.xml">
+
+	<title>Core Concepts</title>
+	
+	    <!-- *********************************************************************************** -->
+		<section id="3-1">
+			<title>Feature Groups</title>
+			<para>Features can be gathered as group. It is then possible to toggle the whole group. This capability can be 
+			useful for instance, if you want to group all the "user stories" of sprint in the same release.
+			</para>
+			
+			<itemizedlist>
+      		
+      		 <listitem>
+       			<para>Let's create a new XML file <filename>ff4j-group.xml</filename> to illustrate</para>
+    			<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration&gt;
+&lt;features&gt;
+
+	&lt;feature uid="featA" description="my first feature" enable="true"&gt;
+	&lt;/feature&gt;
+
+	&lt;feature uid="featA" enable="false" /&gt;
+
+
+	&lt;!-- Sample Feature Group --&gt;
+	&lt;feature-group name="release-2.3"&gt;
+
+		&lt;feature uid="users-story1" description="desc1" enable="false"&gt;
+		&lt;/feature&gt;
+
+		&lt;feature uid="users-story2" description="null" enable="false"&gt;
+		&lt;/feature&gt;
+
+	&lt;/feature-group&gt;
+	
+&lt;/features&gt;</programlisting>
+      		 </listitem>
+      		 
+      		 <listitem>
+       			<para>Here is a sample utilisation of groups.</para>
+    			<programlisting language="java">@Test
+public void myGroupTest() {
+
+   FF4j ff4j = new FF4j("ff4j-groups.xml");
+
+   // Check features loaded
+   assertEquals(4, ff4j.getFeatures().size());
+   assertTrue(ff4j.exist("featA"));
+   assertTrue(ff4j.exist("users-story1"));
+   assertTrue(ff4j.getStore().existGroup("release-2.3"));
+   System.out.println("Features loaded OK");
+
+   // Given
+   assertFalse(ff4j.check("users-story1"));
+   assertFalse(ff4j.check("users-story2"));
+
+   // When
+   ff4j.enableGroup("release-2.3");
+
+   // Then
+   assertTrue(ff4j.check("users-story1"));
+   assertTrue(ff4j.check("users-story2"));
+
+}</programlisting>
+      		 </listitem>
+      		 
+      		  <listitem>
+       			<para>You can also access to all operation dynamically through the <varname>FeatureStore</varname></para>
+    			<programlisting language="java">@Test
+public void workWithGroupTest() {
+
+   // Given
+   FF4j ff4j = new FF4j("ff4j-groups.xml");
+   assertTrue(ff4j.exist("featA"));
+
+   // When
+   ff4j.getStore().addToGroup("featA", "new-group");
+
+   // Then
+   assertTrue(ff4j.getStore().existGroup("new-group"));
+   assertTrue(ff4j.getStore().readAllGroups().contains("new-group"));
+
+   Map&lt;String, Feature&gt; myGroup = ff4j.getStore().readGroup("new-group");
+   assertTrue(myGroup.containsKey("featA"));
+
+   // A feature can be in a single group
+   // Here changing =&gt; deleting the last element of a group =&gt; deleting the group
+   ff4j.getStore().addToGroup("featA", "group2");
+   assertFalse(ff4j.getStore().existGroup("new-group"));
+}</programlisting>
+
+    		 </listitem>
+      		
+      	   </itemizedlist>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-2">
+			<title>Aspect Oriented Programming (AOP)</title>
+			
+			<section id="3-2-1">
+				<title>Overview</title>
+				  <para>From the beginning of this guide, we use intrusive tests statements within source code to perform flipping like in : </para>
+				  <programlisting language="java">if (ff4j.check("featA")) {
+  // new code
+} else {
+  // legacy
+}</programlisting>
+
+			<para>This approach is quite intrusive into source code. You can nested different feature toggles at you may consider to clean often your 
+			code and remove obsolete features. A good alternative is to rely on <ulink url="http://en.wikipedia.org/wiki/Dependency_Injection">Dependency Injection</ulink>, 
+			also called Inversion of control (ioc) to choose the correct implementation of the service at runtime.</para>
+			
+			<para>Ff4j provide the <varname>@Flip</varname> annotation to perform flipping on methods using AOP proxies. At runtime, the target service is proxified by the ff4j 
+			component which choose an implementation instead of another using feature status (enable/disable). It leverage on Spring AOP Framework.
+			</para>
+			
+			</section>
+			
+			<section id="3-2-2">
+				<title>Illustrate with example</title>
+				<para>In the following chapter, we modify the project created in getting started to illustrate
+				flipping through aop</para>
+			<itemizedlist>
+			<listitem>
+       			<para>Add the dependency to <filename>ff4j-aop</filename> in your project</para>
+    			<programlisting language="xml">&lt;dependency&gt;
+ &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
+  &lt;artifactId&gt;ff4j-aop&lt;/artifactId&gt;
+  &lt;version&gt;1.2.0&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
+    		</listitem>
+    		
+			<listitem>
+       			<para>Define a sample interface with the annotation : </para>
+       			 <programlisting language="java">public interface GreetingService {
+
+   @Flip(name="language-french", alterBean="greeting.french")
+   String sayHello(String name);
+
+}</programlisting>
+			</listitem>
+			
+			<listitem>
+       			<para>Define a first implementation, to tell hello in english </para>
+       			 <programlisting language="java">@Component("greeting.english")
+public class GreetingServiceEnglishImpl implements GreetingService {
+    public String sayHello(String name) {
+      return "Hello " + name;
+    }
+}</programlisting>
+			</listitem>
+			
+			<listitem>
+       			<para>Define a second implementation, to tell hello in french </para>
+       			 <programlisting language="java">@Component("greeting.french")
+public class GreetingServiceFrenchImpl implements GreetingService {
+  public String sayHello(String name) {
+    return "Bonjour " + name;
+  }
+}</programlisting>
+			</listitem>
+			
+			<listitem>
+       			<para>The AOP capability leverage on Spring Framework. To enable the Autoproxy, please ensure that the package <varname>org.ff4j.aop</varname> 
+       			is scanned by spring at startup. The <filename>applicationContext-aop.xml</filename> should look like : </para>
+       			 <programlisting language="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;
+           
+   &lt;context:component-scan base-package="org.ff4j.aop, org.ff4j.sample"/&gt;
+   
+  &lt;bean id="ff4j" class="org.ff4j.FF4j" &gt;
+    &lt;property name="store" ref="ff4j.store.inmemory" /&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="ff4j.store.inmemory" class="org.ff4j.store.InMemoryFeatureStore" &gt;
+    &lt;property name="location" value="ff4j-aop.xml" /&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</programlisting>
+			</listitem>
+			
+			<listitem>
+			<para>Create a dedicated ff4j.xml file with the feature name <varname>language-french</varname> let's say <filename>ff4j-demo-aop.xml</filename></para>
+			 <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+ &lt;feature uid="language-french" enable="false" /&gt;
+&lt;/features&gt;</programlisting>
+			</listitem>
+			
+			
+			<listitem>
+			<para>Demonstrate how does it work through a test :</para>
+			 <programlisting language="java">import junit.framework.Assert;
+
+import org.ff4j.FF4j;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:*applicationContext-aop.xml")
+public class FeatureFlippingThoughAopTest {
+
+    @Autowired
+    private FF4j ff4j;
+
+    @Autowired
+    @Qualifier("greeting.english")
+    private GreetingService greeting;
+
+    @Test
+    public void testAOP() {
+        Assert.assertTrue(greeting.sayHello("CLU").startsWith("Hello"));
+        ff4j.enable("language-french");
+        Assert.assertTrue(greeting.sayHello("CLU").startsWith("Bonjour"));
+    }
+
+}</programlisting>
+			</listitem>
+			
+		</itemizedlist>
+			</section>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-3">
+			<title>Permissions and security</title>
+			
+			<section id="3-3-1">
+				<title>Overview</title>
+				  <para>You may have to enable your feature for a subset of your users identified by a dedicated group or profile. 
+				  With the <varname>Canary Realease</varname> pattern for instance, the feature could be activated only for beta-tester.
+				  </para>
+				  
+				  <para>ff4j does not provide any user/group declaration system but instead leverage on existing one (Spring Security, Apache Chiro...), they
+				  are not declared, defined and administrate with ff4j. A set of permissions is defined for each feature but the permissions must already
+				  exist in the external security provider.</para>
+			</section>
+			
+			<section id="3-3-2">
+				<title>AuthorizationManager</title>
+				  <para>This is the class where ff4j test permissions of current user against the list in the feature. It will leverage on existing framework. Today
+				  the only implementation available is through <varname>Spring security</varname> but you can define your own.</para>
+				  
+				  <figure id="fig-03-auth" floatstyle="center">
+				  <title>AuthorizationManager UML Diagram</title>
+				  <mediaobject>
+				   <imageobject role="web">
+					<imagedata align="center" fileref="img/fig-03-authmanager.png" contentwidth="7cm"/>
+			  	  </imageobject>
+				 </mediaobject>
+		</figure>
+			</section>
+			
+			<section id="3-3-3">
+				<title>Illustrate through sample code</title>
+				  <para>In this first sample we will create our own <varname>AuthorizationManager</varname> with the list of permissions in Memory.</para>
+				  
+				  <itemizedlist>
+					<listitem>
+       					<para>There is no new dependency to declare the <varname>AuthorizationManager</varname> is in the <filename>ff4j-core.jar</filename> file. So let's
+       					propose a implementation for this interface</para>
+    				<programlisting language="java">&lt;dependency&gt;
+    				</programlisting>
+    			</listitem>
+    			</itemizedlist>
+				  
+				  
+			</section>
+			
+			
+			<section id="3-3-4">
+				<title>Working with Spring Security</title>
+				  <para> Xml update, custom permission manager, unit testing
+				  Principle, use cases (canary release, beta feature), sequence diagram
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-4">
+			<title>Custom Strategy</title>
+			<para>Text here</para>
+			<section id="3-4-1">
+				<title>Overview</title>
+				  <para>Reference to conclusion #1, sequence diagram,
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-2">
+				<title>FeatureFlippingStrategy Interface</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-3">
+				<title>Sample Code</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-4">
+				<title>Overriding Strategy</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="3-4-5">
+				<title>Available Strategies</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <section id="3-4-5-1">
+					<title>Expression Language</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  <section id="3-4-5-2">
+					<title>ReleaseDate</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  <section id="3-4-5-3">
+					<title>ClientList</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  <section id="3-4-5-4">
+					<title>ServerList</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				   <section id="3-4-5-5">
+					<title>Ponderation</title>
+				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  </section>
+				  
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-5">
+			<title>Feature Stores</title>
+			<para>Text here</para>
+			
+			<section id="3-5-1">
+				<title>Introduction</title>
+				<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  	<section id="3-5-1-1">
+					 <title>Objectives</title>
+				  	 <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				    </section>
+				    <section id="3-5-1-2">
+					 <title>Architecture Patterns</title>
+				  	 <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				    </section>
+			</section>
+			
+			<section id="3-5-2">
+			  <title>InMemoryFeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			
+			<section id="3-5-3">
+			  <title>&gt;RDBMS FeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 <section id="3-5-3-1">
+				 <title>Core JDBC</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+				 <section id="3-5-3-2">
+				 <title>Spring JDBC</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+			</section>
+			
+			<section id="3-5-4">
+			  <title>MongoDB FeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 <section id="3-5-4-1">
+				  <title>Overview</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+				 <section id="3-5-4-2">
+				  <title>Sample Code</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+			</section>
+			
+			<section id="3-5-5">
+			  <title>Remote HTTP (client) FeatureStore</title>
+			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 <section id="3-5-5-1">
+				  <title>Overview</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+				 <section id="3-5-5-2">
+				  <title>Sample Code</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				 </section>
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-6">
+			<title>Caching</title>
+			<para>Text here</para>
+			 
+			 <section id="3-6-1">
+			 	<title>Architecture Concerns</title>
+				<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+			
+			  <section id="3-6-2">
+				<title>Working with EHCache</title>
+				<para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			  </section>
+			  
+			  <section id="3-6-3">
+				<title>Working with Redis</title>
+				<para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+		      </section>
+			 
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="3-7">
+			<title>Monitoring</title>
+			<para>Text here</para>
+			
+			 <section id="3-7-1">
+			 	<title>Overview</title>
+				<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+			 
+			  <section id="3-7-2">
+			 	<title>Metrics</title>
+				<para>Usage vs actions, exporter
+				Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+			 
+			 <section id="3-7-3">
+			 	<title>Curves and Graphics</title>
+				<para>Usage vs actions, exporter
+				Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			 </section>
+		</section>
+		
+</chapter>
+  <chapter id="4" version="5.0" xml:lang="en" xml:base="4-web.xml">
+
+	<title>Web</title>
+	
+	    <!-- *********************************************************************************** -->
+		<section id="4-1">
+			<title>Embedded Console</title>
+			<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+		 	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi.
+		 	</para>
+		 	
+		 	<section id="4-1-1">
+				<title>Overview</title>
+				  <para>Phylosophy, capability, architecture, limits as security
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-1-2">
+				<title>Declaring Servlet</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-1-3">
+				<title>User Guide</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="4-2">
+			<title>Taglib Library</title>
+			<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+		 	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi.
+		 	</para>
+		 	
+		 	<section id="4-2-1">
+				<title>Introducing Taglib</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-2-2">
+				<title>Available Tags</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="4-3">
+			<title>RestFul API</title>
+			<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+		 	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi.
+		 	</para>
+		 	
+		 	<section id="4-3-1">
+				<title>Introduction</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-3-2">
+				<title>State Diagram</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-3-3">
+				<title>API BluePrint</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-3-4">
+				<title>Security</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-3-5">
+				<title>Sample Clients</title>
+				  <para> HttpClient, CURL, Javascript....
+				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+		</section>
+		
+		<!-- *********************************************************************************** -->
+		<section id="4-4">
+			<title>WebConsole Full Stack</title>
+			<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+		 	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi.
+		 	</para>
+		 	
+		 	<section id="4-4-1">
+				<title>Introduction</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-4-2">
+				<title>Configuration</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+			<section id="4-4-3">
+				<title>User Guide</title>
+				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			</section>
+		</section>
+		
+</chapter>
+  <chapter id="5" version="5.0" xml:lang="en" xml:base="5-advanced-concepts.xml">
+
+	<title>Advanced Concepts</title>
+
+	<!-- *********************************************************************************** -->
+	<section id="5-1">
+		<title>JMX Support</title>
+		<para>Definition, UML Diagram, description attributes, ff4j
+			definition, status</para>
+
+		<section id="5-1-1">
+			<title>Overview</title>
+			<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna
+				mi, scelerisque vitae, ultrices vel, euismod vel, eros.
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque
+				dictum felis a nisi.
+			</para>
+		</section>
+		<section id="5-1-2">
+			<title>Sample Code</title>
+			<para> Status, crud, storage,Sed egestas molestie elit. Mauris urna
+				mi, scelerisque vitae, ultrices vel, euismod vel, eros.
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque
+				dictum felis a nisi.
+			</para>
+		</section>
+
+	</section>
+
+
+</chapter>
+
+</book>

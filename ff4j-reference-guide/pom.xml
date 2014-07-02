@@ -38,7 +38,7 @@
 					<includes>book.xml</includes>
 					<xincludeSupported>true</xincludeSupported>
 					<chunkedOutput>false</chunkedOutput>
-					<generatedSourceDirectory>${project.build.directory}/docbook/generated</generatedSourceDirectory>
+					<generatedSourceDirectory>${basedir}/src</generatedSourceDirectory>
 					<foCustomization>${basedir}/src/main/resources/xsl/pdf.xsl</foCustomization>
 					<useExtensions>1</useExtensions>
 					<highlightSource>1</highlightSource>

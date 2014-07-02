@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
-<chapter id="4" lang="en">
+<chapter id="4" xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
 
 	<title>Web</title>
 	

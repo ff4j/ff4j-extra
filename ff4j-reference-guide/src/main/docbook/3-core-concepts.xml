@@ -1,57 +1,285 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
-<chapter id="3" lang="en">
+<chapter id="3" xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
 
 	<title>Core Concepts</title>
 	
 	    <!-- *********************************************************************************** -->
 		<section id="3-1">
-			<title>Groups</title>
-			<para>Text here</para>
+			<title>Feature Groups</title>
+			<para>Features can be gathered as group. It is then possible to toggle the whole group. This capability can be 
+			useful for instance, if you want to group all the "user stories" of sprint in the same release.
+			</para>
+			
+			<itemizedlist>
+      		
+      		 <listitem>
+       			<para>Let's create a new XML file <filename>ff4j-group.xml</filename> to illustrate</para>
+    			<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration&gt;
+&lt;features&gt;
+
+	&lt;feature uid="featA" description="my first feature" enable="true"&gt;
+	&lt;/feature&gt;
+
+	&lt;feature uid="featA" enable="false" /&gt;
+
+
+	&lt;!-- Sample Feature Group --&gt;
+	&lt;feature-group name="release-2.3"&gt;
+
+		&lt;feature uid="users-story1" description="desc1" enable="false"&gt;
+		&lt;/feature&gt;
+
+		&lt;feature uid="users-story2" description="null" enable="false"&gt;
+		&lt;/feature&gt;
+
+	&lt;/feature-group&gt;
+	
+&lt;/features&gt;</programlisting>
+      		 </listitem>
+      		 
+      		 <listitem>
+       			<para>Here is a sample utilisation of groups.</para>
+    			<programlisting language="java">@Test
+public void myGroupTest() {
+
+   FF4j ff4j = new FF4j("ff4j-groups.xml");
+
+   // Check features loaded
+   assertEquals(4, ff4j.getFeatures().size());
+   assertTrue(ff4j.exist("featA"));
+   assertTrue(ff4j.exist("users-story1"));
+   assertTrue(ff4j.getStore().existGroup("release-2.3"));
+   System.out.println("Features loaded OK");
+
+   // Given
+   assertFalse(ff4j.check("users-story1"));
+   assertFalse(ff4j.check("users-story2"));
+
+   // When
+   ff4j.enableGroup("release-2.3");
+
+   // Then
+   assertTrue(ff4j.check("users-story1"));
+   assertTrue(ff4j.check("users-story2"));
+
+}</programlisting>
+      		 </listitem>
+      		 
+      		  <listitem>
+       			<para>You can also access to all operation dynamically through the <varname>FeatureStore</varname></para>
+    			<programlisting language="java">@Test
+public void workWithGroupTest() {
+
+   // Given
+   FF4j ff4j = new FF4j("ff4j-groups.xml");
+   assertTrue(ff4j.exist("featA"));
+
+   // When
+   ff4j.getStore().addToGroup("featA", "new-group");
+
+   // Then
+   assertTrue(ff4j.getStore().existGroup("new-group"));
+   assertTrue(ff4j.getStore().readAllGroups().contains("new-group"));
+
+   Map&lt;String, Feature&gt; myGroup = ff4j.getStore().readGroup("new-group");
+   assertTrue(myGroup.containsKey("featA"));
+
+   // A feature can be in a single group
+   // Here changing => deleting the last element of a group => deleting the group
+   ff4j.getStore().addToGroup("featA", "group2");
+   assertFalse(ff4j.getStore().existGroup("new-group"));
+}</programlisting>
+
+    		 </listitem>
+      		
+      	   </itemizedlist>
 		</section>
 		
 		<!-- *********************************************************************************** -->
 		<section id="3-2">
 			<title>Aspect Oriented Programming (AOP)</title>
-			<para>Text here</para>
 			
 			<section id="3-2-1">
 				<title>Overview</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>From the beginning of this guide, we use intrusive tests statements within source code to perform flipping like in : </para>
+				  <programlisting language="java">if (ff4j.check("featA")) {
+  // new code
+} else {
+  // legacy
+}</programlisting>
+
+			<para>This approach is quite intrusive into source code. You can nested different feature toggles at you may consider to clean often your 
+			code and remove obsolete features. A good alternative is to rely on <ulink url="http://en.wikipedia.org/wiki/Dependency_Injection">Dependency Injection</ulink>, 
+			also called Inversion of control (ioc) to choose the correct implementation of the service at runtime.</para>
+			
+			<para>Ff4j provide the <varname>@Flip</varname> annotation to perform flipping on methods using AOP proxies. At runtime, the target service is proxified by the ff4j 
+			component which choose an implementation instead of another using feature status (enable/disable). It leverage on Spring AOP Framework.
+			</para>
+			
 			</section>
+			
 			<section id="3-2-2">
-				<title>Sample Code</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				<title>Illustrate with example</title>
+				<para>In the following chapter, we modify the project created in getting started to illustrate
+				flipping through aop</para>
+			<itemizedlist>
+			<listitem>
+       			<para>Add the dependency to <filename>ff4j-aop</filename> in your project</para>
+    			<programlisting language="xml">&lt;dependency&gt;
+ &lt;groupId>org.ff4j&lt;/groupId&gt;
+  &lt;artifactId>ff4j-aop&lt;/artifactId&gt;
+  &lt;version>1.2.0&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
+    		</listitem>
+    		
+			<listitem>
+       			<para>Define a sample interface with the annotation : </para>
+       			 <programlisting language="java">public interface GreetingService {
+
+   @Flip(name="language-french", alterBean="greeting.french")
+   String sayHello(String name);
+
+}</programlisting>
+			</listitem>
+			
+			<listitem>
+       			<para>Define a first implementation, to tell hello in english </para>
+       			 <programlisting language="java">@Component("greeting.english")
+public class GreetingServiceEnglishImpl implements GreetingService {
+    public String sayHello(String name) {
+      return "Hello " + name;
+    }
+}</programlisting>
+			</listitem>
+			
+			<listitem>
+       			<para>Define a second implementation, to tell hello in french </para>
+       			 <programlisting language="java">@Component("greeting.french")
+public class GreetingServiceFrenchImpl implements GreetingService {
+  public String sayHello(String name) {
+    return "Bonjour " + name;
+  }
+}</programlisting>
+			</listitem>
+			
+			<listitem>
+       			<para>The AOP capability leverage on Spring Framework. To enable the Autoproxy, please ensure that the package <varname>org.ff4j.aop</varname> 
+       			is scanned by spring at startup. The <filename>applicationContext-aop.xml</filename> should look like : </para>
+       			 <programlisting language="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;
+           
+   &lt;context:component-scan base-package="org.ff4j.aop, org.ff4j.sample"/&gt;
+   
+  &lt;bean id="ff4j" class="org.ff4j.FF4j" &gt;
+    &lt;property name="store" ref="ff4j.store.inmemory" /&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="ff4j.store.inmemory" class="org.ff4j.store.InMemoryFeatureStore" &gt;
+    &lt;property name="location" value="ff4j-aop.xml" /&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</programlisting>
+			</listitem>
+			
+			<listitem>
+			<para>Create a dedicated ff4j.xml file with the feature name <varname>language-french</varname> let's say <filename>ff4j-demo-aop.xml</filename></para>
+			 <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+ &lt;feature uid="language-french" enable="false" /&gt;
+&lt;/features&gt;</programlisting>
+			</listitem>
+			
+			
+			<listitem>
+			<para>Demonstrate how does it work through a test :</para>
+			 <programlisting language="java">import junit.framework.Assert;
+
+import org.ff4j.FF4j;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:*applicationContext-aop.xml")
+public class FeatureFlippingThoughAopTest {
+
+    @Autowired
+    private FF4j ff4j;
+
+    @Autowired
+    @Qualifier("greeting.english")
+    private GreetingService greeting;
+
+    @Test
+    public void testAOP() {
+        Assert.assertTrue(greeting.sayHello("CLU").startsWith("Hello"));
+        ff4j.enable("language-french");
+        Assert.assertTrue(greeting.sayHello("CLU").startsWith("Bonjour"));
+    }
+
+}</programlisting>
+			</listitem>
+			
+		</itemizedlist>
 			</section>
 		</section>
 		
 		<!-- *********************************************************************************** -->
 		<section id="3-3">
 			<title>Permissions and security</title>
-			<para>Text here</para>
 			
 			<section id="3-3-1">
 				<title>Overview</title>
-				  <para>Principle, use cases (canary release, beta feature), sequence diagram
-				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>You may have to enable your feature for a subset of your users identified by a dedicated group or profile. 
+				  With the <varname>Canary Realease</varname> pattern for instance, the feature could be activated only for beta-tester.
+				  </para>
+				  
+				  <para>ff4j does not provide any user/group declaration system but instead leverage on existing one (Spring Security, Apache Chiro...), they
+				  are not declared, defined and administrate with ff4j. A set of permissions is defined for each feature but the permissions must already
+				  exist in the external security provider.</para>
 			</section>
+			
 			<section id="3-3-2">
-				<title>PermissionManager</title>
-				  <para>Presentation, UML Diagram, reuse external, 
-				  Principle, use cases (canary release, beta feature), sequence diagram
-				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				<title>AuthorizationManager</title>
+				  <para>This is the class where ff4j test permissions of current user against the list in the feature. It will leverage on existing framework. Today
+				  the only implementation available is through <varname>Spring security</varname> but you can define your own.</para>
+				  
+				  <figure id="fig-03-auth" floatstyle="center">
+				  <title>AuthorizationManager UML Diagram</title>
+				  <mediaobject>
+				   <imageobject role="web">
+					<imagedata align="center" fileref="img/fig-03-authmanager.png" contentwidth="7cm" />
+			  	  </imageobject>
+				 </mediaobject>
+		</figure>
 			</section>
+			
 			<section id="3-3-3">
-				<title>Sample Code</title>
-				  <para> Xml update, custom permission manager, unit testing
-				  Principle, use cases (canary release, beta feature), sequence diagram
-				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				<title>Illustrate through sample code</title>
+				  <para>In this first sample we will create our own <varname>AuthorizationManager</varname> with the list of permissions in Memory.</para>
+				  
+				  <itemizedlist>
+					<listitem>
+       					<para>There is no new dependency to declare the <varname>AuthorizationManager</varname> is in the <filename>ff4j-core.jar</filename> file. So let's
+       					propose a implementation for this interface</para>
+    				<programlisting language="java">&lt;dependency&gt;
+    				</programlisting>
+    			</listitem>
+    			</itemizedlist>
+				  
+				  
 			</section>
+			
+			
 			<section id="3-3-4">
 				<title>Working with Spring Security</title>
 				  <para> Xml update, custom permission manager, unit testing

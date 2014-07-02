@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN" "docbook-5.0.dtd">
-<book id="ff4j-reference-guide">
+<book id="ff4j-reference-guide" xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ~ Title                    ~ -->
@@ -11,7 +10,7 @@
 	<!-- ~ General Informations     ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<bookinfo>
-		<title>ff4j Reference Guide</title>
+		<title>Ff4j Reference Guide</title>
 		<productname>Feature Flipping For Java</productname>
 		<edition>Reference Guide v1.2.0</edition>
 		<pubdate>2014</pubdate>

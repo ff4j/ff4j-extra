@@ -26,6 +26,8 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+	<context:component-scan base-package="org.ff4j.web.resources"/>
+	
 	<bean id="ff4j" class="org.ff4j.FF4j">
 		<property name="store" ref="ff4j.store" />
 	</bean>
@@ -38,6 +40,5 @@
 		<property name="store" ref="ff4j.store" />
 	</bean>
 	
-	<context:component-scan base-package="org.ff4j.web.resources"/>
 	
 </beans>

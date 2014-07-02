@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <!--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -316,6 +317,7 @@ under the License.
 		<xsl:attribute name="space-after.optimum">0.1em</xsl:attribute>
 		<xsl:attribute name="space-after.minimum">0.1em</xsl:attribute>
 		<xsl:attribute name="space-after.maximum">0.1em</xsl:attribute>
+		<xsl:attribute name="color">#00ab8b</xsl:attribute>
 	</xsl:attribute-set>
 
 	<xsl:attribute-set name="section.title.level2.properties">
@@ -329,6 +331,7 @@ under the License.
 		<xsl:attribute name="space-after.optimum">0.1em</xsl:attribute>
 		<xsl:attribute name="space-after.minimum">0.1em</xsl:attribute>
 		<xsl:attribute name="space-after.maximum">0.1em</xsl:attribute>
+		<xsl:attribute name="color">#888888</xsl:attribute>
 	</xsl:attribute-set>
 
 	<xsl:attribute-set name="section.title.level3.properties">
@@ -342,6 +345,7 @@ under the License.
 		<xsl:attribute name="space-after.optimum">0.1em</xsl:attribute>
 		<xsl:attribute name="space-after.minimum">0.1em</xsl:attribute>
 		<xsl:attribute name="space-after.maximum">0.1em</xsl:attribute>
+		<xsl:attribute name="color">#595959</xsl:attribute>
 	</xsl:attribute-set>
 
 	<xsl:attribute-set name="section.title.level4.properties">
@@ -544,8 +548,11 @@ under the License.
 	</xsl:template>
 
 	<!-- admon -->
-	<xsl:param name="admon.graphics" select="0"/>
-
+	<xsl:param name="admon.graphics">1</xsl:param>
+	<xsl:param name="admon.graphics.path">img/</xsl:param>
+	<xsl:param name="admon.graphics.extension">.svg</xsl:param>
+	
+	<!-- tips, note,important -->
 	<xsl:attribute-set name="nongraphical.admonition.properties">
 		<xsl:attribute name="margin-left">0.1em</xsl:attribute>
 		<xsl:attribute name="margin-right">2em</xsl:attribute>
@@ -559,6 +566,7 @@ under the License.
 		<xsl:attribute name="space-after.optimum">1.5em</xsl:attribute>
 		<xsl:attribute name="space-after.minimum">1.5em</xsl:attribute>
 		<xsl:attribute name="space-after.maximum">1.5em</xsl:attribute>
+		<xsl:attribute name="background-color">#E0E0E0</xsl:attribute>
 	</xsl:attribute-set>
 
     <xsl:attribute-set name="admonition.title.properties">
@@ -573,6 +581,10 @@ under the License.
 		<xsl:attribute name="space-before.optimum">0em</xsl:attribute>
 		<xsl:attribute name="space-before.minimum">0em</xsl:attribute>
 		<xsl:attribute name="space-before.maximum">0em</xsl:attribute>
+		<xsl:attribute name="background-color">#FFF8DC</xsl:attribute>
+		<xsl:attribute name="border-left-width">1pt</xsl:attribute>
+		<xsl:attribute name="border-left-style">solid</xsl:attribute>
+		<xsl:attribute name="border-left-color">#00ab8b</xsl:attribute>
 	</xsl:attribute-set>
 
 	<!-- Asciidoc -->
@@ -615,5 +627,13 @@ under the License.
 	<xsl:template match='xslthl:value' mode="xslthl">
 	  <fo:inline font-weight="bold" color="#2A00FF"><xsl:apply-templates mode="xslthl"/></fo:inline>
 	</xsl:template>
+	
+	<!-- MEDIA -->
+	<xsl:template match="mediaobject[@role='bordered']">
+ 		<fo:block border="0.5pt solid black" width="90%">
+  			<xsl:apply-imports/>
+ 		</fo:block>
+	</xsl:template>
+	
 
 </xsl:stylesheet>
