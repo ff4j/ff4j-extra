@@ -581,7 +581,7 @@ under the License.
 		<xsl:attribute name="space-before.optimum">0em</xsl:attribute>
 		<xsl:attribute name="space-before.minimum">0em</xsl:attribute>
 		<xsl:attribute name="space-before.maximum">0em</xsl:attribute>
-		<xsl:attribute name="background-color">#FFF8DC</xsl:attribute>
+		<xsl:attribute name="background-color">#F0F0F0</xsl:attribute>
 		<xsl:attribute name="border-left-width">1pt</xsl:attribute>
 		<xsl:attribute name="border-left-style">solid</xsl:attribute>
 		<xsl:attribute name="border-left-color">#00ab8b</xsl:attribute>

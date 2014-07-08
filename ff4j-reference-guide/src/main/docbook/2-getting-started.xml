@@ -2,6 +2,10 @@
 <chapter id="2" xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
 
 	<title>Getting Started</title>
+	
+	 <note>
+	  <para>All source code and working samples are available <ulink url="#">HERE</ulink> for download and testing.</para>
+	</note>
 
 	<!-- *********************************************************************************** -->
 	<section id="2-1">
@@ -259,12 +263,6 @@ public class CoreSpringTest {
       		 </listitem>
       		 
       		 </itemizedlist>
-			
-		<warning><para>Sample Warning</para></warning>
-		
-		<tip><para>Sample Tip</para></tip>
-		
-		<note><title>Note Title</title><para>Sample note</para></note>
 		
 	</section>
 		
