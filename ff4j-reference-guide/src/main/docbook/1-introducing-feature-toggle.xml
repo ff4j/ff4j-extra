@@ -13,11 +13,10 @@
 			 It's also called  <emphasis role="italic">feature flipping</emphasis>, <emphasis role="italic">feature flags</emphasis>, 
 			 or even <emphasis role="italic">feature bits</emphasis>. Toggle features at runtime is mandatory to change behaviour of the application without restarting. 
 			 FF4J is an implementation of the principle for the Java Plateform. It stands as <emphasis role="italic">Feature Flipping for Java</emphasis>.
-			</para>
 			 
 			 <note>
-			 <title>ff4j is not only Java</title>
-			 <para>As ff4j provides a restFul WebAPI, any application could work and check features through HTTP. It's not limited to the Java platform</para>
+			 <para>As ff4j provides a restFul WebAPI, any application could work and check features through HTTP. 
+			 It's not limited to the Java platform
 			 <figure id="figure-01-introd" floatstyle="center" >
       			 <mediaobject >
       			   <imageobject condition="web" >
@@ -25,7 +24,10 @@
       			   </imageobject>
       			 </mediaobject>
       			 </figure>
+      			 </para>
 			 </note>
+			 
+			 </para>
 			
 		</section>
 

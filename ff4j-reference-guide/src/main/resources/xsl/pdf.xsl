@@ -554,19 +554,21 @@ under the License.
 	
 	<!-- tips, note,important -->
 	<xsl:attribute-set name="nongraphical.admonition.properties">
+		<xsl:attribute name="background-color">#E0E0E0</xsl:attribute>
 		<xsl:attribute name="margin-left">0.1em</xsl:attribute>
 		<xsl:attribute name="margin-right">2em</xsl:attribute>
+		<xsl:attribute name="padding-left">2.5em</xsl:attribute>
+		
 		<xsl:attribute name="border-left-width">.75pt</xsl:attribute>
 		<xsl:attribute name="border-left-style">solid</xsl:attribute>
 		<xsl:attribute name="border-left-color">#5c5c4f</xsl:attribute>
-		<xsl:attribute name="padding-left">0.5em</xsl:attribute>
-		<xsl:attribute name="space-before.optimum">1.5em</xsl:attribute>
-		<xsl:attribute name="space-before.minimum">1.5em</xsl:attribute>
-		<xsl:attribute name="space-before.maximum">1.5em</xsl:attribute>
+		
+		<xsl:attribute name="space-before.optimum">1em</xsl:attribute>
+		<xsl:attribute name="space-before.minimum">1em</xsl:attribute>
+		<xsl:attribute name="space-before.maximum">1em</xsl:attribute>
 		<xsl:attribute name="space-after.optimum">1.5em</xsl:attribute>
 		<xsl:attribute name="space-after.minimum">1.5em</xsl:attribute>
 		<xsl:attribute name="space-after.maximum">1.5em</xsl:attribute>
-		<xsl:attribute name="background-color">#E0E0E0</xsl:attribute>
 	</xsl:attribute-set>
 
     <xsl:attribute-set name="admonition.title.properties">
