@@ -1,0 +1,25 @@
+title ff4j : check
+
+participant client
+participant ff4j
+participant FeatureStore
+
+client->+ff4j : feature_id
+ff4j->ff4j:check
+ff4j->+FeatureStore:feature_id
+FeatureStore->FeatureStore:read
+
+alt FEATURE_EXIST
+    FeatureStore-->-ff4j:Feature
+    ff4j-->-client:Feature.isEnable()
+    
+else FEATURE_DOES_NOT_EXIST
+   FeatureStore-->+ff4j:FeatureNotFoundException
+    note over ff4j: catch
+    alt autocreate = true
+      ff4j-->client:false
+    else autocreate = false
+        ff4j-->-client:FeatureNotFoundException
+    end
+end
+

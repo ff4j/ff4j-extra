@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xslthl-config>
-	<highlighter id="java" file="highlight-java.xml" />
+	<highlighter id="java" 			file="highlight-java.xml" />
+	<highlighter id="sql"  			file="highlight-sql.xml"  />
+	<highlighter id="properties" 	file="highlight-properties.xml"  />
+	<highlighter id="json" 			file="highlight-json.xml"  />
 	<namespace prefix="xslthl" uri="http://xslthl.sf.net" />
 </xslthl-config>

@@ -1,0 +1,51 @@
+title ff4j : check full
+
+participant client
+participant ff4j
+participant FeatureStore
+participant AuthorizationManager
+participant FlippingStrategy
+
+alt Read Feature
+ client->+ff4j : check(feature_id)
+ ff4j->+FeatureStore:read(feature_id)
+end
+
+alt Feature Does not exist
+   FeatureStore-->-ff4j:FeatureNotFoundException
+    note over ff4j: catch
+    alt autocreate = true
+      ff4j-->client:false
+    else autocreate = false
+        ff4j-->-client:FeatureNotFoundException
+    end
+    note over client: exit
+end
+
+FeatureStore-->-ff4j:Feature
+ff4j-->ff4j:Feature.isEnable()
+
+alt AuthorisationManager != null
+ff4j->+AuthorizationManager:getUserPermissions()
+AuthorizationManager-->-ff4j:permission list
+ff4j->ff4j:check ACL
+alt Not Authorized
+ff4j-->client:false
+note over client: exit
+end
+end
+
+ff4j->ff4j:Feature.getStrategy()
+alt FlippingStrategy != null
+ff4j->+FlippingStrategy : evaluate(ExecutionContext)
+note right of FlippingStrategy : custom code
+FlippingStrategy-->-ff4j:boolean
+end
+ff4j-->-client:boolean
+note over client: exit
+
+
+
+
+
+

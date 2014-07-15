@@ -113,8 +113,10 @@
 			 The principe of <emphasis role="italic">Feature Toggle</emphasis> is to enable or disable feature through configuration, eventually at runtime.
 			 The condition statement to toggle can be a simple flag (boolean) but also a more elaborate test with a set of rules. 
 			 It's also called  <emphasis role="italic">feature flipping</emphasis>, <emphasis role="italic">feature flags</emphasis>, 
-			 or even <emphasis role="italic">feature bits</emphasis>. Toggle features at runtime is mandatory to change behaviour of the application without restarting. 
-			 FF4J is an implementation of the principle for the Java Plateform. It stands as <emphasis role="italic">Feature Flipping for Java</emphasis>.
+			 or even <emphasis role="italic">feature bits</emphasis>. Toggle features at runtime is mandatory to change behaviour of the application without restarting.
+			 </para>
+			 
+			 <para><emphasis role="bold">FF4J</emphasis> is an implementation of the principle for the Java Plateform. It stands as <emphasis role="italic">Feature Flipping for Java</emphasis>.
 			 
 			 <note>
 			 <para>As ff4j provides a restFul WebAPI, any application could work and check features through HTTP. 
@@ -602,6 +604,17 @@ behaviour by setting the autoCreate flag as true. If feature is not found the me
        		</listitem>
        		 
     		</itemizedlist>
+    		
+    		<para>As describe before the core sequence diagram to <varname>check</varname> the status of a feature is the following : 
+    		 <figure id="seq-core" floatstyle="center">
+	      			 <title>Sequence Diagram Core</title>
+	      			 <mediaobject role="bordered">
+	      			   <imageobject condition="web">
+	      			    <imagedata align="center" fileref="img/fig-02-sequencediagram-core.png" format="PNG" width="15cm"/>
+	      			   </imageobject>
+	      			 </mediaobject>
+	     		  </figure>
+    		</para>
       
 		</section>
 		
@@ -706,25 +719,23 @@ public class CoreSpringTest {
       		 <listitem>
        			<para>Let's create a new XML file <filename>ff4j-group.xml</filename> to illustrate</para>
     			<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-&lt;!DOCTYPE configuration&gt;
 &lt;features&gt;
 
-	&lt;feature uid="featA" description="my first feature" enable="true"&gt;
-	&lt;/feature&gt;
+ &lt;feature uid="featA" description="my first feature" enable="true"&gt;
+ &lt;/feature&gt;
 
-	&lt;feature uid="featA" enable="false" /&gt;
+ &lt;feature uid="featA" enable="false" /&gt;
 
+  &lt;!-- Sample Feature Group --&gt;
+  &lt;feature-group name="release-2.3"&gt;
 
-	&lt;!-- Sample Feature Group --&gt;
-	&lt;feature-group name="release-2.3"&gt;
+  &lt;feature uid="users-story1" description="desc1" enable="false"&gt;
+  &lt;/feature&gt;
 
-		&lt;feature uid="users-story1" description="desc1" enable="false"&gt;
-		&lt;/feature&gt;
+  &lt;feature uid="users-story2" description="null" enable="false"&gt;
+  &lt;/feature&gt;
 
-		&lt;feature uid="users-story2" description="null" enable="false"&gt;
-		&lt;/feature&gt;
-
-	&lt;/feature-group&gt;
+ &lt;/feature-group&gt;
 	
 &lt;/features&gt;</programlisting>
       		 </listitem>
@@ -930,19 +941,30 @@ public class FeatureFlippingThoughAopTest {
 			
 			<section id="3-3-1">
 				<title>Overview</title>
-				  <para>You may have to enable your feature for a subset of your users identified by a dedicated group or profile. 
+				  <para>You may have to enable a feature only for a subset of your users. They are belong to a dedicated group or get a dedicated profile. 
 				  With the <varname>Canary Realease</varname> pattern for instance, the feature could be activated only for beta-tester.
 				  </para>
 				  
-				  <para>ff4j does not provide any user/group declaration system but instead leverage on existing one (Spring Security, Apache Chiro...), they
-				  are not declared, defined and administrate with ff4j. A set of permissions is defined for each feature but the permissions must already
-				  exist in the external security provider.</para>
+				  <para>ff4j does not provideany  users/groups definition system but, instead, leverage on existing one like Spring Security or Apache Chiro. 
+				  A set of permissions is defined for each feature but the permissions must already exists in the external security provider. Permissions will be checked
+				  if, and only if, the feature is enabled.
+				  </para>
+				  
+				  <figure id="fig-03-authds" floatstyle="center">
+				  <title>AuthorizationManager sequence diagram</title>
+				  <mediaobject role="bordered">
+				   <imageobject role="web">
+					<imagedata align="center" fileref="img/fig-03-sequencediagram-permissions.png" contentwidth="15cm"/>
+			  	  </imageobject>
+				 </mediaobject>
+				 </figure>
 			</section>
 			
 			<section id="3-3-2">
 				<title>AuthorizationManager</title>
-				  <para>This is the class where ff4j test permissions of current user against the list in the feature. It will leverage on existing framework. Today
-				  the only implementation available is through <varname>Spring security</varname> but you can define your own.</para>
+				  <para>This is the class where ff4j evaluates users permissions against granted list at feature level. An implementation is available out-of-the-box to work
+				  with <varname>Spring security</varname> framework. There are 2 methods to implements. The first one is retrieving current user profiles (to be tested against features ACL), and the
+				  second will return a union of all permissions avaiable within the sysem. It's used in administration console to display permissions avec an editable list.</para>
 				  
 				  <figure id="fig-03-auth" floatstyle="center">
 				  <title>AuthorizationManager UML Diagram</title>
@@ -951,32 +973,246 @@ public class FeatureFlippingThoughAopTest {
 					<imagedata align="center" fileref="img/fig-03-authmanager.png" contentwidth="7cm"/>
 			  	  </imageobject>
 				 </mediaobject>
-		</figure>
+				 </figure>
 			</section>
 			
 			<section id="3-3-3">
 				<title>Illustrate through sample code</title>
-				  <para>In this first sample we will create our own <varname>AuthorizationManager</varname> with the list of permissions in Memory.</para>
+				  <para>In this sample we will create a custom implementatino of <varname>AuthorizationManager</varname> which keep the list of permissions in Memory.</para>
 				  
 				  <itemizedlist>
 					<listitem>
-       					<para>There is no new dependency to declare the <varname>AuthorizationManager</varname> is in the <filename>ff4j-core.jar</filename> file. So let's
-       					propose a implementation for this interface</para>
-    				<programlisting language="java">&lt;dependency&gt;
-    				</programlisting>
+       					<para>There is no new extra required dependency to implement the <varname>AuthorizationManager</varname> is in the <filename>ff4j-core.jar</filename> file.
+       					Here is a sample implementation.</para>
+    				<programlisting language="java">public class CustomAuthorizationManager implements AuthorizationsManager {
+
+  public static ThreadLocal&lt;String&gt; currentUserThreadLocal = new ThreadLocal&lt;String&gt;();
+
+  private static final Map&lt;String, Set&lt;String&gt;&gt; permissions = new HashMap&lt;String, Set&lt;String&gt;&gt;();
+
+  static {
+    permissions.put("userA", new HashSet&lt;String&gt;(Arrays.asList("user", "admin", "beta")));
+    permissions.put("userB", new HashSet&lt;String&gt;(Arrays.asList("user")));
+    permissions.put("userC", new HashSet&lt;String&gt;(Arrays.asList("user", "beta")));
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public Set&lt;String&gt; getCurrentUserPermissions() {
+    String currentUser = currentUserThreadLocal.get();
+    return permissions.containsKey(currentUser) ? permissions.get(currentUser) : new HashSet&lt;String&gt;(); 
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public Set&lt;String&gt; listAllPermissions() {
+    Set&lt;String&gt; allPermissions = new HashSet&lt;String&gt;();
+    for (Set&lt;String&gt; subPersmission : permissions.values()) {
+      allPermissions.addAll(subPersmission);
+    }
+    return allPermissions;
+  }
+
+}</programlisting>
     			</listitem>
-    			</itemizedlist>
-				  
-				  
+    			
+    				<listitem>
+       					<para>Create a <filename>ff4j.xml</filename> file with dedicated roles. 
+       					A user will be able to use the <varname>sayHello</varname> feature it's enabled and if
+       					he has the permission <varname>admin</varname>. In the same way a user can use <varname>sayGoodBye</varname>
+       					if, and only if, he has the beta OR the user permission.  
+       					</para>
+    				<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration&gt;
+&lt;features&gt;
+
+	&lt;feature uid="sayHello" description="my first feature" enable="true"&gt;
+		&lt;security&gt;
+			&lt;role name="admin" /&gt;
+		&lt;/security&gt;
+		
+	&lt;/feature&gt;
+
+	&lt;feature uid="sayGoodBye" description="null" enable="true"&gt;
+		&lt;security&gt;
+			&lt;role name="beta" /&gt;
+			&lt;role name="user" /&gt;
+		&lt;/security&gt;
+	&lt;/feature&gt;
+	
+&lt;/features&gt;</programlisting>
+    				</listitem>
+    				
+    				<listitem>
+       					<para>Here is the unit test to illustrate : </para>
+       					<programlisting language="java">@Test
+public void sampleSecurityTest() {
+
+  // Create FF4J
+  FF4j ff4j = new FF4j("ff4j-security.xml");
+  // Add the Authorization Manager Filter
+  AuthorizationsManager authManager = new CustomAuthorizationManager();
+  ff4j.setAuthorizationsManager(authManager);
+  
+  // Given : Feature exist and enable
+  assertTrue(ff4j.exist("sayHello"));
+  assertTrue(ff4j.getFeature("sayHello").isEnable());
+
+  // Unknow user does not have any permission =&gt; check is false
+  CustomAuthorizationManager.currentUserThreadLocal.set("unknown-user");
+  System.out.println(authManager.getCurrentUserPermissions());
+  assertFalse(ff4j.check("sayHello"));
+
+  // userB exist bit he has not role Admin
+  CustomAuthorizationManager.currentUserThreadLocal.set("userB");
+  System.out.println(authManager.getCurrentUserPermissions());
+  assertFalse(ff4j.check("sayHello"));
+
+  // userA is admin
+  CustomAuthorizationManager.currentUserThreadLocal.set("userA");
+  System.out.println(authManager.getCurrentUserPermissions());
+  assertTrue(ff4j.check("sayHello"));
+}</programlisting>
+ 			   </listitem>
+    		 </itemizedlist>
 			</section>
-			
 			
 			<section id="3-3-4">
 				<title>Working with Spring Security</title>
-				  <para> Xml update, custom permission manager, unit testing
-				  Principle, use cases (canary release, beta feature), sequence diagram
-				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>Even if creating a custom <varname>AuthorizationManager</varname> is possible, you may
+				  want to use a well defined security framework such as Spring Security. The support of the framework
+				  is provided out-of-the-box
+				  </para>
+				  
+				 <itemizedlist>
+					<listitem>
+       					<para>Add the following dependency to your <filename>pom.xml</filename> file.</para>
+    				<programlisting language="xml">&lt;dependency&gt;
+ &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
+  &lt;artifactId&gt;ff4j-aop&lt;/artifactId&gt;
+  &lt;version&gt;1.2.0&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
+    				</listitem>
+    				
+    				<listitem>
+       					<para>Define a spring security <varname>UserDetails</varname> implementation 
+       					with the following <filename>applicationContext-security.xml</filename> file.</para>
+    				<programlisting language="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;
+
+  &lt;bean id="ff4j" class="org.ff4j.FF4j" &gt;
+    &lt;property name="store" 					ref="ff4j.store.inmemory" /&gt;
+    &lt;property name="authorizationsManager"	ref="ff4j.authorizationManager.spring" /&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="ff4j.store.inmemory" class="org.ff4j.store.InMemoryFeatureStore" &gt;
+    &lt;property name="location" value="ff4j-security.xml" /&gt;
+  &lt;/bean&gt;
+  
+  &lt;bean id="ff4j.authorizationManager.spring" class="org.ff4j.security.SpringSecurityAuthorisationManager" &gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</programlisting>
+    				</listitem>
+    				
+    				<listitem>
+       					<para>The <filename>ff4j-security.xml</filename> file has not changed from last sample</para>
+    				<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration&gt;
+&lt;features&gt;
+
+	&lt;feature uid="sayHello" description="my first feature" enable="true"&gt;
+		&lt;security&gt;
+			&lt;role name="admin" /&gt;
+		&lt;/security&gt;
+		
+	&lt;/feature&gt;
+
+	&lt;feature uid="sayGoodBye" description="null" enable="true"&gt;
+		&lt;security&gt;
+			&lt;role name="beta" /&gt;
+			&lt;role name="user" /&gt;
+		&lt;/security&gt;
+	&lt;/feature&gt;
+	
+&lt;/features&gt;</programlisting>
+    				</listitem>
+    				
+    				<listitem>
+    				<para>Create the following test. It instanciates a spring security context and authenticate
+    				a 'userA' with the permission 'beta'.</para>
+    				<programlisting language="java">@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:*applicationContext-security.xml"})
+public class SampleSpringSecurityTest {
+
+    @Autowired
+    private FF4j ff4j;
+
+    /** Security context. */
+    private SecurityContext securityCtx;
+
+    @Before
+    public void setUp() throws Exception {
+        securityCtx = SecurityContextHolder.getContext();
+
+        // UserA got the roles : beta, user, admin
+        List&lt;GrantedAuthority&gt; listOfRoles = new ArrayList&lt;GrantedAuthority&gt;();
+        listOfRoles.add(new SimpleGrantedAuthority("beta"));
+        User userA = new User("userA", "passwdA", listOfRoles);
+
+        // Creadentials for UserA
+        String userName = userA.getUsername();
+        String passwd = userA.getPassword();
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userName, passwd, listOfRoles);
+        token.setDetails(userA);
+
+        // Create a security context with
+        SecurityContext context = new SecurityContextImpl();
+        context.setAuthentication(token);
+        SecurityContextHolder.setContext(context);
+    }
+
+    @Test
+    public void testIsAuthenticatedAndAuthorized() {
+
+        // Given userA is authenticated in Spring
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Assert.assertTrue(auth.isAuthenticated());
+
+        // UserA has not expected role 'admin'
+        assertTrue(ff4j.exist("sayHello"));
+        assertTrue(ff4j.getFeature("sayHello").isEnable());
+        assertTrue(ff4j.getFeature("sayHello").getPermissions().contains("admin"));
+        assertFalse(ff4j.check("sayHello"));
+
+        // UserA has expected role 'beta'
+        assertTrue(ff4j.exist("sayGoodBye"));
+        assertTrue(ff4j.getFeature("sayGoodBye").isEnable());
+        assertTrue(ff4j.getFeature("sayGoodBye").getPermissions().contains("beta"));
+        assertTrue(ff4j.check("sayGoodBye"));
+    }
+
+    @After
+    public void tearDown() {
+        SecurityContextHolder.setContext(securityCtx);
+    }
+    				</programlisting>
+    				</listitem>
+    				
+    			</itemizedlist>
+    			
+    			<note>
+    			<para>
+    				The spring security context has been here created in the test, in web applications, the security Context
+    				within the HTTP thread with a <varname>ThreadLocal.</varname>
+    			</para>
+    			</note>
+				  
 			</section>
 			
 		</section>
@@ -984,27 +1220,128 @@ public class FeatureFlippingThoughAopTest {
 		<!-- *********************************************************************************** -->
 		<section id="3-4">
 			<title>Custom Strategy</title>
-			<para>Text here</para>
 			<section id="3-4-1">
-				<title>Overview</title>
-				  <para>Reference to conclusion #1, sequence diagram,
-				  Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				<title>FlippingStrategy Overview</title>
+				  
+				  <para>As introduced in the first chapter, you can enslaved the feature with your custom implementation and rules. With <varname>ff4j</varname>, once the
+				  feature is enabled AND the current authenticated user is granted (if authorization manager not null) we check the avaiability of the feature with a <filename>FlippinStrategy</filename>.
+				  As defined below it's set up with initial parameters. (those parameters are important for serialization later) and the test is performed within <filename>evaluate(...)</filename> method. This
+				  method expected an <varname>FlippingExecutionContext</varname> which hold key/value parameters.
+				  </para>
+				  
+				 <figure id="fig-03-strat" floatstyle="center">
+				  <title>FlippingStrategy UML Diagram</title>
+				  <mediaobject role="bordered">
+				   <imageobject role="web">
+					<imagedata align="center" fileref="img/fig-03-flippingstrategy.png" contentwidth="7cm"/>
+			  	  </imageobject>
+				 </mediaobject>
+				 </figure>
+				 
+				 <para>The behavior of the flipping strategy component is described in the sequence diagram below. Note that <varname>init(...)</varname> method is invoked at startup. The flipping strategies
+				 are hold by the features themselves.
+				 </para>
+				 
+				  <figure id="fig-03-stratseq" floatstyle="center">
+				  <title>FlippingStrategy UML Diagram</title>
+				  <mediaobject>
+				   <imageobject role="web">
+					<imagedata align="center" fileref="img/fig-03-sequencediagram-strategy.png" contentwidth="15cm"/>
+			  	  </imageobject>
+				 </mediaobject>
+				 </figure>
+				 
 			</section>
-			<section id="3-4-2">
-				<title>FeatureFlippingStrategy Interface</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
-			</section>
+			
 			<section id="3-4-3">
 				<title>Sample Code</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>There is a bunch of strategies provided out-of-the-box but to understand the concept we propose to create our own. In this sample we will toggle feature
+				  if, and only if the request is made during office time let's say 09:00 to 18:00.</para>
+				  <itemizedlist>
+					<listitem>
+       					<para>There is no new extra required dependency to implement the <varname>FlippingStrategy</varname> is in the <filename>ff4j-core.jar</filename> file. Create the following class
+       					strategy class. Note that it inherit from <varname>AbstractFlipStrategy</varname>, it's not mandatory but provide a bunch of helpers.</para>
+    				<programlisting language="java">public class OfficeHoursFlippingStrategy extends AbstractFlipStrategy {
+
+    /** Start Hour. */
+    private int start = 0;
+
+    /** Hend Hour. */
+    private int end = 0;
+
+    /** {@inheritDoc} */
+    @Override
+    public void init(String featureName, Map&lt;String, String&gt; initValue) {
+        super.init(featureName, initValue);
+        assertRequiredParameter("startDate");
+        assertRequiredParameter("endDate");
+        start = new Integer(initValue.get("startDate"));
+        end = new Integer(initValue.get("endDate"));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean evaluate(String featureName, FeatureStore cuurentStore, FlippingExecutionContext executionContext) {
+        int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        return (currentHour &gt;= start &amp;&amp; currentHour &lt; end);
+    }
+
+}</programlisting>
+    				</listitem>
+    				
+    				<listitem>
+    					<para>Create a <varname>ff4j-strategy-1.xml</varname> with a feature reference our new strategy : </para>
+    					<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+
+	&lt;feature uid="sayHello" enable="true" description="some desc"&gt;
+		&lt;flipstrategy class="org.ff4j.sample.strategy.OfficeHoursFlippingStrategy" &gt;
+			&lt;param name="startDate"&gt;9&lt;/param&gt;
+			&lt;param name="endDate"&gt;18&lt;/param&gt;
+		&lt;/flipstrategy&gt;
+	&lt;/feature&gt;
+		
+&lt;/features&gt;</programlisting>
+    				</listitem>
+    				
+    				<listitem>
+    					<para>And the test to illustrate the behavior create the following unit test :</para>
+    					<programlisting language="java">public class OfficeHoursFlippingStrategyTest  {
+	
+    // ff4j
+    private final FF4j ff4j = new FF4j("ff4j-strategy-1.xml");
+
+	@Test
+    public void testCustomStrategy() throws Exception {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        boolean isNowOfficeTime = (hour &gt; 9) &amp; (hour &lt; 18);
+        Assert.assertTrue(isNowOfficeTime == ff4j.check("sayHello"));
+	}
+		
+}</programlisting>
+    				</listitem>
+    				
+    			</itemizedlist>
+				  
+				  
 			</section>
+			
+			
 			<section id="3-4-4">
 				<title>Overriding Strategy</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>Sometimes, even it a feature has a defined strategy, you would like to override it for a single invocation. The <varname>FF4J</varname> 
+				  class provides another <varname>check()</varname> method with a flipping strategy parameter. It will overrides the existing one.
+				  </para>
+				  
+				  <itemizedlist>
+				  <listitem>
+    					<para>And the test to illustrate the behavior create the following unit test :</para>
+    					<programlisting language="java">
+    					</programlisting>
+    				</listitem>
+				  
+				  </itemizedlist>
+				  
 			</section>
 			<section id="3-4-5">
 				<title>Available Strategies</title>

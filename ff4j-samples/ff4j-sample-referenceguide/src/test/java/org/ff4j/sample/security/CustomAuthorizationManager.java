@@ -10,13 +10,10 @@ import org.ff4j.security.AuthorizationsManager;
 
 public class CustomAuthorizationManager implements AuthorizationsManager {
 
-    private static final Map<String, Set<String>> permissions = new HashMap<String, Set<String>>();
-
     public static ThreadLocal<String> currentUserThreadLocal = new ThreadLocal<String>();
 
-    /**
-     * Initialization of our sample
-     */
+    private static final Map<String, Set<String>> permissions = new HashMap<String, Set<String>>();
+
     static {
         permissions.put("userA", new HashSet<String>(Arrays.asList("user", "admin", "beta")));
         permissions.put("userB", new HashSet<String>(Arrays.asList("user")));
@@ -27,12 +24,8 @@ public class CustomAuthorizationManager implements AuthorizationsManager {
     @Override
     public Set<String> getCurrentUserPermissions() {
         String currentUser = currentUserThreadLocal.get();
-        if (permissions.containsKey(currentUser)) {
-            return permissions.get(currentUser);
-        }
-        return new HashSet<String>();
+        return permissions.containsKey(currentUser) ? permissions.get(currentUser) : new HashSet<String>(); 
     }
-
 
     /** {@inheritDoc} */
     @Override

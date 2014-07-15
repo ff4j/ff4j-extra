@@ -11,8 +11,10 @@
 			 The principe of <emphasis role="italic">Feature Toggle</emphasis> is to enable or disable feature through configuration, eventually at runtime.
 			 The condition statement to toggle can be a simple flag (boolean) but also a more elaborate test with a set of rules. 
 			 It's also called  <emphasis role="italic">feature flipping</emphasis>, <emphasis role="italic">feature flags</emphasis>, 
-			 or even <emphasis role="italic">feature bits</emphasis>. Toggle features at runtime is mandatory to change behaviour of the application without restarting. 
-			 FF4J is an implementation of the principle for the Java Plateform. It stands as <emphasis role="italic">Feature Flipping for Java</emphasis>.
+			 or even <emphasis role="italic">feature bits</emphasis>. Toggle features at runtime is mandatory to change behaviour of the application without restarting.
+			 </para>
+			 
+			 <para><emphasis role="bold">FF4J</emphasis> is an implementation of the principle for the Java Plateform. It stands as <emphasis role="italic">Feature Flipping for Java</emphasis>.
 			 
 			 <note>
 			 <para>As ff4j provides a restFul WebAPI, any application could work and check features through HTTP. 

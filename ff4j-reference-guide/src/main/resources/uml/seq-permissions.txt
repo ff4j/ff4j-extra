@@ -1,0 +1,21 @@
+title ff4j : check with permissions
+
+participant client
+participant ff4j
+participant FeatureStore
+participant AuthorizationManager
+
+alt Read Feature
+  client->+ff4j : check(feature_id)
+  ff4j->+FeatureStore:read(feature_id)
+  FeatureStore-->-ff4j:Feature
+end
+note over ff4j : Feature exists and enabled. \n(Otherwise already exit)
+
+alt AuthorisationManager != null
+ff4j->+AuthorizationManager:getUserPermissions()
+AuthorizationManager-->-ff4j:permission list
+ff4j->ff4j:check ACL
+ff4j-->-client:isAuthorized
+end
+

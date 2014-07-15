@@ -1,0 +1,29 @@
+title ff4j : check with strategy
+
+participant client
+participant ff4j
+participant FeatureStore
+participant AuthorizationManager
+participant FlippingStrategy
+
+alt Read Feature & Check Permissions
+  client->+ff4j : check(feature_id)
+  ff4j->FeatureStore:...
+  ff4j->AuthorizationManager:...
+
+end
+note over ff4j : Feature exists, Enabled and Authorized. \n(Otherwise already exit)
+
+ff4j->ff4j:Feature.getStrategy()
+alt FlippingStrategy != null
+ff4j->+FlippingStrategy : evaluate(ExecutionContext)
+note right of FlippingStrategy : custom code
+FlippingStrategy-->-ff4j:boolean
+ff4j-->-client:boolean
+end
+
+
+
+
+
+

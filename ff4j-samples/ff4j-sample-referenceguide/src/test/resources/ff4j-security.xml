@@ -6,7 +6,6 @@
 		<security>
 			<role name="admin" />
 		</security>
-		
 	</feature>
 
 	<feature uid="sayGoodBye" description="null" enable="true">
