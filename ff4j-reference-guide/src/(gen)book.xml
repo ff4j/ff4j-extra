@@ -610,7 +610,7 @@ behaviour by setting the autoCreate flag as true. If feature is not found the me
 	      			 <title>Sequence Diagram Core</title>
 	      			 <mediaobject role="bordered">
 	      			   <imageobject condition="web">
-	      			    <imagedata align="center" fileref="img/fig-02-sequencediagram-core.png" format="PNG" width="15cm"/>
+	      			    <imagedata align="center" fileref="img/fig-02-sequencediagram-core.png" format="PNG" width="12cm"/>
 	      			   </imageobject>
 	      			 </mediaobject>
 	     		  </figure>
@@ -1219,17 +1219,28 @@ public class SampleSpringSecurityTest {
 		
 		<!-- *********************************************************************************** -->
 		<section id="3-4">
-			<title>Custom Strategy</title>
+			<title>Flipping Strategy</title>
 			<section id="3-4-1">
-				<title>FlippingStrategy Overview</title>
+				<title>Overview</title>
 				  
-				  <para>As introduced in the first chapter, you can enslaved the feature with your custom implementation and rules. With <varname>ff4j</varname>, once the
-				  feature is enabled AND the current authenticated user is granted (if authorization manager not null) we check the avaiability of the feature with a <filename>FlippinStrategy</filename>.
-				  As defined below it's set up with initial parameters. (those parameters are important for serialization later) and the test is performed within <filename>evaluate(...)</filename> method. This
-				  method expected an <varname>FlippingExecutionContext</varname> which hold key/value parameters.
+				  <para>As introduced in the first chapter, the behavior of a feature can be enslaved with your custom implementation and rules. With <varname>ff4j</varname>, once the
+				  feature is enabled AND current authenticated user is granted, a test is performed to evaluate the value of <filename>FlippingStrategy</filename>.</para>
+				 
+				  <figure id="fig-03-stratseq" floatstyle="center">
+				  <title>FlippingStrategy UML Diagram</title>
+				  <mediaobject role="bordered">
+				   <imageobject role="web">
+					<imagedata align="center" fileref="img/fig-03-sequencediagram-strategy.png" contentwidth="15cm"/>
+			  	  </imageobject>
+				 </mediaobject>
+				 </figure>
+				  
+				  <para>
+				  The class is set up with a map of "initial parameters" and the <varname>init(..)</varname> method must be implemented. The getter of those parameters must also be implemented
+				  (for serialization purposes) and obviously the test is performed within <filename>evaluate(...)</filename> method.
 				  </para>
 				  
-				 <figure id="fig-03-strat" floatstyle="center">
+				  <figure id="fig-03-strat" floatstyle="center">
 				  <title>FlippingStrategy UML Diagram</title>
 				  <mediaobject role="bordered">
 				   <imageobject role="web">
@@ -1238,23 +1249,15 @@ public class SampleSpringSecurityTest {
 				 </mediaobject>
 				 </figure>
 				 
-				 <para>The behavior of the flipping strategy component is described in the sequence diagram below. Note that <varname>init(...)</varname> method is invoked at startup. The flipping strategies
-				 are hold by the features themselves.
-				 </para>
-				 
-				  <figure id="fig-03-stratseq" floatstyle="center">
-				  <title>FlippingStrategy UML Diagram</title>
-				  <mediaobject>
-				   <imageobject role="web">
-					<imagedata align="center" fileref="img/fig-03-sequencediagram-strategy.png" contentwidth="15cm"/>
-			  	  </imageobject>
-				 </mediaobject>
-				 </figure>
+				 <para>
+				 The <varname>evaluate()</varname> method expects a <varname>FlippingExecutionContext</varname> which hold parameters as key/value pairs 
+				 and provides to you the feature name and a reference to the feature store.
+				 </para>  
 				 
 			</section>
 			
 			<section id="3-4-3">
-				<title>Sample Code</title>
+				<title>Illustrate custom strategies (1)</title>
 				  <para>There is a bunch of strategies provided out-of-the-box but to understand the concept we propose to create our own. In this sample we will toggle feature
 				  if, and only if the request is made during office time let's say 09:00 to 18:00.</para>
 				  <itemizedlist>
@@ -1281,7 +1284,7 @@ public class SampleSpringSecurityTest {
 
     /** {@inheritDoc} */
     @Override
-    public boolean evaluate(String featureName, FeatureStore cuurentStore, FlippingExecutionContext executionContext) {
+    public boolean evaluate(String fName, FeatureStore fStore, FlippingExecutionContext ctx) {
         int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         return (currentHour &gt;= start &amp;&amp; currentHour &lt; end);
     }
@@ -1308,16 +1311,24 @@ public class SampleSpringSecurityTest {
     					<para>And the test to illustrate the behavior create the following unit test :</para>
     					<programlisting language="java">public class OfficeHoursFlippingStrategyTest  {
 	
-    // ff4j
-    private final FF4j ff4j = new FF4j("ff4j-strategy-1.xml");
+  // Initialization of target 'ff4j'
+  private final FF4j ff4j = new FF4j("ff4j-strategy-1.xml");
 
-	@Test
-    public void testCustomStrategy() throws Exception {
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        boolean isNowOfficeTime = (hour &gt; 9) &amp; (hour &lt; 18);
-        Assert.assertTrue(isNowOfficeTime == ff4j.check("sayHello"));
-	}
-		
+  @Test
+  public void testCustomStrategy() throws Exception {
+    // Given
+    assertTrue(ff4j.exist("sayHello"));
+    FlippingStrategy fs = ff4j.getFeature("sayHello").getFlippingStrategy();
+    assertTrue(fs.getClass() == OfficeHoursFlippingStrategy.class);
+    assertEquals("9", fs.getInitParams().get("startDate"));
+    
+    // When
+    int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    boolean isNowOfficeTime = (hour &gt; 9) &amp;&amp; (hour &lt; 18);
+    
+    // Then
+    assertEquals(isNowOfficeTime, ff4j.check("sayHello"));
+  }	
 }</programlisting>
     				</listitem>
     				
@@ -1326,8 +1337,95 @@ public class SampleSpringSecurityTest {
 				  
 			</section>
 			
-			
 			<section id="3-4-4">
+				<title>Illustrate custom strategies (2)</title>
+				  <para>This second sample will illustrate the <varname>FlippingExecutionContext</varname> behaviour. We create a strategy
+				  to enable a feature only for a subset of geographical regions.
+				  </para>
+				  
+				  <itemizedlist>
+				  <listitem>
+    					<para>Create a strategy, initialized with the granted regions and expected user region's within execution context : </para>
+    					<programlisting language="java">
+public class RegionFlippingStrategy extends AbstractFlipStrategy {
+
+  /** initial parameter. */
+  private static final String INIT_PARAMNAME_REGIONS = "grantedRegions";
+
+  /** current user attribute */
+  public static final String PARAMNAME_USER_REGION = "region";
+
+  /** Initial Granted Regions. */
+  private final Set&lt;String&gt; setOfGrantedRegions = new HashSet&lt;String&gt;();
+
+  /** {@inheritDoc} */
+  @Override
+  public void init(String featureName, Map&lt;String, String&gt; initValue) {
+    super.init(featureName, initValue);
+    assertRequiredParameter(INIT_PARAMNAME_REGIONS);
+    String[] arrayOfRegions = initValue.get(INIT_PARAMNAME_REGIONS).split(",");
+    setOfGrantedRegions.addAll(Arrays.asList(arrayOfRegions));
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public boolean evaluate(String fName, FeatureStore fStore, FlippingExecutionContext ctx) {
+    // true means required here
+    String userRegion = ctx.getString(PARAMNAME_USER_REGION, true);
+    return setOfGrantedRegions.contains(userRegion);
+  }
+}</programlisting>
+    			  </listitem>
+    			 
+    			 <listitem>
+    					<para>Create a xml file with a feature using the strategy : </para>
+    					<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+  &lt;feature uid="notForEurop" enable="true" &gt;
+    &lt;flipstrategy class="org.ff4j.sample.strategy.RegionFlippingStrategy" &gt;
+      &lt;param name="grantedRegions"&gt;ASIA,AMER&lt;/param&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+&lt;/features&gt;</programlisting>
+    			 </listitem>
+    			 
+    			 <listitem>
+    					<para>Create the unit test : </para>
+    					<programlisting language="java">public class RegionFlippingStrategyTest {
+
+  // ff4j
+  private final FF4j ff4j = new FF4j("ff4j-strategy-2.xml");
+
+  // sample execution context
+  private final FlippingExecutionContext fex = new FlippingExecutionContext();
+
+  @Test
+  public void testRegionStrategy() throws Exception {
+    // Given
+    assertTrue(ff4j.exist("notForEurop"));
+    FlippingStrategy fs = ff4j.getFeature("notForEurop").getFlippingStrategy();
+    assertTrue(fs.getClass() == RegionFlippingStrategy.class);
+    assertEquals("ASIA,AMER", fs.getInitParams().get("grantedRegions"));
+
+    // When
+    fex.addValue(RegionFlippingStrategy.PARAMNAME_USER_REGION, "AMER");
+    // Then
+    assertTrue(ff4j.check("notForEurop", fex));
+
+    // When
+    fex.addValue(RegionFlippingStrategy.PARAMNAME_USER_REGION, "EUROP");
+    // Then
+    assertFalse(ff4j.check("notForEurop", fex));
+  }
+}</programlisting>
+    			 </listitem>
+    			 
+    			 </itemizedlist>
+				  
+			</section>
+			
+			
+			<section id="3-4-5">
 				<title>Overriding Strategy</title>
 				  <para>Sometimes, even it a feature has a defined strategy, you would like to override it for a single invocation. The <varname>FF4J</varname> 
 				  class provides another <varname>check()</varname> method with a flipping strategy parameter. It will overrides the existing one.
@@ -1343,31 +1441,31 @@ public class SampleSpringSecurityTest {
 				  </itemizedlist>
 				  
 			</section>
-			<section id="3-4-5">
+			<section id="3-4-6">
 				<title>Available Strategies</title>
 				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
-				  <section id="3-4-5-1">
+				  <section id="3-4-6-1">
 					<title>Expression Language</title>
 				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
 				  </section>
-				  <section id="3-4-5-2">
+				  <section id="3-4-6-2">
 					<title>ReleaseDate</title>
 				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
 				  </section>
-				  <section id="3-4-5-3">
+				  <section id="3-4-6-3">
 					<title>ClientList</title>
 				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
 				  </section>
-				  <section id="3-4-5-4">
+				  <section id="3-4-6-4">
 					<title>ServerList</title>
 				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
 				  </section>
-				   <section id="3-4-5-5">
+				   <section id="3-4-6-5">
 					<title>Ponderation</title>
 				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>

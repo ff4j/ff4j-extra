@@ -185,7 +185,7 @@ behaviour by setting the autoCreate flag as true. If feature is not found the me
 	      			 <title>Sequence Diagram Core</title>
 	      			 <mediaobject role="bordered">
 	      			   <imageobject condition="web" >
-	      			    <imagedata align="center" fileref="img/fig-02-sequencediagram-core.png" format="PNG" width="15cm" />
+	      			    <imagedata align="center" fileref="img/fig-02-sequencediagram-core.png" format="PNG" width="12cm" />
 	      			   </imageobject>
 	      			 </mediaobject>
 	     		  </figure>

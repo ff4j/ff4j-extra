@@ -50,7 +50,7 @@ public class OfficeHoursFlippingStrategy extends AbstractFlipStrategy {
 
     /** {@inheritDoc} */
     @Override
-    public boolean evaluate(String featureName, FeatureStore cuurentStore, FlippingExecutionContext executionContext) {
+    public boolean evaluate(String fName, FeatureStore fStore, FlippingExecutionContext context) {
         int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         return (currentHour >= start && currentHour < end);
     }

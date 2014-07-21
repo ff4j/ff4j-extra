@@ -22,11 +22,13 @@ package org.ff4j.sample.strategy;
  * #L%
  */
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Calendar;
 
-import junit.framework.Assert;
-
 import org.ff4j.FF4j;
+import org.ff4j.core.FlippingStrategy;
 import org.junit.Test;
 
 public class OfficeHoursFlippingStrategyTest  {
@@ -36,9 +38,14 @@ public class OfficeHoursFlippingStrategyTest  {
 
 	@Test
     public void testCustomStrategy() throws Exception {
+        assertTrue(ff4j.exist("sayHello"));
+        FlippingStrategy fs = ff4j.getFeature("sayHello").getFlippingStrategy();
+        assertTrue(fs.getClass() == OfficeHoursFlippingStrategy.class);
+        assertEquals("9", fs.getInitParams().get("startDate"));
+
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         boolean isNowOfficeTime = (hour > 9) & (hour < 18);
-        Assert.assertTrue(isNowOfficeTime == ff4j.check("sayHello"));
+        assertEquals(isNowOfficeTime, ff4j.check("sayHello"));
 	}
 		
 }
