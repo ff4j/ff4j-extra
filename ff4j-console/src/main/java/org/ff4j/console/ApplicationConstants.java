@@ -1,4 +1,4 @@
-package org.ff4j.console.controller;
+package org.ff4j.console;
 
 /*
  * #%L
@@ -30,5 +30,15 @@ public interface ApplicationConstants {
     // Content of Page
     String PAGE_TITLE = "title";
     String PAGE_SUBTITLE = "subtitle";
+
+    // ----- VIEWS ------------
+
+    String VIEW_HOME = "home";
+
+    String VIEW_FEATURES = "features";
+
+    String VIEW_STATS = "stats";
+
+    String VIEW_SETTINGS = "settings";
 
 }

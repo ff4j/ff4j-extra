@@ -1,49 +1,44 @@
-<%@ include file="/jsp-tiles/taglibs.jsp" %>
+<%@ include file="/jsp-tiles/taglibs.jsp"%>
+<html>
 <head>
-    <title>403 | Forbidden</title>
-    <%@ include file="/jsp-tiles/header.jsp" %>
+<%@ include file="/jsp-tiles/header.jsp"%>
+<title><fmt:message key="webapp.name" /></title>
 </head>
-<body class="loginPage" id="login">
+<body>
 
-	<div class="loginContainer">
-		<form class="form-horizontal" method="post" id="loginForm"
-			  action="<c:url value='/j_security_check'/>"
-			  autocomplete="off"
-    		  onsubmit="saveUsername(this);return validateForm(this)" >
+	<!-- Bandeau avec logout, alert et profile -->
+	<%@ include file="/jsp-tiles/navbar.jsp"%>
 
-			<div class="form-row row-fluid">
+	<div class="main-inner">
+		<div class="container">
+			<div class="row">
+
 				<div class="span12">
-					<h2 >
-						<img src="<c:url value='/images/403_man.jpg' />" >
-					</h2>
-				</div>
-			</div>
 
-			<div class="form-row row-fluid" >
-				<div class="span12">
-					<div class="row-fluid">
-						<div class="form-actions">
-							<div class="span12 controls" >
-							<center>
-								<a href="<c:url value='mainMenu'/>" class="btn btn-danger" >
-								 	<i class="icon-home icon-white"></i>
-								 	Back to HOME
-								</a>
-							</center>
+					<!--  General Informations -->
+					<div class="widget widget-nopad">
+
+						<div class="widget-header">
+							<i class="icon-home"></i>
+							<h3>Error 403 : Forbidden !</h3>
+						</div>
+
+						<div class="widget-content">
+							<div class="widget-content">
+								<img src="<c:url value='/img/403_man.jpg' />">
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-		</form>
-
+		</div>
 	</div>
 
-<c:set var="scripts" scope="request">
-	<script type="text/javascript">
-		<%@ include file="/scripts/login.js"%>
-	</script>
-</c:set>
+	<!-- extra -->
+	<%@ include file="/jsp-tiles/extra.jsp"%>
+
+	<!-- Footer -->
+	<%@ include file="/jsp-tiles/footer.jsp"%>
 
 </body>
+</html>

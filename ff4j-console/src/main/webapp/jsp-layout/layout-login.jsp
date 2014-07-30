@@ -1,18 +1,23 @@
-<%@ include file="/jsp-layout/includes-taglibs.jsp"%>
-<decorator:usePage id="template-login" />
-
-<html lang="en">
-
- <head>
-   <%@ include file="/jsp-layout/header.jsp" %>
-   <decorator:head/>
-   <title><decorator:title/> | <fmt:message key="webapp.name"/></title>
- </head>
-
- <body>
-   <decorator:getProperty property="body.id" writeEntireProperty="true"/>
-   <decorator:getProperty property="body.class" writeEntireProperty="true"/>
-   <decorator:body/>
- </body>
- 
+<%@ include file="/jsp-tiles/taglibs.jsp"%>
+<html>
+<head>
+  <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
+  <link href="<c:url value='/css/bootstrap-responsive.min.css'/>" rel="stylesheet" type="text/css" />
+  <link href="<c:url value='/css/font-awesome.css'/>" rel="stylesheet">
+  
+  <link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css">
+  <link href="<c:url value='/css/pages/signin.css'/>" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript" src="<c:url value='/js/jquery-1.7.2.min.js'/>"></script>
+  <script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
+  <script type="text/javascript" src="<c:url value='/js/signin.js'/>"></script>
+  
+</head>
+<body>
+	 
+	 <!-- Contenu de la page -->
+	<decorator:body/>
+  	  
+  	 
+</body>
 </html>

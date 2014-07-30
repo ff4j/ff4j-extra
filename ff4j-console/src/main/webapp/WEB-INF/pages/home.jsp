@@ -180,7 +180,7 @@
           <!-- /widget -->
           <div class="widget">
             <div class="widget-header"> <i class="icon-signal"></i>
-              <h3>Σ Feature Hit</h3>
+              <h3>Feature Hit</h3>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">

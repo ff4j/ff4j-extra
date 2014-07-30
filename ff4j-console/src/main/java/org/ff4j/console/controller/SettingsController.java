@@ -31,26 +31,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * HomeController which load supervision services and display home page.
- */
 @Controller
-@RequestMapping("/" + ApplicationConstants.VIEW_HOME)
-public class HomeController extends AbstractConsoleController {
+@RequestMapping("/" + ApplicationConstants.VIEW_SETTINGS)
+public class SettingsController extends AbstractConsoleController {
 
     /**
      * Display screen
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        log.info("Access Home Controller");
+        log.info("Access Settings Controller");
 
-        // HOME
+        // FEATURES
         Model model = new ExtendedModelMap();
         model.addAttribute(PAGE_TITLE, "Supervision");
-        model.addAttribute(PAGE_SUBTITLE, "DashBoard");
+        model.addAttribute(PAGE_SUBTITLE, "Settings");
 
-        return new ModelAndView(VIEW_HOME, "model", model);
+        return new ModelAndView(VIEW_SETTINGS, "model", model);
     }
-
 }

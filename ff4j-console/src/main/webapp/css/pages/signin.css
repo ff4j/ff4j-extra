@@ -1,28 +1,18 @@
-/*------------------------------------------------------------------
-Bootstrap Admin Template by EGrappler.com
-------------------------------------------------------------------*/
-
-
-
-
-/** Base Body Styles **/
-body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'Open Sans';}
-
+body{ 
+  background: url(../../img/body-bg.png); 
+  color:#838383;
+}
 
 .account-container {
-	width: 380px; 
-	display: block;
-	margin: 60px auto 0 auto;
-	
-	background: #f9f9f9;
-	
-	border: 1px solid #d5d5d5;
-	
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-
-	box-shadow:  0px 0px 2px #dadada, inset 0px -3px 0px #e6e6e6;
+  width: 380px; 
+  display: block;
+  margin: 60px auto 0 auto;
+  background: #f9f9f9;
+  border: 1px solid #d5d5d5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  box-shadow:  0px 0px 2px #dadada, inset 0px -3px 0px #e6e6e6;
 }
 
 .content {
@@ -30,11 +20,12 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 } 
 
 .login-fields {
-	
+	font-size:15px;
 }
 
 .login-fields .field {
 	margin-bottom: 1.25em;
+	
 }
 
 .login-fields label {
@@ -43,37 +34,32 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 
 .login-fields input {
 	font-family: 'Open Sans';
-	font-size: 13px;
+	font-size: 15px;
+	height:40px;
+	width: 320px;
 	color: #8e8d8d;
 	padding: 11px 15px 10px 50px;
 	background-color: #fdfdfd;
-	width: 255px;
+	
 	display: block;
 	margin: 0;
 	box-shadow: inset 2px 2px 4px #f1f1f1;
 }
 
 .username-field { background: url(../../img/signin/user.png) no-repeat; }
-
 .password-field { background: url(../../img/signin/password.png) no-repeat; }
-
-
 
 
 .login-actions {
 	float: left;
-	
 	width: 100%;
-	
 	margin-top: -1em;
 	margin-bottom: 1.25em;
 }
 
 .login-social {
 	float: left;
-	
 	padding: 10px 0 15px;
-	
 	border: 1px dotted #CCC;
 	border-right: none;
 	border-left: none;	
@@ -92,17 +78,13 @@ span.login-checkbox > input[type='checkbox'] {
 
 span.login-checkbox > input[type='checkbox'] + label {    
     clear: none;
-    
 	height: 15px; 
 	display: block;
     padding: 0 0 0 22px;
     margin: 0;
-    
     font-size: 12px;
     line-height: 1.2em;
-    
     background: url(../../img/signin/check.png) no-repeat 0 0;
-    
     cursor: pointer;
 }
 
@@ -110,81 +92,17 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 	background-position: 0 -15px;
 }
 
-/** Text Under Box**/
-.login-extra {
-	display: block; 
-	width: 300px; 
-	margin: 1.5em auto;
-	 
-	text-align: left;
-	line-height: 19px; 
-	
-	text-shadow: 1px 1px 0px #fff; 	
+.account-container {
+	font-size:15px;
 }
 
 
 .account-container h1 {
 	margin-bottom: .4em;
-	
 	color: #525252;
 }
 
-/** Buttons **/
-.twitter, .fb {
-	position: relative;
-	
-	height: 32px; 
-	width: 157px; 
-	display: block;
-	
-	background: url(../../img/signin/twitter_btn.png) no-repeat; 
-	
-}
-
-.fb {
-	width: 162px; 
-	
-	background: url(../../img/signin/fb_btn.png) no-repeat; 	
-}
-
-.twitter:active, .fb:active {
-	top: 1px;
-}
-
-.twitter:hover, .fb:hover {
-	background-position: 0 -32px;
-}
-
-.twitter a, .fb a {
-	padding: 5px 0 0 35px; 
-	text-shadow: -1px -1px 0px rgba(0,0,0,.3); 
-	color:#fff; 
-	font-weight: bold; 
-	font-size: 11px; 
-	height: 32px; 
-	display: block;	
-}
-
-.fb a {
-	padding: 5px 0 0 31px; 
-	
-}
-
-.twitter, .fb {
-	display: inline-block;
-}
-
-.twitter a:hover, .fb a:hover {
-	color: #FFF;
-	text-decoration: none;
-}
-
 .button {-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; float: right; margin-top: 18px;}
-
-
-
-
-
 
 .register .login-social {
 	margin-bottom: 1em;

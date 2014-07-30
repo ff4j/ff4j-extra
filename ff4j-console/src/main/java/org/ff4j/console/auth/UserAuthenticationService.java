@@ -20,6 +20,13 @@ package org.ff4j.console.auth;
  * #L%
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,10 +41,18 @@ import org.springframework.stereotype.Repository;
 @Repository("authenticateUser")
 public class UserAuthenticationService implements UserDetailsService {
 
+    /** Logger for the class. */
+    protected Logger log = LoggerFactory.getLogger(getClass());
+
     /** {@inheritDoc} */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User usr = new User("admin", "password", true, true, true, true, null);
+        log.info("Authentication of " + username);
+        // Initialization from XML
+        List<GrantedAuthority> listOfRoles = new ArrayList<GrantedAuthority>();
+        GrantedAuthority simpl = new SimpleGrantedAuthority("ROLE_USER");
+        listOfRoles.add(simpl);
+        User usr = new User("admin", "password", true, true, true, true, listOfRoles);
         return usr;
     }
 

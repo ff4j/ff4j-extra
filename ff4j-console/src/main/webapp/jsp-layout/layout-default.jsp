@@ -10,6 +10,9 @@
 	 <!-- Bandeau avec logout, alert et profile -->
 	 <%@ include file="/jsp-tiles/navbar.jsp" %>
 	 
+	 <!-- Menu -->
+	 <%@ include file="/jsp-tiles/subnavbar.jsp" %>
+	 
 	 <!-- Contenu de la page -->
 	 <div id="wrapper" class="container" >
    		<div class="row">
