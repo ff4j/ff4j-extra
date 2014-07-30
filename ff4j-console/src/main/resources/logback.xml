@@ -38,3 +38,68 @@
   </root>
 
 </configuration>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by USER USER (SOCIETE GENERALE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ff4j-console">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="properties" minOccurs="0"/>
+				<xs:element ref="users" minOccurs="0"/>
+				<xs:element ref="connections"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="property">
+		<xs:complexType>
+			<xs:attribute name="name" use="required"/>
+			<xs:attribute name="value" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="user">
+		<xs:complexType>
+			<xs:attribute name="name" use="required"/>
+			<xs:attribute name="password" use="required"/>
+			<xs:attribute name="language"/>
+			<xs:attribute name="admin"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="users">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="user"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="properties">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="property"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="connections">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="connection"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="connection">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="user"/>
+			</xs:sequence>
+			<xs:attribute name="id" use="required"/>
+			<xs:attribute name="mode" use="required"/>
+			<xs:attribute name="url" use="required"/>
+			<xs:attribute name="authKey"/>
+			<xs:attribute name="jmxUserName"/>
+			<xs:attribute name="jmxPassword"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
