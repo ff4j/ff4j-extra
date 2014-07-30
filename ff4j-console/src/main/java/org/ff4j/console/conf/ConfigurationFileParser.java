@@ -1,4 +1,4 @@
-package org.ff4j.console.utils;
+package org.ff4j.console.conf;
 
 /*
  * #%L
@@ -20,6 +20,6 @@ package org.ff4j.console.utils;
  * #L%
  */
 
-public class YamlConfigurationLoader {
+public class ConfigurationFileParser {
 
 }

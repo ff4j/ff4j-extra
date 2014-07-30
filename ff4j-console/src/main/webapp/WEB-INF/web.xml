@@ -4,7 +4,7 @@
 	version="3.0">
 
  	<!-- Display Name in application server -->
-	<display-name>FF4J Administration Console</display-name>
+	<display-name>ff4j Administration Console</display-name>
 
 	<!-- Resources -->
 	<context-param>
@@ -15,7 +15,10 @@
     <!-- SpringBeans -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>
+		 classpath:applicationContext-console.xml
+		 classpath:applicationContext-security.xml
+		</param-value>
 	</context-param>
 
 	<!-- Spring Context -->
@@ -52,7 +55,7 @@
         <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
     
-    <!-- URL Rewriter -->
+    <!-- URL Rewriter 
     <filter>
         <filter-name>rewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
@@ -61,21 +64,64 @@
         <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+    -->
+
 	<!-- Spring MVC -->
-    <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/app/*</url-pattern>
-    </servlet-mapping>
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- Ignore resources -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.eot</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.svg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.woff</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.svgz</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ttf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.otf</url-pattern>
+	</servlet-mapping>
     
 	<!-- Welcome file -->
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<!-- Define error pages -->
@@ -109,6 +155,5 @@
         </cookie-config>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
-	
 
 </web-app>

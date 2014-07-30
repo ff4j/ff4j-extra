@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ff4j-console default-language="en">
+
+	<connections>
+		<connection id="DEV" mode="http"
+			url="http://localhost/ff4j-console/ff4j">
+			<credential authkey="JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF" />
+			<users>
+				<user name="admin" password="xyz" admin="true" />
+				<user name="user" password="toto" language="fr" />
+				<user name="bozo" password="tata" />
+			</users>
+		</connection>
+	</connections>
+
+</ff4j-console>
+

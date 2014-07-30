@@ -27,21 +27,21 @@
 		<dependency>
 			<artifactId>ff4j-core</artifactId>
 			<groupId>org.ff4j</groupId>
-			<version>1.2.0-SNAPSHOT</version>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- AOP -->
 		<dependency>
 			<artifactId>ff4j-aop</artifactId>
 			<groupId>org.ff4j</groupId>
-			<version>1.2.0-SNAPSHOT</version>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- SECURITY -->
 		<dependency>
 			<artifactId>ff4j-security-spring</artifactId>
 			<groupId>org.ff4j</groupId>
-			<version>1.2.0-SNAPSHOT</version>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

@@ -1,4 +1,4 @@
-<%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/jsp-tiles/taglibs.jsp" %>
 
 <!-- ************** Navigation BAR ************** -->
 
@@ -23,7 +23,7 @@
         <div class="nav-collapse"  style="margin-top:15px">
 	        <ul class="nav pull-right">
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-cog"></i> Choose Language <b class="caret"></b></a>
+                            class="icon-cog icon-white"></i> Choose Language <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;"><img src="./img/icons/flag/english.png" style="height:15px"> English</a></li>
               <li><a href="javascript:;"><img src="./img/icons/flag/france.png" style="height:15px"> Frensh</a></li>

@@ -3,17 +3,21 @@
 <decorators defaultdir="/jsp-layout" >
 
     <excludes>
-        <pattern>/403.jsp</pattern>
-        <pattern>/resources/*</pattern>
+        <pattern>/img/*</pattern>
+        <pattern>/css/*</pattern>
+        <pattern>/js/*</pattern>
+        <pattern>/font/*</pattern>
     </excludes> 
     
+    <!-- Home -->
     <decorator name="default" page="layout-default.jsp">
         <pattern>/*</pattern>
+        <pattern>/40*.jsp</pattern>
     </decorator>
     
+    <!-- Dedicated to login -->
      <decorator name="login" page="layout-login.jsp">
         <pattern>/login</pattern>
-        <pattern>/40*.jsp</pattern>
      </decorator>
     
 </decorators>

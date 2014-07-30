@@ -1,7 +1,7 @@
-<%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/jsp-tiles/taglibs.jsp" %>
 <head>
     <title>403 | Forbidden</title>
-    <%@ include file="/common/header.jsp" %>
+    <%@ include file="/jsp-tiles/header.jsp" %>
 </head>
 <body class="loginPage" id="login">
 

@@ -1,31 +1,31 @@
-<%@ include file="/includes.jsp"%>
+<%@ include file="/jsp-tiles/taglibs.jsp"%>
 <html>
 <head>
-  <%@ include file="/common/header.jsp" %>
+  <%@ include file="/jsp-tiles/header.jsp" %>
   <decorator:head/>
    <title><fmt:message key="webapp.name"/></title>
 </head>
-
 <body>
 
 	 <!-- Bandeau avec logout, alert et profile -->
-	 <%@ include file="/common/navbar.jsp" %>
+	 <%@ include file="/jsp-tiles/navbar.jsp" %>
 	 
-	 <div id="wrapper" class="container">
+	 <!-- Contenu de la page -->
+	 <div id="wrapper" class="container" >
    		<div class="row">
-
-  		<!-- Barre de menu gauche -->
-  		<%@ include file="/common/sidebar.jsp"%>
-  
-   		<!--content area -->
    		<div class="span9"> 
-    		<div id="content" class="clearfix" style="padding-top:20px">
+    		<div id="content" class="clearfix" >
 	 			<decorator:body/>
      		</div>
   		</div>
-
+  	   </div>
+  	 </div>
+  	 
+	 <!-- extra -->
+ 	 <%@ include file="/jsp-tiles/extra.jsp"%>
+ 
      <!-- Footer -->
-     <%@ include file="/common/footer.jsp"%>
+     <%@ include file="/jsp-tiles/footer.jsp"%>
    
 </body>
 </html>

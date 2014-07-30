@@ -1,4 +1,4 @@
-<%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/jsp-tiles/taglibs.jsp" %>
 
   <div class="main-inner">
     <div class="container">
@@ -26,7 +26,7 @@
                 		 	Uptime&nbsp;
                 		 </a>
                 		 </td>
-                		 <td style="width:25px"><img src="./img/icons/uptime.png" style="width:20px"></td>
+                		 <td style="width:25px"><img src="<c:url value='/img/icons/uptime.png'/>" style="width:20px"></td>
                 		 <td style="width:300px;color:#696969;
                 		 		text-align:right;
                 		 		-webkit-border-radius: 6px;
@@ -104,7 +104,7 @@
                 		 		border-radius: 6px;
                 		 		background-color:#eef8ee;
                 		 		padding:5px;
-                		 		text-transform:lowercase;"><h4> 1.2.0-SNAPSHOT </td>
+                		 		text-transform:lowercase;"><h4> 1.2.0 </td>
                 		 </tr>
                 	</table>
                 	</center>
@@ -180,7 +180,7 @@
           <!-- /widget -->
           <div class="widget">
             <div class="widget-header"> <i class="icon-signal"></i>
-              <h3> Σ Feature Hit</h3>
+              <h3>Σ Feature Hit</h3>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">

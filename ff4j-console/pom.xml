@@ -23,6 +23,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
 		<jetty.port>8080</jetty.port>
+		<jetty.context>/ff4j-console</jetty.context>
 		<license.licenseResolver>${project.baseUri}src/license</license.licenseResolver>
 		<sitemesh.version>2.4.2</sitemesh.version>
 	</properties>
@@ -84,7 +85,7 @@
             <version>${sitemesh.version}</version>
         </dependency>
 
-		<!-- TAGLIBS -->
+		<!-- WEB -->
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>c</artifactId>
@@ -97,47 +98,20 @@
 			<artifactId>jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- Webservices exposition -->
+		 <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>jaxb-impl</artifactId>
-					<groupId>com.sun.xml.bind</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-spring</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aop</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-	</dependencies>
-
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>3.1.3.RELEASE</version>
+        </dependency>
+		
+		</dependencies>
+		 
 	<build>
 		<finalName>ff4j-console</finalName>
 		<plugins>
@@ -163,7 +137,7 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
 				<configuration>
-					<contextPath>/ff4j-console</contextPath>
+					<contextPath>${jetty.context}</contextPath>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">

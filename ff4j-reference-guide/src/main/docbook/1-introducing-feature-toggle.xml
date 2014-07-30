@@ -282,22 +282,17 @@
 		   </section> <!-- Ops and infrastructure -->
 		   
 		   <section id="1-3-3"><title>Business Toggle</title>
-		   
-		   		<section id="1-3-3-1"><title>Overview</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
-				
-				</section>
-				
+		   	
 				<section id="1-3-3-2"><title>Business Rules</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>The flipping of features can be driven by a set of high level rules with a decision table or decision tree. For
+				  thoses cases you should implement your own logic and not only rely on a single flag. We use the term business rules 
+				  but also for ff4j <varname>Flipping Strategy</varname>. The behaviour is described in the following flowchart :</para>
 				  
-				    <figure id="fig-brules" floatstyle="center">
+				    <figure id="fig-01-brules" floatstyle="center">
       				  <title>Business rules</title>
-      				   <mediaobject>
+      				   <mediaobject role="bordered">
       				    <imageobject role="web">
-      					  <imagedata align="center" fileref="img/fig-00-notcreated.png" contentwidth="8cm" />
+      					  <imagedata align="center" fileref="img/fig-01-businessrules-flowchart.png" contentwidth="10cm" />
       					</imageobject>
       				   </mediaobject>
      				</figure>
@@ -305,14 +300,24 @@
 				</section>
 				
 				<section id="1-3-3-3"><title>A/B Testing</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>This term is well defined in wikipedia with : "<emphasis role="italic">In marketing and business intelligence, A/B testing 
+				  is jargon for a randomized experiment with two variants, A and B, which are the control and treatment in the controlled experiment. 
+				  It is a form of statistical hypothesis testing with two variants leading to the technical term, Two-sample hypothesis testing, 
+				  used in the field of statistics. Other terms used for this method include bucket tests and split testing but these terms have a 
+				  wider applicability to more than two variants. In online settings, such as web design (especially user experience design), the 
+				  goal is to identify changes to web pages that increase or maximize an outcome of interest (e.g., click-through rate for a banner 
+				  advertisement). Formally the current web page is associated with the null hypothesis."</emphasis> </para>
+				  
+				  <para>The feature toggle pattern allows to choose between one variant or another based on a custom strategy. The target is to measure the
+				  transformation rate to estimate its business added value. Monitoring capabilities are mandatory. FF4J
+				  saved any access to the feature out-of-the-box. Those statistics are available any time in the <varname>EventRepository</varname>, check
+				  monitoring part for more information.</para>
 				  
 				   <figure id="fig-abtesting" floatstyle="center">
       				  <title>A/B testing</title>
       				   <mediaobject>
       				    <imageobject role="web">
-      					  <imagedata align="center" fileref="img/fig-00-notcreated.png" contentwidth="8cm" />
+      					  <imagedata align="center" fileref="img/fig-01-abtesting.png" contentwidth="10cm" />
       					</imageobject>
       				   </mediaobject>
      				</figure>

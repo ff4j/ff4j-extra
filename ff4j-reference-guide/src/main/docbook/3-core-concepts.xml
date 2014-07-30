@@ -720,18 +720,36 @@ public class RegionFlippingStrategy extends AbstractFlipStrategy {
 				  
 			</section>
 			
-			
 			<section id="3-4-5">
 				<title>Overriding Strategy</title>
-				  <para>Sometimes, even it a feature has a defined strategy, you would like to override it for a single invocation. The <varname>FF4J</varname> 
-				  class provides another <varname>check()</varname> method with a flipping strategy parameter. It will overrides the existing one.
+				  <para>Sometimes, even if a feature has a defined strategy, you would like to override it for a single invocation. The <varname>FF4J</varname> 
+				  class provides another <varname>check()</varname> method which take a flipping strategy as second parameter. The strategy will overrides the existing one.
 				  </para>
 				  
 				  <itemizedlist>
 				  <listitem>
-    					<para>And the test to illustrate the behavior create the following unit test :</para>
-    					<programlisting language="java">
-    					</programlisting>
+    					<para>Here is a sample unit test to illustrate the behavior : </para>
+    					<programlisting language="java">public class OverridingStrategyTest {
+  // ff4j
+  private final FF4j ff4j = new FF4j("ff4j-strategy-1.xml");
+
+  @Test
+  public void testBehaviourOfOverriding() {
+    assertTrue(ff4j.exist("sayHello"));
+
+    // Behaviour of the strategy
+    FlippingStrategy fs = ff4j.getFeature("sayHello").getFlippingStrategy();
+    assertTrue(fs.getClass() == OfficeHoursFlippingStrategy.class);
+    assertEquals("9", fs.getInitParams().get("startDate"));
+    int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    boolean isNowOfficeTime = (hour &gt; 9) &amp; (hour &lt; 18);
+    assertEquals(isNowOfficeTime, ff4j.check("sayHello"));
+
+    // New Strategy : ReleaseDate with date in the past ==&gt; Always true
+    FlippingStrategy newStrategy = new ReleaseDateFlipStrategy(new Date(System.currentTimeMillis() - 100000));
+    assertTrue(ff4j.checkOveridingStrategy("sayHello", newStrategy, null));
+  }
+}</programlisting>
     				</listitem>
 				  
 				  </itemizedlist>
@@ -739,75 +757,542 @@ public class RegionFlippingStrategy extends AbstractFlipStrategy {
 			</section>
 			<section id="3-4-6">
 				<title>Available Strategies</title>
-				  <para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  <para>As previously detailed, a <varname>FlippingStrategy</varname> implements a custom logic to perform flipping. The ff4j framework provides a set of
+				  strategies out-of-the-box.</para>
 				  <section id="3-4-6-1">
 					<title>Expression Language</title>
-				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  	<para>
+				  	The idea behind this strategy is to evaluate a boolean expression by combining several feature with moore algebra. AND, OR, NOT and brackets are available. This way you
+				  	can define features depending of status of other.
+				  	</para>
+				  	
+				  <itemizedlist>
+				    <listitem>
+    					<para>Create a XML file, we want to check that feature 'D' is flipped if : <varname>(A AND B ) OR NOT(C) OR NOT(B)</varname>.
+    					The expression is wrapped in a CDATA block. The charater for the
+    					operand AND is <varname>&amp;</varname>, for OR it's <varname>|</varname> and for NOT it's <varname>!</varname></para>
+    					<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+  &lt;feature uid="A" enable="true"  /&gt;
+  &lt;feature uid="B" enable="false" /&gt;
+  &lt;feature uid="C" enable="false" /&gt;
+  &lt;feature uid="D" enable="true"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.el.ExpressionFlipStrategy"&gt;
+      &lt;param name="expression"&gt;&lt;![CDATA[A &amp; B | !C | !B]]&gt;&lt;/param&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+  &lt;feature uid="E" enable="true"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.el.ExpressionFlipStrategy"&gt;
+      &lt;param name="expression"&gt;&lt;![CDATA[A &amp; B]]&gt;&lt;/param&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+  &lt;feature uid="F" enable="true"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.el.ExpressionFlipStrategy"&gt;
+      &lt;param name="expression"&gt;&lt;![CDATA[A | B]]&gt;&lt;/param&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;  
+&lt;/features&gt;</programlisting>
+    			    </listitem>
+    			    
+    			    <listitem>
+    					<para>The behaviour is detailed in the following unit test</para>
+    					<programlisting language="java">public class ExpressionStrategyTest {
+
+  // ff4j
+  private final FF4j ff4j = new FF4j("ff4j-strategy-expression.xml");
+
+  @Test
+   public void testExpressions() {
+
+     // Given
+     assertTrue(ff4j.exist("A"));
+     assertTrue(ff4j.exist("B"));
+     assertTrue(ff4j.exist("C"));
+     ff4j.enable("D");
+     ff4j.enable("E");
+     ff4j.enable("F");
+
+     // When A=FALSE, B=TRUE, C=TRUE
+     assertFalse(ff4j.check("A"));
+     assertTrue(ff4j.check("B"));
+     assertTrue(ff4j.check("C"));
+
+     // THEN
+     // E = A AND B = FALSE AND TRUE = FALSE
+     assertFalse(ff4j.check("E"));
+     // F = A OR R = FALSE OR TRUE = TRUE
+     assertTrue(ff4j.check("F"));
+     // D = (A AND B) OR NOT(B) OR NOT(C) = (false &amp; true) or false or false
+     assertFalse(ff4j.check("D"));
+
+     // When enabling A
+     ff4j.enable("A");
+
+     // THEN
+     // E = A AND B = TRUE AND TRUE = TRUE
+     assertTrue(ff4j.check("E"));
+     // F = A AND B = TRUE OR TRUE = TRUE
+     assertTrue(ff4j.check("F"));
+     // D = (A AND B) OR NOT(B) OR NOT(C) = (true &amp; true) or false or false
+     assertTrue(ff4j.check("D"));
+  }
+}</programlisting>
+    			    </listitem>
+    			    
+    			 </itemizedlist>
 				  </section>
 				  <section id="3-4-6-2">
 					<title>ReleaseDate</title>
-				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  	<para>The purpose of this strategy is the made a feature available from a fixed date (like a releaseDate).
+				  	Before the defined date, the feature is always false and after it's true. The format to set up the date is YYYY-MM-dd-HH:mm</para>
+				  	<itemizedlist>
+				    <listitem>
+    					<para>Here a sample XML file : </para>
+    					<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features&gt;
+  &lt;feature uid="PAST" enable="true" description="Always true as in the past"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.ReleaseDateFlipStrategy" &gt;
+      &lt;param name="releaseDate" value="2013-07-14-14:00" /&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+  &lt;feature uid="FUTURE" enable="true" description="Always false as in the (far) future"&gt; 
+    &lt;flipstrategy class="org.ff4j.strategy.ReleaseDateFlipStrategy" &gt;
+      &lt;param name="releaseDate" value="3013-07-14-14:00" /&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+&lt;/features&gt;</programlisting>
+    				</listitem>
+    				<listitem>
+    					<para>And the related unit test : </para>
+    					<programlisting language="java">public class ReleaseDateFlipStrategyTest  {
+
+  // initialize ff4j
+  FF4j ff4j = new FF4j("ff4j-strategy-releasedate.xml");
+
+  @Test
+  public void testReleaseDateStrategy() throws ParseException {
+
+    // Given
+    assertTrue(ff4j.exist("PAST"));
+    Feature fPast = ff4j.getFeature("PAST");
+    ReleaseDateFlipStrategy rdsPast = (ReleaseDateFlipStrategy) fPast.getFlippingStrategy();
+    assertTrue(new Date().after(rdsPast.getReleaseDate()));
+    // Then
+    assertTrue(ff4j.check("PAST"));
+
+    // Given
+    assertTrue(ff4j.exist("FUTURE"));
+    Feature fFuture = ff4j.getFeature("FUTURE");
+    ReleaseDateFlipStrategy rdsFuture = (ReleaseDateFlipStrategy) fFuture.getFlippingStrategy();
+    Assert.assertTrue(new Date().before(rdsFuture.getReleaseDate()));
+    // Then
+    assertFalse(ff4j.check("FUTURE"));
+  }
+}</programlisting>
+    				</listitem>
+    			   </itemizedlist>
+				  	
 				  </section>
+				  
 				  <section id="3-4-6-3">
-					<title>ClientList</title>
-				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+					<title>ClientList Strategy</title>
+				  	<para>The purpose of this strategy is to enable a feature for a limited list of clients. Each client must present its 'hostname' in the context. 
+				  	If the hostname is in the white list, it's ok. The attribute to set up is <varname>clientHostName</varname>. The values are separated by a comma, there
+				  	are no spaces between values.</para>
+				  	
+				  	<itemizedlist>
+				  	 <listitem>
+				  	    <para>Here a sample XML file : </para>
+				  	    <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration&gt;
+&lt;features&gt;
+  &lt;feature uid="pingCluster" enable="true" description="limit client hosts"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.ClientFilterStrategy" &gt;
+      &lt;param name="grantedClients"&gt;127.0.0.1,srvprd01,srvprd02&lt;/param&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+&lt;/features&gt;</programlisting>
+				  	 </listitem>
+				  	 <listitem>
+				  	 	<para>And the related unit test : </para>
+				  	    <programlisting language="java">public class ClientListStrategyTest {
+
+  // initialize ff4j
+  FF4j ff4j = new FF4j("ff4j-strategy-clientfilter.xml");
+
+  @Test
+  public void testClientFilter() {
+    // Given
+    assertTrue(ff4j.exist("pingCluster"));
+    assertTrue(ff4j.getFeature("pingCluster").isEnable());
+
+    // When no host provided, Then error
+    try {
+      assertFalse(ff4j.check("pingCluster"));
+      fail(); // error as parameter not present in execution context
+    } catch (IllegalArgumentException iae) {
+      assertTrue(iae.getMessage().contains(ClientFilterStrategy.CLIENT_HOSTNAME));
+    }
+
+    // When invalid host provided, Then unavailable
+    FlippingExecutionContext fex = new FlippingExecutionContext();
+    fex.addValue(ClientFilterStrategy.CLIENT_HOSTNAME, "invalid");
+    assertFalse(ff4j.check("pingCluster", fex));
+
+    // When correct hostname... OK
+    fex.addValue(ClientFilterStrategy.CLIENT_HOSTNAME, "srvprd01");
+    assertTrue(ff4j.check("pingCluster", fex));
+  }
+}</programlisting>
+				  	 </listitem>
+				  	</itemizedlist>
+				  	
 				  </section>
+				  
 				  <section id="3-4-6-4">
-					<title>ServerList</title>
-				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+					<title>ServerFilterList Strategy</title>
+				  	<para>The purpose of this strategy is to enable a feature for a limited list of servers. The feature will be available only if the hostname of hosting server
+				  	is in the white list. The attribute to set up is <varname>serverHostName</varname> but it'not required. If not provided ff4j will ask the JVM for the current
+				  	hostname (through the <varname>InetAddress</varname>) The values are separated by a comma, there are no spaces between values.</para>
+				  	<itemizedlist>
+				  	 <listitem>
+				  	    <para>Here a sample XML file : </para>
+				  	    <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration&gt;
+&lt;features&gt;
+  &lt;feature uid="onlyOnPRODServers" enable="true" description="some desccheck hostname"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.ServerFilterStrategy" &gt;
+      &lt;param name="grantedServers"&gt;srvprd01,srvprd02,srvprd03&lt;/param&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+ &lt;/features&gt; 
+</programlisting>
+					 </listitem>
+					 
+				  	 <listitem>
+				  	 	<para>And the related unit test : </para>
+				  	    <programlisting language="java">public class ServerListStrategyTest {
+
+  // initialize ff4j
+  FF4j ff4j = new FF4j("ff4j-strategy-serverfilter.xml");
+
+  @Test
+  public void testServerFilter() throws UnknownHostException {
+    // Given
+    assertTrue(ff4j.exist("onlyOnPRODServers"));
+    assertTrue(ff4j.getFeature("onlyOnPRODServers").isEnable());
+
+    // When invalid host provided, Then unavailable
+    FlippingExecutionContext fex = new FlippingExecutionContext();
+    fex.addValue(ServerFilterStrategy.SERVER_HOSTNAME, "invalid");
+    assertFalse(ff4j.check("onlyOnPRODServers", fex));
+
+    // When correct hostname... OK
+    fex.addValue(ServerFilterStrategy.SERVER_HOSTNAME, "srvprd01");
+    assertTrue(ff4j.check("onlyOnPRODServers", fex));
+
+    // When no host provided, Then try to identified by itself but not SECURE
+    System.out.println("Trying..." + InetAddress.getLocalHost().getHostName() + " against white list");
+    // my laptop hostname is not in the whitelist
+    assertFalse(ff4j.check("onlyOnPRODServers"));
+  }
+}</programlisting>
+				  	 </listitem>
+				  	 
+				    </itemizedlist>
+				  	
 				  </section>
+				  
 				   <section id="3-4-6-5">
 					<title>Ponderation</title>
-				  	<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  	<para>The purpose of this strategy is to enable a feature for a percentage of requests. It could be useful in 
+				  	<link linkend='1-3-1-2'>Dark Launch</link> zero downtime deployment pattern for instance. It expected a parameter
+				  	<varname>weight</varname> but if not provided is set up to its default value 0.5</para>
+				  	<itemizedlist>
+				  	
+				  	  <listitem>
+				  	    <para>Here a sample XML file : </para>
+				  	    <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration&gt;
+&lt;features&gt;
+
+  &lt;!-- Ponderation to 0 --&gt;
+  &lt;feature uid="pond_0"  enable="true" description="some desc"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.PonderationStrategy" &gt;
+      &lt;param name="weight" value="0" /&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+			
+  &lt;!-- Ponderation to 1 --&gt;
+  &lt;feature uid="pond_1" enable="true" description="some desc" &gt;
+    &lt;flipstrategy class="org.ff4j.strategy.PonderationStrategy" &gt;
+      &lt;param name="weight" value="1" /&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+	
+  &lt;feature uid="pond_06"  enable="true" description="some desc"&gt; 
+    &lt;flipstrategy class="org.ff4j.strategy.PonderationStrategy" &gt;
+      &lt;param name="weight" value="0.6" /&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+	
+  &lt;feature uid="pondDefault" enable="true" description="some desc"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.PonderationStrategy" /&gt;
+  &lt;/feature&gt;
+		
+&lt;/features&gt;</programlisting>
+				  	  </listitem>
+ 					
+ 					  <listitem>
+				  	 	<para>And the related unit test : </para>
+				  	    <programlisting language="java">public class PonderationFlippingStrategyTest {
+
+  // initialize ff4j
+  FF4j ff4j = new FF4j("ff4j-strategy-ponderation.xml");
+
+  @Test
+  public void testPonderation() {
+    
+    // Given : weight = 0
+    assertTrue(ff4j.exist("pond_0"));
+    // Then => always false
+    assertFalse(ff4j.check("pond_0"));
+
+    // Given : weight = 100%
+    assertTrue(ff4j.exist("pond_1"));
+    // Then => Always true
+    assertTrue(ff4j.check("pond_1"));
+
+    // Given : weight = 60%
+    assertTrue(ff4j.exist("pond_06"));
+    // When : Try 1 million times
+    double success = 0.0;
+    for (int i = 0; i &lt; 1000000; i++) {
+       if (ff4j.check("pond_06")) {
+         success++;
+       }
+    }
+    // Then, percentage ok with great precision
+    double resultPercent = success / 1000000;
+    assertTrue(resultPercent &lt; (0.6 + 0.001));
+    assertTrue(resultPercent &gt; (0.6 - 0.001));
+  }
+}</programlisting>
+				  	  </listitem>
+				  	  </itemizedlist>
+				  	  
 				  </section>
 				  
 			</section>
 			
 		</section>
 		
-		<!-- *********************************************************************************** -->
+		<!-- ************************************************************** -->
+		<!-- *** STORES                                                 *** -->
+		<!-- ************************************************************** -->
+		
 		<section id="3-5">
 			<title>Feature Stores</title>
-			<para>Text here</para>
 			
 			<section id="3-5-1">
 				<title>Introduction</title>
-				<para>Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				<para>As already introduced in getting started the <varname>FeatureStore</varname> is the persistent unit whare are saved the features with their attributes and status.
+				It proposes a set of CRUD operations to work with features but also, groups of features, and, permissions on features.</para>
+				
+				<figure id="fig-03-featurestore" floatstyle="center">
+				  <title>Feature Store</title>
+				  <mediaobject role="bordered">
+				    <imageobject role="web">
+					  <imagedata align="center" fileref="img/fig-02-featurestore.png" contentwidth="6cm" />
+					</imageobject>
+				  </mediaobject>
+				</figure>
+				
+				<para>The <varname>FeatureStore</varname> is only an interface and several implementations are available for different kind of storage middleware. All examples in this
+				guide have been written using the simplest yet less powerful store the default InMemeoryStore relying on XML, with other stores any modifications perform on features are kept.</para>
+					
 				  	<section id="3-5-1-1">
 					 <title>Objectives</title>
-				  	 <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+				  	 <para>There are multiple purposed of the store  : </para>
+				  	 
+				  	 <itemizedlist>
+				  	 	<listitem><para>It allows to enable or disable features AT RUNTIME.</para></listitem>
+				  	 	<listitem><para>It allows to PERSIST status of features even when restarting applications (except for InMemoryStore/XML stores).</para></listitem>
+				  	 	<listitem><para>It allows to synchronized status of features between DIFFERENT APPLICATIONS (except for InMemoryStore/XML stores)</para></listitem>
+				  	 </itemizedlist>
+				  	
 				    </section>
+				    
 				    <section id="3-5-1-2">
-					 <title>Architecture Patterns</title>
-				  	 <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+					  <title>Architecture Patterns</title>
+				  	  <para>An "embedded" or "in memory" <varname>FeatureStore</varname> has 2 main drawbacks. The modifications performed at runtime are lost when restarting, 
+				  	  you cannot be consistent in a cluster with several nodes. Yet it's the most fast. You must consider your production environment requirements to make good choices.</para>
+				  	  <figure id="fig-03-archipattern" floatstyle="center">
+				  	 	<title>Embedded vs Externalized Store</title>
+				     	<mediaobject role="bordered">
+				      	<imageobject role="web">
+					    	<imagedata align="center" fileref="img/fig-03-archipatterns.png" contentwidth="12cm" />
+						</imageobject>
+				  		</mediaobject>
+					  </figure>
 				    </section>
+				    
 			</section>
 			
 			<section id="3-5-2">
 			  <title>InMemoryFeatureStore</title>
-			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
-				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
+			  <para>The implementation of this <varname>FeatureStore</varname> parses an XML document (file or stream) at startup and store the features as a ConcurrentHashMap in memory. It's the default
+			  implementation of FF4J. It does not required any external librairies and is available in the module <varname>ff4j-core</varname>. The XML schema of the file (or XSD) can be find there.
+			  <ulink url="http://ff4j.org/schema/ff4j-1.2.0.xsd">http://ff4j.org/schema/ff4j-1.2.0.xsd</ulink> 
+			  </para>
+			  
+			  <para>You can declared the schema in the XML file with the following schema : </para>
+			  <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features xmlns="http://www.ff4j.org/schema/ff4j" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.2.0.xsd"&gt;
+  &lt;!-- Here your declarations -- &gt;
+&lt;/features&gt;</programlisting>
+
+			  <para>There are a lot of samples in this reference guide. Yet, let's summarize everything in a quite complete one </para>
+			   <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;features xmlns="http://www.ff4j.org/schema/ff4j" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.2.0.xsd"&gt;
+
+  &lt;!-- Simplest --&gt;
+  &lt;feature uid="A" enable="true" /&gt;
+
+  &lt;!-- Add description --&gt;
+  &lt;feature uid="B" description="Expect to say good bye..." enable="false" /&gt;
+
+  &lt;!-- Security stuff --&gt;
+  &lt;feature uid="C" enable="false"&gt;
+    &lt;security&gt;
+      &lt;role name="USER"  /&gt;
+	  &lt;role name="ADMIN" /&gt;
+	&lt;/security&gt;
+  &lt;/feature&gt;
+
+  &lt;!-- Some strategies and a group --&gt;
+  &lt;feature-group name="strategies"&gt;
+		
+    &lt;feature uid="S1" enable="true"&gt;
+	  &lt;flipstrategy class="org.ff4j.strategy.el.ExpressionFlipStrategy"&gt;
+        &lt;param name="expression" value="A | B" /&gt;
+      &lt;/flipstrategy&gt;
+    &lt;/feature&gt;
+
+    &lt;feature uid="S2" enable="true"&gt;
+      &lt;flipstrategy class="org.ff4j.strategy.ReleaseDateFlipStrategy"&gt;
+        &lt;param name="releaseDate" value="2013-07-14-14:00" /&gt;
+      &lt;/flipstrategy&gt;
+    &lt;/feature&gt;
+
+    &lt;feature uid="S3" description="null" enable="true"&gt;
+      &lt;flipstrategy class="org.ff4j.strategy.PonderationStrategy"&gt;
+        &lt;param name="weight" value="0.5" /&gt;
+      &lt;/flipstrategy&gt;
+    &lt;/feature&gt;
+
+    &lt;feature uid="S4" description="z" enable="true"&gt;
+      &lt;flipstrategy class="org.ff4j.strategy.ClientFilterStrategy"&gt;
+        &lt;param name="grantedClients" value="c1,c2" /&gt;
+      &lt;/flipstrategy&gt;
+    &lt;/feature&gt;
+
+    &lt;feature uid="S5" description="null" enable="true"&gt;
+      &lt;flipstrategy class="org.ff4j.strategy.ServerFilterStrategy"&gt;
+        &lt;param name="grantedServers" value="s1,s2" /&gt;
+      &lt;/flipstrategy&gt;
+    &lt;/feature&gt;
+		
+  &lt;/feature-group&gt;
+&lt;/features&gt;</programlisting>
+
+			<para>The XML format can be generated whatever the <varname>FeatureStore</varname> configured. It should be use to export configuration from an environment
+			and insert into another. As detailed further, this operation is available in the web console.</para>
+			
+			  <figure id="fig-03-export" floatstyle="center">
+				  <title>Export and Imports actions in web console</title>
+				  <mediaobject role="bordered">
+				   <imageobject role="web">
+					<imagedata align="center" fileref="img/fig-03-export-import.png" contentwidth="12cm" />
+			  	  </imageobject>
+				 </mediaobject>
+				 </figure>
+				 
+			<para>If you would like to do it in your own code, here is the way to do it.</para>
+			<programlisting language="java">public class ImportExportXmlTest {
+
+    @Test
+    public void testImport() throws FileNotFoundException {
+        // Given
+        FF4j ff4j = new FF4j();
+        // When
+        FileInputStream fis = new FileInputStream(new File("src/test/resources/ff4j.xml"));
+        Map&lt;String, Feature&gt; mapsOfFeat = new FeatureXmlParser().parseConfigurationFile(fis);
+        for (Entry&lt;String, Feature&gt; feature : mapsOfFeat.entrySet()) {
+            if (ff4j.exist(feature.getKey())) {
+                ff4j.getStore().update(feature.getValue());
+            } else {
+                ff4j.getStore().create(feature.getValue());
+            }
+        }
+        // Then
+        assertEquals(2, ff4j.getFeatures().size());
+    }
+    
+    @Test
+    public void testExport() throws IOException {
+        FF4j ff4j = new FF4j("ff4j.xml");
+        
+        InputStream in = ff4j.exportFeatures();
+
+        // Write into console
+        byte[] bbuf = new byte[4096];
+        int length = 0;
+        while ((in != null) &amp;&amp; (length != -1)) {
+            length = in.read(bbuf);
+        }
+        System.out.print(new String(bbuf));
+    }
+}</programlisting>
+			  
 			</section>
 			
 			<section id="3-5-3">
-			  <title>>RDBMS FeatureStore</title>
-			  <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
+			  <title>Relational Database FeatureStore</title>
+			  <para>The first store to externalize feature is to rely on a "database", a relational database to be exact. It's accessed through the
+			  Java Database Connectivity API, JDBC. 
+			  </para>
+			  	<section id="3-5-3-1">
+				 <title>Data Model</title>
+				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
-				 <section id="3-5-3-1">
+				  	 <programlisting language="sql">-- Main Table to store Features
+CREATE TABLE FF4J_FEATURES (
+  "FEAT_UID"     	VARCHAR(100),
+  "ENABLE"  		INTEGER NOT NULL,
+  "DESCRIPTION" 	VARCHAR(255),
+  "STRATEGY"		VARCHAR(255),
+  "EXPRESSION"	    VARCHAR(255),
+  "GROUPNAME"		VARCHAR(255),
+  PRIMARY KEY("FEAT_UID")
+);
+
+-- Roles to store ACL, FK to main table
+CREATE TABLE FF4J_ROLES (
+  "FEAT_UID"     VARCHAR(50) REFERENCES FF4J_FEATURES("FEAT_UID"),
+  "ROLE_NAME"    VARCHAR(50),
+  PRIMARY KEY("FEAT_UID", "ROLE_NAME")
+);</programlisting>
+				 </section>
+				 <section id="3-5-3-2">
 				 <title>Core JDBC</title>
 				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>
 				 </section>
-				 <section id="3-5-3-2">
+				 <section id="3-5-3-3">
 				 <title>Spring JDBC</title>
 				   <para>Status, crud, storage,Sed egestas molestie elit. Mauris urna mi, scelerisque vitae, ultrices vel, euismod vel, eros. 
 				  	 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque dictum felis a nisi. </para>

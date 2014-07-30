@@ -1,5 +1,5 @@
 body {
-	background: #f9f6f1;
+	background-image: url("../img/body-bg.png");
 	font: 13px/1.7em 'Open Sans';
 }
     
@@ -109,6 +109,7 @@ textarea {
     
 .subnavbar-inner {
 	background: #fff;
+	background-image: url("../img/debut_light.png"); 
 	border-bottom: 1px solid #d6d6d6;
 }
 
@@ -148,7 +149,6 @@ textarea {
 
 .subnavbar .container > ul > li > a > i {
 	display: inline-block;
-	
 	width: 24px;
 	height: 24px;
 	margin-top: 11px;
@@ -158,12 +158,10 @@ textarea {
 
 .subnavbar .container > ul > li > a > span {
 	display: block;
-	
 }
 
 
 .subnavbar .container > ul > li.active > a {
-	
 	border-bottom:3px solid #ff7f74;
 	color: #383838;
 }
@@ -184,8 +182,6 @@ textarea {
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
     }
-    
-    
     
 .subnavbar .dropdown-menu::before {
 	content: '';
@@ -251,7 +247,27 @@ textarea {
 	padding: 5px 0;
 	font-size: 11px;
 	color: #BBB;
-	background: #1A1A1A;
+	background: #444;
+}
+
+.extra-inner ul {
+	padding: 0;
+	
+	margin: 0;
+}
+
+.extra-inner li {
+	margin-bottom: .6em;
+	list-style: none;
+}
+
+.extra-inner a {
+	color: #999;
+}
+
+.extra-inner a:hover {
+	color: #00ab8b;
+	text-decoration:none;
 }
 
 .extra a {
@@ -267,6 +283,12 @@ textarea {
 .extra h4 {
 	margin-bottom: 1em;
 	font-weight: 400;
+}
+
+.extra-inner h4 {
+	margin-bottom: 1em;
+	font-weight: 400;
+	color:white;
 }
 
 .extra ul {
@@ -372,12 +394,7 @@ textarea {
 			font-size: 16px;
 			color: #555;
 			vertical-align: middle;
-			
-			
-			
 		}
-
-
 
 
 .widget-content {

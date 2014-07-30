@@ -1,4 +1,4 @@
-package org.ff4j.console.utils;
+package org.ff4j.console.controller;
 
 /*
  * #%L
@@ -20,16 +20,15 @@ package org.ff4j.console.utils;
  * #L%
  */
 
-import java.io.Serializable;
-
 /**
- * Configuration of the console loader from yaml configuration file.
- * 
+ * Constants to be used in the application.
+ *
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
-public class ConsoleConfiguration implements Serializable {
+public interface ApplicationConstants {
 
-    /** serial number. */
-    private static final long serialVersionUID = 6553174631428859508L;
+    // Content of Page
+    String PAGE_TITLE = "title";
+    String PAGE_SUBTITLE = "subtitle";
 
 }
