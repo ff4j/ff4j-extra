@@ -15,16 +15,16 @@
 	</xs:element>
 	<xs:element name="property">
 		<xs:complexType>
-			<xs:attribute name="name" use="required"/>
-			<xs:attribute name="value" use="required"/>
+			<xs:attribute type="xs:string" name="name" use="required"/>
+			<xs:attribute type="xs:string" name="value" use="required"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="user">
 		<xs:complexType>
-			<xs:attribute name="name" use="required"/>
-			<xs:attribute name="password" use="required"/>
-			<xs:attribute name="language"/>
-			<xs:attribute name="admin"/>
+			<xs:attribute type="xs:string" name="name" use="required"/>
+			<xs:attribute type="xs:string" name="password" use="required"/>
+			<xs:attribute type="xs:string" name="language"/>
+			<xs:attribute type="xs:boolean" name="admin"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="users">
@@ -50,15 +50,12 @@
 	</xs:element>
 	<xs:element name="connection">
 		<xs:complexType>
-			<xs:sequence minOccurs="0" maxOccurs="unbounded">
-				<xs:element name="user"/>
-			</xs:sequence>
-			<xs:attribute name="id" use="required"/>
-			<xs:attribute name="mode" use="required"/>
-			<xs:attribute name="url" use="required"/>
-			<xs:attribute name="authKey"/>
-			<xs:attribute name="jmxUserName"/>
-			<xs:attribute name="jmxPassword"/>
+			<xs:attribute type="xs:string" name="id" use="required"/>
+			<xs:attribute type="xs:string" name="mode" use="required"/>
+			<xs:attribute type="xs:string" name="url" use="required"/>
+			<xs:attribute type="xs:string" name="authKey"/>
+			<xs:attribute type="xs:string" name="jmxUserName"/>
+			<xs:attribute type="xs:string" name="jmxPassword"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

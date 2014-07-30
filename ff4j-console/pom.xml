@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~ PARENT                   ~ -->
+	<!-- ~ PARENT ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<parent>
 		<groupId>org.ff4j</groupId>
@@ -19,7 +19,7 @@
 	</parent>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- ~ PROPERTIES				~ -->
+	<!-- ~ PROPERTIES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
 		<jetty.port>8080</jetty.port>
@@ -27,7 +27,7 @@
 		<license.licenseResolver>${project.baseUri}src/license</license.licenseResolver>
 		<sitemesh.version>2.4.2</sitemesh.version>
 	</properties>
-	
+
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ~ DEPENDENCIES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -79,11 +79,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-		 <dependency>
-            <groupId>opensymphony</groupId>
-            <artifactId>sitemesh</artifactId>
-            <version>${sitemesh.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>${sitemesh.version}</version>
+		</dependency>
 
 		<!-- WEB -->
 		<dependency>
@@ -98,24 +98,29 @@
 			<artifactId>jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		 <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-		
 		<dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>3.1.3.RELEASE</version>
-        </dependency>
-		
-		</dependencies>
-		 
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>3.2.4.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.4.RELEASE</version>
+		</dependency>
+
+	</dependencies>
+
 	<build>
 		<finalName>ff4j-console</finalName>
 		<plugins>
-		
+
 			<!-- Add ImplementationVersion to WAR -->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
@@ -130,7 +135,7 @@
 					<archiveClasses>true</archiveClasses>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Work with Jetty -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
@@ -147,9 +152,52 @@
 					</connectors>
 				</configuration>
 			</plugin>
+
+
+
+
 		</plugins>
 
 	</build>
+
+	<profiles>
+
+		<profile>
+			<id>GEN</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jvnet.jaxb2.maven2</groupId>
+						<artifactId>maven-jaxb2-plugin</artifactId>
+						<version>0.8.0</version>
+						<executions>
+							<execution>
+								<id>generation-bean-console</id>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<schemaDirectory>src/main/resources</schemaDirectory>
+									<schemaIncludes>
+										<include>ff4j-console-conf.xsd</include>
+									</schemaIncludes>
+									<forceRegenerate>false</forceRegenerate>
+									<removeOldOutput>true</removeOldOutput>
+									<verbose>true</verbose>
+									<extension>true</extension>
+									<generatePackage>org.ff4j.console.conf.xml</generatePackage>
+									<generateDirectory>target/generated-resources</generateDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+
+		</profile>
+
+	</profiles>
 
 
 </project>

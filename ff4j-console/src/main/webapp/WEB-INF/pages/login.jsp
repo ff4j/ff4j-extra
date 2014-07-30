@@ -21,11 +21,6 @@
 					<input type="password" id="j_password" name="j_password" value="" placeholder="<fmt:message key='login.field.password' />" class="login password-field"/>
 				</div> <!-- /password -->
 				
-				<div class="field">
-					<label for="env">Password:</label>
-					<input type="text" id="env" name="env" value="" placeholder="<fmt:message key='login.field.password' />" class="login password-field"/>
-				</div> <!-- /password -->
-				
 			</div> <!-- /login-fields -->
 			
 			<div class="login-actions">

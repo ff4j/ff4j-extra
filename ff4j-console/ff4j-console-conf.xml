@@ -20,7 +20,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<connections>
 		<connection id="DEV-HTTP" 	mode="http" url="http://localhost/ff4j-console/ff4j" 
-			authkey="JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF" />
+			authKey="JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF" />
 		<connection id="DEV-JMX" 	mode="JMX" 	url="127.0.0.1:1000" 
 			jmxUserName="" jmxPassword="" />
 	</connections>
