@@ -24,22 +24,15 @@
 			</div> <!-- /login-fields -->
 			
 			<div class="login-actions">
-				
-				<span class="login-checkbox">
-					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
-					<label class="choice" for="Field">Keep me signed in</label>
-				</span>
-									
-				<button class="button btn btn-ff4j-india btn-large">Sign In</button>
-				
+				<button class="button btn btn-green btn-large"><i class="icon-user icon-white"></i>&nbsp;<fmt:message key="login.button.signin" /></button>	
 			</div> <!-- .actions -->
 			
 		</form>
 		
 	</div> <!-- /content -->
 	
+	
 </div> <!-- /account-container -->
-
 
 
 </body>

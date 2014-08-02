@@ -14,6 +14,7 @@ package org.ff4j.console.auth;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ff4j.console.ApplicationConstants;
 import org.ff4j.console.conf.XmlConfigurationParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,43 +33,50 @@ import org.springframework.stereotype.Repository;
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
 @Repository("authenticateUser")
-public class UserAuthenticationService implements UserDetailsService {
+public class UserAuthenticationService implements UserDetailsService, ApplicationConstants {
 
     /** Logger for the class. */
     protected Logger log = LoggerFactory.getLogger(getClass());
 
+    /** Injection of configuration. */
     @Autowired
-    private XmlConfigurationParser conf;
+    private XmlConfigurationParser xmlParser;
 
     /** {@inheritDoc} */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("Authentication of " + username);
-        // Initialization from XML
+        log.info("Authenticating user <" + username + ">");
         List<GrantedAuthority> listOfRoles = new ArrayList<GrantedAuthority>();
-        GrantedAuthority simpl = new SimpleGrantedAuthority("ROLE_USER");
-        listOfRoles.add(simpl);
-        User usr = new User("admin", "password", true, true, true, true, listOfRoles);
-        return usr;
+        if (xmlParser.getConf().getMapOfUser().containsKey(username)) {
+            org.ff4j.console.conf.xml.User xmlUser = xmlParser.getConf().getMapOfUser().get(username);
+            // if flag as admin
+            if (xmlUser.isAdmin()) {
+                listOfRoles.add(new SimpleGrantedAuthority(ROLE_ADMIN));
+            }
+            listOfRoles.add(new SimpleGrantedAuthority(ROLE_USER));
+            return new User(username, xmlUser.getPassword(), listOfRoles);
+        }
+        // invalid user
+        return new User("ko", "ko", listOfRoles);
     }
 
     /**
-     * Getter accessor for attribute 'conf'.
+     * Getter accessor for attribute 'xmlParser'.
      *
-     * @return current value of 'conf'
+     * @return current value of 'xmlParser'
      */
-    public XmlConfigurationParser getConf() {
-        return conf;
+    public XmlConfigurationParser getXmlParser() {
+        return xmlParser;
     }
 
     /**
-     * Setter accessor for attribute 'conf'.
+     * Setter accessor for attribute 'xmlParser'.
      * 
-     * @param conf
-     *            new value for 'conf '
+     * @param xmlParser
+     *            new value for 'xmlParser '
      */
-    public void setConf(XmlConfigurationParser conf) {
-        this.conf = conf;
+    public void setXmlParser(XmlConfigurationParser xmlParser) {
+        this.xmlParser = xmlParser;
     }
 
 }

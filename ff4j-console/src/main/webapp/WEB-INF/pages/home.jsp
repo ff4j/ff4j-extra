@@ -1,9 +1,17 @@
 <%@ include file="/jsp-tiles/taglibs.jsp" %>
+<head>
+    <title><fmt:message key="home.title"/></title>
+    <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/css/pages/dashboard.css'/>" /> 
+</head>
+<body>
 
   <div class="main-inner">
     <div class="container">
       <div class="row">
-      
+      	
+       <c:choose>
+      	<c:when test="${not empty envbean.envId}">
+        
         <div class="span6">
         
           <!--  General Informations -->
@@ -16,7 +24,8 @@
             <div class="widget-content">
               <div class="widget big-stats-container">
                 <div class="widget-content">
-                	<h6 class="bigstats">Your are connected to <a href="#">DEV</a> using <a href="#">HTTP (RESTFul API)</a>
+                	<h6 class="bigstats">Your are connected to <a href="#"><c:out value="${envbean.envId}" >-</c:out></a> 
+                	using the <a href="#"><c:out value="${envbean.connectionMode}" >-</c:out></a> mode.
                 	</h6>
                 	<center>
                 	<table style="border-collapse:separate;border-spacing:0 10px;text-transform:none">
@@ -34,7 +43,7 @@
                 		 		border-radius: 6px;
                 		 		background-color:#eef8ee;
                 		 		padding:5px;
-                		 		text-transform:lowercase;"><h4> 39 day(s) 18 Hour(s) 48 min 27 s</td>
+                		 		text-transform:lowercase;"><h4> <c:out value="${homebean.uptime}" >---</c:out></td>
                 		 </tr>
                 		 <tr>
                 		 <td style="width:100px;text-align:right"><h4>
@@ -48,7 +57,7 @@
                 		 		background-color:#eef8ee;
                 		 		padding:5px;">
                 		 	<h4>
-                		 	InMemoryFeatureStore
+                		 	<c:out value="${homebean.store}" >---</c:out>
                 		 	</td>
                 		 </tr>
                 		 <tr>
@@ -62,7 +71,7 @@
                 		 		border-radius: 6px;
                 		 		background-color:#eef8ee;
                 		 		padding:5px;">
-                		 	<h4> --- </td>
+                		 	<h4><c:out value="${homebean.caching}" >---</c:out></td>
                 		 </tr>
                 		  <tr>
                 		 <td style="width:100px;text-align:right"><h4>
@@ -75,7 +84,7 @@
                 		 		border-radius: 6px;
                 		 		background-color:#eef8ee;
                 		 		padding:5px;">
-                		 	<h4> --- </td>
+                		 	<h4> <c:out value="${homebean.security}" >---</c:out> </td>
                 		 </tr>
                 		  <tr>
                 		 <td style="width:100px;text-align:right"><h4>
@@ -88,7 +97,7 @@
                 		 		border-radius: 6px;
                 		 		background-color:#eef8ee;
                 		 		padding:5px;">
-                		 	<h4> InMemoryEventRepository</td>
+                		 	<h4> <c:out value="${homebean.monitoring}" >---</c:out></td>
                 		 </tr>
                 		 <tr>
                 		 <td style="width:100px;text-align:right;margin-right:15px"><h4>
@@ -104,7 +113,7 @@
                 		 		border-radius: 6px;
                 		 		background-color:#eef8ee;
                 		 		padding:5px;
-                		 		text-transform:lowercase;"><h4> 1.2.0 </td>
+                		 		text-transform:lowercase;"><h4> <c:out value="${homebean.version}" >---</c:out> </td>
                 		 </tr>
                 	</table>
                 	</center>
@@ -193,9 +202,54 @@
           
         </div>
         <!-- /span6 --> 
+        
+      </c:when>
+      	<c:otherwise>
+      		<div class="span6">
+
+					<!--  General Informations -->
+					<div class="widget widget-nopad">
+
+						<div class="widget-header">
+							<i class="icon-home"></i>
+							<h3>Select Environment...</h3>
+						</div>
+
+						<div class="widget-content" style="height:300px;">
+							
+							<p><h6 class="bigstats"> Several environments have been defined in configuration.</p>
+							
+							Please choose the target you want to reach.</h6></p>
+							
+							 <form action="<c:url value='/home'/>" id="envcheck" method="POST" >
+							  <div class="btn-group" style="margin-left:50px">
+				             <ul class="dropdown-menu" role="menu" style="width:150px;float:left">
+				              <c:forEach items="${envbean.listOfConnection}" var="conn">
+				              	<li><a href="javascript:$('#env').val('${conn.id}');$('#envcheck').submit()">${conn.id}</a></li>
+				              </c:forEach>
+				              </ul>
+				               <input type="text" name="env" id="env" style="width:150px;height:30px;font-style:normal;float:left;" readonly="readonly">
+				            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:left">
+				              <span class="sr-only"> <i class="icon-th-list icon-white"></i></span>
+				              <span class="caret"></span>
+				            </button>
+				            
+				              </div>
+				            </form>
+							
+							</div>
+							
+						</div>
+					</div>
+				</div>
+      	</c:otherwise>
+      </c:choose>
+      
       </div>
       <!-- /row --> 
     </div>
     <!-- /container --> 
   </div>
   <!-- /main-inner --> 
+  
+</body>

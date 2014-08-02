@@ -1,5 +1,15 @@
 <%@ include file="/jsp-tiles/taglibs.jsp" %>
 
+<script>
+$(document).ready(function() {
+    // put your jQuery code here.
+	$( "#li-features" ).removeClass( "active");
+	$( "#li-dashboard" ).removeClass( "active");
+	$( "#li-settings" ).addClass( "active");
+	$( "#li-monitoring" ).removeClass( "active");
+});
+</script>
+
 <div class="main-inner">
 		<div class="container">
 			<div class="row">

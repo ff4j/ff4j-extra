@@ -24,6 +24,8 @@ package org.ff4j.console.conf;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Locale;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -32,7 +34,15 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.ff4j.console.conf.xml.Connection;
+import org.ff4j.console.conf.xml.Connections;
 import org.ff4j.console.conf.xml.Ff4JConsole;
+import org.ff4j.console.conf.xml.Properties;
+import org.ff4j.console.conf.xml.Property;
+import org.ff4j.console.conf.xml.User;
+import org.ff4j.console.conf.xml.Users;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
@@ -51,7 +61,14 @@ public class XmlConfigurationParser implements InitializingBean {
 
     private static final String SCHEMA = "ff4j-console-conf.xsd";
 
-    private Ff4JConsole xmlConfiguration;
+    private static final String PROPERTY_LANGUAGE = "language";
+
+    /** Logger for the class. */
+    protected Logger log = LoggerFactory.getLogger(getClass());
+
+    private Ff4JConsole rawConfiguration;
+
+    private ConsoleConfiguration conf;
 
     /** Default Constructor */
     public XmlConfigurationParser() {
@@ -68,7 +85,7 @@ public class XmlConfigurationParser implements InitializingBean {
         }
         try {
             Unmarshaller u = getUnmarshaller(Ff4JConsole.class.getPackage().getName(), xsdProperties);
-            xmlConfiguration = (Ff4JConsole) u.unmarshal(xmlProperties);
+            rawConfiguration = (Ff4JConsole) u.unmarshal(xmlProperties);
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot parse the file", e);
         } finally {
@@ -79,10 +96,40 @@ public class XmlConfigurationParser implements InitializingBean {
                 }
             }
         }
+        log.info("Configuration file '" + FILE_CONF + "' has been parsed");
 
         // PostTreatment XML
-
+        this.conf = new ConsoleConfiguration();
+        List<Object> rawElements = rawConfiguration.getPropertiesOrUsersOrConnections();
+        for (Object object : rawElements) {
+            if (object instanceof Properties) {
+                Properties props = (Properties) object;
+                List<Property> listOfProp = props.getProperty();
+                if (listOfProp != null && !listOfProp.isEmpty()) {
+                    for (Property p : listOfProp) {
+                        if (PROPERTY_LANGUAGE.equalsIgnoreCase(p.getName())) {
+                            conf.setLanguage(new Locale(p.getValue()).getISO3Language());
+                        }
+                    }
+                }
+            } else if (object instanceof Users) {
+                Users users = (Users) object;
+                for (User user : users.getUser()) {
+                    conf.getMapOfUser().put(user.getName(), user);
+                }
+            } else if (object instanceof Connections) {
+                Connections conns = (Connections) object;
+                List<Connection> listofConn = conns.getConnection();
+                if (listofConn != null && !listofConn.isEmpty()) {
+                    for (Connection connection : listofConn) {
+                        conf.getMapOfConnections().put(connection.getId(), connection);
+                    }
+                }
+            }
+        }
+        log.info("Configuration has been initialized with " + conf.getMapOfUser().size() + " user(s)");
     }
+
     /**
      * Méthode permettant de créer le Unmarshaller pour le parsing du XML.
      * @param modelPackage
@@ -124,5 +171,42 @@ public class XmlConfigurationParser implements InitializingBean {
         return u;
     }
 
+    /**
+     * Getter accessor for attribute 'rawConfiguration'.
+     *
+     * @return current value of 'rawConfiguration'
+     */
+    public Ff4JConsole getRawConfiguration() {
+        return rawConfiguration;
+    }
+
+    /**
+     * Setter accessor for attribute 'rawConfiguration'.
+     * 
+     * @param rawConfiguration
+     *            new value for 'rawConfiguration '
+     */
+    public void setRawConfiguration(Ff4JConsole rawConfiguration) {
+        this.rawConfiguration = rawConfiguration;
+    }
+
+    /**
+     * Getter accessor for attribute 'conf'.
+     *
+     * @return current value of 'conf'
+     */
+    public ConsoleConfiguration getConf() {
+        return conf;
+    }
+
+    /**
+     * Setter accessor for attribute 'conf'.
+     * 
+     * @param conf
+     *            new value for 'conf '
+     */
+    public void setConf(ConsoleConfiguration conf) {
+        this.conf = conf;
+    }
 
 }

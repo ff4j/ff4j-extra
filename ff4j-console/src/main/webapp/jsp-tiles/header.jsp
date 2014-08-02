@@ -1,7 +1,5 @@
 <%@ include file="/jsp-tiles/taglibs.jsp" %>
 
-	<title>Administration Console - DashBoard</title>
-	
     <!-- Default META-DATA -->
     <meta http-equiv="Cache-Control" 			content="no-store"								/>
     <meta http-equiv="Pragma" 					content="no-cache"								/>
@@ -23,7 +21,7 @@
     
     <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/css/font-awesome.css'/>" />
     <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/css/style.css'/>" />
-    <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/css/pages/dashboard.css'/>" /> 
+  
     
 	<!-- JavaScript :  -->
     <script type="text/javascript" src="<c:url value='/js/jquery-1.7.2.min.js'/>"></script>

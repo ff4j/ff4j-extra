@@ -22,8 +22,11 @@ package org.ff4j.console.controller;
 
 import org.ff4j.FF4j;
 import org.ff4j.console.ApplicationConstants;
+import org.ff4j.console.conf.ConsoleConfiguration;
+import org.ff4j.console.conf.XmlConfigurationParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -31,12 +34,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
-public abstract class AbstractConsoleController implements ApplicationConstants {
+public abstract class AbstractConsoleController implements ApplicationConstants, InitializingBean {
 
     /** logger for the class. */
     protected Logger log = LoggerFactory.getLogger(getClass());
 
+    /** local ff4j. */
     @Autowired
     protected FF4j ff4j;
+
+    /** Xml Configuration */
+    @Autowired
+    protected XmlConfigurationParser xmlParser;
+
+    /** Console Configuration. */
+    protected ConsoleConfiguration conf;
+
+    /** {@inheritDoc} */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        conf = xmlParser.getConf();
+    }
 
 }

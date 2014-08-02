@@ -67,7 +67,7 @@ public class User {
     @XmlAttribute(name = "language")
     protected String language;
     @XmlAttribute(name = "admin")
-    protected Boolean admin;
+    protected boolean admin = false;
 
     /**
      * Gets the value of the name property.
@@ -149,7 +149,7 @@ public class User {
      *     {@link Boolean }
      *     
      */
-    public Boolean isAdmin() {
+    public boolean isAdmin() {
         return admin;
     }
 

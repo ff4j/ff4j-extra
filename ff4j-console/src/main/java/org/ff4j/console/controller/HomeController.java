@@ -20,13 +20,17 @@ package org.ff4j.console.controller;
  * #L%
  */
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.console.ApplicationConstants;
+import org.ff4j.console.conf.xml.Connection;
+import org.ff4j.console.domain.EnvironmenBean;
+import org.ff4j.console.domain.HomeBean;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,18 +43,73 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController extends AbstractConsoleController {
 
     /**
-     * Display screen
+     * Allows to display screen.
+     * 
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        log.info("Access Home Controller");
+        log.info("Page <HOME>");
 
-        // HOME
-        Model model = new ExtendedModelMap();
-        model.addAttribute(PAGE_TITLE, "Supervision");
-        model.addAttribute(PAGE_SUBTITLE, "DashBoard");
+        // check First Access, still : no environment selected
+        if (null == request.getSession().getAttribute(ATTR_ENVBEAN)) {
+            // Single Environment means default choice;
+            ArrayList<Connection> conns = new ArrayList<Connection>(conf.getMapOfConnections().values());
+            if (1 == conf.getMapOfConnections().size()) {
+                log.info("Selecting <" + conns.get(0).getId() + "> as default and single environement");
+                request.getSession().setAttribute(ATTR_ENVBEAN, new EnvironmenBean(conns.get(0), conns));
+            } else {
+                log.info("No environnment selected yet >> asking to user");
+                ModelAndView mav = new ModelAndView(VIEW_HOME);
+                mav.addObject(ATTR_ENVBEAN, new EnvironmenBean(conns));
+                return mav;
+            }
+        }
 
-        return new ModelAndView(VIEW_HOME, "model", model);
+        // using environnment to create homebean
+        return buildHomePage((EnvironmenBean) request.getSession().getAttribute(ATTR_ENVBEAN));
+    }
+
+    /**
+     * Select target environnement to be connected
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView selectEnv(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String targetEnvId = request.getParameter(FORM_PARAM_ENVIRONMENT);
+
+        log.info("Page <HOME> - Select environment " + targetEnvId);
+        if (StringUtils.hasText(targetEnvId)) {
+            if (conf.getMapOfConnections().containsKey(targetEnvId)) {
+                ArrayList<Connection> conns = new ArrayList<Connection>(conf.getMapOfConnections().values());
+                EnvironmenBean envBean = new EnvironmenBean(conf.getMapOfConnections().get(targetEnvId), conns);
+                request.getSession().setAttribute(ATTR_ENVBEAN, envBean);
+            }
+        }
+
+        // using environnment to create homebean
+        return buildHomePage((EnvironmenBean) request.getSession().getAttribute(ATTR_ENVBEAN));
+    }
+
+    /**
+     * Build target page and model from environment.
+     * 
+     * @param envBean
+     *            environment bean
+     * @return
+     * 
+     */
+    private ModelAndView buildHomePage(EnvironmenBean envBean) {
+        // Output page is HOME
+        ModelAndView mav = new ModelAndView(VIEW_HOME);
+        log.info("Working with environnement " + envBean.getEnvId());
+        mav.addObject(ATTR_ENVBEAN, envBean);
+
+        HomeBean homeBean = new HomeBean();
+        mav.addObject(ATTR_HOMEBEAN, homeBean);
+        return mav;
     }
 
 }

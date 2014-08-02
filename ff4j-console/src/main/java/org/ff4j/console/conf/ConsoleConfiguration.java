@@ -20,12 +20,89 @@ package org.ff4j.console.conf;
  * #L%
  */
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Map;
 
-public class ConsoleConfiguration {
+import org.ff4j.console.conf.xml.Connection;
+import org.ff4j.console.conf.xml.User;
+
+/**
+ * Easy-to-use Configuration Bean
+ *
+ * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
+ */
+public class ConsoleConfiguration implements Serializable {
+
+    /** serial. */
+    private static final long serialVersionUID = 7118117781354548178L;
 
     /** Default Langugage. */
-    private final String language = Locale.ENGLISH.getISO3Language();
+    private String language = Locale.ENGLISH.getISO3Language();
 
+    /** available users. */
+    private Map<String, User> mapOfUser = new HashMap<String, User>();
+    
+    /** Store connection but keep ordrer for dropdown. */
+    private Map<String, Connection> mapOfConnections = new LinkedHashMap<String, Connection>();
+
+    /**
+     * Getter accessor for attribute 'language'.
+     *
+     * @return
+     *       current value of 'language'
+     */
+    public String getLanguage() {
+        return language;
+    }
+
+    /**
+     * Setter accessor for attribute 'language'.
+     * @param language
+     * 		new value for 'language '
+     */
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    /**
+     * Getter accessor for attribute 'mapOfUser'.
+     *
+     * @return
+     *       current value of 'mapOfUser'
+     */
+    public Map<String, User> getMapOfUser() {
+        return mapOfUser;
+    }
+
+    /**
+     * Setter accessor for attribute 'mapOfUser'.
+     * @param mapOfUser
+     * 		new value for 'mapOfUser '
+     */
+    public void setMapOfUser(Map<String, User> mapOfUser) {
+        this.mapOfUser = mapOfUser;
+    }
+
+    /**
+     * Getter accessor for attribute 'mapOfConnections'.
+     *
+     * @return
+     *       current value of 'mapOfConnections'
+     */
+    public Map<String, Connection> getMapOfConnections() {
+        return mapOfConnections;
+    }
+
+    /**
+     * Setter accessor for attribute 'mapOfConnections'.
+     * @param mapOfConnections
+     * 		new value for 'mapOfConnections '
+     */
+    public void setMapOfConnections(Map<String, Connection> mapOfConnections) {
+        this.mapOfConnections = mapOfConnections;
+    }
 
 }

@@ -12,17 +12,16 @@
 	<!--   Role for all connections                -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<users>
-		<user name="admin" password="admin" language="" />
+		<user name="admin" password="admin" language="en" />
+		<user name="clu"   password="clu" 	language="fr" />
 	</users>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!--               Connections                 -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<connections>
-		<connection id="DEV-HTTP" 	mode="http" url="http://localhost/ff4j-console/ff4j" 
-			authKey="JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF" />
-		<connection id="DEV-JMX" 	mode="JMX" 	url="127.0.0.1:1000" 
-			jmxUserName="" jmxPassword="" />
+		<connection id="DEV-HTTP" mode="http" url="http://localhost:8282/webapi" authKey="JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF" />
+		<!--<connection id="DEV-JMX" 	mode="JMX" 	url="127.0.0.1:1000" jmxUserName="" jmxPassword="" />-->
 	</connections>
 
 </ff4j-console>

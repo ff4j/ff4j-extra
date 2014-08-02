@@ -47,6 +47,8 @@ public class FeaturesController extends AbstractConsoleController {
         model.addAttribute(PAGE_TITLE, "Supervision");
         model.addAttribute(PAGE_SUBTITLE, "Features");
 
+        
+
         return new ModelAndView(VIEW_FEATURES, "model", model);
     }
 

@@ -29,6 +29,7 @@ public interface ApplicationConstants {
 
     // Content of Page
     String PAGE_TITLE = "title";
+
     String PAGE_SUBTITLE = "subtitle";
 
     // ----- VIEWS ------------
@@ -40,5 +41,25 @@ public interface ApplicationConstants {
     String VIEW_STATS = "stats";
 
     String VIEW_SETTINGS = "settings";
+
+    // ---- Roles ----
+
+    String ROLE_USER = "ROLE_USER";
+
+    String ROLE_ADMIN = "‚ROLE_ADMIN";
+
+    // ---- Sessions Beans ----
+
+    String SESSION_HOMEBEAN = "HOME";
+
+    // ----- Model Attributes ------
+
+    String ATTR_HOMEBEAN = "homebean";
+
+    String ATTR_ENVBEAN = "envbean";
+
+    // ---- Form Params ----
+
+    String FORM_PARAM_ENVIRONMENT = "env";
 
 }
