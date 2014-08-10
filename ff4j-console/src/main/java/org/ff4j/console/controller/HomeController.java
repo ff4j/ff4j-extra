@@ -26,9 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.console.ApplicationConstants;
+import org.ff4j.console.client.ConsoleHttpClient;
 import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.EnvironmenBean;
-import org.ff4j.console.domain.HomeBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,9 +106,8 @@ public class HomeController extends AbstractConsoleController {
         ModelAndView mav = new ModelAndView(VIEW_HOME);
         log.info("Working with environnement " + envBean.getEnvId());
         mav.addObject(ATTR_ENVBEAN, envBean);
-
-        HomeBean homeBean = new HomeBean();
-        mav.addObject(ATTR_HOMEBEAN, homeBean);
+        ConsoleHttpClient client = new ConsoleHttpClient(getConnection(envBean.getEnvId()));
+        mav.addObject(ATTR_HOMEBEAN, client.readFF4j());
         return mav;
     }
 

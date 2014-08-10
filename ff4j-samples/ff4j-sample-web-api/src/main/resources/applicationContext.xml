@@ -34,7 +34,7 @@
 		<property name="location" value="ff4j.xml" />
 	</bean>
 	
-	<bean id="ff4j.webapi.store" class="org.ff4j.web.resources.FeatureStoreResource">
+	<bean id="ff4j.webapi.store" class="org.ff4j.web.api.resources.FeatureStoreResource">
 		<property name="store" ref="ff4j.store" />
 	</bean>
 	

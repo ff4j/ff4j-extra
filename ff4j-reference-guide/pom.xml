@@ -24,6 +24,15 @@
 		<plugins>
 
 			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-maven-plugin</artifactId>
 				<version>2.0.15</version>
@@ -80,66 +89,25 @@
 						</configuration>
 					</execution>
 
-					<!-- HTML-SINGLE 
-					<execution>
-						<id>html-single</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>generate-html</goal>
-						</goals>
-						<configuration>
-							<htmlCustomization>${basedir}/src/main/resources/xsl/html-singlepage.xsl</htmlCustomization>
-							<targetDirectory>${basedir}/target/docbook/htmlsingle</targetDirectory>
-							<postProcess>
-								<copy todir="${basedir}/target/contents/reference/htmlsingle">
-									<fileset dir="${basedir}/target/docbook/htmlsingle">
-										<include name="**/*.html" />
-									</fileset>
-								</copy>
-								<copy todir="${basedir}/target/contents/reference/htmlsingle/img">
-									<fileset dir="${basedir}/src/img">
-										<include name="**/*.png" />
-									</fileset>
-								</copy>
-								<copy todir="${basedir}/target/contents/reference/htmlsingle/images">
-									<fileset dir="${basedir}/src/main/docbook/img">
-										<include name="**/*.svg" />
-									</fileset>
-								</copy>
-							</postProcess>
-						</configuration>
-					</execution>
-					
-					<execution>
-						<id>html</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>generate-html</goal>
-						</goals>
-						<configuration>
-							<htmlCustomization>${basedir}/src/main/resources/xsl/html-multipage.xsl</htmlCustomization>
-							<targetDirectory>${basedir}/target/docbook/html</targetDirectory>
-							<chunkedOutput>true</chunkedOutput>
-							<postProcess>
-								<copy todir="${basedir}/target/contents/reference/html">
-									<fileset dir="${basedir}/target/docbook/html">
-										<include name="**/*.html" />
-									</fileset>
-								</copy>
-								<copy todir="${basedir}/target/contents/reference/html/img">
-									<fileset dir="${basedir}/src/img">
-										<include name="**/*.png" />
-									</fileset>
-								</copy>
-								<copy todir="${basedir}/target/contents/reference/html/images">
-									<fileset dir="${basedir}/src/main/docbook/img">
-										<include name="**/*.svg" />
-									</fileset>
-								</copy>
-							</postProcess>
-						</configuration>
-					</execution>
-					-->
+					<!-- HTML-SINGLE <execution> <id>html-single</id> <phase>generate-resources</phase> 
+						<goals> <goal>generate-html</goal> </goals> <configuration> <htmlCustomization>${basedir}/src/main/resources/xsl/html-singlepage.xsl</htmlCustomization> 
+						<targetDirectory>${basedir}/target/docbook/htmlsingle</targetDirectory> <postProcess> 
+						<copy todir="${basedir}/target/contents/reference/htmlsingle"> <fileset dir="${basedir}/target/docbook/htmlsingle"> 
+						<include name="**/*.html" /> </fileset> </copy> <copy todir="${basedir}/target/contents/reference/htmlsingle/img"> 
+						<fileset dir="${basedir}/src/img"> <include name="**/*.png" /> </fileset> 
+						</copy> <copy todir="${basedir}/target/contents/reference/htmlsingle/images"> 
+						<fileset dir="${basedir}/src/main/docbook/img"> <include name="**/*.svg" 
+						/> </fileset> </copy> </postProcess> </configuration> </execution> <execution> 
+						<id>html</id> <phase>generate-resources</phase> <goals> <goal>generate-html</goal> 
+						</goals> <configuration> <htmlCustomization>${basedir}/src/main/resources/xsl/html-multipage.xsl</htmlCustomization> 
+						<targetDirectory>${basedir}/target/docbook/html</targetDirectory> <chunkedOutput>true</chunkedOutput> 
+						<postProcess> <copy todir="${basedir}/target/contents/reference/html"> <fileset 
+						dir="${basedir}/target/docbook/html"> <include name="**/*.html" /> </fileset> 
+						</copy> <copy todir="${basedir}/target/contents/reference/html/img"> <fileset 
+						dir="${basedir}/src/img"> <include name="**/*.png" /> </fileset> </copy> 
+						<copy todir="${basedir}/target/contents/reference/html/images"> <fileset 
+						dir="${basedir}/src/main/docbook/img"> <include name="**/*.svg" /> </fileset> 
+						</copy> </postProcess> </configuration> </execution> -->
 
 				</executions>
 			</plugin>

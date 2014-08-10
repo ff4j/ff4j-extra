@@ -62,4 +62,8 @@ public interface ApplicationConstants {
 
     String FORM_PARAM_ENVIRONMENT = "env";
 
+    String MODE_HTTP = "http";
+
+    String MODE_JMX = "jmx";
+
 }

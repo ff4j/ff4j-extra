@@ -5,25 +5,15 @@ import org.ff4j.web.api.FF4JWebProvider;
 
 public class SimpleFF4jProvider implements FF4JWebProvider {
 
-    /** ff4j instance. */
-    private final FF4j ff4j;
+    private FF4j ff4j = null;
 
-    /**
-     * Default constructeur invoked by servlet.
-     */
-    public SimpleFF4jProvider() {
-        ff4j = new FF4j("ff4j.xml");
-        ff4j.setAuthorizationsManager(new MockAuthorisationManager());
-    }
-
-    /**
-     * Getter accessor for attribute 'fF4j'.
-     *
-     * @return current value of 'fF4j'
-     */
     @Override
     public FF4j getFF4j() {
+        if (ff4j == null) {
+            ff4j = new FF4j("ff4j.xml");
+        }
         return ff4j;
     }
+    
 
 }

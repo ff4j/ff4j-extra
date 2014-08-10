@@ -45,6 +45,12 @@ public class HomeBean implements Serializable {
 
     private String version;
     
+    private int nbFeature = 0;
+
+    private int nbGroup = 0;
+
+    private int nbEvents = 0;
+
     public HomeBean() {
 }
 
@@ -150,6 +156,73 @@ public class HomeBean implements Serializable {
      */
     public String getUptime() {
         return uptime;
+    }
+
+    /**
+     * Setter accessor for attribute 'uptime'.
+     * 
+     * @param uptime
+     *            new value for 'uptime '
+     */
+    public void setUptime(String uptime) {
+        this.uptime = uptime;
+    }
+
+    /**
+     * Getter accessor for attribute 'nbFeature'.
+     *
+     * @return current value of 'nbFeature'
+     */
+    public int getNbFeature() {
+        return nbFeature;
+    }
+
+    /**
+     * Setter accessor for attribute 'nbFeature'.
+     * 
+     * @param nbFeature
+     *            new value for 'nbFeature '
+     */
+    public void setNbFeature(int nbFeature) {
+        this.nbFeature = nbFeature;
+    }
+
+    /**
+     * Getter accessor for attribute 'nbGroup'.
+     *
+     * @return current value of 'nbGroup'
+     */
+    public int getNbGroup() {
+        return nbGroup;
+    }
+
+    /**
+     * Setter accessor for attribute 'nbGroup'.
+     * 
+     * @param nbGroup
+     *            new value for 'nbGroup '
+     */
+    public void setNbGroup(int nbGroup) {
+        this.nbGroup = nbGroup;
+    }
+
+    /**
+     * Getter accessor for attribute 'nbEvents'.
+     *
+     * @return current value of 'nbEvents'
+     */
+    public int getNbEvents() {
+        return nbEvents;
+    }
+
+    /**
+     * Setter accessor for attribute 'nbEvents'.
+     * 
+     * @param nbEvents
+     *            new value for 'nbEvents '
+     */
+    public void setNbEvents(int nbEvents) {
+        this.nbEvents = nbEvents;
     }
 
 }

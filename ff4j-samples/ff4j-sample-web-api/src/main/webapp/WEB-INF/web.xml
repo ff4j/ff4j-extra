@@ -20,8 +20,8 @@
 		<servlet-name>WebAPI</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		<init-param>
-			 <param-name>javax.ws.rs.Application</param-name>
-			<param-value>org.ff4j.sample.CustomWebApiFf4JProvider</param-value>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>org.ff4j.sample.SimpleFF4JJerseyApplication</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

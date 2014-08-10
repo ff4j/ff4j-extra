@@ -24,6 +24,7 @@ import org.ff4j.FF4j;
 import org.ff4j.console.ApplicationConstants;
 import org.ff4j.console.conf.ConsoleConfiguration;
 import org.ff4j.console.conf.XmlConfigurationParser;
+import org.ff4j.console.conf.xml.Connection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -54,6 +55,20 @@ public abstract class AbstractConsoleController implements ApplicationConstants,
     @Override
     public void afterPropertiesSet() throws Exception {
         conf = xmlParser.getConf();
+    }
+
+    /**
+     * Select connection from map.
+     * 
+     * @param connId
+     *            target connection identifier.
+     * @return target connection
+     */
+    protected Connection getConnection(String connId) {
+        if (!conf.getMapOfConnections().containsKey(connId)) {
+            throw new IllegalArgumentException("Id " + connId + " is invalid :" + conf.getMapOfConnections().keySet());
+        }
+        return conf.getMapOfConnections().get(connId);
     }
 
 }

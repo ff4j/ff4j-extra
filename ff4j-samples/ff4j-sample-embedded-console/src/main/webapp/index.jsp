@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -12,5 +11,5 @@ body {
 </style>
 </head>
 
-<body>Embedded console</body>
+<body><a href="./ff4j-console">Embedded console</a></body>
 </html>
