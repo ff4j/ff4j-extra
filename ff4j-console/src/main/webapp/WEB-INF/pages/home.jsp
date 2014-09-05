@@ -1,7 +1,14 @@
 <%@ include file="/jsp-tiles/taglibs.jsp" %>
 <head>
-    <title><fmt:message key="home.title"/></title>
-    <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/css/pages/dashboard.css'/>" /> 
+ <title><fmt:message key="home.title"/></title>
+ 
+ <!-- PAGE HOME -->
+ <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/css/pages/dashboard.css'/>" />
+ <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/js/jqplot/jquery.jqplot.min.css'/>" />
+ <script type="text/javascript" src="<c:url value='/js/jqplot/jquery.jqplot.min.js'/>"></script>
+ <script type="text/javascript" src="<c:url value='/js/jqplot/plugins/jqplot.pieRenderer.min.js'/>"></script>
+ <script type="text/javascript" src="<c:url value='/js/jqplot/plugins/jqplot.highlighter.min.js'/>"></script>
+ <style>.divpie {width:525px;height:285px;padding:5px;}</style>
 </head>
 <body>
 
@@ -34,7 +41,7 @@
                 	<table style="border-collapse:separate;border-spacing:0 10px;text-transform:none">
                 		<tr>
                 		 <td style="width:100px;text-align:right;margin-right:15px"><h4>
-                		 <a class="ff4j-tooltip" tooltip="<fmt:message key="home.general.uptime.comment"/>">
+                		 <a class="ff4j-tooltip" tooltip="<fmt:message key="home.general.uptime.comment"/>" style="color:#ab8b00">
                 		 	<fmt:message key="home.general.uptime"/>&nbsp;
                 		 </a>
                 		 </td>
@@ -44,7 +51,7 @@
                 		 		-webkit-border-radius: 6px;
                 		 		-moz-border-radius: 6px;
                 		 		border-radius: 6px;
-                		 		background-color:#eef8ee;
+                		 		background-color:#d0f3e3;
                 		 		padding:5px;
                 		 		text-transform:lowercase;"><h4> <c:out value="${homebean.uptime}" >---</c:out></td>
                 		 </tr>
@@ -58,7 +65,7 @@
                 		 		-webkit-border-radius: 6px;
                 		 		-moz-border-radius: 6px;
                 		 		border-radius: 6px;
-                		 		background-color:#eef8ee;
+                		 		background-color:#d0f3e3;
                 		 		padding:5px;">
                 		 	<h4>
                 		 	<c:out value="${homebean.store}" >---</c:out>
@@ -74,7 +81,7 @@
                 		 		-webkit-border-radius: 6px;
                 		 		-moz-border-radius: 6px;
                 		 		border-radius: 6px;
-                		 		background-color:#eef8ee;
+                		 		background-color:#d0f3e3;
                 		 		padding:5px;">
                 		 	<h4><c:out value="${homebean.caching}" >---</c:out></td>
                 		 </tr>
@@ -88,7 +95,7 @@
                 		 		-webkit-border-radius: 6px;
                 		 		-moz-border-radius: 6px;
                 		 		border-radius: 6px;
-                		 		background-color:#eef8ee;
+                		 		background-color:#d0f3e3;
                 		 		padding:5px;">
                 		 	<h4> <c:out value="${homebean.security}" >---</c:out> </td>
                 		 </tr>
@@ -102,7 +109,7 @@
                 		 		-webkit-border-radius: 6px;
                 		 		-moz-border-radius: 6px;
                 		 		border-radius: 6px;
-                		 		background-color:#eef8ee;
+                		 		background-color:#d0f3e3;
                 		 		padding:5px;">
                 		 	<h4> <c:out value="${homebean.monitoring}" >---</c:out></td>
                 		 </tr>
@@ -118,7 +125,7 @@
                 		 		-webkit-border-radius: 6px;
                 		 		-moz-border-radius: 6px;
                 		 		border-radius: 6px;
-                		 		background-color:#eef8ee;
+                		 		background-color:#d0f3e3;
                 		 		padding:5px;
                 		 		text-transform:lowercase;"><h4> <c:out value="${homebean.version}" >---</c:out> </td>
                 		 </tr>
@@ -136,7 +143,7 @@
              <div class="widget-content">
                   <div id="big_stats" class="cf">
                     <div class="stat">
-                    		<i class="icon-heart"></i>
+                    	<i class="icon-th-list"></i>
                     	<a class="ff4j-tooltip" tooltip="<fmt:message key="home.stats.nbfeature.comment" />">
                     	<span class="value">
                     		<c:out value="${homebean.nbFeature}" >---</c:out>
@@ -146,7 +153,7 @@
                     <!-- .stat -->
                     
                     <div class="stat">
-                    	<i class="icon-th"></i>
+                    	<i class="icon-th-large"></i>
                     	<a class="ff4j-tooltip" tooltip="<fmt:message key="home.stats.nbgroup.comment" />">
                     	<span class="value"><c:out value="${homebean.nbGroup}" >---</c:out></span>
                     	</a>
@@ -182,7 +189,7 @@
             <div class="widget-content">
               <div class="shortcuts"> 
               	<a href="<c:url value='/features'/>" class="shortcut">
-              	  <i class="shortcut-icon icon-th-list"></i>
+              	  <i class="shortcut-icon icon-hdd"></i>
               	  <span class="shortcut-label"><fmt:message key="home.ops.store" /></span>
               	</a>
               	<a href="<c:url value='/stats'/>" class="shortcut">
@@ -208,9 +215,48 @@
               <h3><fmt:message key="home.graph.title" /></h3>
             </div>
             <!-- /widget-header -->
-            <div class="widget-content">
-              Pie distribution per feature
-              <canvas id="area-chart" class="chart-holder" height="250" width="538"> </canvas>
+            <div class="widget-content" style="margin:0px;padding:0px">
+             
+              <div id="pie" class="divpie"></div>
+              
+              <script  type="text/javascript">
+              $(document).ready(function(){
+            	var pieData = ${homebean.todayHitCountData};
+    			var plot = $.jqplot('pie', [pieData], {
+    				animate: true,
+    				animateReplot: true,
+    				seriesDefaults:{ 
+        				renderer:$.jqplot.PieRenderer,
+        				shadow:true,
+        				rendererOptions: {
+        					fill:true,
+        					showDataLabels: true, 
+        					dataLabelPositionFactor: 0.75,
+        					sliceMargin: 5, 
+        					seriesColors: ${homebean.todayHitCountColors}
+    					},
+        				trendline:{ show: true }
+    				},
+        			legend:{ 
+        				show: true, 
+        				location: 'w' 
+        			},
+        			grid: {
+        				drawGridlines: false,
+        				drawBorder: false, 
+        				shadow:false, 
+        				background: '#FFFFFF'
+        			},
+        			highlighter: {
+        	            show: true,
+        	            formatString:'%s',
+        	            tooltipLocation: 'n',
+        	            useAxesFormatters:false
+        	        }
+    			}); // plot2
+			  }); // function
+              </script>            
+              
               <!-- /area-chart --> 
             </div>
             <!-- /widget-content --> 

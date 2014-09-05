@@ -1,5 +1,6 @@
 <%@ include file="/jsp-tiles/taglibs.jsp" %>
 
+
 <!-- ************** Navigation BAR ************** -->
 
 <div class="navbar navbar-fixed-top">
@@ -17,7 +18,7 @@
         <a class="brand" href="#" >
         	<img src="./img/icons/ff4j.png" style="height:40px">
         	&nbsp;&nbsp;&nbsp;Administration Console 
-        		@&nbsp;<span style="color:DDDD00"><c:out value="${sessionScope.envbean.envId}" > -- </c:out></span>
+        		@&nbsp;<span style="color:#9ce1cd"><c:out value="${sessionScope.envbean.envId}" > -- </c:out></span>
         </a>
         
         <!-- Right part of the nav bar -->

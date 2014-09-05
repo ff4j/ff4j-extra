@@ -50,7 +50,7 @@ public abstract class AbstractConsoleController implements ApplicationConstants,
 
     /** Console Configuration. */
     protected ConsoleConfiguration conf;
-
+    
     /** {@inheritDoc} */
     @Override
     public void afterPropertiesSet() throws Exception {

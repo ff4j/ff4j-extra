@@ -24,7 +24,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.WebApplicationException;
@@ -65,18 +68,42 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
         myMap = objectMapper.readValue(entityStream, HashMap.class);
 
         HomeBean hb = new HomeBean();
+        
         // uptime
         hb.setUptime((String) myMap.get("uptime"));
+        
         // Version
         hb.setVersion((String) myMap.get("version"));
+        
         // Monitoring
         if (myMap.containsKey("eventRepository")) {
             Map<String, Object> evtMap = (Map<String, Object>) myMap.get("eventRepository");
             if (evtMap != null) {
                 String classType = (String) evtMap.get("type");
                 hb.setMonitoring(classType.substring(classType.lastIndexOf(".") + 1));
-                if (evtMap.containsKey("numberOfEvents")) {
-                    hb.setNbEvents((Integer) evtMap.get("numberOfEvents"));
+                if (evtMap.containsKey("todayHitTotal")) {
+                    hb.setNbEvents((Integer) evtMap.get("todayHitTotal"));
+                }
+                // Pie
+                if (evtMap.containsKey("todayHitsPie")) {
+                    Map<String, Object> pieMap = (Map<String, Object>) evtMap.get("todayHitsPie");
+                    StringBuilder sbData = new StringBuilder("[");
+                    StringBuilder sbColor = new StringBuilder("[");
+                    List < LinkedHashMap< String , Object > > listOfSectory = (ArrayList<LinkedHashMap< String , Object >>) pieMap.get("sectors");
+                    boolean first = true;
+                    for (LinkedHashMap< String , Object > sector : listOfSectory) {
+                        if (!first) {
+                            sbData.append(",");
+                            sbColor.append(",");
+                        }
+                        sbData.append("['" + (String) sector.get("label") + "', " + String.valueOf(sector.get("hitcount")) + "]");
+                        sbColor.append("\"" + (String) sector.get("color") + "\"");
+                        first = false;
+                    }
+                    sbData.append("]");
+                    hb.setTodayHitCountData(sbData.toString());
+                    sbColor.append("]");
+                    hb.setTodayHitCountColors(sbColor.toString());
                 }
             }
         } else {
@@ -95,7 +122,8 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
         } else {
             hb.setSecurity("---");
         }
-        // Store
+        
+        // Store (+ caching)
         if (myMap.containsKey("featuresStore")) {
             Map<String, Object> featMap = (Map<String, Object>) myMap.get("featuresStore");
             if (featMap != null) {
@@ -107,19 +135,20 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
                 if (featMap.containsKey("numberOfGroups")) {
                     hb.setNbGroup((Integer) featMap.get("numberOfGroups"));
                 }
+                
+                if (featMap.containsKey("cached")) {
+                    boolean cached = (Boolean) featMap.get("cached");
+                    if (cached) {
+                        String classStore= (String) myMap.get("cacheStore");
+                        String cacheProvider = (String) myMap.get("cacheProvider");
+                        hb.setCaching(classType.substring(classStore.lastIndexOf(".") + 1) + "(" + cacheProvider + " )");
+                    }
+                } else {
+                    hb.setCaching("---");
+                }
             }
         }
-        // Caching
-        if (myMap.containsKey("cached")) {
-            boolean cached = (Boolean) myMap.get("cached");
-            if (cached) {
-                String classType = (String) myMap.get("cacheStore");
-                String cacheProvider = (String) myMap.get("cacheProvider");
-                hb.setCaching(classType.substring(classType.lastIndexOf(".") + 1) + "(" + cacheProvider + " )");
-            }
-        } else {
-            hb.setCaching("---");
-        }
+        
         log.debug("ff4j mapped to HomeBean");
         return hb;
     }

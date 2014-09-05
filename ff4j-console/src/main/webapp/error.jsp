@@ -1,6 +1,15 @@
-<%@ include file="/jsp-tiles/taglibs.jsp" %>
+<%@ include file="/jsp-tiles/taglibs.jsp"%>
+<html>
+<head>
+<%@ include file="/jsp-tiles/header.jsp"%>
+<title><fmt:message key="webapp.name" /></title>
+</head>
+<body>
 
-<div class="main-inner">
+	<!-- Bandeau avec logout, alert et profile -->
+	<%@ include file="/jsp-tiles/navbar.jsp"%>
+
+	<div class="main-inner">
 		<div class="container">
 			<div class="row">
 
@@ -9,17 +18,15 @@
 					<!--  General Informations -->
 					<div class="widget widget-nopad">
 
-						<div class="widget-header">
+						<div class="widget-header" >
 							<i class="icon-warning-sign"></i>
-							<h3><fmt:message key="errorPage.title" /></h3>
+							<h3 style="color:#880000"><fmt:message key="errorPage.title" /></h3>
 						</div>
 
 						<div class="widget-content">
 							<div class="widget-content">
-								<h1>
-									<fmt:message key="errorPage.heading" />
-								</h1>
-								<p style="padding-top: 70px">
+								<h1><fmt:message key="errorPage.heading" /></h1>
+								<p >
 									<fmt:message key="errorPage.message" />
 								</p>
 							</div>

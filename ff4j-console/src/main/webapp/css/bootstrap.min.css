@@ -2017,8 +2017,9 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 }
 .btn-group {
 	position: relative;
-*zoom:1;
-*margin-left:.3em;
+	
+	*zoom:1;
+	*margin-left:.3em;
 }
 .btn-group:before, .btn-group:after {
 	display: table;

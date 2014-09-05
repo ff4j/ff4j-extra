@@ -23,6 +23,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
 		<jetty.port>8080</jetty.port>
+		<jetty.stop.port>9967</jetty.stop.port>
 		<jetty.context>/ff4j-console</jetty.context>
 		<license.licenseResolver>${project.baseUri}src/license</license.licenseResolver>
 		<sitemesh.version>2.4.2</sitemesh.version>
@@ -103,6 +104,11 @@
 			<artifactId>servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jsp-2.1</artifactId>
+			<version>6.0.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -113,12 +119,12 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -154,6 +160,7 @@
 				<configuration>
 					<contextPath>${jetty.context}</contextPath>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<stopPort>${jetty.stop.port}</stopPort>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
 							<port>${jetty.port}</port>
@@ -163,8 +170,16 @@
 				</configuration>
 			</plugin>
 
-
-
+			<!-- compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
 
 		</plugins>
 
@@ -201,6 +216,8 @@
 							</execution>
 						</executions>
 					</plugin>
+
+
 
 				</plugins>
 			</build>

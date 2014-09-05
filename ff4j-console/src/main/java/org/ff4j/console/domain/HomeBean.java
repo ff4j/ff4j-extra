@@ -35,24 +35,41 @@ public class HomeBean implements Serializable {
     /** uptime. */
     private String uptime;
     
+    /** class of store. */
     private String store;
 
+    /** boolean for caching. */
     private String caching;
 
+    /** authorizationManager. */
     private String security;
 
+    /** class of monitoring. */
     private String monitoring;
 
+    /** version of target ff4j. */
     private String version;
     
+    /** number of features to display. */
     private int nbFeature = 0;
 
+    /** number of groups to display. */
     private int nbGroup = 0;
 
+    /** number of events used. */
     private int nbEvents = 0;
-
+    
+    /** data for pie. */
+    private String todayHitCountData;
+    
+    /** color of sector from pie. */
+    private String todayHitCountColors;
+    
+    /**
+     * Default constructor.
+     */
     public HomeBean() {
-}
+    }
 
     /**
      * Getter accessor for attribute 'store'.
@@ -223,6 +240,44 @@ public class HomeBean implements Serializable {
      */
     public void setNbEvents(int nbEvents) {
         this.nbEvents = nbEvents;
+    }
+
+    /**
+     * Getter accessor for attribute 'todayHitCountData'.
+     *
+     * @return
+     *       current value of 'todayHitCountData'
+     */
+    public String getTodayHitCountData() {
+        return todayHitCountData;
+    }
+
+    /**
+     * Setter accessor for attribute 'todayHitCountData'.
+     * @param todayHitCountData
+     * 		new value for 'todayHitCountData '
+     */
+    public void setTodayHitCountData(String todayHitCountData) {
+        this.todayHitCountData = todayHitCountData;
+    }
+
+    /**
+     * Getter accessor for attribute 'todayHitCountColors'.
+     *
+     * @return
+     *       current value of 'todayHitCountColors'
+     */
+    public String getTodayHitCountColors() {
+        return todayHitCountColors;
+    }
+
+    /**
+     * Setter accessor for attribute 'todayHitCountColors'.
+     * @param todayHitCountColors
+     * 		new value for 'todayHitCountColors '
+     */
+    public void setTodayHitCountColors(String todayHitCountColors) {
+        this.todayHitCountColors = todayHitCountColors;
     }
 
 }

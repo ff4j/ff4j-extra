@@ -70,10 +70,10 @@ public class Connection {
     protected String url;
     @XmlAttribute(name = "authKey")
     protected String authKey;
-    @XmlAttribute(name = "jmxUserName")
-    protected String jmxUserName;
-    @XmlAttribute(name = "jmxPassword")
-    protected String jmxPassword;
+    @XmlAttribute(name = "userName")
+    protected String userName;
+    @XmlAttribute(name = "password")
+    protected String password;
 
     /**
      * Gets the value of the id property.
@@ -172,51 +172,51 @@ public class Connection {
     }
 
     /**
-     * Gets the value of the jmxUserName property.
+     * Gets the value of the userName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getJmxUserName() {
-        return jmxUserName;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * Sets the value of the jmxUserName property.
+     * Sets the value of the userName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setJmxUserName(String value) {
-        this.jmxUserName = value;
+    public void setUserName(String value) {
+        this.userName = value;
     }
 
     /**
-     * Gets the value of the jmxPassword property.
+     * Gets the value of the password property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getJmxPassword() {
-        return jmxPassword;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * Sets the value of the jmxPassword property.
+     * Sets the value of the password property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setJmxPassword(String value) {
-        this.jmxPassword = value;
+    public void setPassword(String value) {
+        this.password = value;
     }
 
 }

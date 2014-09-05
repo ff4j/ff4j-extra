@@ -1,33 +1,29 @@
 package org.ff4j.console.client;
 
 /*
- * #%L
- * ff4j-console
- * %%
- * Copyright (C) 2013 - 2014 Ff4J
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * #%L ff4j-console %% Copyright (C) 2013 - 2014 Ff4J %% Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain a copy of the License at
  * 
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * #L%
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License. #L%
  */
+
+import static org.ff4j.web.store.FeatureStoreHttp.buildAuthorization4ApiKey;
+import static org.ff4j.web.store.FeatureStoreHttp.buildAuthorization4UserName;
+
+import java.util.Set;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.ff4j.console.ApplicationConstants;
 import org.ff4j.console.conf.xml.Connection;
+import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.console.domain.HomeBean;
 import org.ff4j.web.api.FF4jWebConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -69,21 +65,50 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
         // Configuration of jersey
         ClientConfig config = new DefaultClientConfig();
         config.getClasses().add(HomeBeanMsgBodyReader.class);
-
+        config.getClasses().add(FeaturesBeanMsgBodyReader.class);
         jerseyClient = Client.create(config);
 
-        url = conn.getUrl() + "/" + RESOURCE_FF4J;
-        if (StringUtils.hasLength(conn.getAuthKey())) {
-            url += "?authKey=" + conn.getAuthKey();
-        }
+        // Target URL
+        url = ff4jConnection.getUrl() + "/" + RESOURCE_FF4J;
         log.debug("Jersey Client initialized");
     }
 
-    public HomeBean readFF4j() {
-        // Make GET operation
-        ClientResponse cRes = jerseyClient.resource(url).get(ClientResponse.class);
-        // Parsing result to homebean
-        return cRes.getEntity(HomeBean.class);
+    /**
+     * Build target request with security if required.
+     *
+     * @param url
+     *      target url to contact
+     * @return
+     *      target request {@link ClientResponse}
+     */
+    private ClientResponse buildRequest(String url) {
+        if (null != ff4jConnection.getAuthKey() && !"".equals(ff4jConnection.getAuthKey())) {
+            String header = buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
+            return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).get(ClientResponse.class);
+        } else if (null != ff4jConnection.getUserName() && !"".equals(ff4jConnection.getUserName())) {
+            String header = buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
+            return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).get(ClientResponse.class);
+        }
+        return jerseyClient.resource(url).get(ClientResponse.class);
+    }
+    
+    /**
+     * Build HomePage
+     * 
+     * @return target home page bean
+     */
+    public HomeBean getHome() {
+        return buildRequest(url).getEntity(HomeBean.class);
+    }
+
+    /**
+     * Population permissions.
+     *
+     * @return
+     */
+    public Set<String> getAllPermissions() {
+        String myUrl = ff4jConnection.getUrl() + "/" + RESOURCE_FF4J + "/" + RESOURCE_SECURITY;
+        return buildRequest(myUrl).getEntity(FeaturesBean.class).getPermissionList();
     }
 
     /**
@@ -104,6 +129,5 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
     public void setFf4jConnection(Connection ff4jConnection) {
         this.ff4jConnection = ff4jConnection;
     }
-    
 
 }

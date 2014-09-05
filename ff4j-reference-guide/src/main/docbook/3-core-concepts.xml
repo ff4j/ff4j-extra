@@ -17,22 +17,15 @@
     			<programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;features&gt;
 
- &lt;feature uid="featA" description="my first feature" enable="true"&gt;
- &lt;/feature&gt;
-
- &lt;feature uid="featA" enable="false" /&gt;
-
-  &lt;!-- Sample Feature Group --&gt;
-  &lt;feature-group name="release-2.3"&gt;
-
-  &lt;feature uid="users-story1" description="desc1" enable="false"&gt;
-  &lt;/feature&gt;
-
-  &lt;feature uid="users-story2" description="null" enable="false"&gt;
-  &lt;/feature&gt;
-
+ &lt;!-- Sample Feature Group --&gt;
+ &lt;feature-group name="release-2.3"&gt;
+   &lt;feature uid="users-story1" enable="false" /&gt;
+   &lt;feature uid="users-story2" enable="false" /&gt;
  &lt;/feature-group&gt;
-	
+
+ &lt;feature uid="featA" enable="true"  /&gt;
+ &lt;feature uid="featB" enable="false" /&gt;
+
 &lt;/features&gt;</programlisting>
       		 </listitem>
       		 

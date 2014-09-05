@@ -46,8 +46,11 @@ public class HomeController extends AbstractConsoleController {
      * Allows to display screen.
      * 
      * @param request
+     *          http request
      * @param response
+     *          http response
      * @return
+     *          model and view
      * @throws Exception
      */
     @RequestMapping(method = RequestMethod.GET)
@@ -69,8 +72,8 @@ public class HomeController extends AbstractConsoleController {
             }
         }
 
-        // using environnment to create homebean
-        return buildHomePage((EnvironmenBean) request.getSession().getAttribute(ATTR_ENVBEAN));
+        // Using environnment to create homebean
+        return buildHomePage(request, (EnvironmenBean) request.getSession().getAttribute(ATTR_ENVBEAN));
     }
 
     /**
@@ -90,7 +93,7 @@ public class HomeController extends AbstractConsoleController {
         }
 
         // using environnment to create homebean
-        return buildHomePage((EnvironmenBean) request.getSession().getAttribute(ATTR_ENVBEAN));
+        return buildHomePage(request, (EnvironmenBean) request.getSession().getAttribute(ATTR_ENVBEAN));
     }
 
     /**
@@ -101,13 +104,13 @@ public class HomeController extends AbstractConsoleController {
      * @return
      * 
      */
-    private ModelAndView buildHomePage(EnvironmenBean envBean) {
+    private ModelAndView buildHomePage(HttpServletRequest request, EnvironmenBean envBean) {
         // Output page is HOME
         ModelAndView mav = new ModelAndView(VIEW_HOME);
         log.info("Working with environnement " + envBean.getEnvId());
         mav.addObject(ATTR_ENVBEAN, envBean);
         ConsoleHttpClient client = new ConsoleHttpClient(getConnection(envBean.getEnvId()));
-        mav.addObject(ATTR_HOMEBEAN, client.readFF4j());
+        mav.addObject(ATTR_HOMEBEAN, client.getHome());
         return mav;
     }
 

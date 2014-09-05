@@ -35,7 +35,7 @@
 		<servlet-class>org.ff4j.web.embedded.ConsoleServlet</servlet-class>
 		<init-param>
 			<param-name>ff4jProvider</param-name>
-			<param-value>org.ff4j.sample.SimpleFF4jProvider</param-value>
+			<param-value>org.ff4j.sample.SimpleFF4JJerseyApplication</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

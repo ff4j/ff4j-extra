@@ -11,7 +11,7 @@
 	 
 	 <!-- Menu -->
 	 <c:if test="${not empty envbean.envId}">
-	 <%@ include file="/jsp-tiles/subnavbar.jsp" %>
+	 	<%@ include file="/jsp-tiles/subnavbar.jsp" %>
 	 </c:if>
 	 
 	 <!-- Contenu de la page -->
@@ -31,9 +31,10 @@
      <!-- Footer -->
      <%@ include file="/jsp-tiles/footer.jsp"%>
 
-<form action="<c:url value='/home'/>" id="envchange" method="POST" >
-	<input type="hidden" id="env" name="env" value="" />
-</form>
+	<!-- form to post change -->
+	<form action="<c:url value='/home'/>" id="envchange" method="POST" >
+		<input type="hidden" id="env" name="env" value="" />
+	</form>
 
 </body>
 </html>

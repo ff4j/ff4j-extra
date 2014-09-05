@@ -54,8 +54,8 @@
 			<xs:attribute type="xs:string" name="mode" use="required"/>
 			<xs:attribute type="xs:string" name="url" use="required"/>
 			<xs:attribute type="xs:string" name="authKey"/>
-			<xs:attribute type="xs:string" name="jmxUserName"/>
-			<xs:attribute type="xs:string" name="jmxPassword"/>
+			<xs:attribute type="xs:string" name="userName"/>
+			<xs:attribute type="xs:string" name="password"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

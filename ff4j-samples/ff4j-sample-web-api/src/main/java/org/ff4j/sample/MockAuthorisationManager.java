@@ -3,9 +3,9 @@ package org.ff4j.sample;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.ff4j.security.AuthorizationsManager;
+import org.ff4j.security.AbstractAuthorizationManager;
 
-public class MockAuthorisationManager implements AuthorizationsManager {
+public class MockAuthorisationManager extends AbstractAuthorizationManager {
 
     /** {@inheritDoc} */
     @Override

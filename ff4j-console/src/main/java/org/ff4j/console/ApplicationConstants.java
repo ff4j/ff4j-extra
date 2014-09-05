@@ -48,15 +48,13 @@ public interface ApplicationConstants {
 
     String ROLE_ADMIN = "‚ROLE_ADMIN";
 
-    // ---- Sessions Beans ----
-
-    String SESSION_HOMEBEAN = "HOME";
-
     // ----- Model Attributes ------
 
     String ATTR_HOMEBEAN = "homebean";
 
     String ATTR_ENVBEAN = "envbean";
+    
+    String ATTR_FEATUREBEAN = "featuresbean";
 
     // ---- Form Params ----
 
@@ -65,5 +63,97 @@ public interface ApplicationConstants {
     String MODE_HTTP = "http";
 
     String MODE_JMX = "jmx";
+    
+    // --- Http Parameters --
+    
+    /** POST - Operation. */
+    String OPERATION = "op";
+    
+    /** POST - Operation. */
+    String SUBOPERATION = "ope";
+    
+    /** User operation. */
+    String OP_CREATE_FEATURE = "create";
+
+    /** User operation. */
+    String OP_EDIT_FEATURE = "update";
+
+    /** User operation: remove feature. */
+    String OP_RMV_FEATURE = "delete";
+
+    /** User operation. */
+    String OP_TOGGLE_GROUP = "toggleGroup";
+
+    /** User operation. */
+    String OP_ENABLE = "enable";
+
+    /** User operation. */
+    String OP_DISABLE = "disable";
+
+    /** User operation. */
+    String OP_IMPORT = "import";
+
+    /** User operation. */
+    String OP_EXPORT = "export";
+
+    // -------- FORM PARAM ------------------------------
+
+    /** HTTP Parameter. */
+    String FEATID = "uid";
+
+    /** HTTP Parameter. */
+    String ROLE = "role";
+
+    /** HTTP Parameter. */
+    String DESCRIPTION = "desc";
+
+    /** HTTP Parameter. */
+    String FLIPFILE = "flipFile";
+    
+    /** HTTP Parameter. */
+    String GROUPNAME = "groupName";
+
+    /** HTTP Parameter. */
+    String STRATEGY = "strategy";
+    
+    /** HTTP Parameter. */
+    String STRATEGY_INIT = "initParams";
+
+    /** HTTP Parameter. */
+    String PERMISSION = "permission";
+    
+    // ------- FEATURE ELEMENTS --------------------
+    
+    /** attribute name. */
+    String PREFIX_CHECKBOX = "perm-check-";
+
+    /** permission. */
+    String PERMISSION_PUBLIC = "Public";
+
+    /** permission. */
+    String PERMISSION_RESTRICTED = "Restricted";
+
+    /** modal id. */
+    String MODAL_EDIT = "modalEdit";
+
+    /** modal ID. */
+    String MODAL_CREATE = "modalCreate";
+
+    /** modal ID. */
+    String MODAL_TOGGLE = "modalToggle";
+    
+    // --- Message type ---
+    
+    /** message type. */
+    String MSG_INFO = "info";
+    
+    /** message type. */
+    String MSG_WARNING = "warning";
+    
+    /** message type. */
+    String MSG_ERROR = "error";
+    
+    /** message type. */
+    String MSG_SUCCESS = "success";
 
 }

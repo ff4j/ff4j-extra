@@ -77,6 +77,14 @@ public class XmlConfigurationParser implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         // Parsing XML
+        log.info("  __  __ _  _   _ ");
+        log.info(" / _|/ _| || | (_)");
+        log.info("| |_| |_| || |_| |");
+        log.info("|  _|  _|__   _| |");
+        log.info("|_| |_|    |_|_/ |");
+        log.info("             |__/   Console Full Stack v." + getClass().getPackage().getImplementationVersion());
+        log.info(" ");
+        
         File xmlProperties = new File(FILE_CONF);
         if (!xmlProperties.exists()) {}
         InputStream xsdProperties = getClass().getClassLoader().getResourceAsStream(SCHEMA);

@@ -7,7 +7,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<groupId>org.ff4j</groupId>
 	<artifactId>ff4j-sample-embedded-console</artifactId>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.2.1-SNAPSHOT</version>
 	<name>ff4j-sample-embedded-console</name>
 	<packaging>war</packaging>
 
@@ -27,7 +27,7 @@
 		<dependency>
 			<artifactId>ff4j-web</artifactId>
 			<groupId>org.ff4j</groupId>
-			<version>1.2.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -52,6 +52,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
@@ -68,8 +75,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>

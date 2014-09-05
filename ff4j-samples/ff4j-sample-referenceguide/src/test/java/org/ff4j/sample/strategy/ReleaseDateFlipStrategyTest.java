@@ -4,12 +4,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
-import java.util.Date;
 
 import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
 import org.ff4j.strategy.ReleaseDateFlipStrategy;
-import org.junit.Assert;
 import org.junit.Test;
 
 /*
@@ -49,7 +47,7 @@ public class ReleaseDateFlipStrategyTest  {
         assertTrue(ff4j.exist("PAST"));
         Feature fPast = ff4j.getFeature("PAST");
         ReleaseDateFlipStrategy rdsPast = (ReleaseDateFlipStrategy) fPast.getFlippingStrategy();
-        assertTrue(new Date().after(rdsPast.getReleaseDate()));
+        assertTrue(rdsPast.evaluate("PAST", ff4j.getStore(), null));
         // Then
         assertTrue(ff4j.check("PAST"));
 
@@ -57,7 +55,8 @@ public class ReleaseDateFlipStrategyTest  {
         assertTrue(ff4j.exist("FUTURE"));
         Feature fFuture = ff4j.getFeature("FUTURE");
         ReleaseDateFlipStrategy rdsFuture = (ReleaseDateFlipStrategy) fFuture.getFlippingStrategy();
-        Assert.assertTrue(new Date().before(rdsFuture.getReleaseDate()));
+        assertFalse(rdsFuture.evaluate("FUTURE", ff4j.getStore(), null));
+        
 
         // Then
         assertFalse(ff4j.check("FUTURE"));
