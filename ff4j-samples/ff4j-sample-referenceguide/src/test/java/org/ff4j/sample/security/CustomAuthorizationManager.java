@@ -38,4 +38,10 @@ public class CustomAuthorizationManager implements AuthorizationsManager {
         return allPermissions;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public String toJson() {
+        return toString();
+    }
+
 }

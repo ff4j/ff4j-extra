@@ -67,7 +67,8 @@ body {
       			<h3 style="text-align:center">Mercury</h3>
       			
       			<!-- Test related to Features Flags -->
-      			<ff4j:enable featureid="mercure-desc">
+      			<ff4j:enable featureid="mercury-desc">
+      			
       				<p style="text-align:justify">
       				 Mercury is the smallest planet in the Solar System. It is the closest planet to the sun. 
       				 It makes one trip around the Sun once every 87.969 days.Mercury is bright when it is visible 
@@ -77,7 +78,7 @@ body {
       				</p>
       			</ff4j:enable>
       			
-      			<ff4j:enable featureid="mercure-link">
+      			<ff4j:enable featureid="mercury-link">
       				<p style="text-align:center"><a class="btn btn-warning" href="http://simple.wikipedia.org/wiki/Mercury_(planet)">
       				<i class="icon-book icon-white"></i>&nbsp;Wikipedia &raquo;</a></p>
       			</ff4j:enable>

@@ -71,7 +71,7 @@ textarea {
 
 .navbar-inner {
 	padding: 0px 0;
-	background: #696969 !important;
+	background: #687684 !important;
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;
@@ -158,7 +158,7 @@ textarea {
 }
 
 .subnavbar .container > ul > li > a:hover {
-	color: #888;
+	color: #687684;
 	text-decoration: none;
 }
 
@@ -177,8 +177,8 @@ textarea {
 
 
 .subnavbar .container > ul > li.active > a {
-	border-bottom:3px solid #ff7f74;
-	color: #383838;
+	border-bottom:3px solid #DA4453;
+	color: #33495F;
 }
 
 .subnavbar .container > ul > li.active2 > a {
@@ -383,7 +383,7 @@ textarea {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f6f1', endColorstr='#f2efea');
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f6f1', endColorstr='#f2efea')";
 	
-	
+	color:#33495F;
 	border: 1px solid #d6d6d6;
 	
 	

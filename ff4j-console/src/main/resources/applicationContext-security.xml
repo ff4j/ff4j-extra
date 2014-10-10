@@ -10,9 +10,9 @@
 	<http pattern="/scripts/**" security="none" />
 
 	<http auto-config="true">
-		<!-- <intercept-url pattern="/home*" access="ROLE_USER" /> -->
-		<!-- <intercept-url pattern="/features*" access="ROLE_USER,ROLE_ADMIN" /> -->
-		<intercept-url pattern="/stats*" access="ROLE_USER" />
+		<!-- <intercept-url pattern="/home*" access="ROLE_USER" /> 					-->
+		<!-- <intercept-url pattern="/features*" access="ROLE_USER,ROLE_ADMIN" /> 	-->
+		<!-- <intercept-url pattern="/stats*" access="ROLE_USER" />					-->
 		<intercept-url pattern="/settings" access="ROLE_ADMIN" />
 		<form-login login-page="/login" authentication-failure-url="/login?error=true"
 			login-processing-url="/j_security_check" />

@@ -22,7 +22,7 @@
         <li class="active2">
           <a data-toggle="modal" href="#modalCreate" class="open-createDialog" >
             <i class="icon-plus" style="margin-left:10px"></i>
-            <span><i>New Feature</i></span>
+            <span>New Feature</span>
           </a>
         </li>
         <li class="active2">

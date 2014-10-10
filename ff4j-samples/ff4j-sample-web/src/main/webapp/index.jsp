@@ -63,9 +63,7 @@ body {
 			<p class="alert alert-error">Hello visitor ! Feature 'sayGoodBye' is disabled
       	</ff4j:disable>
       </div>
-      
 	</div>
-	
 
 	</body>
 </html>

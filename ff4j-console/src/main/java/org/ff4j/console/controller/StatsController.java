@@ -20,17 +20,28 @@ package org.ff4j.console.controller;
  * #L%
  */
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.console.ApplicationConstants;
+import org.ff4j.console.domain.EnvironmenBean;
+import org.ff4j.console.domain.StatisticsBean;
+import org.ff4j.core.Feature;
+import org.ff4j.core.FeatureStore;
+import org.ff4j.web.api.FF4jWebConstants;
+import org.ff4j.web.store.FeatureStoreHttp;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Controller to display stats screen
+ *
+ * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
+ */
 @Controller
 @RequestMapping("/" + ApplicationConstants.VIEW_STATS)
 public class StatsController extends AbstractConsoleController {
@@ -39,15 +50,25 @@ public class StatsController extends AbstractConsoleController {
      * Display screen
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView showPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        log.info("Access Stats Controller");
-
-        // FEATURES
-        Model model = new ExtendedModelMap();
-        model.addAttribute(PAGE_TITLE, "Supervision");
-        model.addAttribute(PAGE_SUBTITLE, "Statistics");
-
-        return new ModelAndView(VIEW_STATS, "model", model);
+    public ModelAndView showPage(HttpServletRequest req, HttpServletResponse res)
+    throws Exception {
+       
+        // Environment de travail
+        EnvironmenBean envBean = (EnvironmenBean) req.getSession().getAttribute(ATTR_ENVBEAN);
+        log.info("Page <MONITORING>, action<GET>, env<" + envBean.getEnvId() + ">");
+        
+        // Access features through HTTP store (all parsing done)
+        FeatureStore storeHTTP = new FeatureStoreHttp(envBean.getEnvUrl() + "/" + FF4jWebConstants.RESOURCE_FF4J);
+      
+        // StatisticBeans
+        StatisticsBean statisticBean = new StatisticsBean();
+        statisticBean.setListOfFeatures(new ArrayList<Feature>(storeHTTP.readAll().values()));
+      
+        // Display output page
+        ModelAndView mav = new ModelAndView(VIEW_STATS);
+        mav.addObject(ATTR_ENVBEAN, envBean);
+        mav.addObject(ATTR_STATISTICBEAN, statisticBean);
+        return mav;
     }
 
 }

@@ -20,12 +20,14 @@
         <div class="controls">
           <div class="btn-group">
             <input type="text" name="groupName" id="groupName" style="width:250px;height:30px;" readonly="readonly" />
-            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-right:79px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-inbox icon-white" ></i></span>
             </button>
             <ul class="dropdown-menu" role="menu" style="width:250px;font-style:normal;color:#696969">
-            
+            	<c:forEach items="${featuresbean.groupList}" var="group">
+ 					<li><a href="javascript:$('#modalToggle #groupName').val('${group}');">${group}</a></li>
+ 				</c:forEach>
             
               <li class="divider"></li>
               <li><a href="javascript:$('#modalToggle #groupName').val('');">None</a></li>
@@ -39,7 +41,7 @@
       <div class="controls">
         <div class="btn-group">
             <input type="text" name="ope" id="ope" style="width:250px;height:30px;font-style:normal" readonly="readonly">
-            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-right:79px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-cog icon-white" ></i></span>
             </button>

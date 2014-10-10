@@ -55,6 +55,8 @@ public interface ApplicationConstants {
     String ATTR_ENVBEAN = "envbean";
     
     String ATTR_FEATUREBEAN = "featuresbean";
+    
+    String ATTR_STATISTICBEAN = "statsbean";
 
     // ---- Form Params ----
 

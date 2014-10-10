@@ -1136,21 +1136,21 @@ public class RegionFlippingStrategy extends AbstractFlipStrategy {
 			  <title>InMemoryFeatureStore</title>
 			  <para>The implementation of this <varname>FeatureStore</varname> parses an XML document (file or stream) at startup and store the features as a ConcurrentHashMap in memory. It's the default
 			  implementation of FF4J. It does not required any external librairies and is available in the module <varname>ff4j-core</varname>. The XML schema of the file (or XSD) can be find there.
-			  <ulink url="http://ff4j.org/schema/ff4j-1.2.0.xsd">http://ff4j.org/schema/ff4j-1.2.0.xsd</ulink> 
+			  <ulink url="http://ff4j.org/schema/ff4j.xsd">http://ff4j.org/schema/ff4j.xsd</ulink> 
 			  </para>
 			  
 			  <para>You can declared the schema in the XML file with the following schema : </para>
 			  <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;features xmlns="http://www.ff4j.org/schema/ff4j" 
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.2.0.xsd"&gt;
+	 xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j.xsd"&gt;
   &lt;!-- Here your declarations -- &gt;
 &lt;/features&gt;</programlisting>
 
 			  <para>There are a lot of samples in this reference guide. Yet, let's summarize everything in a quite complete one </para>
 			   <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;features xmlns="http://www.ff4j.org/schema/ff4j" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.2.0.xsd"&gt;
+	xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j.xsd"&gt;
 
   &lt;!-- Simplest --&gt;
   &lt;feature uid="A" enable="true" /&gt;

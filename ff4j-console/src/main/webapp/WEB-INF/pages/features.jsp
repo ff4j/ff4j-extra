@@ -105,6 +105,8 @@ $(document).ready(function() {
 
 <%@ include file="features-modal-import.jsp" %>
 
+<%@ include file="features-modal-togglegroup.jsp" %>
+
 
 
 <!-- Toggle -->

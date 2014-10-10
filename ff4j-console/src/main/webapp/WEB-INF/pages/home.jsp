@@ -188,7 +188,7 @@
             <!-- /widget-header -->
             <div class="widget-content">
               <div class="shortcuts"> 
-              	<a href="<c:url value='/features'/>" class="shortcut">
+              	<a href="<c:url value='/features'/>" class="shortcut" >
               	  <i class="shortcut-icon icon-hdd"></i>
               	  <span class="shortcut-label"><fmt:message key="home.ops.store" /></span>
               	</a>
