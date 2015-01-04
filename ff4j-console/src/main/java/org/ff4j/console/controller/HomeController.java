@@ -39,7 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
  * HomeController which load supervision services and display home page.
  */
 @Controller
-@RequestMapping("/" + ApplicationConstants.VIEW_HOME)
+@RequestMapping("/" + ApplicationConstants.VIEW_HOME + ".do")
 public class HomeController extends AbstractConsoleController {
 
     /**
@@ -56,20 +56,9 @@ public class HomeController extends AbstractConsoleController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         log.info("Page <HOME>");
-
-        // check First Access, still : no environment selected
+        // Check First Access, still : no environment selected
         if (null == request.getSession().getAttribute(ATTR_ENVBEAN)) {
-            // Single Environment means default choice;
-            ArrayList<Connection> conns = new ArrayList<Connection>(conf.getMapOfConnections().values());
-            if (1 == conf.getMapOfConnections().size()) {
-                log.info("Selecting <" + conns.get(0).getId() + "> as default and single environement");
-                request.getSession().setAttribute(ATTR_ENVBEAN, new EnvironmenBean(conns.get(0), conns));
-            } else {
-                log.info("No environnment selected yet >> asking to user");
-                ModelAndView mav = new ModelAndView(VIEW_HOME);
-                mav.addObject(ATTR_ENVBEAN, new EnvironmenBean(conns));
-                return mav;
-            }
+            return new ModelAndView("redirect:loadConfig.do");
         }
 
         // Using environnment to create homebean

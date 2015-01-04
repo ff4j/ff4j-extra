@@ -46,7 +46,7 @@ public interface ApplicationConstants {
 
     String ROLE_USER = "ROLE_USER";
 
-    String ROLE_ADMIN = "‚ROLE_ADMIN";
+    String ROLE_ADMIN = "ROLE_ADMIN";
 
     // ----- Model Attributes ------
 

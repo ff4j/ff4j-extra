@@ -29,7 +29,7 @@
 	<context:property-placeholder location="classpath*:env.properties"/>
 	 
 	<bean id="ff4j" class="org.ff4j.FF4j">
-		<property name="store" 					ref="ff4j.store.inmemory" />
+		<property name="store" 					ref="ff4j.store" />
 		<property name="authorizationsManager" 	ref="ff4j.authorizationManager" />
 	</bean>
 	
@@ -37,30 +37,8 @@
 		<property name="location" value="ff4j.xml" />
 	</bean>
 	
-	<bean id="ff4j.webapi.store" class="org.ff4j.web.api.resources.FeatureStoreResource">
-		<property name="store" ref="ff4j.store" />
-	</bean>
-	
 	<bean id="ff4j.authorizationManager" class="org.ff4j.sample.MockAuthorisationManager" />
 	
-	<bean id="ff4j.store.inmemory" class="org.ff4j.store.InMemoryFeatureStore" >
-	    <constructor-arg type="java.util.Map">
-	        <map key-type="java.lang.String" value-type="org.ff4j.core.Feature">
-	            <entry key="myFeature" value-ref="myFeatureRef"/>
-	        </map>
-	    </constructor-arg>
-	</bean>
 	
-	<bean id="myFeatureRef" class="org.ff4j.core.Feature">
-    	<constructor-arg name="uid" value="myFeature"/>
-    	<property name="enable" 			value="true"/>
-    	<property name="description" 		value="Feature description"/>
-    	<property name="flippingStrategy" 	ref="myReleaseStrategy"/>
-    	<property name="group" 				value="myFeatureGroup"/>
-	</bean>
-	
-	<bean id="myReleaseStrategy" class="org.ff4j.strategy.ReleaseDateFlipStrategy">
-    	<constructor-arg type="java.lang.String" value="${effectiveDate}"/>
-	</bean>
 	
 </beans>

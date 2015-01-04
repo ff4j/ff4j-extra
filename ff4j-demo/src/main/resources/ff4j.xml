@@ -1,42 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<features xmlns="http://www.ff4j.org/schema/ff4j" 
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j.xsd">
-	
+<features xmlns="http://www.ff4j.org/schema/ff4j" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j.xsd">
+
 	<!-- Earth Capabilities -->
 	<feature-group name="earth">
-		<feature uid="earth-desc" enable="true" >
+		<feature uid="earth-desc" enable="true">
 			<security>
 				<role name="ROLE_USER" />
 			</security>
 		</feature>
-		<feature uid="earth-link" enable="true" />
-	</feature-group>
-	
-	<!-- Mercury Capabilities -->
-	<feature-group name="mercury" >
-		<feature uid="mercury-desc" enable="true" />
-		<feature uid="mercury-link" enable="true" />
-	</feature-group>
-	
-	<feature-group name="venus" >
-		<feature uid="venus-desc" enable="true" />
-		<feature uid="venus-link" enable="true" />
+		<feature uid="earth-link" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
 	</feature-group>
 
-	<feature-group name="jupiter" >
-		<feature uid="jupiter-desc" enable="true" />
-		<feature uid="jupiter-link" enable="true" />
+	<!-- Mercury Capabilities -->
+	<feature-group name="mercury">
+		<feature uid="mercury-desc" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
+		<feature uid="mercury-link" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
 	</feature-group>
-	
-	<feature-group name="mars" >
-		<feature uid="mars-desc" enable="true" />
-		<feature uid="mars-link" enable="true" />
+
+	<feature-group name="venus">
+		<feature uid="venus-desc" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
+		<feature uid="venus-link" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
 	</feature-group>
-	
-	<feature-group name="saturn" >
-		<feature uid="saturn-desc" enable="true" />
-		<feature uid="saturn-link" enable="true" />
+
+	<feature-group name="jupiter">
+		<feature uid="jupiter-desc" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
+		<feature uid="jupiter-link" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
+	</feature-group>
+
+	<feature-group name="mars">
+		<feature uid="mars-desc" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
+		<feature uid="mars-link" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
+	</feature-group>
+
+	<feature-group name="saturn">
+		<feature uid="saturn-desc" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
+		<feature uid="saturn-link" enable="true">
+			<security>
+				<role name="ROLE_USER" />
+			</security>
+		</feature>
 	</feature-group>
 
 </features>

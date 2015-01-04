@@ -6,7 +6,7 @@
     <div class="container">
       <ul class="mainnav">
         <li id="li-dashboard" class="active">
-        	<a href="<c:url value='/home'/>">
+        	<a href="<c:url value='/home.do'/>">
         		<i class="icon-dashboard"></i>
         		<span><fmt:message key="navbar.dashboard" /></span>
         	</a>
@@ -32,7 +32,7 @@
           </a>
         </li>
         <li class="active2">
-          <a href="<c:url value='/features?op=export'/>">
+          <a href="<c:url value='/features.do?op=export'/>">
             <i class="shortcut-icon icon-download-alt"></i>
             <span>Export XML</span>
           </a>
@@ -45,22 +45,18 @@
         </li>
         </c:when>
         <c:otherwise>
+        <sec:authorize url="/features.do">
          <li id="li-features">
-        	<a href="<c:url value='/features'/>">
+        	<a href="<c:url value='/features.do'/>">
         		<i class="icon-list-alt"></i>
         		<span><fmt:message key="navbar.features" /></span>
         	</a>
         </li>
+        </sec:authorize>
         <li id="li-monitoring">
-        	<a href="<c:url value='/stats'/>">
+        	<a href="<c:url value='/stats.do'/>">
         		<i class="icon-bar-chart"></i>
         		<span><fmt:message key="navbar.monitoring" />
-        	</a>
-        </li>
-        <li id="li-settings" >
-        	<a href="<c:url value='/settings'/>">
-        		<i class="icon-cog"></i>
-        		<span><fmt:message key="navbar.settings" /></span>
         	</a>
         </li>
         </c:otherwise>

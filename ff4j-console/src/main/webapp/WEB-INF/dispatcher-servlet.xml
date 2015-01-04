@@ -13,9 +13,12 @@
     <!-- Configures the @Controller programming model -->
     <mvc:annotation-driven />
     
+    <mvc:default-servlet-handler/>
+    
     <!-- Association root to home -->
+    
     <mvc:view-controller path="/" view-name="index"/>
-    <mvc:view-controller path="/login" view-name="login"/>
+    <mvc:view-controller path="/login.do" view-name="login"/>
     
     <!-- resources exclusions from servlet mapping -->
 	<mvc:resources mapping="/css/**" 	location="/css/" />
@@ -48,6 +51,5 @@
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="en" />
 	</bean>
-    
     
 </beans>

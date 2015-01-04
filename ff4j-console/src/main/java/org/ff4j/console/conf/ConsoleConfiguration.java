@@ -41,6 +41,12 @@ public class ConsoleConfiguration implements Serializable {
 
     /** Default Langugage. */
     private String language = Locale.ENGLISH.getISO3Language();
+    
+    /** Status of parsing. */
+    private boolean confFilePresent = false;
+    
+    /** Status of parsing. */
+    private boolean confFileParsed = false;
 
     /** available users. */
     private Map<String, User> mapOfUser = new HashMap<String, User>();
@@ -103,6 +109,44 @@ public class ConsoleConfiguration implements Serializable {
      */
     public void setMapOfConnections(Map<String, Connection> mapOfConnections) {
         this.mapOfConnections = mapOfConnections;
+    }
+
+    /**
+     * Getter accessor for attribute 'confFilePresent'.
+     *
+     * @return
+     *       current value of 'confFilePresent'
+     */
+    public boolean isConfFilePresent() {
+        return confFilePresent;
+    }
+
+    /**
+     * Setter accessor for attribute 'confFilePresent'.
+     * @param confFilePresent
+     * 		new value for 'confFilePresent '
+     */
+    public void setConfFilePresent(boolean confFilePresent) {
+        this.confFilePresent = confFilePresent;
+    }
+
+    /**
+     * Getter accessor for attribute 'confFileParsed'.
+     *
+     * @return
+     *       current value of 'confFileParsed'
+     */
+    public boolean isConfFileParsed() {
+        return confFileParsed;
+    }
+
+    /**
+     * Setter accessor for attribute 'confFileParsed'.
+     * @param confFileParsed
+     * 		new value for 'confFileParsed '
+     */
+    public void setConfFileParsed(boolean confFileParsed) {
+        this.confFileParsed = confFileParsed;
     }
 
 }

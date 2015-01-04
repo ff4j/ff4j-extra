@@ -25,7 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/" + ApplicationConstants.VIEW_HOME)
+@RequestMapping("/" + ApplicationConstants.VIEW_HOME + ".do")
 public class ChangeLocalController {
 
 }

@@ -11,14 +11,13 @@
     
     <!-- Home -->
     <decorator name="default" page="layout-default.jsp">
-        <pattern>/*</pattern>
+        <pattern>/*.do</pattern>
         <pattern>/40*.jsp</pattern>
     </decorator>
     
     <!-- Dedicated to login -->
-     <decorator name="login" page="layout-login.jsp">
-        <pattern>/login</pattern>
-        <pattern>*select-env.jsp</pattern>
-     </decorator>
+    <decorator name="login" page="layout-login.jsp">
+        <pattern>/login.do</pattern>
+    </decorator>
     
 </decorators>

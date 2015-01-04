@@ -21,6 +21,7 @@ import org.ff4j.console.ApplicationConstants;
 import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.console.domain.HomeBean;
+import org.ff4j.console.domain.StatisticsBean;
 import org.ff4j.web.api.FF4jWebConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.json.JSONConfiguration;
 
 /**
  * Connect to FF4J using http client.
@@ -66,6 +68,8 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
         ClientConfig config = new DefaultClientConfig();
         config.getClasses().add(HomeBeanMsgBodyReader.class);
         config.getClasses().add(FeaturesBeanMsgBodyReader.class);
+        config.getClasses().add(StatsBeanMsgBodyReader.class);
+        config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         jerseyClient = Client.create(config);
 
         // Target URL
@@ -81,7 +85,26 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
      * @return
      *      target request {@link ClientResponse}
      */
-    private ClientResponse buildRequest(String url) {
+    private ClientResponse buildPOSTRequest(String url) {
+        if (null != ff4jConnection.getAuthKey() && !"".equals(ff4jConnection.getAuthKey())) {
+            String header = buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
+            return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).post(ClientResponse.class);
+        } else if (null != ff4jConnection.getUserName() && !"".equals(ff4jConnection.getUserName())) {
+            String header = buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
+            return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).post(ClientResponse.class);
+        }
+        return jerseyClient.resource(url).post(ClientResponse.class);
+    }
+    
+    /**
+     * Build target request with security if required.
+     *
+     * @param url
+     *      target url to contact
+     * @return
+     *      target request {@link ClientResponse}
+     */
+    private ClientResponse buildGETRequest(String url) {
         if (null != ff4jConnection.getAuthKey() && !"".equals(ff4jConnection.getAuthKey())) {
             String header = buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).get(ClientResponse.class);
@@ -98,9 +121,30 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
      * @return target home page bean
      */
     public HomeBean getHome() {
-        return buildRequest(url).getEntity(HomeBean.class);
+        return buildGETRequest(url).getEntity(HomeBean.class);
     }
-
+    
+    /** Custom reader. */
+    public StatisticsBean getStatisticBean(String uid) {
+        ClientResponse cRes;
+        if (uid != null && !"".equals(uid)) {
+            cRes =  buildGETRequest(url + "/monitoring/" + uid);
+        } else {
+            cRes =  buildGETRequest(url + "/monitoring");
+        }
+        return cRes.getEntity(StatisticsBean.class);
+    }
+    
+    /**
+     * Clear Cache.
+     */
+    public void clearCache() {
+        ClientResponse response = buildPOSTRequest(url + "/store/cache");
+        if (response.getStatus() != 200) {
+            throw new IllegalStateException("Cannot clear cache");
+        }
+    }
+    
     /**
      * Population permissions.
      *
@@ -108,7 +152,7 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
      */
     public Set<String> getAllPermissions() {
         String myUrl = ff4jConnection.getUrl() + "/" + RESOURCE_FF4J + "/" + RESOURCE_SECURITY;
-        return buildRequest(myUrl).getEntity(FeaturesBean.class).getPermissionList();
+        return buildGETRequest(myUrl).getEntity(FeaturesBean.class).getPermissionList();
     }
 
     /**

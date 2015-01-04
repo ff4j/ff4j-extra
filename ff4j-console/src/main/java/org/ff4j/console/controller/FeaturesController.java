@@ -40,7 +40,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.ff4j.console.ApplicationConstants;
 import org.ff4j.console.client.ConsoleHttpClient;
-import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.EnvironmenBean;
 import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.core.Feature;
@@ -62,7 +61,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
 @Controller
-@RequestMapping("/" + ApplicationConstants.VIEW_FEATURES)
+@RequestMapping("/" + ApplicationConstants.VIEW_FEATURES + ".do")
 public class FeaturesController extends AbstractConsoleController {
 
     /**
@@ -75,15 +74,8 @@ public class FeaturesController extends AbstractConsoleController {
        
         // Environment de travail
         EnvironmenBean envBean = (EnvironmenBean) req.getSession().getAttribute(ATTR_ENVBEAN);
-        
-        // Redirection to home
-        if (envBean == null) {
-            if (1 == conf.getMapOfConnections().size()) {
-                ArrayList<Connection> conns = new ArrayList<Connection>(conf.getMapOfConnections().values());
-                envBean = new EnvironmenBean(conns.get(0), conns);
-            } else {
-                return new ModelAndView(VIEW_HOME);
-            }
+        if (null == envBean) {
+            return new ModelAndView("redirect:loadConfig.do");
         }
         log.info("Page <FEATURES>, action<GET>, env<" + envBean.getEnvId() + ">");
 
@@ -346,8 +338,7 @@ public class FeaturesController extends AbstractConsoleController {
             // Permissions
             final String permission = req.getParameter(PERMISSION);
             if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
-                @SuppressWarnings("unchecked")
-                Map<String, Object> parameters = req.getParameterMap();
+                Map<String, String[]> parameters = req.getParameterMap();
                 Set<String> permissions = new HashSet<String>();
                 for (String key : parameters.keySet()) {
                     if (key.startsWith(PREFIX_CHECKBOX)) {
@@ -421,8 +412,7 @@ public class FeaturesController extends AbstractConsoleController {
             // Permissions
             final String permission = req.getParameter(PERMISSION);
             if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
-                @SuppressWarnings("unchecked")
-                Map<String, Object> parameters = req.getParameterMap();
+                Map<String, String[]> parameters = req.getParameterMap();
                 Set<String> permissions = new HashSet<String>();
                 for (String key : parameters.keySet()) {
                     if (key.startsWith(PREFIX_CHECKBOX)) {

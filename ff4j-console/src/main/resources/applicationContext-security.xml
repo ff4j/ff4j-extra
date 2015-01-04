@@ -5,16 +5,18 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
               http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http pattern="/images/**" security="none" />
-	<http pattern="/styles/**" security="none" />
+	<http pattern="/images/**"  security="none" />
+	<http pattern="/styles/**"  security="none" />
 	<http pattern="/scripts/**" security="none" />
 
 	<http auto-config="true">
-		<!-- <intercept-url pattern="/home*" access="ROLE_USER" /> 					-->
-		<!-- <intercept-url pattern="/features*" access="ROLE_USER,ROLE_ADMIN" /> 	-->
-		<!-- <intercept-url pattern="/stats*" access="ROLE_USER" />					-->
-		<intercept-url pattern="/settings" access="ROLE_ADMIN" />
-		<form-login login-page="/login" authentication-failure-url="/login?error=true"
+		<intercept-url pattern="/home*" 		access="ROLE_USER" />
+		<intercept-url pattern="/stats*" 		access="ROLE_USER" />
+		<intercept-url pattern="/features*" 	access="ROLE_ADMIN" />
+		<intercept-url pattern="/clearCache*" 	access="ROLE_ADMIN" />
+		
+		<form-login login-page="/login.do" 
+			authentication-failure-url="/login.do?error=true"
 			login-processing-url="/j_security_check" />
 	</http>
 

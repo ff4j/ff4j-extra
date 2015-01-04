@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.console.ApplicationConstants;
+import org.ff4j.console.client.ConsoleHttpClient;
 import org.ff4j.console.domain.EnvironmenBean;
 import org.ff4j.console.domain.StatisticsBean;
 import org.ff4j.core.Feature;
@@ -35,6 +36,7 @@ import org.ff4j.web.store.FeatureStoreHttp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -43,25 +45,33 @@ import org.springframework.web.servlet.ModelAndView;
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
 @Controller
-@RequestMapping("/" + ApplicationConstants.VIEW_STATS)
+@RequestMapping("/" + ApplicationConstants.VIEW_STATS + ".do")
 public class StatsController extends AbstractConsoleController {
 
     /**
      * Display screen
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView showPage(HttpServletRequest req, HttpServletResponse res)
+    public ModelAndView showPage(HttpServletRequest req, HttpServletResponse res, 
+            @RequestParam(value = "uid", required = false) String uid)
     throws Exception {
-       
+
         // Environment de travail
         EnvironmenBean envBean = (EnvironmenBean) req.getSession().getAttribute(ATTR_ENVBEAN);
+        if (null == envBean) {
+            return new ModelAndView("redirect:loadConfig.do");
+        }
         log.info("Page <MONITORING>, action<GET>, env<" + envBean.getEnvId() + ">");
+        
+        // Display all
+        if ("ALL".equals(uid)) uid = null;
+       
+        // Invoke Monitoring resource
+        ConsoleHttpClient client = new ConsoleHttpClient(getConnection(envBean.getEnvId()));
+        StatisticsBean statisticBean = client.getStatisticBean(uid);
         
         // Access features through HTTP store (all parsing done)
         FeatureStore storeHTTP = new FeatureStoreHttp(envBean.getEnvUrl() + "/" + FF4jWebConstants.RESOURCE_FF4J);
-      
-        // StatisticBeans
-        StatisticsBean statisticBean = new StatisticsBean();
         statisticBean.setListOfFeatures(new ArrayList<Feature>(storeHTTP.readAll().values()));
       
         // Display output page
@@ -69,6 +79,7 @@ public class StatsController extends AbstractConsoleController {
         mav.addObject(ATTR_ENVBEAN, envBean);
         mav.addObject(ATTR_STATISTICBEAN, statisticBean);
         return mav;
+        
     }
 
 }

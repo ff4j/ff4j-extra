@@ -54,18 +54,7 @@
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
-    
-    <!-- URL Rewriter 
-    <filter>
-        <filter-name>rewriteFilter</filter-name>
-        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>rewriteFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    -->
-
+   
 	<!-- Spring MVC -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
@@ -74,7 +63,24 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jsp</servlet-name>
+		<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsp</servlet-name>
+		<url-pattern>/WEB-INF/pages/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>jsp</servlet-name>
+		<url-pattern>/jsp-layout/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>jsp</servlet-name>
+		<url-pattern>/jsp-tiles/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- Ignore resources -->
@@ -121,7 +127,7 @@
     
 	<!-- Welcome file -->
 	<welcome-file-list>
-		<welcome-file>/index.jsp</welcome-file>
+    	<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
 	<!-- Define error pages -->
@@ -138,14 +144,6 @@
         <location>/error.jsp</location>
     </error-page>
     
-	<!-- Enable JSP Config -->
-	<jsp-config>
-        <jsp-property-group>
-            <url-pattern>*.jsp</url-pattern>
-            <trim-directive-whitespaces>true</trim-directive-whitespaces>
-        </jsp-property-group>
-    </jsp-config>
-    
     <!-- Track Session through cookie -->
 	<session-config>
         <session-timeout>15</session-timeout>
@@ -155,5 +153,14 @@
         </cookie-config>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
+    
+     <!-- Enable JSP Config 
+	<jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+        </jsp-property-group>
+    </jsp-config>
+    -->
 
 </web-app>

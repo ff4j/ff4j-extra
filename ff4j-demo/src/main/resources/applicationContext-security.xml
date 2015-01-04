@@ -14,8 +14,8 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="guest" password="guest" authorities="ROLE_USER, BETA, ADMIN, USER, FF4JDEV" />
-				<user name="admin" password="admin" authorities="ROLE_USER, BETA, ADMIN, USER, FF4JDEV" />
+				<user name="guest" password="guest" authorities="ROLE_USER" />
+				<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>

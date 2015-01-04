@@ -5,7 +5,7 @@
 <!-- ** Creation FORM ** -->
 <!-- ******************* -->
 
-<form class="form-horizontal" action="<c:url value='/features'/>" method="POST" >
+<form class="form-horizontal" action="<c:url value='/features.do'/>" method="POST" >
 
  <div class="modal hide fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="labelCreate" aria-hidden="true">
   

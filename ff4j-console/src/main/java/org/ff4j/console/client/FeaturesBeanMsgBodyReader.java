@@ -63,6 +63,7 @@ public class FeaturesBeanMsgBodyReader implements MessageBodyReader<FeaturesBean
         Map<String, Object> myMap = new HashMap<String, Object>();
         myMap = objectMapper.readValue(entityStream, HashMap.class);
         FeaturesBean fb = new FeaturesBean();
+        fb.setPermissionList(new HashSet<String>());
         if (myMap.containsKey(PERMISSIONS_TAG)) {
             ArrayList<String> permissions = (ArrayList<String>) myMap.get(PERMISSIONS_TAG);
             fb.setPermissionList(new HashSet<String>(permissions));

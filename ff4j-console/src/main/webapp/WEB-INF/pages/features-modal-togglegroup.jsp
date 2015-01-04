@@ -3,7 +3,7 @@
 <!-- ******************* -->
 <!-- ** TOGGLE GROUP  ** -->
 <!-- ******************* -->
-<form class="form-horizontal" action="<c:url value='/features'/>" method="POST" name="toggleGroupForm" id="toggleGroupForm">
+<form class="form-horizontal" action="<c:url value='/features.do'/>" method="POST" name="toggleGroupForm" id="toggleGroupForm">
 
   <div class="modal hide fade" id="modalToggle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     

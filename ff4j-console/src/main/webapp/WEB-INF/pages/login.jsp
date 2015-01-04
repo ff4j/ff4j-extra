@@ -9,7 +9,7 @@
 			
 			<div class="login-fields">
 				
-				<p class="login-fields"><br/><fmt:message key="login.description" /> : </p>
+				<p class="login-fields"><br/><fmt:message key="login.description" /></p>
 				
 				<div class="field">
 					<label for="j_username">Username</label>

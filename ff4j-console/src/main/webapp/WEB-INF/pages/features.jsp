@@ -26,8 +26,8 @@ $(document).ready(function() {
 					<div class="widget widget-nopad">
 
 						<div class="widget-header">
-							<i class="icon-home"></i>
-							<h3>Features</h3>
+							<i class="icon-th-list"></i>
+							<h3><fmt:message key="feature.title" /></h3>
 						</div>
 
 						<div class="widget-content">
@@ -35,13 +35,13 @@ $(document).ready(function() {
 								<table class="table table-striped table-bordered">
      <thead>
       <tr>
-       <th style="width:20%;text-align:center">Feature</th>
-       <th style="width:20%;text-align:center">Group</th>
-       <th style="width:25%;text-align:center">Permissions</th>
-       <th style="width:25%;text-align:center">Strategy</th>
-       <th style="width:8%;text-align:center">Toggle</th>
-       <th style="width:5%;text-align:center">E</th>
-       <th style="width:5%;text-align:center">D</th>
+       <th style="width:20%;text-align:center"><fmt:message key="feature.table.name" /></th>
+       <th style="width:20%;text-align:center"><fmt:message key="feature.table.group" /></th>
+       <th style="width:25%;text-align:center"><fmt:message key="feature.table.role" /></th>
+       <th style="width:25%;text-align:center"><fmt:message key="feature.table.strategy" /></th>
+       <th style="width:8%;text-align:center"><fmt:message key="feature.table.toggle" />	</th>
+       <th style="width:5%;text-align:center"><fmt:message key="feature.table.edit" />	</th>
+       <th style="width:5%;text-align:center"><fmt:message key="feature.table.supp" />	</th>
       </tr>
     </thead>
     <tbody> 

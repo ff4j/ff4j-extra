@@ -34,14 +34,18 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
         String randomUID = features.get(getRandomOffset(features.size())).getUid();
         // Anytime from 12H
         long randomTimeStamp = System.currentTimeMillis() - (long) (Math.random() * 1000 * 3600 * nbHours);
+        if (Math.random() > 0.5d) {
+            randomTimeStamp = System.currentTimeMillis() + (long) (Math.random() * 1000 * 3600 * nbHours);
+        }
         // Type ok or ko
         EventType myType = (getRandomOffset(2) == 0) ? EventType.HIT_FLIPPED : EventType.HIT_NOT_FLIPPED;
         return new Event(randomUID, myType, randomTimeStamp);
     }
 
     private void initConf() {
-        conf = new FF4jApiConfig();
-        conf.setFF4j(ctx.getBean(FF4j.class));
+        conf = new FF4jApiConfig(ctx.getBean(FF4j.class));
+        conf.enableDocumentation();
+      
 //      // login/Password
 //      conf.setEnableAuthentication(true);
 //      conf.setEnableAuthorization(true);

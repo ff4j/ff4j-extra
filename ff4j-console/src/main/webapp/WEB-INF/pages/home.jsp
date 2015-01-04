@@ -15,10 +15,7 @@
   <div class="main-inner">
     <div class="container">
       <div class="row">
-      	
-       <c:choose>
-      	<c:when test="${not empty envbean.envId}">
-        
+     
         <div class="span6">
         
           <!--  General Informations -->
@@ -41,7 +38,7 @@
                 	<table style="border-collapse:separate;border-spacing:0 10px;text-transform:none">
                 		<tr>
                 		 <td style="width:100px;text-align:right;margin-right:15px"><h4>
-                		 <a class="ff4j-tooltip" tooltip="<fmt:message key="home.general.uptime.comment"/>" style="color:#ab8b00">
+                		 <a class="ff4j-tooltip" tooltip="<fmt:message key="home.general.uptime.comment"/>" >
                 		 	<fmt:message key="home.general.uptime"/>&nbsp;
                 		 </a>
                 		 </td>
@@ -143,28 +140,27 @@
              <div class="widget-content">
                   <div id="big_stats" class="cf">
                     <div class="stat">
-                    	<i class="icon-th-list"></i>
-                    	<a class="ff4j-tooltip" tooltip="<fmt:message key="home.stats.nbfeature.comment" />">
-                    	<span class="value">
-                    		<c:out value="${homebean.nbFeature}" >---</c:out>
+                    	<span class="value" style="color:#ab8b00">
+                    		<c:out value="${homebean.nbFeature}" >---</c:out><span style="font-size:14px">&nbsp;Feature(s)</span>
                     	</span>
-                    	</a>
+                    	<i class="icon-th-list"></i>
                     </div>
                     <!-- .stat -->
                     
                     <div class="stat">
+                    	
+                    	<span class="value" style="color:#ab8b00">
+                    		<c:out value="${homebean.nbGroup}" >---</c:out><span style="font-size:14px">&nbsp;Group(s)
+                    	</span>
                     	<i class="icon-th-large"></i>
-                    	<a class="ff4j-tooltip" tooltip="<fmt:message key="home.stats.nbgroup.comment" />">
-                    	<span class="value"><c:out value="${homebean.nbGroup}" >---</c:out></span>
-                    	</a>
                     </div>
                     <!-- .stat -->
                     
                     <div class="stat"> 
+                    	<span class="value" style="color:#ab8b00">
+                    		<c:out value="${homebean.nbEvents}" >---</c:out><span style="font-size:14px">&nbsp;Hit(s)
+                    	</span>
                     	<i class="icon-bar-chart"></i>
-                    	<a class="ff4j-tooltip" tooltip="<fmt:message key="home.stats.nbevent.comment" />">
-                    	<span class="value"><c:out value="${homebean.nbEvents}" >---</c:out></span>
-                    	</a>
                     </div>
                     <!-- .stat -->
                      
@@ -188,22 +184,26 @@
             <!-- /widget-header -->
             <div class="widget-content">
               <div class="shortcuts"> 
-              	<a href="<c:url value='/features'/>" class="shortcut" >
+              	<a href="<c:url value='/features.do'/>" class="shortcut" >
               	  <i class="shortcut-icon icon-hdd"></i>
               	  <span class="shortcut-label"><fmt:message key="home.ops.store" /></span>
               	</a>
-              	<a href="<c:url value='/stats'/>" class="shortcut">
+              	<a href="<c:url value='/stats.do'/>" class="shortcut">
               	 <i class="shortcut-icon icon-signal"></i>
               	 <span class="shortcut-label"><fmt:message key="home.ops.monitoring" /></span> 
               	</a>
-              	<a href="<c:url value='/clearcache'/>" class="shortcut">
+              	<sec:authorize url="/clearCache.do">
+              	<a data-toggle="modal" href="#modalClearCache" class="shortcut" href="<c:url value='/clearcache'/>" class="shortcut">
               	 <i class="shortcut-icon icon-magic"></i> 
               	 <span class="shortcut-label"><fmt:message key="home.ops.clearcache" /></span> 
               	</a>
-              	<a href="<c:url value='/settings'/>" class="shortcut"> 
+              	</sec:authorize>
+              	<sec:authorize url="/clearCache.do">
+              	<a href="#" class="shortcut"> 
               	 <i class="shortcut-icon icon-warning-sign"></i>
               	 <span class="shortcut-label"><fmt:message key="home.ops.maintenance" /></span> 
               	</a>
+              	</sec:authorize>
               </div>
               <!-- /shortcuts --> 
             </div>
@@ -264,49 +264,7 @@
           <!-- /widget -->
           
         </div>
-        <!-- /span6 --> 
-        
-      </c:when>
-      	<c:otherwise>
-      		<div class="span6">
-
-					<!--  General Informations -->
-					<div class="widget widget-nopad">
-
-						<div class="widget-header">
-							<i class="icon-home"></i>
-							<h3>Select Environment...</h3>
-						</div>
-
-						<div class="widget-content" style="height:300px;">
-							
-							<p><h6 class="bigstats"> Several environments have been defined in configuration.</p>
-							
-							Please choose the target you want to reach.</h6></p>
-							
-							 <form action="<c:url value='/home'/>" id="envcheck" method="POST" >
-							  <div class="btn-group" style="margin-left:50px">
-				             <ul class="dropdown-menu" role="menu" style="width:150px;float:left">
-				              <c:forEach items="${envbean.listOfConnection}" var="conn">
-				              	<li><a href="javascript:$('#env').val('${conn.id}');$('#envcheck').submit()">${conn.id}</a></li>
-				              </c:forEach>
-				              </ul>
-				               <input type="text" name="env" id="env" style="width:150px;height:30px;font-style:normal;float:left;" readonly="readonly">
-				            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:left">
-				              <span class="sr-only"> <i class="icon-th-list icon-white"></i></span>
-				              <span class="caret"></span>
-				            </button>
-				            
-				              </div>
-				            </form>
-							
-							</div>
-							
-						</div>
-					</div>
-				</div>
-      	</c:otherwise>
-      </c:choose>
+     
       
       </div>
       <!-- /row --> 
@@ -314,5 +272,8 @@
     <!-- /container --> 
   </div>
   <!-- /main-inner --> 
+  
+  <%@ include file="features-modal-clearcache.jsp" %>
+  
   
 </body>

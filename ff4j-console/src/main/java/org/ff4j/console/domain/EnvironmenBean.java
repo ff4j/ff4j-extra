@@ -42,6 +42,12 @@ public class EnvironmenBean {
 
     /** list of environment (display dropdown) */
     private ArrayList<Connection> listOfConnection = new ArrayList<Connection>();
+    
+    /** presence of configuration file. */
+    private boolean confFilePresent = true;
+    
+    /** presence of configuration file. */
+    private boolean confFileParsed = true;
 
     /**
      * Populate connection informations
@@ -50,7 +56,7 @@ public class EnvironmenBean {
      *            connection
      */
     public EnvironmenBean() {}
-
+    
     /**
      * Populate connection informations
      * 
@@ -160,6 +166,44 @@ public class EnvironmenBean {
      */
     public void setListOfConnection(ArrayList<Connection> listOfConnection) {
         this.listOfConnection = listOfConnection;
+    }
+
+    /**
+     * Getter accessor for attribute 'confFilePresent'.
+     *
+     * @return
+     *       current value of 'confFilePresent'
+     */
+    public boolean isConfFilePresent() {
+        return confFilePresent;
+    }
+
+    /**
+     * Setter accessor for attribute 'confFilePresent'.
+     * @param confFilePresent
+     * 		new value for 'confFilePresent '
+     */
+    public void setConfFilePresent(boolean confFilePresent) {
+        this.confFilePresent = confFilePresent;
+    }
+
+    /**
+     * Getter accessor for attribute 'confFileParsed'.
+     *
+     * @return
+     *       current value of 'confFileParsed'
+     */
+    public boolean isConfFileParsed() {
+        return confFileParsed;
+    }
+
+    /**
+     * Setter accessor for attribute 'confFileParsed'.
+     * @param confFileParsed
+     * 		new value for 'confFileParsed '
+     */
+    public void setConfFileParsed(boolean confFileParsed) {
+        this.confFileParsed = confFileParsed;
     }
 
 }

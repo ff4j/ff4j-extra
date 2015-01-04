@@ -21,6 +21,8 @@ package org.ff4j.console.domain;
  */
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Webbean to display home information
@@ -64,6 +66,12 @@ public class HomeBean implements Serializable {
     
     /** color of sector from pie. */
     private String todayHitCountColors;
+    
+    /** if cache is enabled. */
+    private boolean cache = false;
+    
+    /** list of cached features. */
+    private List < String > cacheFeature = new ArrayList<String>();
     
     /**
      * Default constructor.
@@ -278,6 +286,44 @@ public class HomeBean implements Serializable {
      */
     public void setTodayHitCountColors(String todayHitCountColors) {
         this.todayHitCountColors = todayHitCountColors;
+    }
+
+    /**
+     * Getter accessor for attribute 'cache'.
+     *
+     * @return
+     *       current value of 'cache'
+     */
+    public boolean isCache() {
+        return cache;
+    }
+
+    /**
+     * Setter accessor for attribute 'cache'.
+     * @param cache
+     * 		new value for 'cache '
+     */
+    public void setCache(boolean cache) {
+        this.cache = cache;
+    }
+
+    /**
+     * Getter accessor for attribute 'cacheFeature'.
+     *
+     * @return
+     *       current value of 'cacheFeature'
+     */
+    public List<String> getCacheFeature() {
+        return cacheFeature;
+    }
+
+    /**
+     * Setter accessor for attribute 'cacheFeature'.
+     * @param cacheFeature
+     * 		new value for 'cacheFeature '
+     */
+    public void setCacheFeature(List<String> cacheFeature) {
+        this.cacheFeature = cacheFeature;
     }
 
 }

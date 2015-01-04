@@ -20,6 +20,11 @@ package org.ff4j.console.controller;
  * #L%
  */
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.ff4j.FF4j;
 import org.ff4j.console.ApplicationConstants;
 import org.ff4j.console.conf.ConsoleConfiguration;
@@ -29,6 +34,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Injection of ff4j for all controller.
@@ -69,6 +76,29 @@ public abstract class AbstractConsoleController implements ApplicationConstants,
             throw new IllegalArgumentException("Id " + connId + " is invalid :" + conf.getMapOfConnections().keySet());
         }
         return conf.getMapOfConnections().get(connId);
+    }
+
+   
+    /**
+     * Process error
+     * @param e
+     *      target error
+     * @return
+     *      target pb.
+     */
+    @ExceptionHandler (Exception.class)
+    public ModelAndView handleException(final Exception e, HttpServletRequest request) {
+        // Clear Session
+        request.getSession().removeAttribute(ATTR_ENVBEAN);
+        
+        final StringWriter sw = new StringWriter();
+        final PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        
+        ModelAndView mav = new ModelAndView("error");
+        mav.addObject("errorMsg", e.getMessage());
+        mav.addObject("errorStack", sw.toString().replaceAll("\\n", "<br>"));
+        return mav;
     }
 
 }

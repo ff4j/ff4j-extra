@@ -81,12 +81,12 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
             if (evtMap != null) {
                 String classType = (String) evtMap.get("type");
                 hb.setMonitoring(classType.substring(classType.lastIndexOf(".") + 1));
-                if (evtMap.containsKey("todayHitTotal")) {
-                    hb.setNbEvents((Integer) evtMap.get("todayHitTotal"));
+                if (evtMap.containsKey("hitCount")) {
+                    hb.setNbEvents((Integer) evtMap.get("hitCount"));
                 }
                 // Pie
-                if (evtMap.containsKey("todayHitsPie")) {
-                    Map<String, Object> pieMap = (Map<String, Object>) evtMap.get("todayHitsPie");
+                if (evtMap.containsKey("eventsPie")) {
+                    Map<String, Object> pieMap = (Map<String, Object>) evtMap.get("eventsPie");
                     StringBuilder sbData = new StringBuilder("[");
                     StringBuilder sbColor = new StringBuilder("[");
                     List < LinkedHashMap< String , Object > > listOfSectory = (ArrayList<LinkedHashMap< String , Object >>) pieMap.get("sectors");
@@ -96,8 +96,8 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
                             sbData.append(",");
                             sbColor.append(",");
                         }
-                        sbData.append("['" + (String) sector.get("label") + "', " + String.valueOf(sector.get("hitcount")) + "]");
-                        sbColor.append("\"" + (String) sector.get("color") + "\"");
+                        sbData.append("['" + (String) sector.get("label") + "', " + String.valueOf(sector.get("value")) + "]");
+                        sbColor.append("\"#" + (String) sector.get("color") + "\"");
                         first = false;
                     }
                     sbData.append("]");
@@ -136,12 +136,15 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
                     hb.setNbGroup((Integer) featMap.get("numberOfGroups"));
                 }
                 
-                if (featMap.containsKey("cached")) {
-                    boolean cached = (Boolean) featMap.get("cached");
-                    if (cached) {
-                        String classStore= (String) myMap.get("cacheStore");
-                        String cacheProvider = (String) myMap.get("cacheProvider");
-                        hb.setCaching(classType.substring(classStore.lastIndexOf(".") + 1) + "(" + cacheProvider + " )");
+                if (featMap.containsKey("cache")) {
+                    Map<String, Object> cacheMap = (Map<String, Object>) featMap.get("cache");
+                    String classStore= (String) cacheMap.get("cacheStore");
+                    hb.setStore(classStore.substring(classStore.lastIndexOf(".") + 1) + " (+ CacheProxy)");
+                    String cacheProvider = (String) cacheMap.get("cacheProvider");
+                    hb.setCaching(cacheProvider);
+                    hb.setCache(true);
+                    if (cacheMap.containsKey("featureNames")) {
+                        hb.setCacheFeature((List<String>) cacheMap.get("featureNames"));
                     }
                 } else {
                     hb.setCaching("---");

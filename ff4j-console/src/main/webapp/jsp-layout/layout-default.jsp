@@ -32,7 +32,7 @@
      <%@ include file="/jsp-tiles/footer.jsp"%>
 
 	<!-- form to post change -->
-	<form action="<c:url value='/home'/>" id="envchange" method="POST" >
+	<form action="<c:url value='/loadConfig.do'/>" id="envchange" method="POST" >
 		<input type="hidden" id="env" name="env" value="" />
 	</form>
 

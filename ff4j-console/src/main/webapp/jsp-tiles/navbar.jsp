@@ -15,7 +15,7 @@
     	</a>
     	
     	<!-- Link to Home -->
-        <a class="brand" href="#" >
+        <a class="brand" href="/home.do" >
         	<img src="./img/icons/ff4j.png" style="height:40px">
         	&nbsp;&nbsp;&nbsp;Administration Console 
         		@&nbsp;<span style="color:#9ce1cd"><c:out value="${sessionScope.envbean.envId}" > -- </c:out></span>
@@ -28,7 +28,8 @@
 	      <!-- Environnement already selected but several available -->
           <c:if test="${fn:length(envbean.listOfConnection) gt 1 && not empty envbean.envId}">
 	          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	           <img src="./img/icons/switch2.png" style="height:20px">&nbsp; <c:out value="${envbean.envId}"/><b class="caret"></b></a>
+	           <img src="./img/icons/switch2.png" style="height:20px">&nbsp; 
+	           	<c:out value="${envbean.envId}"/><b class="caret"></b></a>
 	            <ul class="dropdown-menu">
 	            	 <c:forEach items="${envbean.listOfConnection}" var="conn">
 	            	 	<li><a href="javascript:$('#env').val('${conn.id}');$('#envchange').submit()">
