@@ -16,6 +16,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
 		<encoding>UTF-8</encoding>
+		<jetty.port>8080</jetty.port>
 	</properties>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -103,7 +104,7 @@
 					<stopKey>foo2</stopKey>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>8181</port>
+							<port>${jetty.port}</port>
 							<maxIdleTime>60000</maxIdleTime>
 						</connector>
 					</connectors>

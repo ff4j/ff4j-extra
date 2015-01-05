@@ -16,20 +16,6 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
-	<!-- WebAPI-->
-	<servlet>
-		<servlet-name>WebAPI</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-		<init-param>
-			 <param-name>javax.ws.rs.Application</param-name>
-			<param-value>org.ff4j.sample.CustomWebApiFf4JProvider</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>WebAPI</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
-	
 	<servlet-mapping>
 		<servlet-name>ff4j-console</servlet-name>
 		<url-pattern>/ff4j-console</url-pattern>

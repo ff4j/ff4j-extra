@@ -6,9 +6,9 @@ import org.ff4j.FF4j;
 import org.ff4j.audit.Event;
 import org.ff4j.audit.EventType;
 import org.ff4j.core.Feature;
-import org.ff4j.web.api.FF4JWebProvider;
+import org.ff4j.web.api.FF4JProvider;
+import org.ff4j.web.api.conf.FF4jApiConfig;
 import org.ff4j.web.api.jersey.FF4JApiApplication;
-import org.ff4j.web.api.jersey.FF4jApiConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -17,7 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
-public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements FF4JWebProvider {
+public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements FF4JProvider {
 
     /** Spring Bean. */
     private static ApplicationContext ctx =  new ClassPathXmlApplicationContext("applicationContext.xml"); 
@@ -42,6 +42,7 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
     private void initConf() {
         conf = new FF4jApiConfig();
         conf.setFF4j(ctx.getBean(FF4j.class));
+        conf.enableDocumentation();
 //      // login/Password
 //      conf.setEnableAuthentication(true);
 //      conf.setEnableAuthorization(true);
