@@ -16,8 +16,9 @@
 		<intercept-url pattern="/clearCache*" 	access="ROLE_ADMIN" />
 		
 		<form-login login-page="/login.do" 
-			authentication-failure-url="/login.do?error=true"
+			authentication-failure-url="/login.jsp?error=true"
 			login-processing-url="/j_security_check" />
+			
 	</http>
 
 	<authentication-manager alias="authenticationManager">

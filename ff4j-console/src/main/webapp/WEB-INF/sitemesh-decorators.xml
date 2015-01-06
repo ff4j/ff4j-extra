@@ -18,6 +18,7 @@
     <!-- Dedicated to login -->
     <decorator name="login" page="layout-login.jsp">
         <pattern>/login.do</pattern>
+        <pattern>/login.jsp</pattern>
     </decorator>
     
 </decorators>

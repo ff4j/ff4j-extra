@@ -33,7 +33,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<users>
 		<user name="admin" password="admin" language="en" admin="true" />
-		<user name="clu"   password="clu" 	language="fr" />
+		<user name="user"  password="user" language="fr" />
 	</users>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

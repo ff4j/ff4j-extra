@@ -10,9 +10,9 @@
  <meta name="application-name" content="FF4J Administration Console" />
 
  <!-- Icons -->
- <link href="<c:url value='/img/icons/ff4j.png'/>" rel="icon" />
- <link href="<c:url value='/img/icons/ff4j.png'/>" rel="shortcut icon" />
- <link href="<c:url value='/img/icons/ff4j.png'/>" rel="apple-touch-icon" />
+ <link href="<c:url value='/img/icons/ff4j-ico.png'/>" rel="icon" />
+ <link href="<c:url value='/img/icons/ff4j-ico.png'/>" rel="shortcut icon" />
+ <link href="<c:url value='/img/icons/ff4j-ico.png'/>" rel="apple-touch-icon" />
 
  <!-- Styles -->
  <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/css/bootstrap.min.css'/>" />
