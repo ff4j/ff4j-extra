@@ -12,14 +12,14 @@
 	<bookinfo>
 		<title>Ff4j Reference Guide</title>
 		<productname>Feature Flipping For Java</productname>
-		<edition>Reference Guide v1.2.0</edition>
-		<pubdate>2014</pubdate>
+		<edition>Reference Guide v1.3</edition>
+		<pubdate>2015 </pubdate>
 		<copyright>
 			<year>2013 - </year>
-			<year>2014</year>
+			<year>2015</year>
 			<holder> ff4j.org</holder>
 		</copyright>
-		<releaseinfo>v1.2.0</releaseinfo>
+		<releaseinfo>v1.3</releaseinfo>
 		<authorgroup>
 			<author>
 				<firstname>Cedrick</firstname>

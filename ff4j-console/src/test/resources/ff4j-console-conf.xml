@@ -43,6 +43,9 @@
 		
 		<connection id="FF4J-DEMO" mode="http" url="http://localhost:8081/ff4j-demo/api" />
 		
+		<connection id="FF4J-WEBAPI" mode="http" url="http://localhost:8282/webapi/api" />
+		
+		
 		<!-- <connection id="FF4J-WEBAPI" mode="http" url="http://localhost:8282/webapi/api" authKey="JHDLFOANFFIUHFEKFNOPIUHFEBEIZUBF" /> -->
 		
 		
