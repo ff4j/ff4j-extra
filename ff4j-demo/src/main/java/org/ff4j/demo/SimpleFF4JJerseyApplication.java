@@ -45,6 +45,7 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
     private void initConf() {
         conf = new FF4jApiConfig(ctx.getBean(FF4j.class));
         conf.enableDocumentation();
+        conf.setContextPath("http://cannys.ddns.net:8081/ff4j-demo/api");
       
         // login/Password
         //conf.setEnableAuthentication(true);

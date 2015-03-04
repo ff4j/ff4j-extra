@@ -7,29 +7,12 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
-
-	<bean id="ff4j.filter" class="org.ff4j.FF4JFilter"	/>
 	
 	<!-- ~~~~~~~~~~~~~~~~~ -->
 	<!-- Camel Context     -->
 	<!-- ~~~~~~~~~~~~~~~~~ -->
-	<camelContext  xmlns="http://camel.apache.org/schema/spring" 
-	   id="newscollector.camelContext" trace="${log.verbose?false}" errorHandlerRef="errorHandler" >
-		 
-    	<!-- Scrap website and build a list of SyndFeed -->
-		<route id="illustrate-ff4j" trace="false">
-			<from uri="direct://foo" />
-			<filter>
-				<method ref="ff4j.filter" method="check" />
-				<to uri="mock:ok" />
-			</filter>
-			
-			<choice>
-				<when id="test-ff4j">
-					<method ref="" method="" />
-				</when>
-			</choice>
-		</route>
+	<camelContext  xmlns="http://camel.apache.org/schema/spring" trace="${log.verbose?false}" 
+	   id="camel.context" errorHandlerRef="errorHandler" >
 		  
 	</camelContext>
 	

@@ -10,14 +10,13 @@
 	<http pattern="/scripts/**" security="none" />
 
 	<http auto-config="true">
+		<!-- 
 		<intercept-url pattern="/home*" 		access="ROLE_USER" />
 		<intercept-url pattern="/stats*" 		access="ROLE_USER" />
 		<intercept-url pattern="/features*" 	access="ROLE_ADMIN" />
 		<intercept-url pattern="/clearCache*" 	access="ROLE_ADMIN" />
-		
-		<form-login login-page="/login.do" 
-			authentication-failure-url="/login.jsp?error=true"
-			login-processing-url="/j_security_check" />
+		-->
+		<form-login login-page="/login.do" authentication-failure-url="/login.jsp?error=true" login-processing-url="/j_security_check" />
 			
 	</http>
 

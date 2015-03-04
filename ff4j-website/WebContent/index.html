@@ -1,20 +1,22 @@
 <!DOCTYPE HTML>
 <html>
  <head>
-  <title>Ff4j - Feature Flipping for JAVA</title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta name="description" content="FF4J, Feature flipping for Java mode Easy" />
-  <meta name="keywords" content="feature,features,toggle,flipping,ff4j,java," />
-  
-  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,900" rel="stylesheet" />
+  <title>Home - Feature Flipping 4 JAVA</title>
+  <meta http-equiv="content-type" 	content="text/html; charset=utf-8" />
+  <meta name="description" 			content="FF4J, Feature flipping for Java mode Easy" />
+  <meta name="keywords" 			content="feature,features,toggle,flipping,ff4j,java," />
+ 
   <!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.dropotron.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/skel.min.js"></script>
   <script src="js/skel-panels.min.js"></script>
+   <script src="js/prettify.min.js"></script>
+   <script src="js/site.js"></script>
   <noscript>
 	<link rel="stylesheet" href="css/skel-noscript.css" />
+	<link rel="stylesheet" href="css/google.css" />
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/style-desktop.css" />
   </noscript>
@@ -22,15 +24,16 @@
 
 <body class="homepage">
 
+
 	<!-- Header Wrapper -->
-	<div id="header-wrapper" class="wrapper">	
+	<div id="header-wrapper" class="wrapper" style="height:400px">	
 		<div class="container">
 			<div class="row">
 				<div class="12u">
 					<!-- Header -->
 					<div id="header">
 						<!-- Logo -->
-						<div id="logo">
+						<div id="logo"  style="top:50px">
 							<h1>
 								<img src="images/ff4j.png" />
 							</h1>
@@ -39,23 +42,27 @@
 						<!-- /Logo -->
 
 						<!-- Nav -->
-						<nav id="nav">
+						<nav id="nav" style="margin-top:190px;">
 							<ul>
-								<li><a href="right-sidebar.html" class="fa fa-desktop">&nbsp;Live Demo</a></li>
-								<li><a href="right-sidebar.html" class="fa fa-bookmark">&nbsp;Getting Started</a></li>
-								<li><span class="fa fa-book">&nbsp;Documentation</span>
+								<li><a href="http://cannys.ddns.net:8081/ff4j-demo" class="fa fa-desktop">&nbsp;Live Demo</a>
+								
+								<li><span class="fa fa-bookmark">&nbsp;Getting Started</span>
 									<ul>
-										<li><a href="#" class="fa fa-check" > Reference Guide</a></li>
-										<li><a href="#" class="fa fa-check" > Maven Site</a></li>
-										<li><span>JavaDoc</span>
-											<ul>
-												<li><a href="#">ff4j-core</a></li>
-												<li><a href="#">ff4j-aop</a></li>
-												<li><a href="#">ff4j-jmx</a></li>
-												<li><a href="#">ff4j-test</a></li>
-											</ul></li>
-									</ul></li>
-								<li><a href="no-sidebar.html"class="fa fa-download">&nbsp;Download</a></li>
+										<li><a href="https://github.com/clun/ff4j#hello-world" class="fa fa-laptop"> 10 min tutorial</a></li>
+										<li><a href="https://github.com/clun/ff4j#getting-started" class="fa fa-crosshairs"> Getting Started</a></li>
+										<li><a href="http://celphys.free.fr/ff4j/index.html" class="fa fa-globe"> Maven Site</a></li>
+										<li><a href="https://github.com/clun/ff4j-extra/tree/master/ff4j-samples" class="fa fa-code"> Sample codes</a></li>
+									</ul>
+								</li>
+								
+								<li><span class="fa fa-book">&nbsp;DOCUMENTATION</span>
+									<ul>
+										<li><a href="./ff4j-reference-guide-1.3.pdf" class="fa fa-book"> Reference Guide</span>
+										<li><a href="http://celphys.free.fr/ff4j/apidocs/index.html" class="fa fa-wrench" > JavaDoc</a></li>
+										
+									</ul>
+								</li>
+								<li><a href="http://sourceforge.net/projects/ff4j/files/latest/download" class="fa fa-download">&nbsp;Download</a></li>
 							</ul>
 						</nav>
 						<!-- /Nav -->
@@ -71,84 +78,176 @@
 
 	<!-- Intro Wrapper -->
 	<div id="intro-wrapper" class="wrapper wrapper-style3">
-		<div class="title">The Introduction</div>
+		<div class="title">Overview</div>
 		<div class="container">
+		 
 			<div class="row">
 				<div class="12u">
 
 					<!-- Features -->
 						<section id="features">
-							<header class="style1">
-								<h2>Dolor consequat feugiat amet veroeros</h2>
-								<p class="byline">Feugiat dolor nullam orci pretium
-									phasellus justo</p>
-							</header>
+							
 							<div class="feature-list">
 								<div>
 									<div class="row">
-										<div class="6u">
+									  <div class="6u">
 											<section>
-												<h3 class="fa fa-comment">Mattis velit diam vulputate</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
+												<h3 class="fa fa-desktop">Embedded WebConsole</h3>
+												<p>Toggle features at runtime through dedicated embedded console. A single
+												servlet declaration is required in web.xml
+												<br/><br/><center>
+													<a href="images/console-embedded.png" target="_blank" />
+														<img src="images/console-embedded.png" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
 											</section>
 										</div>
 										<div class="6u">
 											<section>
-												<h3 class="fa fa-refresh">Lorem ipsum dolor sit
-													veroeros</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
+												<h3 class="fa fa-save">Multiple persistance storage</h3>
+												<p>Persist your features into external storage to keep and share a state of your system. 
+												Several implementations are available.
+												<br/><br/><center>
+													<a href="images/console-store.png" target="_blank" />
+														<img src="images/console-store.png" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
+											</section>
+										</div>
+									</div>
+									<div class="row">
+									<div class="6u">
+											<section>
+												<h3 class="fa fa-user">Permissions Management</h3>
+												<p>Toggle your features for a subset of users. <i>(canary release)</i>. Several security providers
+												implementations are available.
+												<br/><br/><center>
+													<a href="images/console-permissions.png" target="_blank" />
+														<img src="images/console-permissions.png" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
+												</p>
+											</section>
+										</div>
+									<div class="6u">
+											<section>
+												<h3 class="fa fa-code-fork">Feature Strategies</h3>
+												<p>Implement your own behaviour to decide if a feature is on. Predicate is evaluated
+												if status is enabled and user granted (optional).
+													<br/><br/><center>
+													<a href="images/console-strategy.png" target="_blank" />
+														<img src="images/console-strategy.png" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
+											</section>
+									</div>
+									</div>
+									<div class="row">
+										<div class="6u">
+											<section>
+												<h3 class="fa fa-code">Toggling through AOP</h3>
+												<p>Avoid nested <i>if</i> statements everywhere but decorate your code with
+												annotations. Inversion of control is overrided to choose correct implementation.
+												<br/><br/><center>
+													<a href="images/console-aop.png" target="_blank" />
+														<img src="images/console-aop.png" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
+												</p>
+											</section>
+										</div>
+										<div class="6u">
+											<section>
+												<h3 class="fa fa-check">RESTFul API</h3>
+												<p>Operate your features through (secure) REST API wich allow any clients 
+												like JAVASCRIPT of MOBILE APPLICATIONS</p>
+													<br/><br/><center>
+													<a href="http://cannys.ddns.net:8081/ff4j-demo/rest/index.html" target="_blank" />
+														<img src="images/console-restapi.png"" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
 											</section>
 										</div>
 									</div>
 									<div class="row">
 										<div class="6u">
 											<section>
-												<h3 class="fa fa-picture-o">Pretium phasellus justo
-													lorem</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
+												<h3 class="fa fa-wrench">Caching Management</h3>
+												<p>Limit overread of quering external storages by caching.
+												Several distributed cache implementations are already available.
+													<br/><br/><center>
+													<a href="images/console-cache.png" target="_blank" />
+														<img src="images/console-cache.png" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
+												</p>
 											</section>
 										</div>
 										<div class="6u">
 											<section>
-												<h3 class="fa fa-cog">Tempus sed pretium orci</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
+												<h3 class="fa fa-wrench">JMX</h3>
+												<p>Not all applications are web-oriented. You can now operate your 
+												features through dedicated JMX console if required. 
+													<br/><br/><center>
+													<a href="images/console-jmx.png" target="_blank" />
+														<img src="images/console-jmx.png" 
+															width="300px" height="200px"
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
 											</section>
 										</div>
+										
 									</div>
 									<div class="row">
 										<div class="6u">
 											<section>
-												<h3 class="fa fa-wrench">Aliquam consequat et feugiat</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
+												<h3 class="fa fa-signal">Monitoring</h3>
+												<p>Features usage is monitored in the same time as checking for toggling. The metrics could 
+												be visualized through dedicated dashboards.
+													<br/><br/><center>
+													<a href="images/console-07-monitoring.png" target="_blank" />
+														<img src="images/console-07-monitoring.png" 
+															width="300px" 
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center>
 											</section>
 										</div>
 										<div class="6u">
 											<section>
-												<h3 class="fa fa-check">Dolore laoreet aliquam mattis</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
+												<h3 class="fa fa-dashboard">Full Stack Console</h3>
+												<p>Provide a full-stack console, much complete than embedded which interact with
+												target through the REST API
+													<br/><br/><center>
+													<a href="images/console-01-homepage.png" target="_blank" />
+														<img src="images/console-01-homepage.png" 
+															width="300px" 
+															style="border:1px solid #888888;margin-left:50px;"/>
+													</a>
+												</p></center> 
 											</section>
 										</div>
 									</div>
+									
 								</div>
 							</div>
-							<ul class="actions actions-centered">
-								<li><a href="#" class="button button-style1 button-big">Get
-										Started</a></li>
-								<li><a href="#" class="button button-style2 button-big">More
-										Info</a></li>
-							</ul>
+							
+							
 						</section>
 						<!-- /Features -->
 
@@ -160,93 +259,214 @@
 
 	<!-- Main Wrapper -->
 	<div class="wrapper wrapper-style2">
-		<div class="title">The Details</div>
+		<div class="title">10 min tutorial</div>
 		<div class="container">
 			<div class="row">
 				<div class="12u">
-
-					<!-- Main -->
-					<div id="main">
-
-						<!-- Image -->
-						<a href="http://fav.me/d5pjw3g" class="image image-featured">
-							<img src="images/pic01.jpg" alt="" />
-						</a>
-						<!-- /Image -->
-
+				
 						<!-- Features -->
-						<section id="features">
-							<header class="style1">
-								<h2>Dolor consequat feugiat amet veroeros</h2>
-								<p class="byline">Feugiat dolor nullam orci pretium
-									phasellus justo</p>
-							</header>
-							<div class="feature-list">
-								<div>
-									<div class="row">
-										<div class="6u">
-											<section>
-												<h3 class="fa fa-comment">Mattis velit diam vulputate</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u">
-											<section>
-												<h3 class="fa fa-refresh">Lorem ipsum dolor sit
-													veroeros</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-									<div class="row">
-										<div class="6u">
-											<section>
-												<h3 class="fa fa-picture-o">Pretium phasellus justo
-													lorem</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u">
-											<section>
-												<h3 class="fa fa-cog">Tempus sed pretium orci</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-									<div class="row">
-										<div class="6u">
-											<section>
-												<h3 class="fa fa-wrench">Aliquam consequat et feugiat</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u">
-											<section>
-												<h3 class="fa fa-check">Dolore laoreet aliquam mattis</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam
-													ante, aliquet sit amet vulputate. Eget mattis at, laoreet
-													vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-								</div>
-							</div>
-							<ul class="actions actions-centered">
-								<li><a href="#" class="button button-style1 button-big">Get
-										Started</a></li>
-								<li><a href="#" class="button button-style2 button-big">More
-										Info</a></li>
-							</ul>
+						<section id="features" style="margin-top:-100px">
+							
+							<p style="color:#AAA"><h2>Hello World !</h2>	</p>
+							<div class="prettyprint linenums">
+In this section we will create a sample from scratch, skip first steps if you already have a working project.
+First, create a simple web project with dedicated maven archetype.  We could have chosen a basic archetype 
+but we could like to show you the web console.
+<br/><br/><pre>mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp \
+				        -Dversion=1.0 -DartifactId=hello-ff4j -DgroupId=org.ff4j.hello</pre></div>
+			
+<div class="prettyprint linenums">
+<p><br/>Import the project in your favorite IDE, open your pom.xml file and add the following dependencies. JUNIT should already be 
+provided but with a quite old version.</p> 
+<pre>&lt;dependency&gt;
+ &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
+ &lt;artifactId&gt;ff4j-core&lt;/artifactId&gt;
+ &lt;version&gt;1.3.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+ &lt;groupId&gt;junit&lt;/groupId&gt;
+ &lt;artifactId&gt;junit&lt;/artifactId&gt;
+ &lt;scope&gt;test&lt;/scope&gt;
+ &lt;version&gt;4.11&lt;/version&gt;
+&lt;/dependency&gt;	  
+</pre></div>
+
+ <p><br/>If required, the maven project folders (src/main/java, src/test/java....). In the folder <span style="font-family:courier-new;color:black">src/test/resources</span>, 
+ create the following <span style="font-family:courier-new;color:black">ff4j.xml</span> file. We
+ should have put you a single feature but let's illustrate immediately some great capabilities.
+ <div class="prettyprint linenums">
+ <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;features xmlns="http://www.ff4j.org/schema/ff4j" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.2.0.xsd"&gt;
+
+  &lt;!-- Will be "ON" if enable is set as true -->
+  &lt;feature uid=&quot;hello&quot; enable=&quot;true&quot;  description="This is my firts feature" /&gt;
+ 
+  &lt;!-- Will be "ON" only if :
+  	- Enable is set as true
+  	- AND a security provider is defined  
+  	- AND the current logged user has the correct permissions. --&gt;
+  &lt;feature uid=&quot;mySecuredFeature&quot; enable=&quot;true&quot; &gt;
+    &lt;security&gt;
+	&lt;role name="USER" /&gt;
+	&lt;role name="ADMIN" /&gt;
+    &lt;/security&gt;
+  &lt;/feature&gt;
+  
+  &lt;!-- Will be "ON" only if 
+    - Enable is set as true
+    -  AND the flip strategy predicate is true, here current date is after the releaseDate -->
+  &lt;feature uid="myFutureFeature" enable="true"&gt;
+    &lt;flipstrategy class="org.ff4j.strategy.ReleaseDateFlipStrategy" &gt;
+      &lt;param name="releaseDate" value="2020-07-14-14:00" /&gt;
+    &lt;/flipstrategy&gt;
+  &lt;/feature&gt;
+  
+  &lt;!-- Features</span> can be grouped to be toggled in the same time -->
+  &lt;feature-group name="sprint_3"&gt;
+    &lt;feature uid="userStory3_1" enable="false" /&gt;
+    &lt;feature uid="userStory3_2" enable="false" /&gt;
+  &lt;/feature-group&gt;
+ 
+&lt;/features&gt;    
+</pre>
+
+<div class="prettyprint linenums">
+<p><br/>In the <span style="font-family:courier-new;color:black">src/test/java</span>, create the package <span style="font-family:courier-new;color:black">org.ff4j.hello</span>
+ with the following JUNIT class. We put several use cases to give you an overview. As I use to say, a piece of code is much clear than a long paragraph.</p> 
+<pre>
+package org.ff4j.hello;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.ff4j.FF4j;
+import org.ff4j.exception.FeatureNotFoundException;
+import org.junit.Test;
+
+public class HelloTest {
+    
+    @Test
+    public void my_first_test() {
+        // Given: file exist
+        assertNotNull(getClass().getClassLoader().getResourceAsStream("ff4j.xml"));
+        // When: init
+        FF4j ff4j = new FF4j("ff4j.xml");
+        // Then
+        assertEquals(5, ff4j.getFeatures().size());
+        assertTrue(ff4j.exist("hello"));
+        assertTrue(ff4j.check("hello"));
+        
+        // Usage
+        if (ff4j.check("hello")) {
+            // hello is toggle on
+            System.out.println("Hello World !!");
+        }
+        
+        // When: Toggle Off
+        ff4j.disable("hello");
+        // Then: expected to be off
+        assertFalse(ff4j.check("hello"));
+    }
+    
+    @Test
+    public void how_does_AutoCreate_Works() {
+        // Given: feature not exist
+        FF4j ff4j = new FF4j("ff4j.xml");
+        assertFalse(ff4j.exist("does_not_exist"));
+        
+        // When: use it
+        try {
+           if (ff4j.check("does_not_exist")) fail();
+        } catch (FeatureNotFoundException fnfe) {
+            // Then: exception
+            System.out.println("By default, feature not found throw exception");
+        }
+        
+        // When: using autocreate
+        ff4j.setAutocreate(true);
+        // Then: no more exceptions
+        if (!ff4j.check("does_not_exist")) {
+            System.out.println("Auto created and set as false");
+        }
+    }
+    
+    @Test
+    public void how_groups_works() {
+        // Given: 2 features 'off' within existing group
+        FF4j ff4j = new FF4j("ff4j.xml");
+        assertTrue(ff4j.exist("userStory3_1"));
+        assertTrue(ff4j.exist("userStory3_2"));
+        assertTrue(ff4j.getStore().readAllGroups().contains("sprint_3"));
+        assertEquals("sprint_3", ff4j.getFeature("userStory3_1").getGroup());
+        assertEquals("sprint_3", ff4j.getFeature("userStory3_2").getGroup());
+        assertFalse(ff4j.check("userStory3_1"));
+        assertFalse(ff4j.check("userStory3_2"));
+        
+        // When: toggle group on
+        ff4j.getStore().enableGroup("sprint_3");
+        
+        // Then: all features on
+        assertTrue(ff4j.check("userStory3_1"));
+        assertTrue(ff4j.check("userStory3_2"));
+    }
+}</pre>
+</div>
+
+<p style="color:#AAA"><h2>Web Console</h2>	</p>
+
+<div class="prettyprint linenums">
+Ok for testing but in production you probable won't toggle OFF your features (except, maybe, to implement a circuit breaker). You
+would rather toggle feature on demand through dedicated console. Now, add the following dependencies to your pom.xml file.</p> 
+<pre>&lt;dependency&gt;
+ &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
+ &lt;artifactId&gt;ff4j-web&lt;/artifactId&gt;
+ &lt;version&gt;1.3.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre></div>
+
+<div class="prettyprint linenums">
+Still in the pom.xml file, add the following statement within &lt;build&gt; tag. It allows to execute the web application under embedded Jetty,
+it also add src/test/resource to classpath (when we put ff4j.xml file). 
+<pre>
+		&lt;plugins&gt;	
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-jetty-plugin&lt;/artifactId&gt;
+				&lt;version&gt;6.1.26&lt;/version&gt;
+				&lt;configuration&gt;
+					&lt;useTestClasspath&gt;true&lt;/useTestClasspath&gt;
+					&lt;contextPath&gt;/hello&lt;/contextPath&gt;
+					
+					&lt;scanIntervalSeconds>5&lt;/scanIntervalSeconds>
+					&lt;stopPort>8065&lt;/stopPort>
+					&lt;connectors>
+						&lt;connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							&lt;port>8080&lt;/port>
+							&lt;maxIdleTime>60000&lt;/maxIdleTime>
+						&lt;/connector>
+					&lt;/connectors>
+				&lt;/configuration>
+			&lt;/plugin>
+
+		&lt;/plugins></pre>
+</div>
+
+
+<p style="color:#AAA"><h2>What's NEXT ?</h2>					
+<p><br>This following introduction is the simplest code ever. A real getting started guide is available
+on <b><a href="https://github.com/clun/ff4j#getting-started">github</a></b> and deals with integration with Spring, AOP
+and externalization to JDBC. The <b><a href="./ff4j-reference-guide-1.3.pdf">reference guide</b> </a>
+contains all informations related to the framework. Finally there are a <a href="https://github.com/clun/ff4j-extra/tree/master/ff4j-samples">lot 
+of <b>samples</b></a> available on github. At end, don't hesitate to raise your question to <b>support</b> <a href="https://groups.google.com/forum/?hl=fr#!forum/ff4j">google group</a></p>
+
+     			
 						</section>
 						<!-- /Features -->
 
@@ -261,7 +481,7 @@
 
 	<!-- Highlights Wrapper -->
 	<div class="wrapper wrapper-style3">
-		<div class="title">The Endorsements</div>
+		<div class="title">Use Cases</div>
 		<div class="container">
 			<div class="row">
 				<div class="12u">
@@ -273,9 +493,9 @@
 								<div class="4u">
 									<section class="highlight highlight-one">
 										<a href="http://fav.me/d59i3b3" class="image image-full"><img
-											src="images/pic02.jpg" alt="" /></a>
+											src="images/usecase-featurebranching.png" alt="" width="300px" height="200px"/></a>
 										<h3>
-											<a href="#">Aliquam diam consequat</a>
+											<a href="#">Avoid Feature Branching</a>
 										</h3>
 										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
 											ante, dolor aliquet sit amet vulputate mattis amet laoreet
@@ -289,9 +509,9 @@
 								<div class="4u">
 									<section class="highlight highlight-two">
 										<a href="http://fav.me/d4tqyby" class="image image-full"><img
-											src="images/pic03.jpg" alt="" /></a>
+											src="images/usecase-bluegreen.png" alt="" width="300px" height="200px"/></a>
 										<h3>
-											<a href="#">Nisl adipiscing sed lorem</a>
+											<a href="#">Blue/Green Deployments</a>
 										</h3>
 										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
 											ante, dolor aliquet sit amet vulputate mattis amet laoreet
@@ -305,7 +525,56 @@
 								<div class="4u">
 									<section class="highlight highlight-three">
 										<a href="http://fav.me/d5w2dot" class="image image-full"><img
-											src="images/pic04.jpg" alt="" /></a>
+											src="images/usecase-canary.png" alt="" width="300px" height="200px"/></a>
+										<h3>
+											<a href="#">Mattis tempus lorem</a>
+										</h3>
+										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
+											ante, dolor aliquet sit amet vulputate mattis amet laoreet
+											lorem.</p>
+										<ul class="actions">
+											<li><a href="#" class="button button-style1">Learn
+													More</a></li>
+										</ul>
+									</section>
+								</div>
+							</div>
+							<div class="row">
+								<div class="4u">
+									<section class="highlight highlight-one">
+										<a href="http://fav.me/d59i3b3" class="image image-full"><img
+											src="images/usecase-featurebranching.png" alt="" width="300px" height="200px"/></a>
+										<h3>
+											<a href="#">Avoid Feature Branching</a>
+										</h3>
+										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
+											ante, dolor aliquet sit amet vulputate mattis amet laoreet
+											lorem.</p>
+										<ul class="actions">
+											<li><a href="#" class="button button-style1">Learn More</a></li>
+										</ul>
+									</section>
+								</div>
+								<div class="4u">
+									<section class="highlight highlight-two">
+										<a href="http://fav.me/d4tqyby" class="image image-full"><img
+											src="images/usecase-bluegreen.png" alt="" width="300px" height="200px"/></a>
+										<h3>
+											<a href="#">Blue/Green Deployments</a>
+										</h3>
+										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
+											ante, dolor aliquet sit amet vulputate mattis amet laoreet
+											lorem.</p>
+										<ul class="actions">
+											<li><a href="#" class="button button-style1">Learn
+													More</a></li>
+										</ul>
+									</section>
+								</div>
+								<div class="4u">
+									<section class="highlight highlight-three">
+										<a href="http://fav.me/d5w2dot" class="image image-full"><img
+											src="images/usecase-canary.png" alt="" width="300px" height="200px"/></a>
 										<h3>
 											<a href="#">Mattis tempus lorem</a>
 										</h3>
@@ -455,6 +724,8 @@
 		</div>
 	</div>
 	<!-- /Footer Wrapper -->
-
+	
+	<a href="https://github.com/clun/ff4j"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+	
 </body>
 </html>

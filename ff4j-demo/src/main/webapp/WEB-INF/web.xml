@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 
-	<display-name>FF4J PetShop Application</display-name>
+	<display-name>FF4J DEMO Application</display-name>
 
 	<!-- Context Spring -->
 	<context-param>

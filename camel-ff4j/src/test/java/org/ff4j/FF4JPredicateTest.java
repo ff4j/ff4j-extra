@@ -16,7 +16,7 @@
  */
 package org.ff4j;
 
-import static org.ff4j.FF4JPredicateBuilder.ff4j;
+import static org.ff4j.FF4JPredicateBuilder.checkFF4j;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.junit4.CamelTestSupport;
@@ -35,7 +35,20 @@ public class FF4JPredicateTest extends CamelTestSupport {
      */
     @BeforeClass
     public static void init() {
-        FF4JPredicateBuilder.initFF4(new FF4j().create("sample").enable("sample"));
+        FF4JPredicateBuilder.initFF4j(new FF4j().create("sample").enable("sample"));
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            public void configure() {
+                from("direct://foo").//
+                    choice().when(checkFF4j("sample")).to("mock:ok"). //
+                    otherwise().to("mock:ko").end(). //
+                to("mock:end");
+            }
+        };
     }
     
     @Test
@@ -59,16 +72,5 @@ public class FF4JPredicateTest extends CamelTestSupport {
     }
 
     
-    /** {@inheritDoc} */
-    @Override
-    protected RouteBuilder createRouteBuilder() throws Exception {
-        return new RouteBuilder() {
-            public void configure() {
-                from("direct://foo").//
-                    choice().when(ff4j("sample")).to("mock:ok"). //
-                    otherwise().to("mock:ko").end(). //
-                to("mock:end");
-            }
-        };
-    }
+   
 }

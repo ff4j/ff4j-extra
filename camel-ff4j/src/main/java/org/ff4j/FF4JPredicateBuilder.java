@@ -21,7 +21,7 @@ public class FF4JPredicateBuilder {
      * @param ff4j
      *      current ff4j.
      */
-    public static void initFF4(FF4j ff4j) {
+    public static synchronized void initFF4j(FF4j ff4j) {
         FF4JPredicateBuilder.ff4j = ff4j;
     }
     
@@ -35,7 +35,7 @@ public class FF4JPredicateBuilder {
      * @return
      *      true if enabled
      */
-    public static Predicate ff4j(final String featureName) {
+    public static Predicate checkFF4j(final String featureName) {
         notNull(featureName, "featureName");
         return new Predicate() {
             public boolean matches(Exchange exchange) {
