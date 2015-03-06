@@ -2362,3 +2362,19 @@ transform
 }
 ol.linenums { margin: 0 0 0 33px; } 
 ol.linenums li { padding-left: 12px; color: #bebec5; line-height: 18px; text-shadow: 0 1px 0 #fff; }
+
+.source-code {
+	font-family:courier new;
+	//font-size:13px;
+	color:#00ab8b;
+}
+
+.source-code a {
+	text-decoration:none;
+	color:#00ab8b;
+}
+
+.source-code a:hover {
+	text-decoration:none;
+	color:#AA0000;
+}

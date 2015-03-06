@@ -267,18 +267,18 @@
 						<!-- Features -->
 						<section id="features" style="margin-top:-100px">
 							
-							<p style="color:#AAA"><h2>Hello World !</h2>	</p>
+							<p style="color:#AAA"><br/><h2>Hello World !</h2>	</p>
 							<div class="prettyprint linenums">
 In this section we will create a sample from scratch, skip first steps if you already have a working project.
 First, create a simple web project with dedicated maven archetype.  We could have chosen a basic archetype 
 but we could like to show you the web console.
-<br/><br/><pre>mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp \
-				        -Dversion=1.0 -DartifactId=hello-ff4j -DgroupId=org.ff4j.hello</pre></div>
+<br/><br/><pre style="font-family:courier new;font-size:13px">mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp \
+	               -Dversion=1.0 -DartifactId=hello-ff4j -DgroupId=org.ff4j.hello</pre></div>
 			
 <div class="prettyprint linenums">
 <p><br/>Import the project in your favorite IDE, open your pom.xml file and add the following dependencies. JUNIT should already be 
 provided but with a quite old version.</p> 
-<pre>&lt;dependency&gt;
+<pre style="font-family:courier new;font-size:13px">&lt;dependency&gt;
  &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
  &lt;artifactId&gt;ff4j-core&lt;/artifactId&gt;
  &lt;version&gt;1.3.0&lt;/version&gt;
@@ -292,23 +292,23 @@ provided but with a quite old version.</p>
 &lt;/dependency&gt;	  
 </pre></div>
 
- <p><br/>If required, the maven project folders (src/main/java, src/test/java....). In the folder <span style="font-family:courier-new;color:black">src/test/resources</span>, 
- create the following <span style="font-family:courier-new;color:black">ff4j.xml</span> file. We
+ <p><br/>If required, the maven project folders (src/main/java, src/test/java....). In the folder <span class="source-code">src/test/resources</span>, 
+ create the following <span class="source-code">ff4j.xml</span> file. We
  should have put you a single feature but let's illustrate immediately some great capabilities.
  <div class="prettyprint linenums">
- <pre>
+<pre style="font-family:courier new;font-size:13px">
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;features xmlns="http://www.ff4j.org/schema/ff4j" 
+&lt;features xmlns="http://ff4j.org/schema" 
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.2.0.xsd"&gt;
+     xsi:schemaLocation="http://ff4j.org/schema http://ff4j.org/schema/ff4j-1.2.0.xsd"&gt;
 
   &lt;!-- Will be "ON" if enable is set as true -->
   &lt;feature uid=&quot;hello&quot; enable=&quot;true&quot;  description="This is my firts feature" /&gt;
  
   &lt;!-- Will be "ON" only if :
-  	- Enable is set as true
-  	- AND a security provider is defined  
-  	- AND the current logged user has the correct permissions. --&gt;
+   (1) Enable is set as true
+   (2) A security provider is defined  
+   (3) The current logged user has the correct permissions. --&gt;
   &lt;feature uid=&quot;mySecuredFeature&quot; enable=&quot;true&quot; &gt;
     &lt;security&gt;
 	&lt;role name="USER" /&gt;
@@ -317,8 +317,8 @@ provided but with a quite old version.</p>
   &lt;/feature&gt;
   
   &lt;!-- Will be "ON" only if 
-    - Enable is set as true
-    -  AND the flip strategy predicate is true, here current date is after the releaseDate -->
+   (1) Enable is set as true
+   (2) Strategy predicate is true (here current &gt; releaseDate) -->
   &lt;feature uid="myFutureFeature" enable="true"&gt;
     &lt;flipstrategy class="org.ff4j.strategy.ReleaseDateFlipStrategy" &gt;
       &lt;param name="releaseDate" value="2020-07-14-14:00" /&gt;
@@ -335,9 +335,9 @@ provided but with a quite old version.</p>
 </pre>
 
 <div class="prettyprint linenums">
-<p><br/>In the <span style="font-family:courier-new;color:black">src/test/java</span>, create the package <span style="font-family:courier-new;color:black">org.ff4j.hello</span>
+<p><br/>In the <span class="source-code">src/test/java</span>, create the package <span class="source-code">org.ff4j.hello</span>
  with the following JUNIT class. We put several use cases to give you an overview. As I use to say, a piece of code is much clear than a long paragraph.</p> 
-<pre>
+<pre style="font-family:courier new;font-size:13px">
 package org.ff4j.hello;
 
 import static org.junit.Assert.assertEquals;
@@ -422,9 +422,12 @@ public class HelloTest {
 <p style="color:#AAA"><h2>Web Console</h2>	</p>
 
 <div class="prettyprint linenums">
-Ok for testing but in production you probable won't toggle OFF your features (except, maybe, to implement a circuit breaker). You
-would rather toggle feature on demand through dedicated console. Now, add the following dependencies to your pom.xml file.</p> 
-<pre>&lt;dependency&gt;
+<p>In production you probably won't toggle Off your features programmatically (maybe to implement a circuit breaker), instead you will
+ toggle features through web console.</p>
+ <p/>FF4J provided 2 consoles : one is embedded as a servlet, the other
+is a full-stack application  (operating with remote components through REST API). Here we will demonstrate the usage of the embedded.
+ Add the following dependencies to your <span class="source-code">pom.xml</span> file.</p> 
+<pre style="font-family:courier new;font-size:13px">&lt;dependency&gt;
  &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
  &lt;artifactId&gt;ff4j-web&lt;/artifactId&gt;
  &lt;version&gt;1.3.0&lt;/version&gt;
@@ -432,30 +435,119 @@ would rather toggle feature on demand through dedicated console. Now, add the fo
 </pre></div>
 
 <div class="prettyprint linenums">
-Still in the pom.xml file, add the following statement within &lt;build&gt; tag. It allows to execute the web application under embedded Jetty,
-it also add src/test/resource to classpath (when we put ff4j.xml file). 
-<pre>
-		&lt;plugins&gt;	
-			&lt;plugin&gt;
-				&lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
-				&lt;artifactId&gt;maven-jetty-plugin&lt;/artifactId&gt;
-				&lt;version&gt;6.1.26&lt;/version&gt;
-				&lt;configuration&gt;
-					&lt;useTestClasspath&gt;true&lt;/useTestClasspath&gt;
-					&lt;contextPath&gt;/hello&lt;/contextPath&gt;
-					
-					&lt;scanIntervalSeconds>5&lt;/scanIntervalSeconds>
-					&lt;stopPort>8065&lt;/stopPort>
-					&lt;connectors>
-						&lt;connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							&lt;port>8080&lt;/port>
-							&lt;maxIdleTime>60000&lt;/maxIdleTime>
-						&lt;/connector>
-					&lt;/connectors>
-				&lt;/configuration>
-			&lt;/plugin>
+<br/>The, add the following statement within <span class="source-code">&lt;build&gt;</span> tag. 
+The purpose here is to execute our web application on jetty container
+using the proper maven plugin. We also add <span class="source-code">src/test/resource</span> to jetty classpath,
+where we created the <span class="source-code">ff4j.xml</span> file.<p/>
+<pre style="font-family:courier new;font-size:13px">
+&lt;plugins&gt;
 
-		&lt;/plugins></pre>
+ &lt;plugin&gt;
+  &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-jetty-plugin&lt;/artifactId&gt;
+  &lt;version&gt;6.1.26&lt;/version&gt;
+  &lt;configuration&gt;
+   &lt;useTestClasspath&gt;true&lt;/useTestClasspath&gt;
+   &lt;contextPath&gt;/hello&lt;/contextPath&gt;
+   &lt;scanIntervalSeconds>5&lt;/scanIntervalSeconds&gt;
+   &lt;stopPort&gt;8065&lt;/stopPort&gt;
+   &lt;connectors&gt;
+    &lt;connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+     &lt;port&gt;8080&lt;/port&gt;
+     &lt;maxIdleTime>60000&lt;/maxIdleTime&gt;
+    &lt;/connector&gt;
+   &lt;/connectors&gt;
+  &lt;/configuration&gt;
+ &lt;/plugin&gt;
+ 
+ &lt;plugin&gt;
+  &lt;groupId>org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId>maven-compiler-plugin&lt;/artifactId&gt;
+   &lt;configuration&gt;
+    &lt;source&gt;1.7&lt;/source&gt;
+    &lt;target&gt;1.7&lt;/target&gt;
+    &lt;showWarnings>true&lt;/showWarnings&gt;
+   &lt;/configuration&gt;
+ &lt;/plugin&gt;
+ 
+&lt;/plugins&gt;
+</pre>
+<br>You should be able to start your application with <span class="source-code">mvn jetty:run</span> and access URL <span class="source-code"><a href="http://localhost:8080/hello/">http://localhost:8080/hello/</a></span>
+</div>
+
+<div class="prettyprint linenums">
+<br/>The administration console needs to find the instance of <span class="source-code">FF4j</span> to operate features. You have to define a class implementing <span class="source-code">org.ff4j.web.api.FF4JProvider</span>
+and reference it when declaring the servlet.
+
+<p><br/>Create a class <span class="source-code">MyFF4JProvider</span> in <span class="source-code">src/main/java</span> in the package of your choice with the following source code. Note that the single expected  method 
+is <span class="source-code">getFF4j()</span><p/>
+<pre style="font-family:courier new;font-size:13px">
+package org.ff4j.hello;
+
+import org.ff4j.FF4j;
+import org.ff4j.web.api.FF4JProvider;
+
+public class MyFF4jProvider implements FF4JProvider {
+
+    private final FF4j ff4j;
+   
+    public MyFF4jProvider() {
+        ff4j = new FF4j("ff4j.xml");
+    }
+  
+    /** {@inheritDoc} */
+    public FF4j getFF4j() { return ff4j; }
+}
+</pre>
+<i>Note : If your are working with any dependency injection framework like Spring Framework you will probably 
+inject ff4j as a bean it, but, here, we want to avoid any dependency.</i>   
+</div>
+
+
+<div class="prettyprint linenums">
+<br/>Update your <span class="source-code"> web.xml</span> file and declare the servlet like the following :
+<pre style="font-family:courier new;font-size:13px">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0"&gt;
+
+ &lt;display-name&gt;HelloWorld ff4j app&lt;/display-name&gt;
+	
+ &lt;servlet&gt;
+  &lt;servlet-name&gt;ff4j-console&lt;/servlet-name&gt;
+  &lt;servlet-class>org.ff4j.web.embedded.ConsoleServlet&lt;/servlet-class&gt;
+  &lt;init-param&gt;
+   &lt;param-name&gt;ff4jProvider&lt;/param-name&gt;
+   &lt;param-value&gt;org.ff4j.hello.MyFF4jProvider&lt;/param-value&gt;
+  &lt;/init-param&gt;
+  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+ &lt;/servlet&gt;
+ 
+ &lt;servlet-mapping&gt;
+   &lt;servlet-name&gt;ff4j-console&lt;/servlet-name&gt;
+   &lt;url-pattern&gt;/ff4j-console&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+  
+  &lt;welcome-file-list&gt;
+   &lt;welcome-file&gt;index.jsp &lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+
+ &lt;/web-app&gt;
+</pre>
+<br>You should be able access administration console <span class="source-code"><a href="http://localhost:8080/hello/ff4j-console">http://localhost:8080/hello/ff4j-console</a></span>
+
+<p/><br/>
+<a href="images/console-hello.png" target="_blank">
+	<img src="images/console-hello.png" alt="" width="600px" style="border:1px solid #CCCCCC;"/>
+</a>
+
+<p>Every operation performed through this console are performed in-memory. At next restart, the state will be lost. To avoid this behavior you will need to change the  <span class="source-code">FeatureStore</span>
+and choose among JDBC, MongoDB or Redis.
+
+<p>The code of this sample (and many others) is available on github <a href="https://github.com/clun/ff4j-extra/ff4j-samples/hello-ff4j">HERE</a>
 </div>
 
 
@@ -465,7 +557,6 @@ on <b><a href="https://github.com/clun/ff4j#getting-started">github</a></b> and 
 and externalization to JDBC. The <b><a href="./ff4j-reference-guide-1.3.pdf">reference guide</b> </a>
 contains all informations related to the framework. Finally there are a <a href="https://github.com/clun/ff4j-extra/tree/master/ff4j-samples">lot 
 of <b>samples</b></a> available on github. At end, don't hesitate to raise your question to <b>support</b> <a href="https://groups.google.com/forum/?hl=fr#!forum/ff4j">google group</a></p>
-
      			
 						</section>
 						<!-- /Features -->
@@ -481,7 +572,7 @@ of <b>samples</b></a> available on github. At end, don't hesitate to raise your 
 
 	<!-- Highlights Wrapper -->
 	<div class="wrapper wrapper-style3">
-		<div class="title">Use Cases</div>
+		<div class="title"> Some Use Cases</div>
 		<div class="container">
 			<div class="row">
 				<div class="12u">
@@ -497,13 +588,8 @@ of <b>samples</b></a> available on github. At end, don't hesitate to raise your 
 										<h3>
 											<a href="#">Avoid Feature Branching</a>
 										</h3>
-										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-											ante, dolor aliquet sit amet vulputate mattis amet laoreet
-											lorem.</p>
-										<ul class="actions">
-											<li><a href="#" class="button button-style1">Learn
-													More</a></li>
-										</ul>
+										<p>Feature branches lead to conflict during merges. Use trunk-based-developpement
+										to toggle-off unfinished code when develop continously.</p>
 									</section>
 								</div>
 								<div class="4u">
@@ -513,78 +599,86 @@ of <b>samples</b></a> available on github. At end, don't hesitate to raise your 
 										<h3>
 											<a href="#">Blue/Green Deployments</a>
 										</h3>
-										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-											ante, dolor aliquet sit amet vulputate mattis amet laoreet
-											lorem.</p>
-										<ul class="actions">
-											<li><a href="#" class="button button-style1">Learn
-													More</a></li>
-										</ul>
+										<p>Avoid clusters nodes inconsistency during deployment and deliver new features desactivated. Toggle
+										"ON"" when all nodes are up-to-date and ready.</p>
 									</section>
 								</div>
 								<div class="4u">
 									<section class="highlight highlight-three">
-										<a href="http://fav.me/d5w2dot" class="image image-full"><img
+										<a href="images/usecase-canary.png" class="image image-full"><img
 											src="images/usecase-canary.png" alt="" width="300px" height="200px"/></a>
 										<h3>
-											<a href="#">Mattis tempus lorem</a>
+											<a href="#">Canary Release</a>
 										</h3>
-										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-											ante, dolor aliquet sit amet vulputate mattis amet laoreet
-											lorem.</p>
-										<ul class="actions">
-											<li><a href="#" class="button button-style1">Learn
-													More</a></li>
-										</ul>
+										<p>Do not create dedicated infrastructure to qualify new features. Open them for subset of beta-testers
+										and directly into production environments.</p>
 									</section>
 								</div>
 							</div>
 							<div class="row">
 								<div class="4u">
 									<section class="highlight highlight-one">
-										<a href="http://fav.me/d59i3b3" class="image image-full"><img
-											src="images/usecase-featurebranching.png" alt="" width="300px" height="200px"/></a>
+										<a href="images/usecase-darklaunch.png" class="image image-full"><img
+											src="images/usecase-darklaunch.png" alt="" width="300px" height="200px"/></a>
 										<h3>
-											<a href="#">Avoid Feature Branching</a>
+											<a href="#">Dark Launch</a>
 										</h3>
-										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-											ante, dolor aliquet sit amet vulputate mattis amet laoreet
-											lorem.</p>
-										<ul class="actions">
-											<li><a href="#" class="button button-style1">Learn More</a></li>
-										</ul>
+										<p>Measure performance impacts of new features. Activate them dynamically on a 
+										defined ratio of incoming requests and observe system responses.</p>
 									</section>
 								</div>
 								<div class="4u">
 									<section class="highlight highlight-two">
-										<a href="http://fav.me/d4tqyby" class="image image-full"><img
-											src="images/usecase-bluegreen.png" alt="" width="300px" height="200px"/></a>
+										<a href="images/usecase-graceful.png" class="image image-full"><img
+											src="images/usecase-graceful.png" alt="" width="300px" height="200px"/></a>
 										<h3>
-											<a href="#">Blue/Green Deployments</a>
+											<a href="#">Graceful degradation</a>
 										</h3>
-										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-											ante, dolor aliquet sit amet vulputate mattis amet laoreet
-											lorem.</p>
-										<ul class="actions">
-											<li><a href="#" class="button button-style1">Learn
-													More</a></li>
-										</ul>
+										<p>Tune and protect your system of heavy loads: focus on high business value requests and
+										discard others dynamically (clients vs prospects, carts contents..).</p>
 									</section>
 								</div>
 								<div class="4u">
 									<section class="highlight highlight-three">
-										<a href="http://fav.me/d5w2dot" class="image image-full"><img
-											src="images/usecase-canary.png" alt="" width="300px" height="200px"/></a>
+										<a href="images/usecase-thinclient.png" class="image image-full"><img
+											src="images/usecase-thinclient.png" alt="" width="300px" height="200px"/></a>
 										<h3>
-											<a href="#">Mattis tempus lorem</a>
+											<a href="#">Thin client application</a>
 										</h3>
-										<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-											ante, dolor aliquet sit amet vulputate mattis amet laoreet
-											lorem.</p>
-										<ul class="actions">
-											<li><a href="#" class="button button-style1">Learn
-													More</a></li>
-										</ul>
+										<p>Avoid annoying frequent deployments and downloads of mobile applications by providing empty 
+										shelf: request expected active features to YOUR servers.</p>
+									</section>
+								</div>
+							</div>
+							<div class="row">
+								<div class="4u">
+									<section class="highlight highlight-one">
+										<a href="images/usecase-darklaunch.png" class="image image-full"><img
+											src="images/pic01.jpg" alt="" width="300px" height="200px"/></a>
+										<h3>
+											<a href="#">Business Toggle</a>
+										</h3>
+										<p>business rules</p>
+									</section>
+								</div>
+								<div class="4u">
+									<section class="highlight highlight-two">
+										<a href="images/usecase-graceful.png" class="image image-full"><img
+											src="images/pic02.jpg" alt="" width="300px" height="200px"/></a>
+										<h3>
+											<a href="#">A/B Testing</a>
+										</h3>
+										<p>aaaa</p>
+									</section>
+								</div>
+								<div class="4u">
+									<section class="highlight highlight-three">
+										<a href="images/usecase-thinclient.png" class="image image-full"><img
+											src="images/pic03.jpg" alt="" width="300px" height="200px"/></a>
+										<h3>
+											<a href="#">Circuit Breaker</a>
+										</h3>
+										<p>ccc.</p>
 									</section>
 								</div>
 							</div>
@@ -600,122 +694,56 @@ of <b>samples</b></a> available on github. At end, don't hesitate to raise your 
 
 	<!-- Footer Wrapper -->
 	<div id="footer-wrapper" class="wrapper">
-		<div class="title">The Rest Of It</div>
+		<div class="title">Links</div>
 		<div class="container">
 			<div class="row">
 				<div class="12u">
 
 					<!-- Footer -->
 					<div id="footer">
-						<header class="style1">
-							<h2>Ipsum sapien elementum portitor?</h2>
-							<p class="byline">
-								Sed turpis tortor, tincidunt sed ornare in metus porttitor
-								mollis nunc in aliquet.<br /> Nam pharetra laoreet imperdiet
-								volutpat etiam consequat feugiat.
-							</p>
-						</header>
-						<hr />
 						<div>
 							<div class="row">
-								<div class="6u">
-
-									<!-- Contact Form -->
-									<section class="footer-one">
-										<form method="post" action="#">
-											<div>
-												<div class="row half">
-													<div class="6u">
-														<input type="text" class="text" name="name"
-															id="contact-name" placeholder="Name" />
-													</div>
-													<div class="6u">
-														<input type="text" class="text" name="name"
-															id="contact-email" placeholder="Email" />
-													</div>
-												</div>
-												<div class="row half">
-													<div class="12u">
-														<textarea name="message" id="contact-message"
-															placeholder="Message"></textarea>
-													</div>
-												</div>
-												<div class="row">
-													<div class="12u">
-														<ul class="actions">
-															<li><input type="submit"
-																class="button button-style1" value="Send" /></li>
-															<li><input type="reset" class="button button-style2"
-																value="Reset" /></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</form>
-									</section>
-									<!-- /Contact Form -->
-
-								</div>
-								<div class="6u">
+								
+								<div class="12u">
 
 									<!-- Contacts -->
 									<section class="footer-two">
 										<div class="feature-list feature-list-small">
 											<div>
 												<div class="row">
-													<div class="6u">
+													<div class="4u">
 														<section>
-															<h3 class="fa fa-home">Mailing Address</h3>
+															<h4 class="fa fa-github"><a href="http://github.com/clun" style="color:#00ab8b">&nbsp;&nbsp;Github</a></h4>
 															<p>
-																Untitled Corporation<br /> 1234 Somewhere Rd #987<br />
-																Nashville, TN 00000-0000
+																
 															</p>
 														</section>
 													</div>
-													<div class="6u">
+													<div class="4u">
 														<section>
-															<h3 class="fa fa-comment">Social</h3>
-															<p>
-																<a href="http://twitter.com/n33co">@n33co</a><br /> <a
-																	href="http://dribbble.com/n33">dribbble.com/n33</a><br />
-																<a href="#">facebook.com/untitled</a>
-															</p>
+															<h4 class="fa fa-twitter"><a href="http://twitter.com/clunven" style="color:#00ab8b">&nbsp;&nbsp;@clunven</h4>
 														</section>
 													</div>
-												</div>
-												<div class="row">
-													<div class="6u">
+													<div class="4u">
 														<section>
-															<h3 class="fa fa-envelope">Email</h3>
-															<p>
-																<a href="#">info@untitled.tld</a>
-															</p>
-														</section>
-													</div>
-													<div class="6u">
-														<section>
-															<h3 class="fa fa-phone">Phone</h3>
-															<p>(000) 555-0000</p>
+															<h4 class="fa fa-envelope">
+																<a href="https://groups.google.com/forum/?hl=fr#!forum/ff4j" style="color:#00ab8b">&nbsp;&nbsp;Support
+															</h4>
 														</section>
 													</div>
 												</div>
 											</div>
 										</div>
 									</section>
-									<!-- /Contacts -->
-
 								</div>
 							</div>
 						</div>
-						<hr />
 					</div>
 					<!-- /Footer -->
 
 					<!-- Copyright -->
 					<div id="copyright">
-						<span> &copy; Untitled. Design by <a
-							href="http://html5up.net/">HTML5 UP</a>.
-						</span>
+						<span>  ff4j&copy; 2013-1015 - All right reserved.</span>
 					</div>
 					<!-- /Copyright -->
 
