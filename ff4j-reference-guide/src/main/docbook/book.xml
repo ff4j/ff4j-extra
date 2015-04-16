@@ -10,8 +10,8 @@
 	<!-- ~ General Informations     ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<bookinfo>
-		<title>Ff4j Reference Guide</title>
-		<productname>Feature Flipping For Java</productname>
+		<title>Reference Guide ff4j</title>
+		<productname>ff4j, Feature flipping for java</productname>
 		<edition>Reference Guide v1.3</edition>
 		<pubdate>2015 </pubdate>
 		<copyright>
@@ -37,10 +37,10 @@
 		</legalnotice>
 	</bookinfo>
   
-   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-   <!--  Table of content            -->
-   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-   <toc/>
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!--  Table of content            -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <toc/>
 
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- ~ Split Book per chapter   ~ -->

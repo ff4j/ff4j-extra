@@ -30,6 +30,16 @@
 		<div class="container">
 			<div class="row">
 				<div class="12u">
+
+<div style="position:absolute;top:20px;left:20px">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="XD2BQ9KDJ7SGU">
+<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+</form></div>
+
+
 					<!-- Header -->
 					<div id="header">
 						<!-- Logo -->
@@ -48,18 +58,17 @@
 								
 								<li><span class="fa fa-bookmark">&nbsp;Getting Started</span>
 									<ul>
-										<li><a href="https://github.com/clun/ff4j#hello-world" class="fa fa-laptop"> 10 min tutorial</a></li>
+										<li><a href="#10min" class="fa fa-laptop"> 10 min tutorial</a></li>
 										<li><a href="https://github.com/clun/ff4j#getting-started" class="fa fa-crosshairs"> Getting Started</a></li>
-										<li><a href="http://celphys.free.fr/ff4j/index.html" class="fa fa-globe"> Maven Site</a></li>
 										<li><a href="https://github.com/clun/ff4j-extra/tree/master/ff4j-samples" class="fa fa-code"> Sample codes</a></li>
 									</ul>
 								</li>
 								
 								<li><span class="fa fa-book">&nbsp;DOCUMENTATION</span>
 									<ul>
-										<li><a href="./ff4j-reference-guide-1.3.pdf" class="fa fa-book"> Reference Guide</span>
+										<li><a href="http://sourceforge.net/projects/ff4j/files/1.3/ff4j-reference-guide-1.3.pdf/download" class="fa fa-book"> Reference Guide</span>
 										<li><a href="http://celphys.free.fr/ff4j/apidocs/index.html" class="fa fa-wrench" > JavaDoc</a></li>
-										
+										<li><a href="http://celphys.free.fr/ff4j/index.html" class="fa fa-globe"> Maven Site</a></li>
 									</ul>
 								</li>
 								<li><a href="http://sourceforge.net/projects/ff4j/files/latest/download" class="fa fa-download">&nbsp;Download</a></li>
@@ -267,7 +276,7 @@
 						<!-- Features -->
 						<section id="features" style="margin-top:-100px">
 							
-							<p style="color:#AAA"><br/><h2>Hello World !</h2>	</p>
+							<p style="color:#AAA"><a name="10min"></a><br/><h2>Hello World !</h2>	</p>
 							<div class="prettyprint linenums">
 In this section we will create a sample from scratch, skip first steps if you already have a working project.
 First, create a simple web project with dedicated maven archetype.  We could have chosen a basic archetype 
@@ -547,14 +556,14 @@ inject ff4j as a bean it, but, here, we want to avoid any dependency.</i>
 <p>Every operation performed through this console are performed in-memory. At next restart, the state will be lost. To avoid this behavior you will need to change the  <span class="source-code">FeatureStore</span>
 and choose among JDBC, MongoDB or Redis.
 
-<p>The code of this sample (and many others) is available on github <a href="https://github.com/clun/ff4j-extra/ff4j-samples/hello-ff4j">HERE</a>
+<p>The code of this sample (and many others) is available on github <a href="https://github.com/clun/ff4j-extra/tree/master/ff4j-samples/hello-ff4j">HERE</a>
 </div>
 
 
 <p style="color:#AAA"><h2>What's NEXT ?</h2>					
 <p><br>This following introduction is the simplest code ever. A real getting started guide is available
 on <b><a href="https://github.com/clun/ff4j#getting-started">github</a></b> and deals with integration with Spring, AOP
-and externalization to JDBC. The <b><a href="./ff4j-reference-guide-1.3.pdf">reference guide</b> </a>
+and externalization to JDBC. The <b><a href="http://sourceforge.net/projects/ff4j/files/1.3/ff4j-reference-guide-1.3.pdf/download">reference guide</b> </a>
 contains all informations related to the framework. Finally there are a <a href="https://github.com/clun/ff4j-extra/tree/master/ff4j-samples">lot 
 of <b>samples</b></a> available on github. At end, don't hesitate to raise your question to <b>support</b> <a href="https://groups.google.com/forum/?hl=fr#!forum/ff4j">google group</a></p>
      			
@@ -653,32 +662,35 @@ of <b>samples</b></a> available on github. At end, don't hesitate to raise your 
 							<div class="row">
 								<div class="4u">
 									<section class="highlight highlight-one">
-										<a href="images/usecase-darklaunch.png" class="image image-full"><img
-											src="images/pic01.jpg" alt="" width="300px" height="200px"/></a>
+										<a href="images/usecase-businesstoggle.png" class="image image-full"><img
+											src="images/usecase-businesstoggle.png" alt="" width="300px" height="200px"/></a>
 										<h3>
 											<a href="#">Business Toggle</a>
 										</h3>
-										<p>business rules</p>
+										<p>Toggling is not only technical. Define your own rules and evaluate features based on
+										business requirements like office hours, user profiles...</p>
 									</section>
 								</div>
 								<div class="4u">
 									<section class="highlight highlight-two">
-										<a href="images/usecase-graceful.png" class="image image-full"><img
-											src="images/pic02.jpg" alt="" width="300px" height="200px"/></a>
+										<a href="images/usecase-abtesting.png" class="image image-full"><img
+											src="images/usecase-abtesting.png" alt="" width="300px" height="200px"/></a>
 										<h3>
 											<a href="#">A/B Testing</a>
 										</h3>
-										<p>aaaa</p>
+										<p>Split A and B populations using a business toggle. Measure business impacts not only
+										with CRM but also hitcounts of very same framework. </p>
 									</section>
 								</div>
 								<div class="4u">
 									<section class="highlight highlight-three">
-										<a href="images/usecase-thinclient.png" class="image image-full"><img
-											src="images/pic03.jpg" alt="" width="300px" height="200px"/></a>
+										<a href="images/usecase-circuitbreaker.png" class="image image-full"><img
+											src="images/usecase-circuitbreaker.png" alt="" width="300px" height="200px"/></a>
 										<h3>
 											<a href="#">Circuit Breaker</a>
 										</h3>
-										<p>ccc.</p>
+										<p>Implement the <a href="http://martinfowler.com/bliki/CircuitBreaker.html">circuit breaker</a> pattern with a 
+										dedicated strategy and custom rules allowing to toggle off proactively not available features.</p>
 									</section>
 								</div>
 							</div>

@@ -25,10 +25,14 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ff4j.FF4j;
 import org.ff4j.console.ApplicationConstants;
+import org.ff4j.console.client.ConsoleFf4JClient;
 import org.ff4j.console.client.ConsoleHttpClient;
 import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.EnvironmenBean;
+import org.ff4j.console.domain.HomeBean;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,9 +102,31 @@ public class HomeController extends AbstractConsoleController {
         ModelAndView mav = new ModelAndView(VIEW_HOME);
         log.info("Working with environnement " + envBean.getEnvId());
         mav.addObject(ATTR_ENVBEAN, envBean);
-        ConsoleHttpClient client = new ConsoleHttpClient(getConnection(envBean.getEnvId()));
-        mav.addObject(ATTR_HOMEBEAN, client.getHome());
+        mav.addObject(ATTR_HOMEBEAN, getHomeBean(envBean.getEnvId()));
         return mav;
+    }
+    
+    /**
+     * Build homebean depending of type of configuration.
+     *
+     * @param envId
+     *      env identifier.
+     * @return
+     *      target homebean.
+     */
+    private HomeBean getHomeBean(String envId) {
+        Connection xmlConfconn = getConnection(envId);
+        if ("bean".equalsIgnoreCase(xmlConfconn.getMode())) {
+            ClassPathXmlApplicationContext cap = new ClassPathXmlApplicationContext(xmlConfconn.getUrl());
+            HomeBean hb =  ConsoleFf4JClient.getHomeBean(cap.getBean(FF4j.class));
+            cap.close();
+            return hb;
+        
+        } else if ("http".equalsIgnoreCase(xmlConfconn.getMode())) {
+            return new ConsoleHttpClient(xmlConfconn).getHome();
+        }
+        
+        throw new IllegalArgumentException("Cannot Handle mode " + xmlConfconn.getMode() + " in configuration file");
     }
 
 }

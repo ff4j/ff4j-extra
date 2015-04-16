@@ -23,8 +23,12 @@ package org.ff4j.console.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ff4j.FF4j;
+import org.ff4j.cache.FeatureStoreCacheProxy;
 import org.ff4j.console.client.ConsoleHttpClient;
+import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.EnvironmenBean;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,10 +54,23 @@ public class ClearCacheController  extends AbstractConsoleController {
         EnvironmenBean envBean = (EnvironmenBean) request.getSession().getAttribute(ATTR_ENVBEAN);
         
         // Access features through HTTP store (all parsing done)
-        ConsoleHttpClient client = new ConsoleHttpClient(getConnection(envBean.getEnvId()));
-        client.clearCache();
        
+        clearCache(envBean.getEnvId());
         return "redirect:home.do";
+    }
+    
+    private void clearCache(String envId) {
+        Connection xmlConfconn = getConnection(envId);
+        if ("bean".equalsIgnoreCase(xmlConfconn.getMode())) {
+            ClassPathXmlApplicationContext cap = new ClassPathXmlApplicationContext(xmlConfconn.getUrl());
+            FF4j ff4j = cap.getBean(FF4j.class);
+            ((FeatureStoreCacheProxy)ff4j.getFeatureStore()).getCacheManager().clear();
+            cap.close();
+        } else if ("http".equalsIgnoreCase(xmlConfconn.getMode())) {
+            new ConsoleHttpClient(getConnection(envId)).clearCache();
+        }
+        
+        throw new IllegalArgumentException("Cannot Handle mode " + xmlConfconn.getMode() + " in configuration file");
     }
 
 }

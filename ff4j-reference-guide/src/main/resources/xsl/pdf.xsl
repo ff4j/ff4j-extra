@@ -27,6 +27,7 @@ under the License.
 				exclude-result-prefixes="xslthl d"
 				version='1.0'>
 
+	<!-- Imports -->
 	<xsl:import href="http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl"/>
 	<xsl:import href="http://docbook.sourceforge.net/release/xsl/current/fo/highlight.xsl"/>
 	<xsl:import href="common.xsl"/>
@@ -34,84 +35,25 @@ under the License.
 	<!-- Extensions -->
 	<xsl:param name="fop1.extensions" select="1"/>
 
-	<xsl:param name="paper.type" select="'A4'"/>
-	<xsl:param name="page.margin.top" select="'1cm'"/>
-	<xsl:param name="region.before.extent" select="'1cm'"/>
-	<xsl:param name="body.margin.top" select="'1.5cm'"/>
-
-	<xsl:param name="body.margin.bottom" select="'1.5cm'"/>
-	<xsl:param name="region.after.extent" select="'1cm'"/>
-	<xsl:param name="page.margin.bottom" select="'1cm'"/>
-	<xsl:param name="title.margin.left" select="'0cm'"/>
+	<!-- Page presentation -->
+	<xsl:param name="paper.type" 			select="'A4'"/>
+	<xsl:param name="page.margin.top" 		select="'1cm'"/>
+	<xsl:param name="region.before.extent"  select="'1cm'"/>
+	<xsl:param name="body.margin.top" 		select="'1.5cm'"/>
+	<xsl:param name="body.margin.bottom" 	select="'1.5cm'"/>
+	<xsl:param name="region.after.extent" 	select="'1cm'"/>
+	<xsl:param name="page.margin.bottom" 	select="'1cm'"/>
+	<xsl:param name="title.margin.left" 	select="'0cm'"/>
 
 	<!-- allow break across pages -->
 	<xsl:attribute-set name="formal.object.properties">
 		<xsl:attribute name="keep-together.within-column">auto</xsl:attribute>
 	</xsl:attribute-set>
 
-	<!-- TITLE PAGE -->
-	<xsl:template name="book.titlepage.recto">
-		<fo:block>
-			<fo:table table-layout="fixed" width="175mm">
-				<fo:table-column column-width="175mm"/>
-				<fo:table-body>
-					<fo:table-row>
-						<fo:table-cell text-align="center">
-							<fo:block>
-								<fo:external-graphic src="images/logo.png" width="240px"
-									height="auto" content-width="scale-to-fit"
-									content-height="scale-to-fit"
-									content-type="content-type:image/png" text-align="center"
-								/>
-							</fo:block>
-							<fo:block font-family="Helvetica" font-size="20pt" font-weight="bold" padding="10mm">
-								<xsl:value-of select="bookinfo/title"/>
-							</fo:block>
-							<fo:block font-family="Helvetica" font-size="14pt" padding-before="2mm">
-								<xsl:value-of select="bookinfo/subtitle"/>
-							</fo:block>
-							<fo:block font-family="Helvetica" font-size="14pt" padding="2mm">
-								<xsl:value-of select="bookinfo/releaseinfo"/>
-							</fo:block>
-						</fo:table-cell>
-					</fo:table-row>
-					<fo:table-row>
-						<fo:table-cell text-align="center">
-							<fo:block font-family="Helvetica" font-size="14pt" padding="5mm">
-								<xsl:value-of select="bookinfo/pubdate"/>
-							</fo:block>
-						</fo:table-cell>
-					</fo:table-row>
-					<fo:table-row>
-						<fo:table-cell text-align="center">
-							<fo:block font-family="Helvetica" font-size="10pt" padding="10mm">
-								<xsl:for-each select="bookinfo/authorgroup/author">
-									<xsl:if test="position() > 1">
-										<xsl:text>, </xsl:text>
-									</xsl:if>
-									<xsl:value-of select="."/>
-								</xsl:for-each>
-							</fo:block>
-
-							<fo:block font-family="Helvetica" font-size="10pt" padding="5mm">
-								<xsl:value-of select="bookinfo/pubdate"/>
-							</fo:block>
-
-							<fo:block font-family="Helvetica" font-size="10pt" padding="5mm" padding-before="25em">
-								<xsl:text>Copyright &#xA9; </xsl:text><xsl:value-of select="bookinfo/copyright"/>
-							</fo:block>
-
-							<fo:block font-family="Helvetica" font-size="8pt" padding="1mm">
-								<xsl:value-of select="bookinfo/legalnotice"/>
-							</fo:block>
-						</fo:table-cell>
-					</fo:table-row>
-				</fo:table-body>
-			</fo:table>
-		</fo:block>
-	</xsl:template>
-
+	
 	<!-- Prevent blank pages in output -->
+	<xsl:template name="book.titlepage.recto">
+	</xsl:template>
 	<xsl:template name="book.titlepage.before.verso">
 	</xsl:template>
 	<xsl:template name="book.titlepage.verso">
@@ -132,11 +74,10 @@ under the License.
 	</xsl:attribute-set>
 
 	<xsl:template name="header.content">
-		<xsl:param name="pageclass" select="''"/>
-		<xsl:param name="sequence" select="''"/>
-		<xsl:param name="position" select="''"/>
+		<xsl:param name="pageclass"   select="''"/>
+		<xsl:param name="sequence"    select="''"/>
+		<xsl:param name="position"    select="''"/>
 		<xsl:param name="gentext-key" select="''"/>
-
 		<xsl:variable name="Version">
 			<xsl:choose>
 				<xsl:when test="//title">
@@ -160,9 +101,6 @@ under the License.
 				</xsl:choose>
 			</xsl:when>
 
-			<xsl:when test="$pageclass='titlepage'">
-			</xsl:when>
-
 			<xsl:when test="$position='center'">
 				<xsl:value-of select="$Version"/>
 			</xsl:when>
@@ -172,7 +110,7 @@ under the License.
 		</xsl:choose>
 	</xsl:template>
 
-	<!-- FOOTER-->
+	<!-- Footer-->
 	<xsl:attribute-set name="footer.content.properties">
 		<xsl:attribute name="font-family">
 			<xsl:value-of select="$body.font.family"/>
@@ -181,11 +119,10 @@ under the License.
 	</xsl:attribute-set>
 
 	<xsl:template name="footer.content">
-		<xsl:param name="pageclass" select="''"/>
-		<xsl:param name="sequence" select="''"/>
-		<xsl:param name="position" select="''"/>
+		<xsl:param name="pageclass"   select="''"/>
+		<xsl:param name="sequence"    select="''"/>
+		<xsl:param name="position"    select="''"/>
 		<xsl:param name="gentext-key" select="''"/>
-
 		<xsl:variable name="Version">
 			<xsl:choose>
 				<xsl:when test="//releaseinfo">
@@ -195,7 +132,6 @@ under the License.
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-
 		<xsl:variable name="Title">
 			<xsl:choose>
 				<xsl:when test="//productname">
@@ -262,7 +198,6 @@ under the License.
 	<xsl:template match="processing-instruction('hard-pagebreak')">
 		<fo:block break-before='page'/>
 	</xsl:template>
-
 
 	<!-- PAPER & PAGE SIZE -->
 

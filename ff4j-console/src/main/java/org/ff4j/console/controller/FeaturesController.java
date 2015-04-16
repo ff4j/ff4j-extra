@@ -38,16 +38,19 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.NotImplementedException;
+import org.ff4j.FF4j;
+import org.ff4j.conf.XmlParser;
 import org.ff4j.console.ApplicationConstants;
 import org.ff4j.console.client.ConsoleHttpClient;
 import org.ff4j.console.domain.EnvironmenBean;
 import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.core.Feature;
 import org.ff4j.core.FeatureStore;
-import org.ff4j.core.FeatureXmlParser;
 import org.ff4j.core.FlippingStrategy;
 import org.ff4j.web.api.FF4jWebConstants;
 import org.ff4j.web.store.FeatureStoreHttp;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,7 +83,19 @@ public class FeaturesController extends AbstractConsoleController {
         log.info("Page <FEATURES>, action<GET>, env<" + envBean.getEnvId() + ">");
 
         // Access features through HTTP store (all parsing done)
-        FeatureStore storeHTTP = new FeatureStoreHttp(envBean.getEnvUrl() + "/" + FF4jWebConstants.RESOURCE_FF4J);
+        FeatureStore fStore;
+        if ("http".equalsIgnoreCase(envBean.getConnectionMode())) {
+            // Access features through HTTP store (all parsing done)
+            fStore = new FeatureStoreHttp(envBean.getEnvUrl() + "/" + FF4jWebConstants.RESOURCE_FF4J);
+        } else if ("bean".equalsIgnoreCase(envBean.getConnectionMode())) {
+            ClassPathXmlApplicationContext cpax = new ClassPathXmlApplicationContext(envBean.getEnvUrl());
+            fStore = cpax.getBean(FF4j.class).getFeatureStore();
+            cpax.close();
+        } else if ("jmx".equalsIgnoreCase(envBean.getConnectionMode())) {
+            throw new NotImplementedException("JMX Client is not yet implemented");
+        } else {
+            throw new IllegalArgumentException("Invalid definition of store within configuration file, avaolable modes are 'http', 'jmx' and 'bean'");
+        }
         
         // Data in the target screen
         FeaturesBean featBean = new FeaturesBean();
@@ -91,20 +106,20 @@ public class FeaturesController extends AbstractConsoleController {
             if (operation != null && !operation.isEmpty()) {
                 log.debug("Performing operation <" + operation + "> on <" + featureId + ">");
                 if (OP_DISABLE.equalsIgnoreCase(operation)) {
-                    opDisableFeature(storeHTTP, featureId);
+                    opDisableFeature(fStore, featureId);
                     String msg = buildMessage(featureId, "DISABLED");
                     featBean.setMessage(msg);
                     log.info(msg);
                 } else if (OP_ENABLE.equalsIgnoreCase(operation)) {
-                    opEnableFeature(storeHTTP, featureId);
+                    opEnableFeature(fStore, featureId);
                     featBean.setMessage(buildMessage(featureId, "ENABLED"));
                 } else if (OP_RMV_FEATURE.equalsIgnoreCase(operation)) {
-                    opDeleteFeature(storeHTTP, featureId);
+                    opDeleteFeature(fStore, featureId);
                     String msg = buildMessage(featureId, "DELETED");
                     featBean.setMessage(msg);
                     log.info(msg);
                 } else if (OP_EXPORT.equalsIgnoreCase(operation)) {
-                    opExportFile(storeHTTP, res);
+                    opExportFile(fStore, res);
                     featBean.setMessage("Feature have been success fully exported");
                 }
             }
@@ -116,9 +131,9 @@ public class FeaturesController extends AbstractConsoleController {
         }
         
         // Updating Bean
-        featBean.setListOfFeatures(new ArrayList<Feature>(storeHTTP.readAll().values()));
+        featBean.setListOfFeatures(new ArrayList<Feature>(fStore.readAll().values()));
         featBean.setHtmlPermissions(populatePermissionList(envBean));
-        featBean.setGroupList(storeHTTP.readAllGroups());
+        featBean.setGroupList(fStore.readAllGroups());
         
         // Create view
         ModelAndView mav = new ModelAndView(VIEW_FEATURES);
@@ -338,6 +353,7 @@ public class FeaturesController extends AbstractConsoleController {
             // Permissions
             final String permission = req.getParameter(PERMISSION);
             if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
+                @SuppressWarnings("unchecked")
                 Map<String, String[]> parameters = req.getParameterMap();
                 Set<String> permissions = new HashSet<String>();
                 for (String key : parameters.keySet()) {
@@ -360,6 +376,7 @@ public class FeaturesController extends AbstractConsoleController {
      * @param req
      *            http request containing operation parameters
      */
+    @SuppressWarnings("unchecked")
     private void opUpdateFeatureDescription(FeatureStore store, HttpServletRequest req) {
         // uid
         final String featureId = req.getParameter(FEATID);
@@ -450,7 +467,7 @@ public class FeaturesController extends AbstractConsoleController {
      *             Error raised if the configuration cannot be read
      */
     private void opImportFile(FeatureStore store, InputStream in) throws IOException {
-        Map<String, Feature> mapsOfFeat = new FeatureXmlParser().parseConfigurationFile(in);
+        Map<String, Feature> mapsOfFeat = new XmlParser().parseConfigurationFile(in).getFeatures();
         for (Entry<String, Feature> feature : mapsOfFeat.entrySet()) {
             if (store.exist(feature.getKey())) {
                 store.update(feature.getValue());
@@ -471,7 +488,7 @@ public class FeaturesController extends AbstractConsoleController {
      */
     private void opExportFile(FeatureStore store, HttpServletResponse res) throws IOException {
         Map<String, Feature> features = store.readAll();
-        InputStream in = new FeatureXmlParser().exportFeatures(features);
+        InputStream in = new XmlParser().exportFeatures(features);
         ServletOutputStream sos = null;
         try {
             sos = res.getOutputStream();
