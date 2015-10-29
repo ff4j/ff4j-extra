@@ -4,6 +4,8 @@
 	<title>Core Concepts</title>
 	
 	    <!-- *********************************************************************************** -->
+	    <!-- *** Feature Groups                                                              *** -->
+	    <!-- *********************************************************************************** -->
 		<section id="3-1">
 			<title>Feature Groups</title>
 			<para>Features can be gathered as group. It is then possible to toggle the whole group. This capability can be 

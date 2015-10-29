@@ -8,12 +8,18 @@
 			<title>Introduction</title>
 			
 			<para>
-			 <emphasis role="bold">Feature Toggle</emphasis> is the capacity for a system, to enable and disable features based on configuration, if possible at runtime.
-			 Statements to evaluate may be flags (boolean) but also more elaborate tests cases with complex rules. The toggling is performed through dedicate console. 
-			 This pattern is also called feature flipping, feature flags, or feature bits. A feature represents a small unit of business logic which crosses every layers of 
-			 applications from user interfaces to data repositories.
+			 <emphasis role="bold">Feature Toggle</emphasis> is the capacity for a system, to enable and disable features programmatically through configuration (files, databases,...) 
+			 and possibly at runtime. It's performed most of the time with dedicated web console but you will see in this document that it's not the only way (command line,
+			 JMX, API...). A feature represents a small unit of BUSINESS logic that impacts <emphasis role="bold">each layer</emphasis> of your applications from graphical user interfaces to data. 
+			 This pattern is also known as feature flipping, feature flags, or feature bits. 
+			 
+			 <para><emphasis role="bold">ff4j</emphasis>, stands as feature flipping for java, and is a proposition for Feature Toggle written in Java. The following guide will
+			 present you all capabilities offered by the framework. To get a shorter overview please check <ulink url="http://ff4j.org">ff4.org</ulink>. For any question 
+			 related to this guide use the <ulink url="https://groups.google.com/forum/?hl=fr#!forum/ff4j">dedicated mailing list.</ulink>
+			 </para>
 			 
 			 <figure id="figure-feature" floatstyle="center" >
+			 	 <title>A feature may impacts each layer of your application</title>
       			 <mediaobject role="bordered">
       			   <imageobject condition="web" >
       			    <imagedata align="center" fileref="img/fig-01-feature.png" format="PNG" width="6cm" />
@@ -21,118 +27,34 @@
       			 </mediaobject>
      		  </figure>
 			</para>
-			 
-			 <para><emphasis role="bold">ff4j</emphasis>, stands as feature flipping for java, is a proposition of implementation writen in Java. The following guide will
-			 present in details all capabilities offers by this framework. To get a short overview please check <ulink url="http://ff4j.org">ff4.org</ulink>. For any question 
-			 related to this guide use the <ulink url="https://groups.google.com/forum/?hl=fr#!forum/ff4j">dedicated mailing list.</ulink>
-			 </para>
-			
-		</section>
-
-		<!-- *********************************************************************************** -->
-		<section id="1-2">
-			<title>References</title>
-			
-			<section id="1-2-1">
-			  <title>Martin Fowler</title>
-			  <para>Martin Fowler, an architect working at Thoughtworks, has written on his professional blog in 2010, an introduction to the concept.
-			  The full article can be consulted <ulink url="http://martinfowler.com/bliki/FeatureToggle.html">here</ulink>. He is known in the
-			  community as one father of the continuous integration. 
-       		  </para>
-       		  <para>He defines feature toggle as : 
-       		  <emphasis role="italic"> The basic idea is to have a configuration file that defines a bunch of toggles for 
-       		  various features you have pending. The running application then uses these toggles in order to decide whether or not to 
-       		  show the new feature.
-       		   </emphasis>
-       		   <figure id="figure-mfowler" floatstyle="center" >
-      			 <title>Martin Fowler reference article</title>
-      			 <mediaobject role="bordered">
-      			   <imageobject condition="web" >
-      			    <imagedata align="center" fileref="img/fig-martinfowler.png" format="PNG" width="12cm" />
-      			   </imageobject>
-      			 </mediaobject>
-     		  </figure>
-     		  </para>
-			</section>
-			
-			<section id="1-2-2">
-			  <title>Blogs and articles</title>
-			 <para>The feature toggle has been mostly promoted by the continuous delivery. Webgiants 
-			  such as GAFA (Google, Amazon, Facebook, Apple) or Etsy have post quite a lot of information 
-			  of their realisations.</para>
-			  
-     		  <table frame='all'><title>Blog references</title>
-				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
-				<colspec colname='c1'/>
-				<colspec colname='c2'/>
-				<thead>
-				<row>
-  					<entry align="center">Title<?dbhtml bgcolor="#EEEEEE" ?><?dbfo bgcolor="#EEEEEE" ?></entry>
-  					<entry align="center">Description<?dbhtml bgcolor="#EEEEEE" ?><?dbfo bgcolor="#EEEEEE" ?></entry>
-				</row>
-				</thead>
-				<tbody>
-					<row>
- 					 <entry> <emphasis role="bold">Presentation on InfoQ</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
-  					 <entry> <ulink url="http://www.infoq.com/presentations/Feature-Bits">http://www.infoq.com/presentations/Feature-Bits</ulink></entry>
-					</row>
-					<row>
- 					 <entry> <emphasis role="bold">Presentation on 99Design</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
-  					 <entry><ulink url="http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/">http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/ </ulink></entry>
-					</row>
-					<row>
- 					 <entry> <emphasis role="bold">About Etsy</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
-  					 <entry>This article is available <ulink url="http://codeascraft.com/2011/02/04/how-does-etsy-manage-development-and-operations/">  on codeascraft</ulink> </entry>
-					</row>
-					<row>
- 					 <entry> <emphasis role="bold">About Flickr</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
-  					 <entry><ulink url="http://code.flickr.com/blog/2009/12/02/flipping-out/">http://code.flickr.com/blog/2009/12/02/flipping-out/</ulink></entry>
-					</row>
-					<row>
- 					 <entry> <emphasis role="bold">Octo Technology</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
-  					 <entry>Introduced the concepts in their:  
-       			   <ulink url="http://blog.octo.com/feature-flipping/">french article</ulink> but also in  
-       			   <ulink url="http://www.octo.com/fr/publications/11-les-geants-du-web">their book.</ulink></entry>
-					</row>
-				</tbody>
-			   </tgroup>
-			 </table>
-
-     		  <figure id="fig-octo-gdw" floatstyle="center" >
-      			 <title>Giants of the web practices by Octo (fr)</title>
-     		   	  <mediaobject>
-      			   <imageobject role="web" >
-      			    <imagedata align="center" fileref="img/fig-octo-gdw.png" contentwidth="4cm" contentdepth="7cm" />
-      			   </imageobject>
-      			  </mediaobject>
-      			 </figure>
-			</section>
 			
 		</section>
 		
 		<!-- *********************************************************************************** -->
 		<section id="1-3">
 			<title>Use Cases</title>
+			<para>
+			 Before drill down into sample codes, I would like to share with you a small overview of possible use cases. Unfortunately, most of the time Feature Flipping is seen as a trick to
+			 deliver poor code into production or even technical debt but it can be much more useful and may help you during deployments, testing and can really have some added business value. Let me show you...
 			<section id="1-3-1">
 			  	 <title>Continuous Delivery</title>
 				
 				 <section id="1-3-1-0">
-				   <title>Definition</title>
-				   <para>The purpose of the continuous delivery is to release components and softwares as often as required. The delivery process is obviously automatic 
-				   and triggered on demand, eventually after each developper commit. It aims 'non-event' releases, they are no more prepared or anticipated, but performed 
-				   anytime needed. For instance, Amazon pushes new code into production, in average, every 11.6 seconds.
+				   <title>Introduction</title>
+				   <para>The purpose of the Continuous Delivery is to allow releasing as often as required. To achieve such demanding practice 
+				   the delivery process is obviously automatic and triggered on demand. The releases are no more prepared or anticipated. For example,
+				   Amazon pushes new code into production, in average, every ...... 11.6 seconds.
 				   </para>
 				 </section>
 				   
 				 <section id="1-3-1-1">
 				   <title>Feature Branching vs Feature Toggle</title>
-				   <para>In order to develop several features in the same time yet keep up with frequent released there are 2 ways.</para>
+				   <para>To develop several features in the same time, you can have two approaches.</para>
 				    
 				     <para><emphasis role="bold">Feature Branching </emphasis></para>
-				     <para>The first solution is to create branches in the source control system for
-                      each new feature. The release is performed from sources hosted on trunk : features under development are ignored and won't be part of the build. 
-                      When a feature is 'production-ready', the related branch is merged to the trunk. This operation may become very complex if several releases have been 
-                      performed since the initial 'fork' of current branch. Source codes can be very different and leads to a large number of conflicts to deals with.
+				     <para>First, you can create branches in the source control system for each new feature. As releases are performed from the trunk, features under development in branches are ignored. 
+                      When a feature is 'production-ready', the related branch is merged to the trunk to become part of the solution. This operation may become very complex if several releases have been 
+                      performed since the initial 'fork' of the branch. Source codes can indeed be very different and leads to a lot of conflicts.
                      </para>
 				     <figure id="fig-featurebanching" floatstyle="center">
       				   <title>Feature Branching</title>
@@ -144,9 +66,12 @@
      				 </figure>
 				  
       			     <para><emphasis role="bold">Trunk-based developement</emphasis></para>
-       				 <para>The second solution is, on the contrary, to keep on developing in the trunk. The immediate consequence is that incomplete or non-working (yet compiling) 
-       				 code will be embedded in a release and pushed into production. To avoid any incidents the relevant source code is wrapped in an always-false predicate. 
-       				 The value of the condition is defined through configuration. As soon as the code is ready, the condition is set to true and start executing.
+       				 <para>You can also keep on developing in the trunk. The immediate consequence is that incomplete or non-working (yet compiling) 
+       				 code will be embedded into next release and pushed to production. To avoid any problem, the relevant source code is wrapped in an always-false predicate. 
+       				 The value of the condition is defined through configuration. When the code is ready, the condition is set to true to start executing.
+       				 </para>
+       				 <para>
+       				 	<emphasis role="bold">Feature Toggle is a solution to avoid complex merges and keep working on trunk.</emphasis>
        				 </para>
        				 <figure id="fig-featuretoggle" floatstyle="center">
       				  <title>Trunk-based developement</title>
@@ -163,12 +88,17 @@
 				 <title>Zero Downtime deployment</title>
 				    
 				     <para><emphasis role="bold">Blue/Green Deployments</emphasis></para>
-				  	 <para>BlueGreen deployment is a term describing a way to perform "hot deployments" within high availability architectures. The application is deployed on several nodes of a same cluster. 
-				  	  During deployment, each node, one after another, is stopped, new version of the product is released and node is restarted. There is a lack of consistency between nodes during release. 
-				  	  
-				  	  This deployment mode does not cope with major modifications like database model evolutions. Feature Toggle is a viable answer. The new version can be deployed on each node but let disabled.
-				  	  The SQL Script will update the datamodel and, at end, toggle on expected features even in the same transaction. 
+				  	 <para>Blue/Green Deployment describes a way to realize "hot deployments" in distributed architectured where applications are deployed on several nodes of a cluster. 
+				  	  To deploy the application you work one node after the other. You remove the node from the cluster (to avoid new incoming request), you stop it, you deploy 
+				  	  the new version, restart the node and finally put back the node in the cluster. This way there are no downtime, there is always an active node to accept incoming requests.
+				  	  Yes, but if you have more than 2 nodes there will be a lack of consistency between nodes. Indeed when deploying from node 3, the first and second nodes will have the new
+				  	  versions but not this others. This deployment mode does not cope with major modifications like database model evolutions. Feature Toggle can be an answer. Use the same
+				  	  behaviour as described but deliver you components with new features toggled off. Only when all nodes are updated, toggle the features for all nodes at once. Bonus trick : if the
+				  	  new version does not work, toggle OFF the features to avoid any rollback.
 				  	 </para>
+				  	 <para>
+       				 	<emphasis role="bold">Feature Toggle is a solution to maintain consistency between nodes when delivering in distributed system.</emphasis>
+       				 </para>
 				  	 <figure id="bluegreen" floatstyle="center" >
 	      			 <title>Blue/Green deployment</title>
 	      			 <mediaobject role="bordered">
@@ -179,10 +109,14 @@
 	     		  </figure>
 				  	 
 				    <para><emphasis role="bold">Canary Release</emphasis></para>
-				  	<para>Canary release is the capacity to open accesses to features for a limited subset of users. They may have specific role (beta-tester, employee...),
-				  	may be located in defined place or anything you would think. Amazon, for instance, tests new features with employees before activate them to everyone. It's a way to get feedback
-				  	from users AND real production metrics.
-				  	console.</para>
+				  	<para>Canary release is the capacity to limit access to new features for only a subset of users. They may be beta-testers, premium users,
+				  	 or anything you need. As an Example Amazon tests new features with their own employees before opening the services for everyone. 
+				  	 It's an elegant way to get feedbacks and real production metrics.</para>
+				  	 
+				  	 <para>
+       				 	<emphasis role="bold">Feature Toggle is a solution to grant new features on beta-testers before open the service for everyone.... without new delivery.</emphasis>
+       				 </para>
+       				 
 				  	 <figure id="fig-canary" floatstyle="center">
       				  <title>Canary Release</title>
       				   <mediaobject role="bordered">

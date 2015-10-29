@@ -5,9 +5,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ~ COORDINATES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<groupId>org.ff4j</groupId>
 	<artifactId>ff4j-sample-web</artifactId>
-	<version>1.3.1-SNAPSHOT</version>
 	<name>ff4j-sample-web</name>
 	<packaging>war</packaging>
 
@@ -18,6 +16,15 @@
 		<encoding>UTF-8</encoding>
 		<jetty.port>8080</jetty.port>
 	</properties>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~         PARENT           ~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<parent>
+		<groupId>org.ff4j</groupId>
+		<artifactId>ff4j-parent</artifactId>
+		<version>1.3.3-SNAPSHOT</version>
+	</parent>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ~ DEPENDENCIES             ~ -->
@@ -34,14 +41,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>3.1.1.RELEASE</version>
 		</dependency>
 		
 		<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
-				<version>1.0.13</version>
-			</dependency>
+		</dependency>
 			
 			<!-- TAGLIBS -->
 		<dependency>
@@ -55,14 +60,12 @@
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
-			<version>1.18.1</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>jaxb-impl</artifactId>
@@ -74,7 +77,12 @@
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-spring</artifactId>
-			<version>1.18.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.fusesource.jansi</groupId>
+			<artifactId>jansi</artifactId>
+			<version>1.11</version>
 		</dependency>
 		
 	</dependencies>
@@ -94,23 +102,18 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.26</version>
-				<configuration>
-					<contextPath>/sampleweb</contextPath>
-					<scanIntervalSeconds>5</scanIntervalSeconds>
-					<stopPort>9965</stopPort>
-					<stopKey>foo2</stopKey>
-					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>${jetty.port}</port>
-							<maxIdleTime>60000</maxIdleTime>
-						</connector>
-					</connectors>
-				</configuration>
+			  <groupId>org.eclipse.jetty</groupId>
+			  <artifactId>jetty-maven-plugin</artifactId>
+			  <version>9.3.2.v20150730</version>
+			  <configuration>
+			 	<contextPath>/sw</contextPath>
+			 	
+			    <stopPort>9965</stopPort>
+			    <stopKey>foo</stopKey>
+			    <stopWait>10</stopWait>
+			  </configuration>
 			</plugin>
-
+					
 		</plugins>
 
 	</build>

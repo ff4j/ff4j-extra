@@ -1,0 +1,80 @@
+<!-- *********************************************************************************** -->
+		<section id="1-2">
+			<title>References</title>
+			
+			<section id="1-2-1">
+			  <title>Martin Fowler</title>
+			  <para>Martin Fowler, an architect working at Thoughtworks, has written on his professional blog in 2010, an introduction to the concept.
+			  The full article can be consulted <ulink url="http://martinfowler.com/bliki/FeatureToggle.html">here</ulink>. He is known in the
+			  community as one father of the continuous integration. 
+       		  </para>
+       		  <para>He defines feature toggle as : 
+       		  <emphasis role="italic"> The basic idea is to have a configuration file that defines a bunch of toggles for 
+       		  various features you have pending. The running application then uses these toggles in order to decide whether or not to 
+       		  show the new feature.
+       		   </emphasis>
+       		   <figure id="figure-mfowler" floatstyle="center" >
+      			 <title>Martin Fowler reference article</title>
+      			 <mediaobject role="bordered">
+      			   <imageobject condition="web" >
+      			    <imagedata align="center" fileref="img/fig-martinfowler.png" format="PNG" width="12cm" />
+      			   </imageobject>
+      			 </mediaobject>
+     		  </figure>
+     		  </para>
+			</section>
+			
+			<section id="1-2-2">
+			  <title>Blogs and articles</title>
+			 <para>The feature toggle has been mostly promoted by the continuous delivery. Webgiants 
+			  such as GAFA (Google, Amazon, Facebook, Apple) or Etsy have post quite a lot of information 
+			  of their realisations.</para>
+			  
+     		  <table frame='all'><title>Blog references</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1'/>
+				<colspec colname='c2'/>
+				<thead>
+				<row>
+  					<entry align="center">Title<?dbhtml bgcolor="#EEEEEE" ?><?dbfo bgcolor="#EEEEEE" ?></entry>
+  					<entry align="center">Description<?dbhtml bgcolor="#EEEEEE" ?><?dbfo bgcolor="#EEEEEE" ?></entry>
+				</row>
+				</thead>
+				<tbody>
+					<row>
+ 					 <entry> <emphasis role="bold">Presentation on InfoQ</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
+  					 <entry> <ulink url="http://www.infoq.com/presentations/Feature-Bits">http://www.infoq.com/presentations/Feature-Bits</ulink></entry>
+					</row>
+					<row>
+ 					 <entry> <emphasis role="bold">Presentation on 99Design</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
+  					 <entry><ulink url="http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/">http://99designs.com/tech-blog/blog/2012/03/01/feature-flipping/ </ulink></entry>
+					</row>
+					<row>
+ 					 <entry> <emphasis role="bold">About Etsy</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
+  					 <entry>This article is available <ulink url="http://codeascraft.com/2011/02/04/how-does-etsy-manage-development-and-operations/">  on codeascraft</ulink> </entry>
+					</row>
+					<row>
+ 					 <entry> <emphasis role="bold">About Flickr</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
+  					 <entry><ulink url="http://code.flickr.com/blog/2009/12/02/flipping-out/">http://code.flickr.com/blog/2009/12/02/flipping-out/</ulink></entry>
+					</row>
+					<row>
+ 					 <entry> <emphasis role="bold">Octo Technology</emphasis><?dbhtml bgcolor="#EEFFEE" ?><?dbfo bgcolor="#EEFFEE" ?></entry>
+  					 <entry>Introduced the concepts in their:  
+       			   <ulink url="http://blog.octo.com/feature-flipping/">french article</ulink> but also in  
+       			   <ulink url="http://www.octo.com/fr/publications/11-les-geants-du-web">their book.</ulink></entry>
+					</row>
+				</tbody>
+			   </tgroup>
+			 </table>
+
+     		  <figure id="fig-octo-gdw" floatstyle="center" >
+      			 <title>Giants of the web practices by Octo (fr)</title>
+     		   	  <mediaobject>
+      			   <imageobject role="web" >
+      			    <imagedata align="center" fileref="img/fig-octo-gdw.png" contentwidth="4cm" contentdepth="7cm" />
+      			   </imageobject>
+      			  </mediaobject>
+      			 </figure>
+			</section>
+			
+		</section>
