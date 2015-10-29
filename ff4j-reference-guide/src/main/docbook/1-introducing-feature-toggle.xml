@@ -36,6 +36,7 @@
 			<para>
 			 Before drill down into sample codes, I would like to share with you a small overview of possible use cases. Unfortunately, most of the time Feature Flipping is seen as a trick to
 			 deliver poor code into production or even technical debt but it can be much more useful and may help you during deployments, testing and can really have some added business value. Let me show you...
+			</para>
 			<section id="1-3-1">
 			  	 <title>Continuous Delivery</title>
 				
