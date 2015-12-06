@@ -35,7 +35,7 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
         // Anytime from 12H
         long randomTimeStamp = System.currentTimeMillis() - (long) (Math.random() * 1000 * 3600 * nbHours);
         // Type ok or ko
-        EventType myType = (getRandomOffset(2) == 0) ? EventType.HIT_FLIPPED : EventType.HIT_NOT_FLIPPED;
+        EventType myType = (getRandomOffset(2) == 0) ? EventType.FEATURE_CHECK_ON : EventType.FEATURE_CHECK_OFF;
         return new Event(randomUID, myType, randomTimeStamp);
     }
 
@@ -43,6 +43,10 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
         conf = new FF4jApiConfig();
         conf.setFF4j(ctx.getBean(FF4j.class));
         conf.enableDocumentation();
+        conf.setPort(8282);
+        conf.setHost("localhost");
+        conf.setWebContext("webapi");
+        
 //      // login/Password
 //      conf.setEnableAuthentication(true);
 //      conf.setEnableAuthorization(true);

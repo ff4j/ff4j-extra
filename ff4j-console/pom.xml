@@ -22,8 +22,8 @@
 	<!-- ~ PROPERTIES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
-		<jetty.port>8080</jetty.port>
-		<jetty.stop.port>9967</jetty.stop.port>
+		<jetty.port>8082</jetty.port>
+		<jetty.stop.port>9968</jetty.stop.port>
 		<jetty.context>/ff4j-console</jetty.context>
 		<license.licenseResolver>${project.baseUri}src/license</license.licenseResolver>
 		<sitemesh.version>2.4.2</sitemesh.version>

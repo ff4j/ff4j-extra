@@ -7,7 +7,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<groupId>org.ff4j</groupId>
 	<artifactId>ff4j-sample-referenceguide</artifactId>
-	<version>1.3</version>
+	<version>1.3.4</version>
 	<name>ff4j-sample-referenceguide</name>
 	<packaging>jar</packaging>
 
@@ -16,6 +16,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
 		<encoding>UTF-8</encoding>
+		<ff4j.version>1.3.4-SNAPSHOT</ff4j.version>
 	</properties>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -27,21 +28,21 @@
 		<dependency>
 			<artifactId>ff4j-core</artifactId>
 			<groupId>org.ff4j</groupId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>${ff4j.version}</version>
 		</dependency>
 		
 		<!-- AOP -->
 		<dependency>
 			<artifactId>ff4j-aop</artifactId>
 			<groupId>org.ff4j</groupId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>${ff4j.version}</version>
 		</dependency>
 		
 		<!-- SECURITY -->
 		<dependency>
 			<artifactId>ff4j-security-spring</artifactId>
 			<groupId>org.ff4j</groupId>
-			<version>1.2.1-SNAPSHOT</version>
+			<version>${ff4j.version}</version>
 		</dependency>
 
 		<dependency>

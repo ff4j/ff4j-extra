@@ -1,26 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.6" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="org.ff4j.core.Feature" project="ff4j-core" 
     file="/ff4j-core/src/main/java/org/ff4j/core/Feature.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="159" width="209" x="15" y="-104"/>    
-    <display autosize="false" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="false">      
+    <position height="139" width="155" x="123" y="43"/>    
+    <display autosize="false" stereotype="false" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="2" language="java" name="org.ff4j.core.FeatureStore" project="ff4j-core" 
-    file="/ff4j-core/src/main/java/org/ff4j/core/FeatureStore.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="373" y="57"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+  <interface id="2" language="java" name="org.ff4j.core.FlippingStrategy" project="ff4j-core" 
+    file="/ff4j-core/src/main/java/org/ff4j/core/FlippingStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="562" y="114"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
+  <class id="3" language="java" name="org.ff4j.core.FlippingExecutionContext" project="ff4j-core" 
+    file="/ff4j-core/src/main/java/org/ff4j/core/FlippingExecutionContext.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="337" x="396" y="175"/>    
+    <display autosize="false" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="org.ff4j.property.AbstractProperty" project="ff4j-core" 
+    file="/ff4j-core/src/main/java/org/ff4j/property/AbstractProperty.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="136" width="174" x="115" y="244"/>    
+    <display autosize="false" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <association id="5">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="6" name="flippingStrategy"/>      
+      <multiplicity id="7" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="8">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="9" name="customProperties"/>      
+      <multiplicity id="10" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-    accessors="true" visibility="true">    
+    sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
     <operations public="true" package="true" protected="true" private="true" static="true"/>  
   </classifier-display>  
