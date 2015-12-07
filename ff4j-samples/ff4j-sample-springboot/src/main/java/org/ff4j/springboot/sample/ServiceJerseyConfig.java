@@ -1,4 +1,4 @@
-package org.ff4j.springboot;
+package org.ff4j.springboot.sample;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.ApplicationPath;
