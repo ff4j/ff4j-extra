@@ -6,9 +6,9 @@ import org.ff4j.FF4j;
 import org.ff4j.audit.Event;
 import org.ff4j.audit.EventType;
 import org.ff4j.core.Feature;
-import org.ff4j.web.api.FF4JProvider;
-import org.ff4j.web.api.conf.FF4jApiConfig;
-import org.ff4j.web.api.jersey.FF4JApiApplication;
+import org.ff4j.web.ApiConfig;
+import org.ff4j.web.FF4JProvider;
+import org.ff4j.web.api.FF4JApiApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -23,7 +23,7 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
     private static ApplicationContext ctx =  new ClassPathXmlApplicationContext("applicationContext.xml"); 
     
     /** current configuration. */
-    private static FF4jApiConfig conf;
+    private static ApiConfig conf;
 
     private static int getRandomOffset(int size) {
         return (int) (Math.random() * Math.abs(size));
@@ -40,9 +40,9 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
     }
 
     private void initConf() {
-        conf = new FF4jApiConfig();
+        conf = new ApiConfig();
         conf.setFF4j(ctx.getBean(FF4j.class));
-        conf.enableDocumentation();
+        //conf.enableDocumentation();
         conf.setPort(8282);
         conf.setHost("localhost");
         conf.setWebContext("webapi");
@@ -70,8 +70,8 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
     }
 
     /** {@inheritDoc} */
-    @Override
-    public FF4jApiConfig getApiConfig() {
+ 
+    public ApiConfig getApiConfig() {
         if (conf == null) {
             initConf();
         }

@@ -29,7 +29,7 @@
 	<context:property-placeholder location="classpath*:env.properties"/>
 	 
 	<bean id="ff4j" class="org.ff4j.FF4j">
-		<property name="store" ref="ff4j.store" />
+		<property name="featureStore" 			ref="ff4j.store" />
 		<property name="authorizationsManager" 	ref="ff4j.authorizationManager" />
 	</bean>
 	

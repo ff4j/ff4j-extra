@@ -15,18 +15,16 @@
 		<property name="location" value="ff4j.xml" />
 	</bean>
 	
-	<bean id="ff4j.cache" class="org.ff4j.cache.InMemoryCacheManager">
-		<property name="ttl" value="1" />
-	</bean>
+	<bean id="ff4j.cache" class="org.ff4j.cache.InMemoryCacheManager" />
 	
-	<bean id="ff4j.storeproxy" class="org.ff4j.cache.FeatureStoreCacheProxy">
-		<property name="target" ref="ff4j.store" />
-		<property name="cacheManager" ref="ff4j.cache" />
+	<bean id="ff4j.storeproxy" class="org.ff4j.cache.FF4jCacheProxy">
+		<property name="targetFeatureStore" ref="ff4j.store" />
+		<property name="cacheManager" 		ref="ff4j.cache" />
 	</bean>
 	
 	<!-- FF4J -->
 	<bean id="ff4j" class="org.ff4j.FF4j" >
-		<property name="store" ref="ff4j.storeproxy" />
+		<property name="featureStore" ref="ff4j.storeproxy" />
 		<property name="authorizationsManager" >
 			<bean class="org.ff4j.security.SpringSecurityAuthorisationManager" />
 		</property>

@@ -1,7 +1,5 @@
 package org.ff4j.springboot.utils;
 
-import org.ff4j.springboot.exception.IllegalArgumentExceptionMapper;
-
 /**
  * REST resource should not use enums are parameters yet interesting in services. This utility
  * class try to automatically convert string expression to relative enum. If the value is

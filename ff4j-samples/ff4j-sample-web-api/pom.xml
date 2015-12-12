@@ -29,6 +29,11 @@
 			<groupId>org.ff4j</groupId>
 			<version>1.3.5-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<artifactId>ff4j-webapi-jersey1x</artifactId>
+			<groupId>org.ff4j</groupId>
+			<version>1.3.5-SNAPSHOT</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>ch.qos.logback</groupId>

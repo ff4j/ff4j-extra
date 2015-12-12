@@ -6,9 +6,9 @@ import org.ff4j.FF4j;
 import org.ff4j.audit.Event;
 import org.ff4j.audit.EventType;
 import org.ff4j.core.Feature;
-import org.ff4j.web.api.FF4JProvider;
-import org.ff4j.web.api.conf.FF4jApiConfig;
-import org.ff4j.web.api.jersey.FF4JApiApplication;
+import org.ff4j.web.ApiConfig;
+import org.ff4j.web.FF4JProvider;
+import org.ff4j.web.api.FF4JApiApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -23,7 +23,7 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
     private static ApplicationContext ctx =  new ClassPathXmlApplicationContext("applicationContext.xml"); 
     
     /** current configuration. */
-    private static FF4jApiConfig conf;
+    private static ApiConfig conf;
 
     private static int getRandomOffset(int size) {
         return (int) (Math.random() * Math.abs(size));
@@ -43,9 +43,8 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
     }
 
     private void initConf() {
-        conf = new FF4jApiConfig(ctx.getBean(FF4j.class));
-        conf.enableDocumentation();
-        conf.setContextPath("http://cannys.ddns.net:8081/ff4j-demo/api");
+        conf = new ApiConfig(ctx.getBean(FF4j.class));
+        conf.setDocumentation(true);
       
         // login/Password
         //conf.setEnableAuthentication(true);
@@ -65,17 +64,14 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
         for (int i = 0; i < nbEvents; i++) {
             conf.getFF4j().getEventRepository().saveEvent(generateRandomEvent(features, nbHours));
         }
-
-        log.info(nbEvents + " event(s) generated.");
     }
 
     /** {@inheritDoc} */
     @Override
-    public FF4jApiConfig getApiConfig() {
+    public ApiConfig getApiConfig() {
         if (conf == null) {
             initConf();
         }
-        log.info("Returning API Config");
         return conf;
     }
 
@@ -84,7 +80,6 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
         if (conf == null) {
             initConf();
         }
-        log.info("Returning FF4J");
         return conf.getFF4j();
     }
 

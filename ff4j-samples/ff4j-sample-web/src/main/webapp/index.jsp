@@ -54,7 +54,7 @@ body {
 			<p class="alert alert-error">Hello visitor ! Feature 'sayHello' is disabled
       	</ff4j:disable>
       	
-      	<ff4j:enable featureid="sayGoodBye">
+      	<ff4j:enable featureid="sayGoodBye" shareHttpSession="false">
       		<p class="alert alert-success">Good Bye visitor !  Feature 'sayGoodbye' is enabled
       	</ff4j:enable>
       	

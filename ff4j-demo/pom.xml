@@ -7,7 +7,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<groupId>org.ff4j</groupId>
 	<artifactId>ff4j-demo</artifactId>
-	<version>1.3.4-SNAPSHOT</version>
+	<version>1.3.5-SNAPSHOT</version>
 	<name>ff4j-demo</name>
 	<packaging>war</packaging>
 
@@ -47,6 +47,11 @@
 		<!-- Wev & CORE -->
 		<dependency>
 			<artifactId>ff4j-web</artifactId>
+			<groupId>org.ff4j</groupId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>ff4j-webapi-jersey1x</artifactId>
 			<groupId>org.ff4j</groupId>
 			<version>${project.version}</version>
 		</dependency>

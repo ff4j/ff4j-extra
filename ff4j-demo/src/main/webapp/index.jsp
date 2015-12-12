@@ -62,7 +62,7 @@ body {
         <p>Part of this page are registered as <b>features</b> and will display only if the related feature
         is <b>enabled.</b>
         <p>Even if feature is enabled you can limit access by providing dedicated <b>permissions</b> <i>(no permission means public)</i> 
-        <p>You can play with the administration console will (here credentials : <span style="color:#880000"><b>admin/admin</b></span></i></p>
+        <p>You can play with the administration console will (here credentials : <span style="color:#880000"><b>admin/admin</b></span></p>
       </div>
 
 		<!-- Example row of columns -->
