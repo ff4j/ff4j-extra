@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Description("A controller for handling requests for hello messages")
-public class HomeController {
-	
-	@RequestMapping("/")
-	public String home(Map<String, Object> model) {
-		model.put("message", "Hello World");
-		model.put("title", "SOA White Application");
-		model.put("date", new Date());
-		return "home";
-	}
-	
+public class HomePage {
+    
+    @RequestMapping("/")
+    public String home(Map<String, Object> model) {
+        model.put("message", "Hello World");
+        model.put("title", "FF4J White Application");
+        model.put("date", new Date());
+        return "home";
+    }
+    
 }

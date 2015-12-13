@@ -13,9 +13,11 @@
 
 package org.ff4j.springboot;
 
+import org.ff4j.web.embedded.ConsoleServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
@@ -26,33 +28,10 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 public class FF4jSpringBootApplication extends SpringBootServletInitializer {
-    /*
-     * @Autowired private ODataServlet demoODataServlet;
-     * 
-     * /** Generic layer on top of low-levelOlingo API.
-     * 
-     * @Autowired private IntrospectionODataServlet oDataServlet;
-     * 
-     * @Bean public ServletRegistrationBean servletRegistrationBean(){ return new
-     * ServletRegistrationBean(demoODataServlet,"/odata/*"); }
-     * 
-     * @Bean public ServletRegistrationBean servletRegistrationBean2(){ return new
-     * ServletRegistrationBean(oDataServlet,"/odata2/*"); }
-     */
-
-    @Bean
-    public SecurityProperties securityProperties() {
-        SecurityProperties security = new SecurityProperties();
-        security.getBasic().setPath("");
-        return security;
-    }
-
-    /**
-     * Main Operation to launch white application.
-     *
-     * @param args
-     *            command line arguments
-     */
+    
+    @Autowired
+    private ConsoleServlet ff4jServlet;
+    
     public static void main(String[] args) {
         SpringApplicationBuilder builder = new SpringApplicationBuilder(FF4jSpringBootApplication.class);
         new FF4jSpringBootApplication().configure(builder).run(args);
@@ -63,5 +42,10 @@ public class FF4jSpringBootApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(FF4jSpringBootApplication.class);
     }
-
+    
+    @Bean 
+    public ServletRegistrationBean servletRegistrationBean(){ 
+        return new ServletRegistrationBean(ff4jServlet, "/ff4j-console/*"); 
+    }
+    
 }
