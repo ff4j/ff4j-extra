@@ -353,23 +353,7 @@ public class FeaturesController extends AbstractConsoleController {
                 }
             }
 
-            // Permissions
-            final String permission = req.getParameter(PERMISSION);
-            if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
-                @SuppressWarnings("unchecked")
-                Map<String, String[]> parameters = req.getParameterMap();
-                Set<String> permissions = new HashSet<>();
-                for (String key : parameters.keySet()) {
-                    if (key.startsWith(PREFIX_CHECKBOX)) {
-                        if (key.equals(PREFIX_CHECKBOX + "other")) {
-                            permissions.add(parameters.get(PREFIX_TEXTBOX + "other-value")[0]);
-                        } else {
-                            permissions.add(key.replace(PREFIX_CHECKBOX, ""));
-                        }
-                    }
-                }
-                fp.setPermissions(permissions);
-            }
+            populateFeatureWithPermissions(fp, req);
 
             // Creation
             store.create(fp);
@@ -433,22 +417,31 @@ public class FeaturesController extends AbstractConsoleController {
                 }
             }
 
-            // Permissions
-            final String permission = req.getParameter(PERMISSION);
-            if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
-                Map<String, String[]> parameters = req.getParameterMap();
-                Set<String> permissions = new HashSet<String>();
-                for (String key : parameters.keySet()) {
-                    if (key.startsWith(PREFIX_CHECKBOX)) {
-                        permissions.add(key.replace(PREFIX_CHECKBOX, ""));
-                    }
-                }
-                fp.setPermissions(permissions);
-            }
+            populateFeatureWithPermissions(fp, req);
 
             // Creation
             store.update(fp);
             log.info(featureId + " has been updated");
+        }
+    }
+
+    private void populateFeatureWithPermissions(Feature fp, HttpServletRequest req) {
+        // Permissions
+        final String permission = req.getParameter(PERMISSION);
+        if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
+            @SuppressWarnings("unchecked")
+            Map<String, String[]> parameters = req.getParameterMap();
+            Set<String> permissions = new HashSet<>();
+            for (String key : parameters.keySet()) {
+                if (key.startsWith(PREFIX_CHECKBOX)) {
+                    if (key.equals(PREFIX_CHECKBOX + "other")) {
+                        permissions.addAll(Arrays.asList(parameters.get(PREFIX_TEXTBOX + "other-value")[0].split(",")));
+                    } else {
+                        permissions.add(key.replace(PREFIX_CHECKBOX, ""));
+                    }
+                }
+            }
+            fp.setPermissions(permissions);
         }
     }
 
