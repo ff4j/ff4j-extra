@@ -1,8 +1,9 @@
 package org.ff4j.springboot;
 
 import org.ff4j.FF4j;
-import org.ff4j.property.Property;
-import org.ff4j.property.PropertyInt;
+import org.ff4j.cache.FF4jCacheProxy;
+import org.ff4j.cache.InMemoryCacheManager;
+import org.ff4j.store.InMemoryFeatureStore;
 import org.ff4j.web.ApiConfig;
 import org.ff4j.web.embedded.ConsoleServlet;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,11 +21,16 @@ public class FF4jConfiguration {
     
     @Bean
     public FF4j getFF4j() {
-        return new FF4j()
-            .createFeature("f1") //
-            .createFeature("f2").createFeature("f3")//
-            .createProperty(new Property("SampleProperty", "go!")) //
-            .createProperty(new PropertyInt("SamplePropertyIn", 12));
+        FF4j ff4j = new FF4j();
+
+        FF4jCacheProxy cacheProxy = new FF4jCacheProxy();
+        cacheProxy.setTargetFeatureStore(new InMemoryFeatureStore());
+        cacheProxy.setCacheManager(new InMemoryCacheManager());
+
+        ff4j.setFeatureStore(cacheProxy);
+        ff4j.setAuthorizationsManager(new CustomAuthorizationManager());
+
+        return ff4j;
     }
     
     @Bean

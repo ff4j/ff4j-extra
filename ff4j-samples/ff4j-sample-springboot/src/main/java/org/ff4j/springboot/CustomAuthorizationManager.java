@@ -32,9 +32,9 @@ public class CustomAuthorizationManager implements AuthorizationsManager {
     public Set<String> listAllPermissions() {
         // Not calculated each time in fact...
         Set<String> allPermissions = new HashSet<String>();
-        for (Set<String> subPersmission : permissions.values()) {
-            allPermissions.addAll(subPersmission);
-        }
+//        for (Set<String> subPersmission : permissions.values()) {
+//            allPermissions.addAll(subPersmission);
+//        }
         return allPermissions;
     }
 

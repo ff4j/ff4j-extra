@@ -28,7 +28,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -239,6 +238,14 @@ public class FeaturesController extends AbstractConsoleController {
                 sb.append(" id=\"" + PREFIX_CHECKBOX + permission + "\" >&nbsp;");
                 sb.append(permission);
         }
+        // Begin user provided permission input
+        sb.append("\r\n<br/>&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" ");
+        sb.append(" name=\"" + PREFIX_CHECKBOX + "other\"");
+        sb.append(" id=\"" + PREFIX_CHECKBOX + "other\" >&nbsp;Other:&nbsp");
+        sb.append("<input type=\"text\" ");
+        sb.append("name=\"" + PREFIX_TEXTBOX + "other-value\"");
+        sb.append("id=\"" + PREFIX_TEXTBOX + "other-value\" />");
+        // End user provided permission input
         log.info(client.getAllPermissions().size() + " permission(s) retrieved");
         return sb.toString();
     }
@@ -355,10 +362,14 @@ public class FeaturesController extends AbstractConsoleController {
             if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
                 @SuppressWarnings("unchecked")
                 Map<String, String[]> parameters = req.getParameterMap();
-                Set<String> permissions = new HashSet<String>();
+                Set<String> permissions = new HashSet<>();
                 for (String key : parameters.keySet()) {
                     if (key.startsWith(PREFIX_CHECKBOX)) {
-                        permissions.add(key.replace(PREFIX_CHECKBOX, ""));
+                        if (key.equals(PREFIX_CHECKBOX + "other")) {
+                            permissions.add(parameters.get(PREFIX_TEXTBOX + "other-value")[0]);
+                        } else {
+                            permissions.add(key.replace(PREFIX_CHECKBOX, ""));
+                        }
                     }
                 }
                 fp.setPermissions(permissions);

@@ -125,9 +125,12 @@ public interface ApplicationConstants {
     String PERMISSION = "permission";
     
     // ------- FEATURE ELEMENTS --------------------
-    
+
     /** attribute name. */
     String PREFIX_CHECKBOX = "perm-check-";
+
+    /** attribute name. */
+    String PREFIX_TEXTBOX = "perm-text-";
 
     /** permission. */
     String PERMISSION_PUBLIC = "Public";
