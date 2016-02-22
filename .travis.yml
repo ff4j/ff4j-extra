@@ -2,3 +2,10 @@ language: java
 jdk:
  - oraclejdk8
 before_install: cd ff4j-console
+deploy:
+  provider: releases
+  api_key: 1gMMFnLjrS9FSwzRH9yq
+  file: "./target/ff4j-console.war"
+  skip_cleanup: true
+  on:
+    tags: true
