@@ -2,6 +2,7 @@ language: java
 jdk:
 - oraclejdk8
 before_install: cd ff4j-console
+before_deploy: pwd && ls /home/travis/build/
 deploy:
   provider: releases
   api_key:
