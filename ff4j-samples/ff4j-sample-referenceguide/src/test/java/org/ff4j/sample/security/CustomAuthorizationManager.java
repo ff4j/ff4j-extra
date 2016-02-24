@@ -1,4 +1,4 @@
-package org.ff4j.springboot;
+package org.ff4j.sample.security;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -22,7 +22,7 @@
 	<!-- ~ PROPERTIES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
-		<jetty.port>8081</jetty.port>
+		<jetty.port>8083</jetty.port>
 		<jetty.stop.port>9968</jetty.stop.port>
 		<jetty.context>/ff4j-console</jetty.context>
 		<license.licenseResolver>${project.baseUri}src/license</license.licenseResolver>
