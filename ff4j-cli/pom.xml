@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.ff4j</groupId>
 		<artifactId>ff4j-parent</artifactId>
-		<version>1.3.4-SNAPSHOT</version>
+		<version>1.4</version>
 	</parent>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -36,8 +36,14 @@
 			<scope>test</scope>
 		</dependency>
 		
+
 		<dependency>
-			<artifactId>ff4j-core</artifactId>
+			<artifactId>ff4j-aop</artifactId>
+			<groupId>org.ff4j</groupId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>ff4j-store-jcache</artifactId>
 			<groupId>org.ff4j</groupId>
 			<version>${project.version}</version>
 		</dependency>

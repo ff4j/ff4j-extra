@@ -1,4 +1,4 @@
-package org.ff4j.cli.util;
+package org.ff4j.cli.command;
 
 /*
  * #%L
@@ -19,3 +19,17 @@ package org.ff4j.cli.util;
  * limitations under the License.
  * #L%
  */
+
+
+public class FF4jConfigurationParsing {
+    
+    private static final String DEFAULT_CONF = "ff4j-cli-config.xml";
+            
+    public FF4jConfigurationParsing() {
+    }
+    
+    public FF4jConfigurationParsing(String configFile) {
+        
+    }
+    
+}

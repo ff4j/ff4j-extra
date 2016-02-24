@@ -1,4 +1,4 @@
-package org.ff4j.cli.util;
+package org.ff4j.cli.ansi;
 
 /*
  * #%L
@@ -22,45 +22,19 @@ package org.ff4j.cli.util;
 
 
 /**
- * Operating System.
+ * Ansi Escape chars.
  *
  * @author Cedrick Lunven (@clunven)</a>
  */
-public enum OSSupported {
+public interface AnsiConstants {
+    
+    /** Every Ansi escape code begins with this PREFIX. */
+    String PREFIX = "\033[";
+    
+    /** Every attribute is separated by this SEPARATOR. */
+    String SEPARATOR = ";";
+    
+    /** Every Ansi escape code end with this POSTFIX. */
+    String POSTFIX = "m";
 
-    /** Windows. */
-    WINDOWS("win"),
-    
-    /** Mac. */
-    OS_X("mac"),
-    
-    /** Unix. */
-    UNIX("unix"),
-    
-    /** Unix. */
-    SOLARIS("solaris");
-    
-    /** Code color for foreGround. */
-    private final String name;
-    
-    /**
-     * Default Constructor.
-     *
-     * @param pname
-     *      current name
-     */
-    private OSSupported(String pname) {
-        this.name = pname;
-    }
-
-    /**
-     * Getter accessor for attribute 'name'.
-     *
-     * @return
-     *       current value of 'name'
-     */
-    public String getName() {
-        return name;
-    }
-    
 }

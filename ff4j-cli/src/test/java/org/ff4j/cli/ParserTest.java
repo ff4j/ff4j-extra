@@ -1,51 +1,49 @@
 package org.ff4j.cli;
 
+/*
+ * #%L
+ * ff4j-cli
+ * %%
+ * Copyright (C) 2013 - 2016 FF4J
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.ff4j.cli.color.AnsiForegroundColor;
-import org.ff4j.cli.color.AnsiText;
+import org.ff4j.cli.command.FF4jCommand;
 import org.junit.Test;
 
 public class ParserTest {
      
     @Test
-    public void testParse() throws ParseException {
-        
-        Options options = new Options();
-        
-        Option help  = new Option( "help", "print this message" );
-        options.addOption(help);
-        
-        Option help2 = new Option( "?", "print this message" );
-        options.addOption(help2);
-        
-        /** Configuration File. */
-        Option confFileOption = Option.builder("conf").longOpt("configfile")
-                            .hasArg()
-                            .argName("configfile")
-                            .desc("XML Configuration file for ff4j")              
-                            .build();
-        options.addOption(confFileOption);
-        
-        //CONNECT
-        //list
-        
-        
+    public void testParse() throws ParseException { 
         
         CommandLineParser parser = new DefaultParser();        
-        CommandLine cmd = parser.parse( options, new String[] { "ff4j", "--configfile", "C:/sample.xml" } );
+        CommandLine cmd = parser.parse( FF4jCommand.noEnvOptions(), 
+                new String[] { "ff4j", "--configfile", "C:/sample.xml" } );
         
         // automatically generate the help statement
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp( "ff4j", options );
+        formatter.printHelp( "ff4j", FF4jCommand.noEnvOptions() );
         
         if( cmd.hasOption( "configfile" ) ) {
-            new AnsiText(cmd.getOptionValue("configfile"), AnsiForegroundColor.RED).display();
+            //new AnsiText(cmd.getOptionValue("configfile"), AnsiForegroundColor.RED).display();
             //System.out.println(cmd.getOptionValue("configfile"));
         }
         

@@ -1,4 +1,4 @@
-package org.ff4j.cli.util;
+package org.ff4j.cli.ansi;
 
 /*
  * #%L
