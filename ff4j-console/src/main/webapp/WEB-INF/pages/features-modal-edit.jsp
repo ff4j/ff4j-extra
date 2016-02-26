@@ -33,7 +33,7 @@
 
     <!-- Group --> 
     <div class="control-group">  
-      <label class="control-label" for="group" style="color:#00ab8b;font-style:normal">Group</label>  
+      <label class="control-label" for="groupName" style="color:#00ab8b;font-style:normal">Group</label>
         <div class="controls">
           <div class="btn-group">
             <input type="text" name="groupName" id="groupName" style="width:250px;height:30px;" />
@@ -92,9 +92,9 @@
             </ul>
           </div>
         </div>
-         <div id="stratlist" class="controls hide" style-"font-style:normal">
+         <div id="stratlist" class="controls hide" style="font-style:normal">
         <p/><br/><span style="color:#00ab8b"><i class="icon-star"></i>&nbsp;Please Give init param :
-          <br><input type="text" name="initParams" id="initParams" style="width:250px;height:30px;font-style:normal">
+          <br><input type="text" name="initParams" id="initParams" style="width:250px;height:30px;font-style:normal"></span>
       </div>
       </div>
 
@@ -132,22 +132,23 @@
 
      <script type="text/javascript" >
       $(document).on("click", ".open-EditFlipDialog", function () {
-        $("#modalEdit #uid").val($(this).data('id'));
-        $("#modalEdit #desc").val($(this).data('desc'));
-        $("#modalEdit #groupName").val($(this).data('group'));
+        var modalEdit = $("#modalEdit");
+        modalEdit.find("#uid").val($(this).data('id'));
+        modalEdit.find("#desc").val($(this).data('desc'));
+        modalEdit.find("#groupName").val($(this).data('group'));
         
         /* --------- */
         /* Strategy  */
         /* --------- */
         var strategy = $(this).data('strategy');
-        $("#modalEdit #strategy").val(strategy);
+        modalEdit.find("#strategy").val(strategy);
         if (strategy == '') {
-          $("#modalEdit #stratlist").hide();
-          $("#modalEdit #initParams").val('');
+          modalEdit.find("#stratlist").hide();
+          modalEdit.find("#initParams").val('');
         } else {
-          $("#modalEdit #stratlist").show();
+          modalEdit.find("#stratlist").show();
           var initParams = $(this).data('stratparams').replace("{", "").replace("}", "");
-          $("#modalEdit #initParams").val(initParams);
+          modalEdit.find("#initParams").val(initParams);
         }
         
         /* ------------ */
@@ -155,16 +156,25 @@
         /* ------------ */
         var permissions = $(this).data('permissions').replace("[", "").replace("]", "");
         if (permissions == '') {
-          $("#modalEdit #permlist").hide();
-          $("#modalEdit #permission").val('Public');
+          modalEdit.find("#permlist").hide();
+          modalEdit.find("#permission").val('Public');
         } else {
-          $("#modalEdit #permission").val('Restricted');
-          $("#modalEdit #permlist").show();
-       	  // Split permissions
+          modalEdit.find("#permlist").show();
+          modalEdit.find("#permission").val('Restricted');
+          // Split permissions
        	  var arrayOfPermissions = permissions.split(',');
-          for(perm in arrayOfPermissions) {
-        	$("#modalEdit #perm-check-" + arrayOfPermissions[perm].trim()).attr('checked', true);
+          var arrayOfOthers = [];
+          for (var index in arrayOfPermissions) {
+            var perm = arrayOfPermissions[index].trim();
+            var currentPermSelector = modalEdit.find("#perm-check-" + perm);
+            if (currentPermSelector.length) {
+              currentPermSelector.attr('checked', true);
+            }
+            else {
+              arrayOfOthers.push(perm);
+            }
           }
+          modalEdit.find("#perm-text-other-value").val(arrayOfOthers.join(","));
         }
         
         });

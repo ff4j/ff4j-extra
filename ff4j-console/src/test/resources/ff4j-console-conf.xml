@@ -25,7 +25,7 @@
 	<!--           Global Properties               -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
-		<property name="language" value="fr" />
+		<property name="language" value="en" />
 	</properties>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -33,7 +33,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<users>
 		<user name="admin" password="admin" language="en" admin="true" />
-		<user name="user"  password="user" language="fr" />
+		<user name="user"  password="user" language="en" />
 	</users>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
