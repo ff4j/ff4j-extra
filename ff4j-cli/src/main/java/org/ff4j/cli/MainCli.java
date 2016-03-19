@@ -37,7 +37,6 @@ import org.ff4j.FF4j;
 import org.ff4j.cli.ansi.AnsiForegroundColor;
 import org.ff4j.cli.ansi.AnsiTerminal;
 import org.ff4j.cli.command.FF4jCommand;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
@@ -118,7 +117,7 @@ public class MainCli {
                     
                             
                     CommandLine cmd = CMD_PARSER.parse(FF4jCommand.noEnvOptions(), line);
-                    
+                    System.out.println(cmd.hasOption('c'));
                     
                     
                     // if the user entered a return, just loop again

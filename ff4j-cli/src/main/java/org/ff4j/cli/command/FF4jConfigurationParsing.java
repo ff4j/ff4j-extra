@@ -23,7 +23,7 @@ package org.ff4j.cli.command;
 
 public class FF4jConfigurationParsing {
     
-    private static final String DEFAULT_CONF = "ff4j-cli-config.xml";
+    public static final String DEFAULT_CONF = "ff4j-cli-config.xml";
             
     public FF4jConfigurationParsing() {
     }
