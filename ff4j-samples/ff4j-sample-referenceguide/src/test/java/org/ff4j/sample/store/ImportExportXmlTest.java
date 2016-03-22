@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.ff4j.FF4j;
+import org.ff4j.conf.XmlParser;
 import org.ff4j.core.Feature;
-import org.ff4j.core.FeatureXmlParser;
 import org.junit.Test;
 
 public class ImportExportXmlTest {
@@ -25,12 +25,12 @@ public class ImportExportXmlTest {
 
         // When
         FileInputStream fis = new FileInputStream(new File("src/test/resources/ff4j.xml"));
-        Map<String, Feature> mapsOfFeat = new FeatureXmlParser().parseConfigurationFile(fis);
+        Map<String, Feature> mapsOfFeat = new XmlParser().parseConfigurationFile(fis).getFeatures();
         for (Entry<String, Feature> feature : mapsOfFeat.entrySet()) {
             if (ff4j.exist(feature.getKey())) {
-                ff4j.getStore().update(feature.getValue());
+                ff4j.getFeatureStore().update(feature.getValue());
             } else {
-                ff4j.getStore().create(feature.getValue());
+                ff4j.getFeatureStore().create(feature.getValue());
             }
         }
 

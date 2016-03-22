@@ -35,18 +35,8 @@ public class FF4JPredicateBuilder {
      * @return
      *      true if enabled
      */
-    public static Predicate checkFF4j(final String featureName) {
-        notNull(featureName, "featureName");
-        return new Predicate() {
-            public boolean matches(Exchange exchange) {
-                return ff4j.check(featureName);
-            }
-
-            @Override
-            public String toString() {
-                return "ff4j.check('" + featureName + "')";
-            }
-        };
+    public static Predicate check(final String featureName) {
+        return check(featureName, null);
     }
     
     /**
@@ -58,7 +48,7 @@ public class FF4JPredicateBuilder {
      * @return
      *      value
      */
-    public static Predicate ff4j(final String featureName, final FlippingExecutionContext fex) {
+    public static Predicate check(final String featureName, final FlippingExecutionContext fex) {
         notNull(featureName, "featureName");
         return new Predicate() {
             public boolean matches(Exchange exchange) {
