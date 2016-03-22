@@ -28,7 +28,6 @@ public class FF4jConfiguration {
         cacheProxy.setCacheManager(new InMemoryCacheManager());
 
         ff4j.setFeatureStore(cacheProxy);
-        ff4j.setAuthorizationsManager(new CustomAuthorizationManager());
 
         return ff4j;
     }
