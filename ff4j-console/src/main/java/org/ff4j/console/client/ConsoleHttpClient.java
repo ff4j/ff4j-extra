@@ -14,6 +14,7 @@ package org.ff4j.console.client;
 import static org.ff4j.web.store.FeatureStoreHttp.buildAuthorization4ApiKey;
 import static org.ff4j.web.store.FeatureStoreHttp.buildAuthorization4UserName;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -152,7 +153,14 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
      */
     public Set<String> getAllPermissions() {
         String myUrl = ff4jConnection.getUrl() + "/" + RESOURCE_FF4J + "/" + RESOURCE_SECURITY;
-        return buildGETRequest(myUrl).getEntity(FeaturesBean.class).getPermissionList();
+        // If the FF4J instance we're connecting to doesn't have security set up,
+        // this results in a JsonParseException
+        try {
+            return buildGETRequest(myUrl).getEntity(FeaturesBean.class).getPermissionList();
+        } catch (Exception ex) {
+            log.debug("Exception! " + ex.getLocalizedMessage());
+            return new HashSet<>();
+        }
     }
 
     /**
