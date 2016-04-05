@@ -60,7 +60,7 @@ public class FF4JStandAloneConsole {
         // If not set, java.io.tmpdir will be used, which can cause problems
         // if the temp directory gets cleaned periodically.
         // Your build scripts should remove this directory between deployments
-        webapp.setTempDirectory(new File("/Users/parkerj/Documents/Code/ff4j-extra/ff4j-console/target/"));
+        webapp.setTempDirectory(new File("/path/to/webapp-directory"));
 
         server.setHandler(webapp);
         server.start();

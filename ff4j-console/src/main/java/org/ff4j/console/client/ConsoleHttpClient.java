@@ -23,7 +23,7 @@ import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.console.domain.HomeBean;
 import org.ff4j.console.domain.StatisticsBean;
-import org.ff4j.web.api.FF4jWebConstants;
+import org.ff4j.web.FF4jWebConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
