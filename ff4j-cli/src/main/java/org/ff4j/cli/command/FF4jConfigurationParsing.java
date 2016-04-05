@@ -1,8 +1,8 @@
-package org.ff4j.sample;
+package org.ff4j.cli.command;
 
 /*
  * #%L
- * ff4j-sample-web
+ * ff4j-cli
  * %%
  * Copyright (C) 2013 - 2016 FF4J
  * %%
@@ -21,27 +21,15 @@ package org.ff4j.sample;
  */
 
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.ff4j.security.AbstractAuthorizationManager;
-
-public class MockAuthorisationManager extends AbstractAuthorizationManager {
-
-    /** {@inheritDoc} */
-    @Override
-    public Set<String> getCurrentUserPermissions() {
-        return new HashSet<String>();
+public class FF4jConfigurationParsing {
+    
+    public static final String DEFAULT_CONF = "ff4j-cli-config.xml";
+            
+    public FF4jConfigurationParsing() {
     }
-
-    /** {@inheritDoc} */
-    @Override
-    public Set<String> listAllPermissions() {
-        Set<String> auths = new HashSet<String>();
-        auths.add("Administrators");
-        auths.add("Users");
-        auths.add("SuperUsers");
-        return auths;
+    
+    public FF4jConfigurationParsing(String configFile) {
+        
     }
-
+    
 }

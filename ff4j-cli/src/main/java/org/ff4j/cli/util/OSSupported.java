@@ -1,8 +1,8 @@
-package org.ff4j.sample;
+package org.ff4j.cli.util;
 
 /*
  * #%L
- * ff4j-sample-web
+ * ff4j-cli
  * %%
  * Copyright (C) 2013 - 2016 FF4J
  * %%
@@ -21,30 +21,46 @@ package org.ff4j.sample;
  */
 
 
-import org.ff4j.FF4j;
-import org.ff4j.web.FF4JProvider;
+/**
+ * Operating System.
+ *
+ * @author Cedrick Lunven (@clunven)</a>
+ */
+public enum OSSupported {
 
-public class SimpleFF4jProvider implements FF4JProvider {
-
-    /** ff4j instance. */
-    private final FF4j ff4j;
-
+    /** Windows. */
+    WINDOWS("win"),
+    
+    /** Mac. */
+    OS_X("mac"),
+    
+    /** Unix. */
+    UNIX("unix"),
+    
+    /** Unix. */
+    SOLARIS("solaris");
+    
+    /** Code color for foreGround. */
+    private final String name;
+    
     /**
-     * Default constructeur invoked by servlet.
-     */
-    public SimpleFF4jProvider() {
-        ff4j = new FF4j("ff4j.xml");
-        // ff4j.setAuthorizationsManager(new MockAuthorisationManager());
-    }
-
-    /**
-     * Getter accessor for attribute 'fF4j'.
+     * Default Constructor.
      *
-     * @return current value of 'fF4j'
+     * @param pname
+     *      current name
      */
-    @Override
-    public FF4j getFF4j() {
-        return ff4j;
+    private OSSupported(String pname) {
+        this.name = pname;
     }
 
+    /**
+     * Getter accessor for attribute 'name'.
+     *
+     * @return
+     *       current value of 'name'
+     */
+    public String getName() {
+        return name;
+    }
+    
 }

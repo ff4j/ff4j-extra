@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<features xmlns="http://www.ff4j.org/schema/ff4j" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.2.0.xsd">
+
+<ff4j xmlns="http://www.ff4j.org/schema/ff4j" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://www.ff4j.org/schema/ff4j ../../main/resources/ff4j-1.4.0.xsd">
+	 
+<features>
 
 	<!-- Earth Capabilities -->
 	<feature-group name="earth">
@@ -83,3 +87,33 @@
 	</feature-group>
 
 </features>
+
+	<properties>
+	 <property name="ppint" 	  type="org.ff4j.property.PropertyInt" value="12"   />
+			  <property name="ppdouble"   type="double"  value="12.5" />
+			  <property name="ppboolean"  type="boolean" value="true" />
+			  <property name="ppstring"   value="hello" />
+			  <property name="ppListInt"  value="12,13,14" />
+			  <property name="myLogLevel" value="DEBUG" type="org.ff4j.property.PropertyLogLevel" />
+			  <property name="digitValue" value="1" type="org.ff4j.property.PropertyInt">
+			  	<fixedValues>
+			 		<value>0</value>
+			 		<value>1</value>
+			 		<value>2</value>
+			 		<value>3</value>
+			 	</fixedValues>
+			  </property>
+			  <property name="regionIdentifier" value="AMER" >
+			 	<fixedValues>
+			 		<value>AMER</value>
+			 		<value>SSSS</value>
+			 		<value>EAST</value>
+			 		<value>EAST</value>
+			 	</fixedValues>
+			 </property>
+			 
+		
+	</properties>
+
+
+</ff4j>

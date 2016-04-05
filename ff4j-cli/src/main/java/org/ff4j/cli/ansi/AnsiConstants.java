@@ -1,8 +1,8 @@
-package org.ff4j.sample;
+package org.ff4j.cli.ansi;
 
 /*
  * #%L
- * ff4j-sample-web
+ * ff4j-cli
  * %%
  * Copyright (C) 2013 - 2016 FF4J
  * %%
@@ -21,27 +21,20 @@ package org.ff4j.sample;
  */
 
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.ff4j.security.AbstractAuthorizationManager;
-
-public class MockAuthorisationManager extends AbstractAuthorizationManager {
-
-    /** {@inheritDoc} */
-    @Override
-    public Set<String> getCurrentUserPermissions() {
-        return new HashSet<String>();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Set<String> listAllPermissions() {
-        Set<String> auths = new HashSet<String>();
-        auths.add("Administrators");
-        auths.add("Users");
-        auths.add("SuperUsers");
-        return auths;
-    }
+/**
+ * Ansi Escape chars.
+ *
+ * @author Cedrick Lunven (@clunven)</a>
+ */
+public interface AnsiConstants {
+    
+    /** Every Ansi escape code begins with this PREFIX. */
+    String PREFIX = "\033[";
+    
+    /** Every attribute is separated by this SEPARATOR. */
+    String SEPARATOR = ";";
+    
+    /** Every Ansi escape code end with this POSTFIX. */
+    String POSTFIX = "m";
 
 }
