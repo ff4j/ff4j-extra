@@ -54,7 +54,7 @@
 			<groupId>org.ff4j</groupId>
 			<version>${ff4j.version}</version>
 		</dependency>
-	
+
 		<!-- MVC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -106,6 +106,18 @@
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
 		</dependency>
 
 		<!-- In-Memory database driver -->
