@@ -23,6 +23,7 @@ package org.ff4j.console.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +39,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.ff4j.FF4j;
 import org.ff4j.conf.XmlParser;
 import org.ff4j.console.ApplicationConstants;
@@ -48,7 +49,7 @@ import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.core.Feature;
 import org.ff4j.core.FeatureStore;
 import org.ff4j.core.FlippingStrategy;
-import org.ff4j.web.api.FF4jWebConstants;
+import org.ff4j.web.FF4jWebConstants;
 import org.ff4j.web.store.FeatureStoreHttp;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -239,6 +240,14 @@ public class FeaturesController extends AbstractConsoleController {
                 sb.append(" id=\"" + PREFIX_CHECKBOX + permission + "\" >&nbsp;");
                 sb.append(permission);
         }
+        // Begin user provided permission input
+        sb.append("\r\n<br/>&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" ");
+        sb.append(" name=\"" + PREFIX_CHECKBOX + "other\"");
+        sb.append(" id=\"" + PREFIX_CHECKBOX + "other\" >&nbsp;Other:&nbsp");
+        sb.append("<input type=\"text\" ");
+        sb.append("name=\"" + PREFIX_TEXTBOX + "other-value\"");
+        sb.append("id=\"" + PREFIX_TEXTBOX + "other-value\" />");
+        // End user provided permission input
         log.info(client.getAllPermissions().size() + " permission(s) retrieved");
         return sb.toString();
     }
@@ -350,19 +359,7 @@ public class FeaturesController extends AbstractConsoleController {
                 }
             }
 
-            // Permissions
-            final String permission = req.getParameter(PERMISSION);
-            if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
-                @SuppressWarnings("unchecked")
-                Map<String, String[]> parameters = req.getParameterMap();
-                Set<String> permissions = new HashSet<String>();
-                for (String key : parameters.keySet()) {
-                    if (key.startsWith(PREFIX_CHECKBOX)) {
-                        permissions.add(key.replace(PREFIX_CHECKBOX, ""));
-                    }
-                }
-                fp.setPermissions(permissions);
-            }
+            populateFeatureWithPermissions(fp, req);
 
             // Creation
             store.create(fp);
@@ -426,22 +423,31 @@ public class FeaturesController extends AbstractConsoleController {
                 }
             }
 
-            // Permissions
-            final String permission = req.getParameter(PERMISSION);
-            if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
-                Map<String, String[]> parameters = req.getParameterMap();
-                Set<String> permissions = new HashSet<String>();
-                for (String key : parameters.keySet()) {
-                    if (key.startsWith(PREFIX_CHECKBOX)) {
-                        permissions.add(key.replace(PREFIX_CHECKBOX, ""));
-                    }
-                }
-                fp.setPermissions(permissions);
-            }
+            populateFeatureWithPermissions(fp, req);
 
             // Creation
             store.update(fp);
             log.info(featureId + " has been updated");
+        }
+    }
+
+    private void populateFeatureWithPermissions(Feature fp, HttpServletRequest req) {
+        // Permissions
+        final String permission = req.getParameter(PERMISSION);
+        if (null != permission && PERMISSION_RESTRICTED.equals(permission)) {
+            @SuppressWarnings("unchecked")
+            Map<String, String[]> parameters = req.getParameterMap();
+            Set<String> permissions = new HashSet<>();
+            for (String key : parameters.keySet()) {
+                if (key.startsWith(PREFIX_CHECKBOX)) {
+                    if (key.equals(PREFIX_CHECKBOX + "other")) {
+                        permissions.addAll(Arrays.asList(parameters.get(PREFIX_TEXTBOX + "other-value")[0].split(",")));
+                    } else {
+                        permissions.add(key.replace(PREFIX_CHECKBOX, ""));
+                    }
+                }
+            }
+            fp.setPermissions(permissions);
         }
     }
 

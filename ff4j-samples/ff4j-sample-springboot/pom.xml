@@ -54,7 +54,7 @@
 			<groupId>org.ff4j</groupId>
 			<version>${ff4j.version}</version>
 		</dependency>
-	
+
 		<!-- MVC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

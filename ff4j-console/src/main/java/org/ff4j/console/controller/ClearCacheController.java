@@ -24,7 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
-import org.ff4j.cache.FeatureStoreCacheProxy;
+import org.ff4j.cache.FF4JCacheManager;
+import org.ff4j.cache.FF4jCacheProxy;
 import org.ff4j.console.client.ConsoleHttpClient;
 import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.EnvironmenBean;
@@ -64,7 +65,9 @@ public class ClearCacheController  extends AbstractConsoleController {
         if ("bean".equalsIgnoreCase(xmlConfconn.getMode())) {
             ClassPathXmlApplicationContext cap = new ClassPathXmlApplicationContext(xmlConfconn.getUrl());
             FF4j ff4j = cap.getBean(FF4j.class);
-            ((FeatureStoreCacheProxy)ff4j.getFeatureStore()).getCacheManager().clear();
+            FF4JCacheManager manager = ((FF4jCacheProxy) ff4j.getFeatureStore()).getCacheManager();
+            manager.clearFeatures();
+            manager.clearProperties();
             cap.close();
         } else if ("http".equalsIgnoreCase(xmlConfconn.getMode())) {
             new ConsoleHttpClient(getConnection(envId)).clearCache();

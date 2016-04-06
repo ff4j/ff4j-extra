@@ -94,7 +94,7 @@ public class XmlConfigurationParser implements InitializingBean {
         
         File xmlProperties;
         if (new ClassPathResource(FILE_CONF).exists()) {
-            xmlProperties = new ClassPathResource(FILE_CONF).getFile(); 
+            xmlProperties = new ClassPathResource(FILE_CONF).getFile();
         } else {
             xmlProperties = new File(FILE_CONF);
         }

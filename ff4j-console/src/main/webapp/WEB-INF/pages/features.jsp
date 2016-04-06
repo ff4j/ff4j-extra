@@ -82,7 +82,7 @@ $(document).ready(function() {
 		</a>
 		</td>
 		<td style="width:5%;text-align:center">
-			<a href="<c:url value='/features?op=delete&uid=${feat.uid}'/>" style="width:6px;" class="btn">
+			<a href="<c:url value='/features.do?op=delete&uid=${feat.uid}'/>" style="width:6px;" class="btn">
 			<i class="icon-trash" style="margin-left:-5px;"></i>
 			</a>
 		</td>

@@ -22,7 +22,7 @@
 	<!-- ~ PROPERTIES ~ -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
-		<jetty.port>8082</jetty.port>
+		<jetty.port>8083</jetty.port>
 		<jetty.stop.port>9968</jetty.stop.port>
 		<jetty.context>/ff4j-console</jetty.context>
 		<license.licenseResolver>${project.baseUri}src/license</license.licenseResolver>
@@ -60,6 +60,11 @@
 			<artifactId>ff4j-security-spring</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-webapi-jersey2x</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- logs -->
 		<dependency>
@@ -95,37 +100,29 @@
 			<type>tld</type>
 		</dependency>
 
-	<dependency>
-		<groupId>javax.servlet.jsp.jstl</groupId>
-		<artifactId>jstl-api</artifactId>
-		<version>1.2</version>
-	</dependency>
-	
-	<dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jstl</artifactId>
-    </dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>jstl-api</artifactId>
+			<version>1.2</version>
+		</dependency>
 
-	<dependency>
-		<groupId>javax.servlet.jsp</groupId>
-		<artifactId>jsp-api</artifactId>
-		<scope>provided</scope>
-	</dependency>
-	
-	<dependency>
-		<groupId>javax.servlet</groupId>
-		<artifactId>javax.servlet-api</artifactId>
-		<version>3.1.0</version>
-	</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
 
-<!-- 
- 		<dependency>
-        	<groupId>org.mortbay.jetty</groupId>
-        	<artifactId>jsp-2.1</artifactId>
-        	<version>6.0.0</version>
-      	</dependency>
-     
-     --> 
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
@@ -139,6 +136,7 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
 		</dependency>
 
 		<dependency>
@@ -153,6 +151,21 @@
 			<artifactId>jetty</artifactId>
 			<version>6.1.26</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.18.1</version>
+		</dependency>
 
 	</dependencies>
 
@@ -160,48 +173,6 @@
 		<finalName>ff4j-console</finalName>
 
 		<plugins>
-
-			<!-- Post Processing to add files 
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>move-main-class</id>
-						<phase>compile</phase>
-						<configuration>
-							<tasks>
-								
-								<copy todir="${project.build.directory}/${project.build.finalName}">
-									<fileset dir="${project.build.directory}/classes/org/ff4j/console">
-										<include name="FF4JStandAloneConsole.class" />
-									</fileset>
-								</copy>
-								
-								<unjar dest="${project.build.directory}/${project.build.finalName}">
-									<fileset dir="${project.build.directory}/${project.build.finalName}/WEB-INF/lib/">
-										<include name="ant-1.6.5.jar" />
-										<include name="jetty*" />
-										<include name="servlet-api*" />
-									</fileset>
-									
-									<patternset>
-										<exclude name="META-INF/**/*" />
-										<exclude name="images/**/*" />
-										<exclude name=".options" />
-										<exclude name="about.html" />
-										<exclude name="jdtCompilerAdapter.jar" />
-										<exclude name="plugin*" />
-									</patternset>
-								</unjar>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			-->
 
 			<!-- Add ImplementationVersion to WAR -->
 			<plugin>
@@ -248,58 +219,6 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
-			
-			<!-- WindStone as standalone war but pb with JSP
-			<plugin>
-				<groupId>net.sf.alchim</groupId>
-				<artifactId>winstone-maven-plugin</artifactId>
-				<version>1.2</version>
-				<configuration>
-					<cmdLineOptions>
-						<property>
-							<name>httpPort</name>
-							<value>8080</value>
-						</property>
-						<property>
-							<name>ajp13Port</name>
-							<value>-1</value>
-						</property>
-						<property>
-							<name>controlPort</name>
-							<value>-1</value>
-						</property>
-						<property>
-							<name>directoryListings</name>
-							<value>false</value>
-						</property>
-						<property>
-							<name>useInvoker</name>
-							<value>false</value>
-						</property>
-						<property>
-							<name>useJasper</name>
-							<value>true</value>
-						</property>
-						<property>
-							<name>prefix</name>
-							<value>/ff4j-console</value>
-						</property>
-					</cmdLineOptions>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>embed</goal>
-						</goals>
-						<phase>package</phase>
-					</execution>
-				</executions>
-			</plugin>
-			-->
-			
-			<!-- Jetty Console plugin work but console -->
-			
-			
 		</plugins>
  		
 	</build>

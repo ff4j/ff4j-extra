@@ -25,7 +25,7 @@
 	<!--           Global Properties               -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
-		<property name="language" value="fr" />
+		<property name="language" value="en" />
 	</properties>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -33,15 +33,14 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<users>
 		<user name="admin" password="admin" language="en" admin="true" />
-		<user name="user"  password="user" language="fr" />
+		<user name="user"  password="user" language="en" />
 	</users>
 	
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!--               Connections                 -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<connections>
-		<connection id="FF4J-LOCAL-DEMO" mode="http" url="http://localhost:8080/api" />
-		<connection id="FF4J-DEPLOYED-DEMO" mode="http" url="http://cannys.ddns.net:8081/ff4j-demo/api" />
+		<connection id="FF4J-LOCAL-DEMO" mode="http" url="http://localhost:8082/api" />
 	</connections>
 
 </ff4j-console>

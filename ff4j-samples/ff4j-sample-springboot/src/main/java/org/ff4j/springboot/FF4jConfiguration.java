@@ -21,9 +21,9 @@ public class FF4jConfiguration {
     @Bean
     public FF4j getFF4j() {
         return new FF4j()
-            .createFeature("f1") //
-            .createFeature("f2").createFeature("f3")//
-            .createProperty(new Property("SampleProperty", "go!")) //
+            .createFeature("f1")
+            .createFeature("f2").createFeature("f3")
+            .createProperty(new Property("SampleProperty", "go!"))
             .createProperty(new PropertyInt("SamplePropertyIn", 12));
     }
     

@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.ff4j.FF4j;
-import org.ff4j.cache.FeatureStoreCacheProxy;
+import org.ff4j.cache.FF4jCacheProxy;
 import org.ff4j.console.domain.HomeBean;
 import org.ff4j.web.api.resources.domain.FF4jStatusApiBean;
 import org.ff4j.web.api.resources.domain.PieSectorApiBean;
@@ -67,11 +67,11 @@ public class ConsoleFf4JClient {
         }
         // Cache
         hb.setCaching("---");
-        hb.setCache(ff4j.getFeatureStore().isCached());
+        hb.setCache(((FF4jCacheProxy) ff4j.getFeatureStore()).isCached());
         if (hb.isCache()) {
-            Set < String > featureNames = ((FeatureStoreCacheProxy) ff4j.getFeatureStore()).getCacheManager().listCachedFeatureNames();
+            Set < String > featureNames = ((FF4jCacheProxy) ff4j.getFeatureStore()).getCacheManager().listCachedFeatureNames();
             hb.setCacheFeature(new ArrayList<String>(featureNames));
-            hb.setCaching(ff4j.getFeatureStore().getCacheProvider());
+            hb.setCaching(((FF4jCacheProxy) ff4j.getFeatureStore()).getCacheProvider());
         }
         // Monitoring
         hb.setMonitoring("---");
