@@ -21,7 +21,7 @@ public class GroupTest {
         assertEquals(4, ff4j.getFeatures().size());
 
         assertTrue(ff4j.exist("users-story1"));
-        assertTrue(ff4j.getStore().existGroup("release-2.3"));
+        assertTrue(ff4j.getFeatureStore().existGroup("release-2.3"));
         System.out.println("Features loaded OK");
 
         // Given
@@ -46,19 +46,19 @@ public class GroupTest {
         assertTrue(ff4j.exist("featA"));
 
         // When
-        ff4j.getStore().addToGroup("featA", "new-group");
+        ff4j.getFeatureStore().addToGroup("featA", "new-group");
 
         // Then
-        assertTrue(ff4j.getStore().existGroup("new-group"));
-        assertTrue(ff4j.getStore().readAllGroups().contains("new-group"));
+        assertTrue(ff4j.getFeatureStore().existGroup("new-group"));
+        assertTrue(ff4j.getFeatureStore().readAllGroups().contains("new-group"));
 
-        Map<String, Feature> myGroup = ff4j.getStore().readGroup("new-group");
+        Map<String, Feature> myGroup = ff4j.getFeatureStore().readGroup("new-group");
         assertTrue(myGroup.containsKey("featA"));
 
         // A feature can be in a single group
         // Here changing => deleting the last element of a group => deleting the group
-        ff4j.getStore().addToGroup("featA", "group2");
+        ff4j.getFeatureStore().addToGroup("featA", "group2");
 
-        assertFalse(ff4j.getStore().existGroup("new-group"));
+        assertFalse(ff4j.getFeatureStore().existGroup("new-group"));
     }
 }

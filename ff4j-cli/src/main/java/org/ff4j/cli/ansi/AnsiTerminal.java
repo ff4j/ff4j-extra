@@ -1,5 +1,8 @@
 package org.ff4j.cli.ansi;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /*
  * #%L
  * ff4j-cli
@@ -31,6 +34,8 @@ import org.fusesource.jansi.AnsiConsole;
  * @author Cedrick Lunven (@clunven)</a>
  */
 public class AnsiTerminal implements AnsiConstants {
+	
+	private static final SimpleDateFormat SDF = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 
     /**
      * Change text color
@@ -40,6 +45,16 @@ public class AnsiTerminal implements AnsiConstants {
      */
     public static void foreGroundColor(AnsiForegroundColor color) {
         setup(color, null, null);
+    }
+    
+    /**
+     * Change text color
+     *
+     * @param color
+     *      blue color
+     */
+    public static void textAttribute(AnsiTextAttribute txt) {
+        setup(null, null, txt);
     }
 
     /**
@@ -82,8 +97,10 @@ public class AnsiTerminal implements AnsiConstants {
      *      text to be displayed
      */
     public static void logWarn(String text) {
+    	foreGroundColor(AnsiForegroundColor.WHITE);
+    	System.out.print(SDF.format(new Date()));
         foreGroundColor(AnsiForegroundColor.YELLOW);
-        System.out.print("WARN : ");
+        System.out.print(" [WARN ] ");
         foreGroundColor(AnsiForegroundColor.WHITE);
         System.out.println(text);
     }
@@ -95,8 +112,10 @@ public class AnsiTerminal implements AnsiConstants {
      *       text to be displayed
      */
     public static void logInfo(String text) {
+    	foreGroundColor(AnsiForegroundColor.WHITE);
+    	System.out.print(SDF.format(new Date()));
         foreGroundColor(AnsiForegroundColor.CYAN);
-        System.out.print("INFO : ");
+        System.out.print(" [INFO ] ");
         foreGroundColor(AnsiForegroundColor.WHITE);
         System.out.println(text);
     }
@@ -108,8 +127,10 @@ public class AnsiTerminal implements AnsiConstants {
      *       text to be displayed
      */
     public static void logError(String text) {
+    	foreGroundColor(AnsiForegroundColor.WHITE);
+    	System.out.print(SDF.format(new Date()));
         foreGroundColor(AnsiForegroundColor.RED);
-        System.out.print("ERROR : ");
+        System.out.print(" [ERROR] ");
         foreGroundColor(AnsiForegroundColor.WHITE);
         System.out.println(text);
     }

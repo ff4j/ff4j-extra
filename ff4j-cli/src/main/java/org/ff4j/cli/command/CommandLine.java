@@ -1,5 +1,7 @@
 package org.ff4j.cli.command;
 
+import java.util.Map;
+
 /*
  * #%L
  * ff4j-cli
@@ -21,15 +23,10 @@ package org.ff4j.cli.command;
  */
 
 
-public class FF4jConfigurationParsing {
-    
-    public static final String DEFAULT_CONF = "ff4j-cli-config.xml";
-            
-    public FF4jConfigurationParsing() {
-    }
-    
-    public FF4jConfigurationParsing(String configFile) {
-        
-    }
-    
+public class CommandLine {
+	
+	private String cmd;
+	
+	private Map < String , String > options;
+
 }

@@ -23,15 +23,6 @@
 	 xsi:schemaLocation="http://www.ff4j.org/schema/ff4j ../../main/resources/ff4j-1.4.0.xsd">
 	
 	<features>
-	
-		<feature uid="ff4j.consoleAdmin.authenticated" 
-				 enable="false" 
-				 description="Limit access to administration console (AuthorizationManager)">
-			<security>
-				<role name="ADMIN" />
-			</security>
-		</feature>
-	
 		<feature uid="AwesomeFeature" enable="true" description="some desc" />
 	
 		<feature uid="first" enable="true" description="description" >
@@ -42,8 +33,8 @@
 			
 			<custom-properties>
 			  <property name="ppint" 	  type="org.ff4j.property.PropertyInt" value="12"   />
-			  <property name="ppdouble"   value="12.5" />
-			  <property name="ppboolean"  value="true" />
+			  <property name="ppdouble"   type="double"  value="12.5" />
+			  <property name="ppboolean"  type="boolean" value="true" />
 			  <property name="ppstring"   value="hello" />
 			  <property name="ppListInt"  value="12,13,14" />
 			  <property name="myLogLevel" value="DEBUG" type="org.ff4j.property.PropertyLogLevel" />
@@ -95,8 +86,8 @@
 	</features>
 	
 	<properties>	
-	 
-	 <property name="a" value="AMER" description="Sample of text">
+	
+	 <property name="a" value="AMER" >
 	 	<fixedValues>
 	 		<value>AMER</value>
 	 		<value>EAST</value>
@@ -105,13 +96,13 @@
 	 	</fixedValues>
 	 </property>
 	 
-	 <property name="b" value="12"   />
+	 <property name="b" 	  value="12"   />
 	
-	 <property name="c" value="12.5" />
+	 <property name="c"   value="12.5" />
 	
 	 <property name="d"  value="true" />
 	
-	 <property name="e" value="hello" />
+	 <property name="e"   value="hello" />
 	
 	 <property name="f"  value="12,13,14" />
 	

@@ -21,14 +21,12 @@ public class CustomAuthorizationManager implements AuthorizationsManager {
     }
 
     /** {@inheritDoc} */
-    @Override
     public Set<String> getCurrentUserPermissions() {
         String currentUser = currentUserThreadLocal.get();
         return permissions.containsKey(currentUser) ? permissions.get(currentUser) : new HashSet<String>(); 
     }
 
     /** {@inheritDoc} */
-    @Override
     public Set<String> listAllPermissions() {
         // Not calculated each time in fact...
         Set<String> allPermissions = new HashSet<String>();
@@ -39,9 +37,12 @@ public class CustomAuthorizationManager implements AuthorizationsManager {
     }
 
     /** {@inheritDoc} */
-    @Override
     public String toJson() {
         return toString();
     }
+
+	public String getCurrentUserName() {
+		return currentUserThreadLocal.get();
+	}
 
 }

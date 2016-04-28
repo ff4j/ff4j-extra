@@ -22,6 +22,8 @@ package org.ff4j.sample;
 
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.proxy.FeatureStoreAuditProxy;
+import org.ff4j.store.InMemoryFeatureStore;
 import org.ff4j.web.FF4JProvider;
 
 public class SimpleFF4jProvider implements FF4JProvider {
@@ -33,8 +35,7 @@ public class SimpleFF4jProvider implements FF4JProvider {
      * Default constructeur invoked by servlet.
      */
     public SimpleFF4jProvider() {
-        ff4j = new FF4j("ff4j.xml");
-        // ff4j.setAuthorizationsManager(new MockAuthorisationManager());
+        ff4j = new FF4j("ff4j.xml").audit(true);
     }
 
     /**
