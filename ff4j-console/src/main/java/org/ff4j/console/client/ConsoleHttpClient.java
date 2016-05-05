@@ -1,18 +1,29 @@
 package org.ff4j.console.client;
 
 /*
- * #%L ff4j-console %% Copyright (C) 2013 - 2014 Ff4J %% Licensed under the Apache License, Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License. You may obtain a copy of the License at
+ * #%L
+ * ff4j-console
+ * %%
+ * Copyright (C) 2013 - 2016 FF4J
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License. #L%
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
  */
 
-import static org.ff4j.web.store.FeatureStoreHttp.buildAuthorization4ApiKey;
-import static org.ff4j.web.store.FeatureStoreHttp.buildAuthorization4UserName;
+
+import static org.ff4j.web.FF4jWebConstants.HEADER_AUTHORIZATION;
+import static org.ff4j.web.FF4jWebConstants.RESOURCE_FF4J;
+import static org.ff4j.web.FF4jWebConstants.RESOURCE_SECURITY;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +34,7 @@ import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.console.domain.HomeBean;
 import org.ff4j.console.domain.StatisticsBean;
-import org.ff4j.web.FF4jWebConstants;
+import org.ff4j.web.jersey2.store.FeatureStoreHttp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +49,7 @@ import com.sun.jersey.api.json.JSONConfiguration;
  *
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
-public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants {
+public class ConsoleHttpClient implements ApplicationConstants  {
 
     /** logger for the class. */
     protected Logger log = LoggerFactory.getLogger(getClass());
@@ -88,10 +99,10 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
      */
     private ClientResponse buildPOSTRequest(String url) {
         if (null != ff4jConnection.getAuthKey() && !"".equals(ff4jConnection.getAuthKey())) {
-            String header = buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
+            String header = FeatureStoreHttp.buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).post(ClientResponse.class);
         } else if (null != ff4jConnection.getUserName() && !"".equals(ff4jConnection.getUserName())) {
-            String header = buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
+            String header = FeatureStoreHttp.buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).post(ClientResponse.class);
         }
         return jerseyClient.resource(url).post(ClientResponse.class);
@@ -107,10 +118,10 @@ public class ConsoleHttpClient implements ApplicationConstants, FF4jWebConstants
      */
     private ClientResponse buildGETRequest(String url) {
         if (null != ff4jConnection.getAuthKey() && !"".equals(ff4jConnection.getAuthKey())) {
-            String header = buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
+            String header = FeatureStoreHttp.buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).get(ClientResponse.class);
         } else if (null != ff4jConnection.getUserName() && !"".equals(ff4jConnection.getUserName())) {
-            String header = buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
+            String header = FeatureStoreHttp.buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).get(ClientResponse.class);
         }
         return jerseyClient.resource(url).get(ClientResponse.class);

@@ -1,4 +1,3 @@
-<%@ taglib prefix="ff4j" uri="http://www.ff4j.org/taglibs/ff4j" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,23 +43,6 @@ body {
 			<i class="icon-th-large icon-white"></i>&nbsp;Access embedded Web Console
 		</a>
 		
-		<p><br/>Below sentences are displayed only if feature is enable using TAGLIB : 	
-
-		<ff4j:enable featureid="sayHello">
-			<p class="alert alert-success">Hello visitor ! Feature 'sayHello' is enabled
-      	</ff4j:enable>
-      	
-      	<ff4j:disable featureid="sayHello">
-			<p class="alert alert-error">Hello visitor ! Feature 'sayHello' is disabled
-      	</ff4j:disable>
-      	
-      	<ff4j:enable featureid="sayGoodBye" shareHttpSession="false">
-      		<p class="alert alert-success">Good Bye visitor !  Feature 'sayGoodbye' is enabled
-      	</ff4j:enable>
-      	
-      	<ff4j:disable featureid="sayGoodBye">
-			<p class="alert alert-error">Hello visitor ! Feature 'sayGoodBye' is disabled
-      	</ff4j:disable>
       </div>
 	</div>
 

@@ -1,3 +1,4 @@
+<!DOCTYPE configuration>
 <New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
   <Set name="port"><Property name="jetty.port" default="8080"/></Set>
   

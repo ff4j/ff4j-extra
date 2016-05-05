@@ -40,7 +40,7 @@
 	<!--               Connections                 -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<connections>
-		<connection id="FF4J-LOCAL-DEMO" mode="http" url="http://localhost:8082/api" />
+		<connection id="FF4J-LOCAL-DEMO" mode="http" url="http://localhost:8282/webapi/api" />
 	</connections>
 
 </ff4j-console>

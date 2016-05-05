@@ -1,10 +1,10 @@
-package org.ff4j.sample;
+package org.ff4j.web;
 
 /*
  * #%L
- * ff4j-sample-web
+ * ff4j-web
  * %%
- * Copyright (C) 2013 - 2016 FF4J
+ * Copyright (C) 2013 - 2014 Ff4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,30 +20,20 @@ package org.ff4j.sample;
  * #L%
  */
 
-
 import org.ff4j.FF4j;
-import org.ff4j.web.FF4JProvider;
 
-public class SimpleFF4jProvider implements FF4JProvider {
-
-    /** ff4j instance. */
-    private final FF4j ff4j;
-
-    /**
-     * Default constructeur invoked by servlet.
-     */
-    public SimpleFF4jProvider() {
-        ff4j = new FF4j("ff4j.xml").audit(true);
-    }
+/**
+ * Loader for class ff4j within Embedded Administration Console.
+ *
+ * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
+ */
+public interface FF4JProvider {
 
     /**
-     * Getter accessor for attribute 'fF4j'.
+     * Initialize the {@link FF4j} object to be injected within console.
      *
-     * @return current value of 'fF4j'
+     * @return instance of ff4j for this application.
      */
-    @Override
-    public FF4j getFF4j() {
-        return ff4j;
-    }
+    FF4j getFF4j();
 
 }

@@ -1,8 +1,13 @@
-package org.ff4j.sample;
+/**
+ * Provides servlet and tags to work with Features
+ * 
+ * @author Cedrick Lunven (@clunven)</a>
+ */
+package org.ff4j.web.embedded;
 
 /*
  * #%L
- * ff4j-sample-web
+ * ff4j-test
  * %%
  * Copyright (C) 2013 - 2016 FF4J
  * %%
@@ -19,31 +24,3 @@ package org.ff4j.sample;
  * limitations under the License.
  * #L%
  */
-
-
-import org.ff4j.FF4j;
-import org.ff4j.web.FF4JProvider;
-
-public class SimpleFF4jProvider implements FF4JProvider {
-
-    /** ff4j instance. */
-    private final FF4j ff4j;
-
-    /**
-     * Default constructeur invoked by servlet.
-     */
-    public SimpleFF4jProvider() {
-        ff4j = new FF4j("ff4j.xml").audit(true);
-    }
-
-    /**
-     * Getter accessor for attribute 'fF4j'.
-     *
-     * @return current value of 'fF4j'
-     */
-    @Override
-    public FF4j getFF4j() {
-        return ff4j;
-    }
-
-}

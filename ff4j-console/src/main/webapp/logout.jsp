@@ -1,4 +1,6 @@
-<%@ include file="/common/taglibs.jsp"%>
+<%@ include file="/jsp-tiles/taglibs.jsp"%>
+
+
 <%@ page import="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices" %>
 <%@ page import="javax.servlet.http.Cookie" %>
 

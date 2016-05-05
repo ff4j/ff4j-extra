@@ -60,13 +60,12 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
-    @Override
     public HomeBean readFrom(Class<HomeBean> type, Type genericType, Annotation[] annotations, MediaType mediaType,
             MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> myMap = new HashMap<String, Object>();
+      
         myMap = objectMapper.readValue(entityStream, HashMap.class);
-
         HomeBean hb = new HomeBean();
         
         // uptime
@@ -78,6 +77,7 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
         // Monitoring
         if (myMap.containsKey("eventRepository")) {
             Map<String, Object> evtMap = (Map<String, Object>) myMap.get("eventRepository");
+
             if (evtMap != null) {
                 String classType = (String) evtMap.get("type");
                 hb.setMonitoring(classType.substring(classType.lastIndexOf(".") + 1));
@@ -109,7 +109,7 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
         } else {
             hb.setMonitoring("n/a");
         }
-
+       
         // Security
         if (myMap.containsKey("authorizationsManager")) {
             Map<String, Object> secMap = (Map<String, Object>) myMap.get("authorizationsManager");
@@ -136,9 +136,9 @@ public class HomeBeanMsgBodyReader implements MessageBodyReader<HomeBean> {
                     hb.setNbGroup((Integer) featMap.get("numberOfGroups"));
                 }
                 
-                if (featMap.containsKey("cache")) {
-                    Map<String, Object> cacheMap = (Map<String, Object>) featMap.get("cache");
-                    String classStore= (String) cacheMap.get("cacheStore");
+                if (featMap.containsKey("cache") && featMap.get("cache") != null) {
+                	Map<String, Object> cacheMap = (Map<String, Object>) featMap.get("cache");
+                	String classStore= (String) cacheMap.get("cacheStore");
                     hb.setStore(classStore.substring(classStore.lastIndexOf(".") + 1) + " (+ CacheProxy)");
                     String cacheProvider = (String) cacheMap.get("cacheProvider");
                     hb.setCaching(cacheProvider);

@@ -32,7 +32,7 @@ import org.ff4j.console.domain.StatisticsBean;
 import org.ff4j.core.Feature;
 import org.ff4j.core.FeatureStore;
 import org.ff4j.web.FF4jWebConstants;
-import org.ff4j.web.store.FeatureStoreHttp;
+import org.ff4j.web.jersey2.store.FeatureStoreHttp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

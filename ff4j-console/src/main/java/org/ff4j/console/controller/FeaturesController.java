@@ -50,7 +50,7 @@ import org.ff4j.core.Feature;
 import org.ff4j.core.FeatureStore;
 import org.ff4j.core.FlippingStrategy;
 import org.ff4j.web.FF4jWebConstants;
-import org.ff4j.web.store.FeatureStoreHttp;
+import org.ff4j.web.jersey2.store.FeatureStoreHttp;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
