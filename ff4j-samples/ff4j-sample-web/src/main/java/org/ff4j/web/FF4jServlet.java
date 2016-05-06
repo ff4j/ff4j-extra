@@ -5,6 +5,9 @@ import static org.ff4j.web.embedded.ConsoleConstants.FF4J_SESSIONATTRIBUTE_NAME;
 import static org.ff4j.web.embedded.ConsoleConstants.SERVLETPARAM_CSS;
 import static org.ff4j.web.embedded.ConsoleConstants.SERVLETPARAM_FF4JPROVIDER;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * #%L
  * ff4j-web
@@ -30,7 +33,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import org.ff4j.FF4j;
-import org.ff4j.web.console.CustomMessageResolver;
+import org.ff4j.web.controller.AbstractController;
+import org.ff4j.web.controller.FeatureUsageController;
+import org.ff4j.web.controller.FeaturesController;
+import org.ff4j.web.controller.HomeController;
+import org.ff4j.web.controller.PropertiesController;
+import org.ff4j.web.controller.SettingsController;
+import org.ff4j.web.controller.StaticResourceController;
+import org.ff4j.web.thymeleaf.CustomMessageResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
@@ -58,6 +68,12 @@ public class FF4jServlet extends HttpServlet {
     /** Template engine. */
     protected TemplateEngine templateEngine = null;
     
+    /** Static resource controller. */
+    protected StaticResourceController staticResourceController;
+    
+    /** Mapping PATH <=> Controller */
+    protected static Map < String , AbstractController > mapOfControllers = new HashMap<String , AbstractController>();
+    
     /**
      * Servlet initialization, init FF4J from "ff4jProvider" attribute Name.
      *
@@ -80,6 +96,17 @@ public class FF4jServlet extends HttpServlet {
         }
         
     	initializeTemplateEngine();
+    	
+    	staticResourceController = new StaticResourceController(ff4j, templateEngine);
+    	addController(new HomeController(ff4j, templateEngine));
+    	addController(new FeaturesController(ff4j, templateEngine));
+    	addController(new FeatureUsageController(ff4j, templateEngine));
+    	addController(new PropertiesController(ff4j, templateEngine));
+    	addController(new SettingsController(ff4j, templateEngine));
+    }
+    
+    private void addController(AbstractController ac) {
+    	mapOfControllers.put(ac.getSuccessView(), ac);
     }
     
     /**
@@ -124,7 +151,7 @@ public class FF4jServlet extends HttpServlet {
     	ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 	    templateResolver.setTemplateMode("XHTML");
 	    templateResolver.setPrefix("views/view-");
-	    templateResolver.setSuffix(".dat");
+	    templateResolver.setSuffix(".html");
 	    templateResolver.setCacheTTLMs(3600000L);
 	    
 	    templateEngine = new TemplateEngine();

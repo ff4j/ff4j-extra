@@ -20,7 +20,6 @@ package org.ff4j.web.utils;
  * #L%
  */
 
-
 import static org.ff4j.web.embedded.ConsoleConstants.NEW_LINE;
 import static org.ff4j.web.embedded.ConsoleConstants.UTF8_ENCODING;
 
@@ -34,9 +33,6 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Read file for HDD.
  * 
@@ -46,9 +42,6 @@ public class FileUtils {
 	
 	/** Taille du buffer. **/
     private static final int BUFFER_SIZE = 4096;
-    
-    /** Logger for this class. */
-	private static final Logger LOGGER = LoggerFactory.getLogger(FileUtils.class);
 	
 	/**
 	 * Hide default constructor.
@@ -82,6 +75,15 @@ public class FileUtils {
         return strBuilder.toString();
     }
     
+    /**
+     * Load with Buffer.
+     *
+     * @param fileName
+     * 		target file name
+     * @return
+     * 		file as String
+     * @throws IOException
+     */
     public final String loadFileAsStringWithBuffer(String fileName) throws IOException {
     	InputStream in = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
         StringBuffer out = new StringBuffer();
@@ -101,7 +103,30 @@ public class FileUtils {
 	 * @param type jpeg, bmp, ...
 	 * @return encoded string
 	 */
-	public static String loadFileAsBase64(String fileName) {
+	public static String loadAndResizeImageAsBase64(String fileName) {
+		return new String(Base64.getEncoder().encode(loadAndResizeImageAsByteArray(fileName)));
+	}
+	
+	/**
+	 * Transform inputStream into base64.
+	 *
+	 * @param image The image to encode
+	 * @param type jpeg, bmp, ...
+	 * @return encoded string
+	 */
+	public static byte[] loadAndResizeImageAsByteArray(String fileName) {
+		ByteArrayOutputStream baos = loadAndResizeImage(fileName);
+		return (baos != null) ? baos.toByteArray() : null;
+	}
+	
+	/**
+	 * Transform inputStream into base64.
+	 *
+	 * @param image The image to encode
+	 * @param type jpeg, bmp, ...
+	 * @return encoded string
+	 */
+	public static ByteArrayOutputStream loadAndResizeImage(String fileName) {
 		InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
 		if (is == null) return null;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -116,7 +141,7 @@ public class FileUtils {
 			// Write into outpustream
 			ImageIO.write(resizedImage, getFileExtension(fileName), bos);
 			// Convert to base64
-			return new String(Base64.getEncoder().encode(bos.toByteArray()));
+			return bos;
 		} catch (IOException e) {
 			throw new IllegalArgumentException("Cannot convert image to base64", e);
 		} finally {
@@ -124,6 +149,39 @@ public class FileUtils {
 				bos.close();
 			} catch (IOException e) {}
 		}
+	}
+	
+	public static ByteArrayOutputStream loadFileAsOutputStream(String fileName) {
+		InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(fileName); 
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		try {
+			byte[] buf = new byte[8192];
+		    int c = 0;
+		    while ((c = is.read(buf, 0, buf.length)) > 0) {
+		    	bos.write(buf, 0, c);
+		        bos.flush();
+		    }
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Cannot convert image to base64", e);
+		} finally {
+			try {
+				bos.close();
+				is.close();
+			} catch (IOException e) {}
+		}
+	    return bos;
+	}
+	
+	/**
+	 * Transform inputStream into base64.
+	 *
+	 * @param image The image to encode
+	 * @param type jpeg, bmp, ...
+	 * @return encoded string
+	 */
+	public static byte[] loadFileAsByteArray(String fileName) {
+		ByteArrayOutputStream baos = loadFileAsOutputStream(fileName);
+		return (baos != null) ? baos.toByteArray() : null;
 	}
 	
 	/**

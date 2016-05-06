@@ -1,4 +1,4 @@
-package org.ff4j.web.console;
+package org.ff4j.web.thymeleaf;
 
 /*
  * #%L
@@ -23,6 +23,7 @@ package org.ff4j.web.console;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Locale;
@@ -109,7 +110,11 @@ public class CustomMessageResolver implements IMessageResolver {
 		} else if (msgParams != null && msgParams.length > 0) {
 			targetMsg = new MessageFormat(targetMsg, args.getContext().getLocale()).format(msgParams);
 		}
-		return new MessageResolution(targetMsg);
+		try {
+			return new MessageResolution(new String(targetMsg.getBytes("ISO-8859-1"), "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			return new MessageResolution(targetMsg);
+		}
 	}	
 
 	/** {@inheritDoc} */

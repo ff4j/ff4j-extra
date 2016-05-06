@@ -1,0 +1,81 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="navbar">
+ <div class="navbar-inner">
+  <div class="container">
+
+   <a class="brand" href="" th:href="@{home}" style="">
+    <img src="" th:src="@{static/img/ff4j.png}" height="45px" width="70px" style="height:45px;margin-top:10px"/>
+    &nbsp;Administration Console
+   </a>
+        
+   <div class="nav-collapse"  style="margin-top:15px">
+   	<ul class="nav pull-right">
+	 <li class="dropdown">
+	  
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	   <span th:if="${#locale.language == 'en'}">
+	    <img src="" th:src="@{static/img/flags/flagEnglish.png}" style="height:20px" /> 
+	   </span>
+	   <span th:if="${#locale.language == 'fr'}">
+	    <img src="" th:src="@{static/img/flags/flagFrance.png}" style="height:20px" /> 
+	   </span>
+	   <span th:if="${#locale.language == 'de'}">
+	    <img src="" th:src="@{static/img/flags/flagGermany.png}" style="height:20px" /> 
+	   </span>
+       <span th:text="${#locale.language}">locale</span>
+       <b class="caret"></b>
+      </a>
+      
+      <ul class="dropdown-menu">
+      	<li><a href="?lang=en"><img src="" th:src="@{static/img/flags/flagEnglish.png}" style="height:15px" />&nbsp;English</a></li>
+        <li><a href="?lang=fr"><img src="" th:src="@{static/img/flags/flagFrance.png}"  style="height:15px" />&nbsp;Français</a></li>
+        <li><a href="?lang=de"><img src="" th:src="@{static/img/flags/flagGermany.png}" style="height:15px" />&nbsp;Deutsch</a></li>
+      </ul>
+      
+	</li>
+	</ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div th:fragment="subnavbar">
+ <div class="subnavbar-inner">
+  <div class="container">
+   <ul class="mainnav">
+    
+    <li class="active2">
+     <a href="" th:href="@{home}" >
+      <i class="icon-home"></i>
+      <span>Home</span>
+     </a>
+    </li>
+    <li>
+     <a href="" th:href="@{features}" >
+      <i class="icon-check"></i>
+      <span>Features</span>
+     </a>
+    </li>
+    <li>
+     <a href="" th:href="@{properties}" >
+      <i class="icon-list-alt"></i> 
+      <span>Properties</span>
+     </a>
+    </li>
+        <li>
+          <a href="" th:href="@{featureUsage}" >
+           <i class="icon-bar-chart"></i> 
+           <span>FeatureUsage</span>
+           </a>
+        </li>
+       
+      </ul>
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: head"></head>
+<body>
+  
+<div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
+
+<div class="subnavbar" th:include="navbar :: subnavbar"></div>
+
+<div id="wrapper" class="container" >
+ <div class="row">
+  <div class="span9"> 
+   <div id="content" class="clearfix" >
+    <div class="main-inner" style="margin-top:60px">
+     <div class="container">
+    	<p>Properties</p>
+	 </div>
+	</div>
+   </div>
+  </div>
+ </div>
+</div>
+   
+</body>
+</html>

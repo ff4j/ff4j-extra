@@ -49,9 +49,7 @@ import static org.ff4j.web.embedded.ConsoleRenderer.renderPageMonitoring;
  */
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -64,9 +62,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
-import org.ff4j.web.controller.AbstractController;
-import org.ff4j.web.controller.HomeController;
-import org.ff4j.web.controller.StaticResourceController;
 import org.ff4j.web.embedded.ConsoleRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,19 +82,6 @@ public class FF4jDispatcherServlet extends FF4jServlet {
     /** Error Message. */
     public static final String ERROR = "error";
     
-    /** Static resource controller. */
-    private StaticResourceController staticResourceController = new StaticResourceController();
-    
-    /** Mapping PATH <=> Controller */
-    private static Map < String , AbstractController > mapOfControllers = new HashMap<String , AbstractController>();
-    
-    /**
-     * Unique constructor.
-     */
-    public FF4jDispatcherServlet() {
-    	mapOfControllers.put("home", new HomeController());
-    }
-    
     /** {@inheritDoc} */
     public void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {
@@ -108,15 +90,14 @@ public class FF4jDispatcherServlet extends FF4jServlet {
     	String[] pathParts = pathInfo.split("/");
     	
     	if (pathInfo.length() > 1 && "static".equals(pathParts[1])) {
-    		LOGGER.info("Render resources " + req.getPathInfo());
-    		staticResourceController.process(req, res, templateEngine);
+    		staticResourceController.process(req, res, null);
     		
     	} else {
     		
         	String targetView  = pathParts[1];
         		
         	if (mapOfControllers.containsKey(targetView)) {
-        		mapOfControllers.get(targetView).process(req, res, templateEngine);
+        		mapOfControllers.get(targetView).process(req, res);
         	} else {
         		// Not found error Page
         	}

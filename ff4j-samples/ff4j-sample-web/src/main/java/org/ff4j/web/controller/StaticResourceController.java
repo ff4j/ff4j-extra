@@ -22,7 +22,6 @@ package org.ff4j.web.controller;
 
 
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_CSS;
-import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_FONT;
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_JS;
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_TEXT;
 
@@ -30,13 +29,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ff4j.FF4j;
 import org.ff4j.web.utils.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 
 /**
  * Load static resource and create response, overriding content type.
@@ -45,9 +45,6 @@ import org.thymeleaf.TemplateEngine;
  */
 public class StaticResourceController extends AbstractController {
 	
-	/** Logger for this class. */
-    public static final Logger LOGGER = LoggerFactory.getLogger(StaticResourceController.class);
-    
     /** Eternal cache for css. */
 	private Map < String, String > cssFiles = new HashMap< String, String >();
 	
@@ -55,13 +52,18 @@ public class StaticResourceController extends AbstractController {
 	private Map < String, String > jsFiles = new HashMap< String, String >();
 	
 	/** Eternal cache for js. */
-	private Map < String, String > fontFiles = new HashMap< String, String >();
+	private Map < String, byte[] > fontFiles = new HashMap< String,  byte[] >();
 	
 	/** Eternal cache for images. */
-	private Map < String, String > images = new HashMap< String, String >();
+	private Map < String, byte[] > images = new HashMap< String, byte[] >();
 	
 	/** {@inheritDoc} */
-	public void process(HttpServletRequest req, HttpServletResponse res, TemplateEngine engine)
+	public StaticResourceController(FF4j ff4j, TemplateEngine te) {
+		super(ff4j, null, te);
+	}
+	
+	/** {@inheritDoc} */
+	public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException {
 		
 		// static/{type}/{fileName}
@@ -83,6 +85,7 @@ public class StaticResourceController extends AbstractController {
 				
 			} else if ("img".equalsIgnoreCase(resourceType)) {
 				serveImage(res, pathInfo, resourceName);
+				
 			} else {
 				notFound(res, pathInfo);
 			}
@@ -114,18 +117,16 @@ public class StaticResourceController extends AbstractController {
 	private void serveFont(HttpServletResponse res, String pathInfo, String resourceName)
 	throws IOException {
 		if (!fontFiles.containsKey(resourceName)) {
-			fontFiles.put(resourceName,FileUtils.loadFileAsString(pathInfo));
+			fontFiles.put(resourceName, FileUtils.loadFileAsByteArray(pathInfo));
 		}
 		if (null == fontFiles.get(resourceName)) {
 			notFound(res, pathInfo);
-		} else if (null != FileUtils.getFileExtension(resourceName)) {
-			res.setContentType(CONTENT_TYPE_FONT);
-	        res.getWriter().println(fontFiles.get(resourceName));
 		} else {
-			// List files in the directory
-			res.setContentType(CONTENT_TYPE_TEXT);
-	        res.getWriter().println(fontFiles.get(resourceName));
+			MimetypesFileTypeMap mimetypesFileTypeMap=new MimetypesFileTypeMap();
+	        res.setContentType(mimetypesFileTypeMap.getContentType(resourceName));
+	        res.getOutputStream().write(fontFiles.get(resourceName));
 		}
+		
 	}
 	
 	/*
@@ -150,17 +151,15 @@ public class StaticResourceController extends AbstractController {
 	private void serveImage(HttpServletResponse res, String pathInfo, String resourceName)
 	throws IOException {
 		if (!images.containsKey(resourceName)) {
-			images.put(resourceName, "data:image/"  //
-					+ FileUtils.getFileExtension(resourceName) //
-					+ ";base64," + FileUtils.loadFileAsBase64(pathInfo));
+			images.put(resourceName, FileUtils.loadFileAsByteArray(pathInfo));
 		}
 		if (null == images.get(resourceName)) {
 			notFound(res, pathInfo);
 		} else {
-			res.setContentType(CONTENT_TYPE_TEXT);
-			res.getWriter().println(images.get(resourceName));
+			MimetypesFileTypeMap mimetypesFileTypeMap=new MimetypesFileTypeMap();
+	        res.setContentType(mimetypesFileTypeMap.getContentType(resourceName));
+	        res.getOutputStream().write(images.get(resourceName));
 		}
-		
 	}
 	
 	private void notFound(HttpServletResponse res, String pathInfo)
