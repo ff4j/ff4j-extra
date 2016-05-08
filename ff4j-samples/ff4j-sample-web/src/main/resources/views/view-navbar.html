@@ -13,6 +13,12 @@
         
    <div class="nav-collapse"  style="margin-top:15px">
    	<ul class="nav pull-right">
+	  <li class="dropdown">
+	 <a href="#">
+      <i class="icon-remove icon-info"></i>&nbsp;
+      v.<span th:text="${version}">n/a</span></a>
+     </li>
+     
 	 <li class="dropdown">
 	  
 	  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -36,6 +42,9 @@
       </ul>
       
 	</li>
+	
+	
+     
 	</ul>
    </div>
   </div>
@@ -73,6 +82,10 @@
         </li>
        
       </ul>
+      
+      <div style="float:right;margin-top:20px;color:#687684">
+       <b>Uptime :</b> <span th:text="${uptime}">n/a</span>
+      </div>
     </div>
   </div>
 </div>

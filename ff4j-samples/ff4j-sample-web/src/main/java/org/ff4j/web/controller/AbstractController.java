@@ -77,6 +77,22 @@ public abstract class AbstractController {
     	WebContext ctx = 
     			new WebContext(req, res,  req.getSession().getServletContext(), req.getLocale());
     	
+    	StringBuilder sb = new StringBuilder();
+    	long uptime = System.currentTimeMillis() - ff4j.getStartTime();
+    	long daynumber = uptime / (1000 * 3600 * 24L);
+    	uptime = uptime - daynumber * 1000 * 3600 * 24L;
+    	long hourNumber = uptime / (1000 * 3600L);
+    	uptime = uptime - hourNumber * 1000 * 3600L;
+    	long minutenumber = uptime / (1000 * 60L);
+    	uptime = uptime - minutenumber * 1000 * 60L;
+    	long secondnumber = uptime / 1000L;
+    	sb.append(daynumber + " days ");
+    	sb.append(hourNumber + " hours ");
+    	sb.append(minutenumber + " min ");
+    	sb.append(secondnumber + " sec");
+    	
+    	ctx.setVariable("uptime", sb.toString());
+    	ctx.setVariable("version", ff4j.getVersion());
     	
     	// Adding attribute to response
     	process(req, res, ctx);

@@ -74,10 +74,10 @@ public class HomeController extends AbstractController {
         long minutenumber = uptime / (1000 * 60L);
         uptime = uptime - minutenumber * 1000 * 60L;
         long secondnumber = uptime / 1000L;
-        sb.append(daynumber + " day(s) ");
-        sb.append(hourNumber + " hours(s) ");
-        sb.append(minutenumber + " minute(s) ");
-        sb.append(secondnumber + " seconds");
+        sb.append(daynumber + " days ");
+        sb.append(hourNumber + " hours ");
+        sb.append(minutenumber + " min ");
+        sb.append(secondnumber + " sec");
         hb.setUptime(sb.toString());
         hb.setVersion(ff4j.getVersion());
         
