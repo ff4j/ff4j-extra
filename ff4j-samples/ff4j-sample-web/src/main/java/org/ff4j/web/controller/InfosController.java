@@ -22,22 +22,11 @@ package org.ff4j.web.controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
-import org.ff4j.audit.graph.PieSector;
-import org.ff4j.audit.proxy.FeatureStoreAuditProxy;
-import org.ff4j.audit.proxy.PropertyStoreAuditProxy;
-import org.ff4j.core.FeatureStore;
-import org.ff4j.property.store.PropertyStore;
-import org.ff4j.utils.TimeUtils;
-import org.ff4j.web.ApiConfig;
-import org.ff4j.web.bean.HomeBean;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -46,20 +35,20 @@ import org.thymeleaf.context.WebContext;
  *
  * @author Cedrick LUNVEN (@clunven)
  */
-public class SettingsController extends AbstractController {
+public class InfosController extends AbstractController {
 	
 	/** View name. */
-	private static final String VIEW_SETTINGS = "settings";
+	private static final String VIEW_INFOS = "infos";
 	
 	/** {@inheritDoc} */
-	public SettingsController(FF4j ff4j, TemplateEngine te) {
-		super(ff4j, VIEW_SETTINGS, te);
+	public InfosController(FF4j ff4j, TemplateEngine te) {
+		super(ff4j, VIEW_INFOS, te);
 	}
 
 	/** {@inheritDoc} */
 	public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException {
-		ctx.setVariable(KEY_TITLE, "Settings");
+		ctx.setVariable(KEY_TITLE, "About ");
 	}
 
 }

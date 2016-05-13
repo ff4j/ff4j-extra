@@ -67,7 +67,10 @@ public class StaticResourceController extends AbstractController {
 	throws IOException {
 		
 		// static/{type}/{fileName}
-		String pathInfo = req.getPathInfo();
+		String pathInfo    = req.getPathInfo();
+		if (pathInfo == null) {
+			pathInfo = "/";
+		}
 		String[] pathParts = pathInfo.split("/");
         
 		// By Convention the fileSystem will follow the same pattern

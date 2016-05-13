@@ -1,5 +1,13 @@
 package org.ff4j.web;
 
+import static org.ff4j.web.FF4jWebConstants.ERROR;
+import static org.ff4j.web.FF4jWebConstants.VIEW_404;
+import static org.ff4j.web.FF4jWebConstants.VIEW_API;
+import static org.ff4j.web.FF4jWebConstants.VIEW_DEFAULT;
+import static org.ff4j.web.FF4jWebConstants.VIEW_STATIC;
+import static org.ff4j.web.FF4jWebConstants.OP_EXPORT;
+import static org.ff4j.web.FF4jWebConstants.OP_IMPORT;
+
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_HTML;
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_JSON;
 import static org.ff4j.web.embedded.ConsoleConstants.FEATID;
@@ -7,6 +15,7 @@ import static org.ff4j.web.embedded.ConsoleConstants.FLIPFILE;
 import static org.ff4j.web.embedded.ConsoleConstants.GROUPNAME;
 import static org.ff4j.web.embedded.ConsoleConstants.NAME;
 import static org.ff4j.web.embedded.ConsoleConstants.OPERATION;
+
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_PROPERTY;
@@ -15,12 +24,12 @@ import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_EXPORT;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_READ_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_READ_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_TOGGLE_GROUP;
+
 import static org.ff4j.web.embedded.ConsoleConstants.PARAM_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleConstants.SUBOPERATION;
 import static org.ff4j.web.embedded.ConsoleOperations.createFeature;
@@ -79,46 +88,146 @@ public class FF4jDispatcherServlet extends FF4jServlet {
     /** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(FF4jDispatcherServlet.class);
     
-    /** Error Message. */
-    public static final String ERROR = "error";
-    
     /** {@inheritDoc} */
     public void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {
-    	
+    	String targetView  = VIEW_DEFAULT;
     	String pathInfo    = req.getPathInfo();
-    	String[] pathParts = pathInfo.split("/");
-    	
-    	if (pathInfo.length() > 1 && "static".equals(pathParts[1])) {
-    		staticResourceController.process(req, res, null);
-    		
-    	} else {
-    		
-        	String targetView  = pathParts[1];
-        		
-        	if (mapOfControllers.containsKey(targetView)) {
-        		mapOfControllers.get(targetView).process(req, res);
-        	} else {
-        		// Not found error Page
+    	if (pathInfo != null) {
+    		String[] pathParts = pathInfo.split("/");
+        	if (pathParts.length > 1) {
+        		targetView = pathParts[1];
         	}
     	}
-    		
-    	 
-    	/*
-    	if (ff4j.check("ff4j.admin.secure")) {
-    		 	PropertyStringList listOfUsers = (PropertyStringList) 
-    				ff4j.getPropertiesStore().readProperty("authorizedUsers");
-    		if (!listOfUsers.contains(ff4j.getAuthorizationsManager().getCurrentUserName())) {
-    			// Forbidden
-    		}
-    	}
     	
-    	if (targetView == null || "".equals(targetView)) {
+    	if (VIEW_STATIC.equals(targetView) && pathInfo.length() > 1) {
+    		staticResourceController.process(req, res, null);
+    		
+    	} else if (VIEW_API.equals(targetView)) {
+    		executeOperation(pathInfo, req, res);
+    		
+    	} else if ("core".equals(targetView)) {
     		pageCore(req, res);
     	
     	} else if ("monitoring".equals(targetView)) {
     		pageMonitoring(req, res);
-    	}*/
+    		
+    	// Controllers and VIEWS
+    	} else {
+        	// Redirect to 404 if not found
+        	if (!mapOfControllers.containsKey(targetView)) {
+        		targetView = VIEW_404;
+        	}
+        	LOGGER.info("Render view - " + targetView);
+        	mapOfControllers.get(targetView).process(req, res);
+    	}
+    }
+    
+    /** {@inheritDoc} */
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String message = null;
+        String messagetype = "info";
+        try {
+        	// Upload file is import
+            if (ServletFileUpload.isMultipartContent(req)) {
+                List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
+                for (FileItem item : items) {
+                    if (item.isFormField()) {
+                        if (OPERATION.equalsIgnoreCase(item.getFieldName())) {
+                            LOGGER.info("Processing action : " + item.getString());
+                        }
+                    } else if (FLIPFILE.equalsIgnoreCase(item.getFieldName())) {
+                        String filename = FilenameUtils.getName(item.getName());
+                        if (filename.toLowerCase().endsWith("xml")) {
+                            importFile(getFf4j(), item.getInputStream());
+                            message = "The file <b>" + filename + "</b> has been successfully imported";
+                        } else {
+                            messagetype = ERROR;
+                            message = "Invalid FILE, must be CSV, XML or PROPERTIES files";
+                        }
+                    }
+                }
+                mapOfControllers.get(VIEW_DEFAULT).process(req, res);
+
+            } else {
+                
+                String operation = req.getParameter(OPERATION);
+                String uid = req.getParameter(FEATID);
+                LOGGER.info("POST - op=" + operation + " feat=" + uid);
+                if (operation != null && !operation.isEmpty()) {
+
+                    if (OP_EDIT_FEATURE.equalsIgnoreCase(operation)) {
+                        updateFeatureDescription(getFf4j(), req);
+                        message = msg(uid, "UPDATED");
+
+                    } else if (OP_EDIT_PROPERTY.equalsIgnoreCase(operation)) {
+                        updateProperty(getFf4j(), req);
+                        message = renderMsgProperty(uid, "UPDATED");
+                       
+                    } else if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
+                        createProperty(getFf4j(), req);
+                        message = renderMsgProperty(req.getParameter(NAME), "ADDED");
+                        
+                    } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
+                        createFeature(getFf4j(), req);
+                        message = msg(uid, "ADDED");
+
+                    } else if (OP_TOGGLE_GROUP.equalsIgnoreCase(operation)) {
+                        String groupName = req.getParameter(GROUPNAME);
+                        if (groupName != null && !groupName.isEmpty()) {
+                            String operationGroup = req.getParameter(SUBOPERATION);
+                            if (OP_ENABLE.equalsIgnoreCase(operationGroup)) {
+                                getFf4j().getFeatureStore().enableGroup(groupName);
+                                message = renderMsgGroup(groupName, "ENABLED");
+                                LOGGER.info("Group '" + groupName + "' has been ENABLED.");
+                            } else if (OP_DISABLE.equalsIgnoreCase(operationGroup)) {
+                                getFf4j().getFeatureStore().disableGroup(groupName);
+                                message = renderMsgGroup(groupName, "DISABLED");
+                                LOGGER.info("Group '" + groupName + "' has been DISABLED.");
+                            }
+                        }
+                    } else {
+                        LOGGER.error("Invalid POST OPERATION" + operation);
+                        messagetype = ERROR;
+                        message = "Invalid REQUEST";
+                    }
+                } else {
+                    LOGGER.error("No ID provided" + operation);
+                    messagetype = ERROR;
+                    message = "Invalid UID";
+                }
+                renderPage(ff4j, req, res, message, messagetype);
+            }
+
+        } catch (Exception e) {
+            messagetype = ERROR;
+            message = e.getMessage();
+            LOGGER.error("An error occured ", e);
+        }
+        
+    }
+
+    
+    /**
+     * Execute operations.
+     *
+     * @param operation
+     * 		current operation
+     * @param req
+     * 		current request
+     * @param res
+     * 		current response
+     * @throws IOException
+     * 		exception during creating response
+     */
+    public void executeOperation(String pathInfo, HttpServletRequest req, HttpServletResponse res)
+    throws IOException {
+    	String[] pathParts = pathInfo.split("/");
+    	String operation   = pathParts[2];
+    	if (OP_EXPORT.equalsIgnoreCase(operation)) {
+            exportFile(ff4j, res);
+            return;
+        }
     }
     
     public void pageMonitoring(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -241,89 +350,7 @@ public class FF4jDispatcherServlet extends FF4jServlet {
         renderPage(getFf4j(), req, res, message, messagetype);
     }
     
-    /** {@inheritDoc} */
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String message = null;
-        String messagetype = "info";
-        try {
-
-            if (ServletFileUpload.isMultipartContent(req)) {
-                List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
-                for (FileItem item : items) {
-                    if (item.isFormField()) {
-                        if (OPERATION.equalsIgnoreCase(item.getFieldName())) {
-                            LOGGER.info("Processing action : " + item.getString());
-                        }
-                    } else if (FLIPFILE.equalsIgnoreCase(item.getFieldName())) {
-                        String filename = FilenameUtils.getName(item.getName());
-                        if (filename.toLowerCase().endsWith("xml")) {
-                            importFile(getFf4j(), item.getInputStream());
-                            message = "The file <b>" + filename + "</b> has been successfully imported";
-                        } else {
-                            messagetype = ERROR;
-                            message = "Invalid FILE, must be CSV, XML or PROPERTIES files";
-                        }
-                    }
-                }
-
-            } else {
-                
-                String operation = req.getParameter(OPERATION);
-                String uid = req.getParameter(FEATID);
-                LOGGER.info("POST - op=" + operation + " feat=" + uid);
-                if (operation != null && !operation.isEmpty()) {
-
-                    if (OP_EDIT_FEATURE.equalsIgnoreCase(operation)) {
-                        updateFeatureDescription(getFf4j(), req);
-                        message = msg(uid, "UPDATED");
-
-                    } else if (OP_EDIT_PROPERTY.equalsIgnoreCase(operation)) {
-                        updateProperty(getFf4j(), req);
-                        message = renderMsgProperty(uid, "UPDATED");
-                       
-                    } else if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
-                        createProperty(getFf4j(), req);
-                        message = renderMsgProperty(req.getParameter(NAME), "ADDED");
-                        
-                    } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
-                        createFeature(getFf4j(), req);
-                        message = msg(uid, "ADDED");
-
-                    } else if (OP_TOGGLE_GROUP.equalsIgnoreCase(operation)) {
-                        String groupName = req.getParameter(GROUPNAME);
-                        if (groupName != null && !groupName.isEmpty()) {
-                            String operationGroup = req.getParameter(SUBOPERATION);
-                            if (OP_ENABLE.equalsIgnoreCase(operationGroup)) {
-                                getFf4j().getFeatureStore().enableGroup(groupName);
-                                message = renderMsgGroup(groupName, "ENABLED");
-                                LOGGER.info("Group '" + groupName + "' has been ENABLED.");
-                            } else if (OP_DISABLE.equalsIgnoreCase(operationGroup)) {
-                                getFf4j().getFeatureStore().disableGroup(groupName);
-                                message = renderMsgGroup(groupName, "DISABLED");
-                                LOGGER.info("Group '" + groupName + "' has been DISABLED.");
-                            }
-                        }
-                    } else {
-                        LOGGER.error("Invalid POST OPERATION" + operation);
-                        messagetype = ERROR;
-                        message = "Invalid REQUEST";
-                    }
-                } else {
-                    LOGGER.error("No ID provided" + operation);
-                    messagetype = ERROR;
-                    message = "Invalid UID";
-                }
-            }
-
-        } catch (Exception e) {
-            messagetype = ERROR;
-            message = e.getMessage();
-            LOGGER.error("An error occured ", e);
-        }
-        renderPage(ff4j, req, res, message, messagetype);
-    }
-
+   
     /**
      * Getter accessor for attribute 'ff4j'.
      * 

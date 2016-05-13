@@ -35,19 +35,19 @@ import org.thymeleaf.context.WebContext;
  * @author Cedrick LUNVEN (@clunven)
  */
 public abstract class AbstractController {
-	
+
 	/** KEY. */
 	protected static final String KEY_TITLE =  "TITLE";
-	
+
 	/** FF4J instance. */
 	protected FF4j ff4j;
-	 
+
     /** Template engine. */
 	protected TemplateEngine templateEngine = null;
-    
+
     /** Success View. */
     protected String successView = null;
-      
+
     /**
      * Default constructor.
      *
@@ -61,7 +61,7 @@ public abstract class AbstractController {
     	this.successView = view;
     	this.templateEngine = te;
     }
-    
+
     /**
      * Invoked by dispatcher.
      *
@@ -74,9 +74,8 @@ public abstract class AbstractController {
      */
     public void process(HttpServletRequest req, HttpServletResponse res)
     throws IOException {
-    	WebContext ctx = 
-    			new WebContext(req, res,  req.getSession().getServletContext(), req.getLocale());
-    	
+    	WebContext ctx = new WebContext(req, res,  req.getSession().getServletContext(), req.getLocale());
+
     	StringBuilder sb = new StringBuilder();
     	long uptime = System.currentTimeMillis() - ff4j.getStartTime();
     	long daynumber = uptime / (1000 * 3600 * 24L);
@@ -90,22 +89,26 @@ public abstract class AbstractController {
     	sb.append(hourNumber + " hours ");
     	sb.append(minutenumber + " min ");
     	sb.append(secondnumber + " sec");
-    	
     	ctx.setVariable("uptime", sb.toString());
     	ctx.setVariable("version", ff4j.getVersion());
-    	
+
     	// Adding attribute to response
-    	process(req, res, ctx);
-    	
+    	try {
+    	    process(req, res, ctx);
+    	} catch(Throwable t) {
+    	    ctx.setVariable("msgType", "error");
+            ctx.setVariable("msgInfo", t.getMessage());
+    	}
+
     	// Render to view
     	templateEngine.process(getSuccessView(), ctx, res.getWriter());
     }
-	
+
 	/**
 	 * Create view from template.
 	 *
 	 * @param req
-	 * 		current http request 
+	 * 		current http request
 	 * @param res
 	 * 		current http response
 	 * @throws IOException
@@ -170,6 +173,6 @@ public abstract class AbstractController {
 	public void setSuccessView(String successView) {
 		this.successView = successView;
 	}
-	
-	
+
+
 }

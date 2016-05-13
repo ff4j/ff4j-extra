@@ -116,13 +116,7 @@ public class ConsoleConstants {
 
     /** User operation. */
     public static final String OP_DISABLE = "disable";
-
-    /** User operation. */
-    public static final String OP_IMPORT = "import";
-
-    /** User operation. */
-    public static final String OP_EXPORT = "export";
-    
+       
     /** User operation. */
     public static final String OP_MONITORING = "monitoring";
 

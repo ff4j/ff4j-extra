@@ -1,59 +1,39 @@
 /*------------------------------------------------------------------
-Bootstrap Admin Template by EGrappler.com
-------------------------------------------------------------------*/
-
-
-
-/*------------------------------------------------------------------
-[1. Shortcuts / .shortcuts]
+[1. Big icons and direct links]
 */
-
 .shortcuts {
 	text-align: center;	
 }
-
 .shortcuts .shortcut { 
 	width: 22.50%;
 	display: inline-block;
 	padding: 12px 0;
 	margin: 0 .9% 1em;
 	vertical-align: top;	
-	
 	text-decoration: none;
-	
 	background: #f9f6f1;
-	
 	border-radius: 5px;
 }
-
 .shortcuts .shortcut .shortcut-icon {
 	margin-top: .25em;
 	margin-bottom: .25em;
-	
 	font-size: 32px;
 	color: #545454;
 }
-
 .shortcuts .shortcut:hover {
 	background: #00ba8b;
 }
-
 .shortcuts .shortcut:hover span{
 	color: #fff;
 }
-
 .shortcuts .shortcut:hover .shortcut-icon {
 	color: #fff;
 }
-
 .shortcuts .shortcut-label {
 	display: block;
-	
 	font-weight: 400;
 	color: #545454;
 }
-
-
 
 /*------------------------------------------------------------------
 [2. Stats / .stats]
@@ -353,4 +333,4 @@ h6.bigstats{
 .circle {
 display:block;width:120px;height:120px;border-radius:60px;font-size:12px;color:#687684;
 text-align:center;text-decoration:none;background:#f9f6f1}
-.circle:hover{color:white;text-decoration:none;background:#00ab8b}
+.circle:hover{color:white;text-decoration:none;background-color:#687684}

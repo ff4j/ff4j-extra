@@ -37,6 +37,8 @@ import org.ff4j.web.controller.AbstractController;
 import org.ff4j.web.controller.FeatureUsageController;
 import org.ff4j.web.controller.FeaturesController;
 import org.ff4j.web.controller.HomeController;
+import org.ff4j.web.controller.InfosController;
+import org.ff4j.web.controller.NotFoundController;
 import org.ff4j.web.controller.PropertiesController;
 import org.ff4j.web.controller.SettingsController;
 import org.ff4j.web.controller.StaticResourceController;
@@ -103,6 +105,8 @@ public class FF4jServlet extends HttpServlet {
     	addController(new FeatureUsageController(ff4j, templateEngine));
     	addController(new PropertiesController(ff4j, templateEngine));
     	addController(new SettingsController(ff4j, templateEngine));
+    	addController(new InfosController(ff4j, templateEngine));
+    	addController(new NotFoundController(ff4j, templateEngine));
     }
     
     private void addController(AbstractController ac) {

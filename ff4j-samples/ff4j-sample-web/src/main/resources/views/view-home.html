@@ -40,107 +40,27 @@
        <div class="ff4jstore" >
         <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;PropertyStore</span>
         <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-mongo.png}" style="width:50px" />
-      	<br/>MongoDB
+	  	<br/><img src="" th:src="@{static/img/db/db-inmemory.png}" style="width:50px" />
+      	<br/>InMemory
    		</p>
        </div>
        
        <div class="ff4jstore" >
         <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;EventRepository</span>
         <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-elastic.png}" style="width:50px" />
-      	<br/>ElasticSearch
+	  	<br/><img src="" th:src="@{static/img/db/db-inmemory.png}" style="width:50px" />
+      	<br/>InMemory
    		</p>
        </div>
        
        <div class="ff4jstore" >
         <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;Authorization</span>
         <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-cassandra.png}" style="width:50px" />
-      	<br/>Cassandra
-   		</p>
-       </div>
-       
-       <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;DB</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-oracle.png}" style="width:50px" />
-      	<br/>Oracle
-   		</p>
-       </div>
-       
-       <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;DB</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-sqlserver.png}" style="width:50px" />
-      	<br/>SQLServer
-   		</p>
-       </div>
-
-		<div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;DB</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-maria.png}" style="width:50px" />
-      	<br/>MariaDB
-   		</p>
-       </div> 
-       
-       <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;DB</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-postgres.png}" style="width:50px" />
-      	<br/>PostGres
-   		</p>
-       </div>   
-           
-        <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;Sec</span>
-        <br/><p class="circle">
 	  	<br/><img src="" th:src="@{static/img/db/spring-security.png}" style="width:50px" />
       	<br/>SpringSecurity
    		</p>
        </div>
-       
-        <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;Cache</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-redis.png}" style="width:50px" />
-      	<br/>Redis
-   		</p>
-       </div>
-       
-        <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;Cache</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-hazelcast.png}" style="width:50px" />
-      	<br/>Hazelcast
-   		</p>
-       </div>
-       
-       <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;Cache</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-ehcache.png}" style="width:50px" />
-      	<br/>EHCache
-   		</p>
-       </div>
-       
-       <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;Cache</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-terracotta.png}" style="width:50px" />
-      	<br/>Terracotta
-   		</p>
-       </div>
-       
-       <div class="ff4jstore" >
-        <span style="font-weight: bold;font-size:14px;color:#00ab8b">&nbsp;Cache</span>
-        <br/><p class="circle">
-	  	<br/><img src="" th:src="@{static/img/db/db-neo4j.png}" style="width:50px" />
-      	<br/>Neo4j
-   		</p>
-       </div>
-       
+              
     </div>
                   
 	</div>
@@ -205,11 +125,11 @@
             <div class="widget-content">
               <div class="shortcuts">
               
-              	<a data-toggle="modal" href="" class="shortcut">
+              	<a data-toggle="modal" href="#modalImport" class="shortcut open-ImportDialog">
               	 <i class="shortcut-icon icon-upload-alt"></i>  
            		 <span class="shortcut-label">Import XML</span>
               	</a>
-              	<a data-toggle="modal" href="" class="shortcut">
+              	<a href="" th:href="@{api/export}" class="shortcut">
               	 <i class="shortcut-icon icon-download-alt"></i>  
            		 <span class="shortcut-label">Export XML</span>
               	</a>
@@ -234,7 +154,7 @@
                  <i class="shortcut-icon  icon-warning-sign"></i>
                  <span class="shortcut-label">Archiving</span>
                 </a>
-                <a href="" class="shortcut">
+                <a href="" th:href="@{infos}" class="shortcut">
               	 <i class="shortcut-icon icon-info"></i>
               	 <span class="shortcut-label">About</span> 
               	</a>
@@ -263,5 +183,8 @@
  </div>
 </div>
    
+<div th:include="modal-features :: modal-import"></div>
+   
+
 </body>
 </html>

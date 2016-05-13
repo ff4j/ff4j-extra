@@ -303,7 +303,7 @@ public final class ConsoleOperations {
                 pstore.createProperty(p.getValue());
             }
         }
-        LOGGER.info(mapsOfProperties.size() + " features have been imported.");
+        LOGGER.info(mapsOfProperties.size() + " properties have been imported.");
     }
     
     /**
