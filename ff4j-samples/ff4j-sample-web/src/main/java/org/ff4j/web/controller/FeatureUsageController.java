@@ -22,22 +22,11 @@ package org.ff4j.web.controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
-import org.ff4j.audit.graph.PieSector;
-import org.ff4j.audit.proxy.FeatureStoreAuditProxy;
-import org.ff4j.audit.proxy.PropertyStoreAuditProxy;
-import org.ff4j.core.FeatureStore;
-import org.ff4j.property.store.PropertyStore;
-import org.ff4j.utils.TimeUtils;
-import org.ff4j.web.ApiConfig;
-import org.ff4j.web.bean.HomeBean;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -57,7 +46,12 @@ public class FeatureUsageController extends AbstractController {
 	}
 
 	/** {@inheritDoc} */
-	public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException {
+    }
+    
+    /** {@inheritDoc} */
+    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException {
 		ctx.setVariable(KEY_TITLE, "Feature Usage");
 	}

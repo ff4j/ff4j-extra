@@ -38,7 +38,6 @@ import static org.ff4j.web.embedded.ConsoleRenderer.renderMessageBox;
 import static org.ff4j.web.embedded.ConsoleRenderer.renderMsgGroup;
 import static org.ff4j.web.embedded.ConsoleRenderer.renderMsgProperty;
 import static org.ff4j.web.embedded.ConsoleRenderer.renderPage;
-import static org.ff4j.web.embedded.ConsoleRenderer.renderPageMonitoring;
 
 /*
  * #%L
@@ -71,7 +70,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
-import org.ff4j.FF4j;
 import org.ff4j.property.Property;
 import org.ff4j.web.embedded.ConsoleRenderer;
 import org.slf4j.Logger;
@@ -90,46 +88,53 @@ public class FF4jDispatcherServlet extends FF4jServlet {
     /** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(FF4jDispatcherServlet.class);
 
+    /**
+     * Current target view.
+     *
+     * @param req
+     *      current http request
+     * @return
+     *      target view
+     */
+    private String getTargetView(HttpServletRequest req) {
+        String targetView  = VIEW_DEFAULT;
+        String pathInfo    = req.getPathInfo();
+        if (pathInfo != null) {
+            String[] pathParts = pathInfo.split("/");
+            if (pathParts.length > 1) {
+                targetView = pathParts[1];
+            }
+        }
+        return targetView;
+    }
+    
     /** {@inheritDoc} */
-    @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {
-    	String targetView  = VIEW_DEFAULT;
-    	String pathInfo    = req.getPathInfo();
-    	if (pathInfo != null) {
-    		String[] pathParts = pathInfo.split("/");
-        	if (pathParts.length > 1) {
-        		targetView = pathParts[1];
-        	}
-    	}
+        
+    	String targetView  = getTargetView(req);
 
-    	if (VIEW_STATIC.equals(targetView) && pathInfo.length() > 1) {
-    		staticResourceController.process(req, res, null);
+    	if (VIEW_STATIC.equals(targetView) && req.getPathInfo().length() > 1) {
+    		staticResourceController.get(req, res, null);
 
     	} else if (VIEW_API.equals(targetView)) {
-    		operationsController.process(req, res, null);
+    		operationsController.get(req, res, null);
 
-    	} else if ("core".equals(targetView)) {
-    		pageCore(req, res);
-
-    	} else if ("monitoring".equals(targetView)) {
-    		pageMonitoring(req, res);
-
-    	} else {
-        	// Redirect to 404 if not found
-        	if (!mapOfControllers.containsKey(targetView)) {
-        		targetView = VIEW_404;
-        	}
-        	LOGGER.info("Render view - " + targetView);
-        	mapOfControllers.get(targetView).process(req, res);
+    	} else if (!mapOfControllers.containsKey(targetView)) {
+        	targetView = VIEW_404;
+        	
+        } else {
+        	mapOfControllers.get(targetView).get(req, res);
     	}
     }
 
     /** {@inheritDoc} */
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+    throws ServletException, IOException {
         String message = null;
         String messagetype = "info";
+        
+        String targetView = getTargetView(req);
         try {
         	// Upload file is import
             if (ServletFileUpload.isMultipartContent(req)) {
@@ -150,7 +155,7 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                         }
                     }
                 }
-                mapOfControllers.get(VIEW_DEFAULT).process(req, res);
+                mapOfControllers.get(VIEW_DEFAULT).get(req, res);
 
             } else {
 
@@ -207,23 +212,6 @@ public class FF4jDispatcherServlet extends FF4jServlet {
             message = e.getMessage();
             LOGGER.error("An error occured ", e);
         }
-    }
-
-
-    public void pageMonitoring(HttpServletRequest req, HttpServletResponse res) throws IOException {
-    	String message = null;
-        String messagetype = "info";
-        try {
-
-
-
-        } catch (Exception e) {
-            // Any Error is trapped and display in the console
-            messagetype = ERROR;
-            message = e.getMessage();
-            LOGGER.error("An error occured ", e);
-        }
-        renderPageMonitoring(getFf4j(), req, res, message, messagetype);
     }
 
     public void pageCore(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -322,27 +310,5 @@ public class FF4jDispatcherServlet extends FF4jServlet {
         // Default page rendering (table)
         renderPage(getFf4j(), req, res, message, messagetype);
     }
-
-
-    /**
-     * Getter accessor for attribute 'ff4j'.
-     *
-     * @return current value of 'ff4j'
-     */
-    public FF4j getFf4j() {
-        if (ff4j == null) {
-            throw new IllegalStateException("Console Servlet has not been initialized, please set 'load-at-startup' to 1");
-        }
-        return ff4j;
-    }
-
-    /**
-     * Setter accessor for attribute 'ff4j'.
-     * @param ff4j
-     * 		new value for 'ff4j '
-     */
-    public void setFf4j(FF4j ff4j) {
-        this.ff4j = ff4j;
-    }
-
+   
 }

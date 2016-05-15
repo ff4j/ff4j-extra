@@ -105,7 +105,7 @@ function ff4j_updatePermissionsEditFeature(uid, permissions) {
    	var arrayLength = permissions.length;
    	for (var i = 0; i < arrayLength; i++) {
    	 htmlForFixedValueList+= '<tr><td style="width:300px">' + permissions[i] + '</td><td>';
-     htmlForFixedValueList+= '<a href="#" onclick="javascript:ff4j_removePermissions(\'' + permissions[i] + '\')" >';
+     htmlForFixedValueList+= '<a href="#" onclick="javascript:ff4j_removePermissionForFeature(\'' + permissions[i] + '\')" >';
      htmlForFixedValueList+= '<i class="icon-trash"></i></a></td></tr>';
     }
     htmlForFixedValueList+= '<tr><td style="width:300px"><input type="text" id="nnfix" name="nnfix"  style="width:250px;height:18px;"/></td>';

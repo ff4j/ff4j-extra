@@ -46,7 +46,12 @@ public class OperationsController extends AbstractController {
     }
 
     /** {@inheritDoc} */
-    public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException {
+    }
+    
+    /** {@inheritDoc} */
+    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws IOException {
         String[] pathParts = req.getPathInfo().split("/");
         String operation   = pathParts[2];

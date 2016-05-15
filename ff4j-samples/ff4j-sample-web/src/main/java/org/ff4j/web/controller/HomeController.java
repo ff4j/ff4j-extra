@@ -57,7 +57,12 @@ public class HomeController extends AbstractController {
 	}
 
 	/** {@inheritDoc} */
-	public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException {
+    }
+    
+    /** {@inheritDoc} */
+    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException {
 
 		ctx.setVariable(KEY_TITLE, "Home");

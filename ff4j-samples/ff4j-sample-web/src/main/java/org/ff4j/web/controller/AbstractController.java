@@ -72,7 +72,7 @@ public abstract class AbstractController {
      * @throws IOException
      * 		error occured.
      */
-    public void process(HttpServletRequest req, HttpServletResponse res)
+    public void get(HttpServletRequest req, HttpServletResponse res)
     throws IOException {
     	WebContext ctx = new WebContext(req, res,  req.getSession().getServletContext(), req.getLocale());
 
@@ -94,7 +94,7 @@ public abstract class AbstractController {
 
     	// Adding attribute to response
     	try {
-    	    process(req, res, ctx);
+    	    get(req, res, ctx);
     	} catch(Throwable t) {
     	    ctx.setVariable("msgType", "error");
             ctx.setVariable("msgInfo", t.getMessage());
@@ -114,8 +114,22 @@ public abstract class AbstractController {
 	 * @throws IOException
 	 * 		target error
 	 */
-	public abstract void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+	public abstract void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException;
+	
+
+    /**
+     * Create view from template.
+     *
+     * @param req
+     *      current http request
+     * @param res
+     *      current http response
+     * @throws IOException
+     *      target error
+     */
+    public abstract void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException;
 
 	/**
 	 * Getter accessor for attribute 'ff4j'.

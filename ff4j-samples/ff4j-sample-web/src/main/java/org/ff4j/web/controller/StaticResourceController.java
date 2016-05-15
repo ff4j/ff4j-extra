@@ -63,7 +63,12 @@ public class StaticResourceController extends AbstractController {
 	}
 	
 	/** {@inheritDoc} */
-	public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException {
+    }
+	
+	/** {@inheritDoc} */
+	public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException {
 		
 		// static/{type}/{fileName}

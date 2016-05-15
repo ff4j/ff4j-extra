@@ -169,5 +169,27 @@ public class FF4jServlet extends HttpServlet {
         templateEngine.addMessageResolver(new CustomMessageResolver());
         LOGGER.info("Thymeleaf has been initialized");
     }
+    
+    /**
+     * Getter accessor for attribute 'ff4j'.
+     *
+     * @return current value of 'ff4j'
+     */
+    public FF4j getFf4j() {
+        if (ff4j == null) {
+            throw new IllegalStateException("Console Servlet has not been initialized, please set 'load-at-startup' to 1");
+        }
+        return ff4j;
+    }
+
+    /**
+     * Setter accessor for attribute 'ff4j'.
+     * @param ff4j
+     *      new value for 'ff4j '
+     */
+    public void setFf4j(FF4j ff4j) {
+        this.ff4j = ff4j;
+    }
+
 
 }

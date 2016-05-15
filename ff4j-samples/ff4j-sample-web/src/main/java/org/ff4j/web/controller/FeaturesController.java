@@ -24,6 +24,8 @@ package org.ff4j.web.controller;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_PERMISSION;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PERMISSION;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 
 import java.io.IOException;
@@ -63,11 +65,13 @@ public class FeaturesController extends AbstractController {
 		super(ff4j, VIEW_FEATURES, te);
 	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
+	/** {@inheritDoc} */
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException {
+    }
+    
+    /** {@inheritDoc} */
+    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
         String operation = req.getParameter(FF4jWebConstants.OPERATION);
         String featureId = req.getParameter(FF4jWebConstants.FEATID);
 
@@ -75,21 +79,33 @@ public class FeaturesController extends AbstractController {
         String msg = null;
         if (Util.hasLength(operation) && Util.hasLength(featureId)) {
             if (getFf4j().getFeatureStore().exist(featureId)) {
+                
                 if (OP_DISABLE.equalsIgnoreCase(operation)) {
                     getFf4j().disable(featureId);
                     msg = msg(featureId, "DISABLED");
                     LOGGER.info(featureId + " has been disabled");
                 }
+                
                 if (OP_ENABLE.equalsIgnoreCase(operation)) {
                     getFf4j().enable(featureId);
                     msg = msg(featureId, "ENABLED");
                     LOGGER.info(featureId + " has been enabled");
                 }
+                
                 if (OP_RMV_FEATURE.equalsIgnoreCase(operation)) {
                     getFf4j().getFeatureStore().delete(featureId);
                     msg = msg(featureId, "DELETED");
                     LOGGER.info(featureId + " has been deleted");
                 }
+                
+                if (OP_ADD_PERMISSION.equalsIgnoreCase(operation)) {
+                    String permName = req.getParameter(FF4jWebConstants.PERMISSION);
+                    Feature feature = getFf4j().getFeatureStore().read(featureId);
+                    feature.getPermissions().add(permName);
+                    getFf4j().getFeatureStore().update(feature);
+                    LOGGER.info("Add new " + permName + " to " + featureId );
+                }
+                    
             } else {
                 msgType = "warning";
                 msg = "The feature '" + featureId + "' does not exist";
