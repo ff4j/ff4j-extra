@@ -21,10 +21,8 @@ package org.ff4j.web.controller;
  */
 
 
-import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_JSON;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_READ_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 
@@ -65,56 +63,42 @@ public class FeaturesController extends AbstractController {
 		super(ff4j, VIEW_FEATURES, te);
 	}
 
-	/** {@inheritDoc}
-	 * @throws IOException */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-    throws IOException {
+    public void process(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
         String operation = req.getParameter(FF4jWebConstants.OPERATION);
-	    String featureId = req.getParameter(FF4jWebConstants.FEATID);
+        String featureId = req.getParameter(FF4jWebConstants.FEATID);
 
-	    String msgType = "success";
-	    String msg     = null;
-	    if (Util.hasLength(operation)) {
-	      if ((featureId != null) && (!featureId.isEmpty())) {
+        String msgType = "success";
+        String msg = null;
+        if (Util.hasLength(operation) && Util.hasLength(featureId)) {
             if (getFf4j().getFeatureStore().exist(featureId)) {
-
                 if (OP_DISABLE.equalsIgnoreCase(operation)) {
-                  getFf4j().disable(featureId);
-                  msg = msg(featureId, "DISABLED");
-                  LOGGER.info(featureId + " has been disabled");
-               }
-
-               if (OP_ENABLE.equalsIgnoreCase(operation)) {
-                  getFf4j().enable(featureId);
-                  msg = msg(featureId, "ENABLED");
-                  LOGGER.info(featureId + " has been enabled");
-               }
-
-               if (OP_RMV_FEATURE.equalsIgnoreCase(operation)) {
-                  getFf4j().getFeatureStore().delete(featureId);
-                  msg = msg(featureId, "DELETED");
-                  LOGGER.info(featureId + " has been deleted");
-               }
-
-               if (OP_READ_FEATURE.equalsIgnoreCase(operation)) {
-                  Feature f = getFf4j().getFeatureStore().read(featureId);
-                  res.setContentType(CONTENT_TYPE_JSON);
-                  res.getWriter().println(f.toJson());
-                  return;
-               }
-
-             } else {
-                 msgType = "warning";
-                 msg = "The feature '" + featureId + "' does not exist";
-             }
-           }
-    	 }
-
-	    ctx.setVariable("msgType", msgType);
+                    getFf4j().disable(featureId);
+                    msg = msg(featureId, "DISABLED");
+                    LOGGER.info(featureId + " has been disabled");
+                }
+                if (OP_ENABLE.equalsIgnoreCase(operation)) {
+                    getFf4j().enable(featureId);
+                    msg = msg(featureId, "ENABLED");
+                    LOGGER.info(featureId + " has been enabled");
+                }
+                if (OP_RMV_FEATURE.equalsIgnoreCase(operation)) {
+                    getFf4j().getFeatureStore().delete(featureId);
+                    msg = msg(featureId, "DELETED");
+                    LOGGER.info(featureId + " has been deleted");
+                }
+            } else {
+                msgType = "warning";
+                msg = "The feature '" + featureId + "' does not exist";
+            }
+        }
+        ctx.setVariable("msgType", msgType);
         ctx.setVariable("msgInfo", msg);
-	    renderPage(ctx);
-	}
+        renderPage(ctx);
+    }
 
 	private void renderPage(WebContext ctx) {
 	    ctx.setVariable(KEY_TITLE, "Features");

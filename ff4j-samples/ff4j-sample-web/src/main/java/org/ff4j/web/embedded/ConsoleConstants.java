@@ -22,16 +22,16 @@ package org.ff4j.web.embedded;
 
 /**
  * Global constants to work with web console ff4j.
- * 
+ *
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
 public class ConsoleConstants {
-    
+
     // -------- CONTENT-TYPE ------------------------------
 
     /** Content type for response. */
     public static final String CONTENT_TYPE_HTML = "text/html";
-    
+
     /** Content type for response. */
     public static final String CONTENT_TYPE_TEXT = "text/plain";
 
@@ -40,13 +40,13 @@ public class ConsoleConstants {
 
     /** Content type for response. */
     public static final String CONTENT_TYPE_JS = "application/javascript";
-    
+
     /** Content type for response. */
     public static final String CONTENT_TYPE_JSON = "application/json";
-    
+
     /** Content type for response. */
     public static final String CONTENT_TYPE_FONT = "font/opentype";
-    
+
 
 
     // -------- RESOURCES ------------------------------
@@ -71,7 +71,7 @@ public class ConsoleConstants {
 
     /** POST - Operation. */
     public static final String OPERATION = "op";
-    
+
     /** View for dispatch. */
     public static final String VIEW = "view";
 
@@ -80,43 +80,43 @@ public class ConsoleConstants {
 
     /** User operation. */
     public static final String OP_CREATE_FEATURE = "create";
-    
+
     /** User operation. */
     public static final String OP_CREATE_PROPERTY = "createProperty";
 
     /** User operation. */
     public static final String OP_EDIT_FEATURE = "update";
-    
+
     /** User operation. */
     public static final String OP_EDIT_PROPERTY = "updateProperty";
 
     /** User operation: remove feature. */
     public static final String OP_RMV_FEATURE = "delete";
-    
+
     /** User operation: remove feature. */
     public static final String OP_RMV_PROPERTY = "deleteProperty";
-    
+
     /** User operation: remove feature. */
     public static final String OP_READ_PROPERTY = "readProperty";
-    
+
     /** remove a value of a listed. */
     public static final String OP_DELETE_FIXEDVALUE = "deleteFixedValue";
-    
+
     /** remove a value of a listed. */
     public static final String OP_ADD_FIXEDVALUE = "addFixedValue";
 
     /** User operation. */
     public static final String OP_TOGGLE_GROUP = "toggleGroup";
-    
+
     /** User operation: remove feature. */
-    public static final String OP_READ_FEATURE = "readFeature";
+    public static final String OP_FEATURES = "features";
 
     /** User operation. */
     public static final String OP_ENABLE = "enable";
 
     /** User operation. */
     public static final String OP_DISABLE = "disable";
-       
+
     /** User operation. */
     public static final String OP_MONITORING = "monitoring";
 
@@ -125,7 +125,7 @@ public class ConsoleConstants {
 
     /** Header. */
     public static final String TEMPLATE_FILE = "ff4j-template.dat";
-    
+
     /** Monitoring. */
     public static final String TEMPLATE_FILE_MONITORING = "ff4j-monitoring.dat";
 
@@ -137,7 +137,7 @@ public class ConsoleConstants {
 
     /** templating. */
     public static final String KEY_FEATURE_ROWS = "FEATURE_ROWS";
-    
+
     /** templating. */
     public static final String KEY_PROPERTIES_ROWS = "PROPERTIES_ROWS";
 
@@ -152,13 +152,13 @@ public class ConsoleConstants {
 
     /** templating alert. */
     public static final String KEY_ALERT_MESSAGE = "ALERT";
-    
+
     /** templating alert. */
     public static final String KEY_AUDIT_ROWS = "AUDIT_ROWS";
 
     /** templating. */
     public static final String KEY_PERMISSIONLIST = "PERMISSIONS";
-    
+
     /** custom css if defined in web.xml. */
     public static final String KEY_CSS_URL = "URL_CSS";
 
@@ -176,19 +176,19 @@ public class ConsoleConstants {
 
     /** HTTP Parameter. */
     public static final String FLIPFILE = "flipFile";
-    
+
     /** HTTP Parameter. */
     public static final String GROUPNAME = "groupName";
 
     /** HTTP Parameter. */
     public static final String STRATEGY = "strategy";
-    
+
     /** HTTP Parameter. */
     public static final String STRATEGY_INIT = "initParams";
 
     /** HTTP Parameter. */
     public static final String PERMISSION = "permission";
-    
+
     /** HTTP Parameter. */
     public static final String NAME = "name";
 
@@ -205,13 +205,13 @@ public class ConsoleConstants {
 
     /** servlet init param. */
     public static final String SERVLETPARAM_FF4JPROVIDER = "ff4jProvider";
-    
+
     /** servlet init param. */
     public static final String SERVLETPARAM_CSS = "customCSS";
-    
+
     /** attribute name. */
     public static final String FF4J_SESSIONATTRIBUTE_NAME = "FF4J";
-    
+
     /** attribute name. */
     public static final String CSS_SESSIONATTRIBUTE_NAME = "customCSS";
 
@@ -232,7 +232,7 @@ public class ConsoleConstants {
 
     /** modal ID. */
     public static final String MODAL_TOGGLE = "modalToggle";
-    
+
     /** FixedValue to be remove. */
     public static final String PARAM_FIXEDVALUE = "fixedValue";
 

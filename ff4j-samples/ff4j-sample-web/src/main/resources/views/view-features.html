@@ -85,14 +85,7 @@
 	 </td>
 	 <td style="width:5%;text-align:center">
 	  <a data-toggle="modal" href="#modalEdit" 
-	     th:attr="data-id=${feat.uid},
-	        data-desc=${feat.description},
-	        data-group=${feat.group}, 
-	        data-strategy=${feat.flippingStrategy} ? ${feat.flippingStrategy.class.name} : '',
-	        data-stratparams=${feat.flippingStrategy} ? ${feat.flippingStrategy.initParams} : '', 
-	        data-permissions=${feat.permissions}"
-	     data-id="" data-desc="" data-group="null" data-strategy="" data-stratparams=""
-		 data-permissions="[ADMIN]"
+	     th:attr="data-id=${feat.uid}"
 		 style="width:6px:margin-left:-3px;color:white;background-color:#008bab" 
 		 class="open-EditFlipDialog btn">
        <i class="icon-pencil"></i>

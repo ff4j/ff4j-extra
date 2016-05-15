@@ -1,13 +1,11 @@
 package org.ff4j.web;
 
 import static org.ff4j.web.FF4jWebConstants.ERROR;
+import static org.ff4j.web.FF4jWebConstants.OP_EXPORT;
 import static org.ff4j.web.FF4jWebConstants.VIEW_404;
 import static org.ff4j.web.FF4jWebConstants.VIEW_API;
 import static org.ff4j.web.FF4jWebConstants.VIEW_DEFAULT;
 import static org.ff4j.web.FF4jWebConstants.VIEW_STATIC;
-import static org.ff4j.web.FF4jWebConstants.OP_EXPORT;
-import static org.ff4j.web.FF4jWebConstants.OP_IMPORT;
-
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_HTML;
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_JSON;
 import static org.ff4j.web.embedded.ConsoleConstants.FEATID;
@@ -15,7 +13,6 @@ import static org.ff4j.web.embedded.ConsoleConstants.FLIPFILE;
 import static org.ff4j.web.embedded.ConsoleConstants.GROUPNAME;
 import static org.ff4j.web.embedded.ConsoleConstants.NAME;
 import static org.ff4j.web.embedded.ConsoleConstants.OPERATION;
-
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_PROPERTY;
@@ -24,12 +21,10 @@ import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_READ_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_READ_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_TOGGLE_GROUP;
-
 import static org.ff4j.web.embedded.ConsoleConstants.PARAM_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleConstants.SUBOPERATION;
 import static org.ff4j.web.embedded.ConsoleOperations.createFeature;
@@ -46,15 +41,23 @@ import static org.ff4j.web.embedded.ConsoleRenderer.renderPage;
 import static org.ff4j.web.embedded.ConsoleRenderer.renderPageMonitoring;
 
 /*
- * #%L AdministrationConsoleServlet.java (ff4j-web) by Cedrick LUNVEN %% Copyright (C) 2013 Ff4J %% Licensed under the Apache
- * License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * #%L
+ * AdministrationConsoleServlet.java (ff4j-web) by Cedrick LUNVEN
+ * %%
+ * Copyright (C) 2013 Ff4J
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License. #L%
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
  */
 
 import java.io.IOException;
@@ -69,7 +72,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.ff4j.FF4j;
-import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
 import org.ff4j.web.embedded.ConsoleRenderer;
 import org.slf4j.Logger;
@@ -77,7 +79,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Unique Servlet to manage FlipPoints and security
- * 
+ *
  * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
  */
 public class FF4jDispatcherServlet extends FF4jServlet {
@@ -87,8 +89,9 @@ public class FF4jDispatcherServlet extends FF4jServlet {
 
     /** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(FF4jDispatcherServlet.class);
-    
+
     /** {@inheritDoc} */
+    @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {
     	String targetView  = VIEW_DEFAULT;
@@ -99,20 +102,19 @@ public class FF4jDispatcherServlet extends FF4jServlet {
         		targetView = pathParts[1];
         	}
     	}
-    	
+
     	if (VIEW_STATIC.equals(targetView) && pathInfo.length() > 1) {
     		staticResourceController.process(req, res, null);
-    		
+
     	} else if (VIEW_API.equals(targetView)) {
-    		executeOperation(pathInfo, req, res);
-    		
+    		operationsController.process(req, res, null);
+
     	} else if ("core".equals(targetView)) {
     		pageCore(req, res);
-    	
+
     	} else if ("monitoring".equals(targetView)) {
     		pageMonitoring(req, res);
-    		
-    	// Controllers and VIEWS
+
     	} else {
         	// Redirect to 404 if not found
         	if (!mapOfControllers.containsKey(targetView)) {
@@ -122,8 +124,9 @@ public class FF4jDispatcherServlet extends FF4jServlet {
         	mapOfControllers.get(targetView).process(req, res);
     	}
     }
-    
+
     /** {@inheritDoc} */
+    @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String message = null;
         String messagetype = "info";
@@ -150,7 +153,7 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                 mapOfControllers.get(VIEW_DEFAULT).process(req, res);
 
             } else {
-                
+
                 String operation = req.getParameter(OPERATION);
                 String uid = req.getParameter(FEATID);
                 LOGGER.info("POST - op=" + operation + " feat=" + uid);
@@ -163,11 +166,11 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                     } else if (OP_EDIT_PROPERTY.equalsIgnoreCase(operation)) {
                         updateProperty(getFf4j(), req);
                         message = renderMsgProperty(uid, "UPDATED");
-                       
+
                     } else if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
                         createProperty(getFf4j(), req);
                         message = renderMsgProperty(req.getParameter(NAME), "ADDED");
-                        
+
                     } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
                         createFeature(getFf4j(), req);
                         message = msg(uid, "ADDED");
@@ -204,39 +207,16 @@ public class FF4jDispatcherServlet extends FF4jServlet {
             message = e.getMessage();
             LOGGER.error("An error occured ", e);
         }
-        
     }
 
-    
-    /**
-     * Execute operations.
-     *
-     * @param operation
-     * 		current operation
-     * @param req
-     * 		current request
-     * @param res
-     * 		current response
-     * @throws IOException
-     * 		exception during creating response
-     */
-    public void executeOperation(String pathInfo, HttpServletRequest req, HttpServletResponse res)
-    throws IOException {
-    	String[] pathParts = pathInfo.split("/");
-    	String operation   = pathParts[2];
-    	if (OP_EXPORT.equalsIgnoreCase(operation)) {
-            exportFile(ff4j, res);
-            return;
-        }
-    }
-    
+
     public void pageMonitoring(HttpServletRequest req, HttpServletResponse res) throws IOException {
     	String message = null;
         String messagetype = "info";
         try {
-        	
-        	
-        	
+
+
+
         } catch (Exception e) {
             // Any Error is trapped and display in the console
             messagetype = ERROR;
@@ -245,12 +225,12 @@ public class FF4jDispatcherServlet extends FF4jServlet {
         }
         renderPageMonitoring(getFf4j(), req, res, message, messagetype);
     }
-    
+
     public void pageCore(HttpServletRequest req, HttpServletResponse res) throws IOException {
     	String message = null;
         String messagetype = "info";
         try {
-            
+
             // 'RSC' parameter will load some static resources
             if (ConsoleRenderer.renderResources(req, res)) return;
 
@@ -259,26 +239,26 @@ public class FF4jDispatcherServlet extends FF4jServlet {
             String featureId = req.getParameter(FEATID);
             LOGGER.info("GET - op=" + operation + " feat=" + featureId);
             if (operation != null && !operation.isEmpty()) {
-                
+
                 // operation which do not required features
                 if (OP_EXPORT.equalsIgnoreCase(operation)) {
                     exportFile(ff4j, res);
                     return;
                 }
-                
+
                 // Work on a feature ID
                 if ((featureId != null) && (!featureId.isEmpty())) {
-                    
+
                     if (getFf4j().getFeatureStore().exist(featureId)) {
-                    
+
                         if (OP_DISABLE.equalsIgnoreCase(operation)) {
                             getFf4j().disable(featureId);
                             res.setContentType(CONTENT_TYPE_HTML);
                             res.getWriter().println(renderMessageBox(msg(featureId, "DISABLED"), "info"));
                             LOGGER.info(featureId + " has been disabled");
                             return;
-                        } 
-                        
+                        }
+
                         if (OP_ENABLE.equalsIgnoreCase(operation)) {
                             getFf4j().enable(featureId);
                             res.setContentType(CONTENT_TYPE_HTML);
@@ -286,38 +266,31 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                             LOGGER.info("Feature '" + featureId + "' has been successfully enabled");
                             return;
                         }
-                        
-                        if (OP_READ_FEATURE.equalsIgnoreCase(operation)) {
-                            Feature f = getFf4j().getFeatureStore().read(featureId);
-                            res.setContentType(CONTENT_TYPE_JSON);
-                            res.getWriter().println(f.toJson());
-                            return;
-                        }
-                        
+
                         // As no return the page is draw
                         if (OP_RMV_FEATURE.equalsIgnoreCase(operation)) {
                             getFf4j().getFeatureStore().delete(featureId);
                             message = msg(featureId, "DELETED");
                             LOGGER.info(featureId + " has been deleted");
                         }
-                        
+
                     }
-                    
+
                     if (getFf4j().getPropertiesStore().existProperty(featureId)) {
-                    
+
                         if (OP_RMV_PROPERTY.equalsIgnoreCase(operation)) {
                             getFf4j().getPropertiesStore().deleteProperty(featureId);
                             message = renderMsgProperty(featureId, "DELETED");
                             LOGGER.info("Property '" + featureId + "' has been deleted");
                         }
-                        
+
                         if (OP_READ_PROPERTY.equalsIgnoreCase(operation)) {
                             Property<?> ap = getFf4j().getPropertiesStore().readProperty(featureId);
                             res.setContentType(CONTENT_TYPE_JSON);
                             res.getWriter().println(ap.toString());
                             return;
                         }
-                        
+
                         if (OP_DELETE_FIXEDVALUE.equalsIgnoreCase(operation)) {
                             String fixedValue = req.getParameter(PARAM_FIXEDVALUE);
                             Property<?> ap = getFf4j().getPropertiesStore().readProperty(featureId);
@@ -325,7 +298,7 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                             getFf4j().getPropertiesStore().updateProperty(ap);
                             return;
                         }
-                        
+
                         if (OP_ADD_FIXEDVALUE.equalsIgnoreCase(operation)) {
                             String fixedValue = req.getParameter(PARAM_FIXEDVALUE);
                             Property<?> ap = getFf4j().getPropertiesStore().readProperty(featureId);
@@ -333,9 +306,9 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                             getFf4j().getPropertiesStore().updateProperty(ap);
                             return;
                         }
-                        
+
                     }
-                 
+
                 }
             }
 
@@ -349,11 +322,11 @@ public class FF4jDispatcherServlet extends FF4jServlet {
         // Default page rendering (table)
         renderPage(getFf4j(), req, res, message, messagetype);
     }
-    
-   
+
+
     /**
      * Getter accessor for attribute 'ff4j'.
-     * 
+     *
      * @return current value of 'ff4j'
      */
     public FF4j getFf4j() {

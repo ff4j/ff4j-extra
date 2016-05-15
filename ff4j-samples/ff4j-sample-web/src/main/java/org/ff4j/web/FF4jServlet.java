@@ -39,6 +39,7 @@ import org.ff4j.web.controller.FeaturesController;
 import org.ff4j.web.controller.HomeController;
 import org.ff4j.web.controller.InfosController;
 import org.ff4j.web.controller.NotFoundController;
+import org.ff4j.web.controller.OperationsController;
 import org.ff4j.web.controller.PropertiesController;
 import org.ff4j.web.controller.SettingsController;
 import org.ff4j.web.controller.StaticResourceController;
@@ -57,25 +58,28 @@ public class FF4jServlet extends HttpServlet {
 
     /** Serial. */
     private static final long serialVersionUID = 8447941463286918975L;
-    
+
     /** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(FF4jServlet.class);
-    
+
     /** instance of ff4j. */
     protected FF4j ff4j = null;
 
     /** initializing ff4j provider. */
     protected FF4JProvider ff4jProvider = null;
-    
+
     /** Template engine. */
     protected TemplateEngine templateEngine = null;
-    
+
     /** Static resource controller. */
     protected StaticResourceController staticResourceController;
-    
+
+    /** Simple Operation. */
+    protected OperationsController operationsController;
+
     /** Mapping PATH <=> Controller */
     protected static Map < String , AbstractController > mapOfControllers = new HashMap<String , AbstractController>();
-    
+
     /**
      * Servlet initialization, init FF4J from "ff4jProvider" attribute Name.
      *
@@ -92,14 +96,16 @@ public class FF4jServlet extends HttpServlet {
         LOGGER.info("|_| |_|    |_|_/ |");
         LOGGER.info("             |__/  v" + getClass().getPackage().getImplementationVersion());
         LOGGER.info(" ");
-        
+
         if (ff4j == null) {
         	initializeFF4J(servletConfig);
         }
-        
+
     	initializeTemplateEngine();
-    	
+
     	staticResourceController = new StaticResourceController(ff4j, templateEngine);
+    	operationsController = new OperationsController(ff4j, templateEngine);
+
     	addController(new HomeController(ff4j, templateEngine));
     	addController(new FeaturesController(ff4j, templateEngine));
     	addController(new FeatureUsageController(ff4j, templateEngine));
@@ -108,11 +114,11 @@ public class FF4jServlet extends HttpServlet {
     	addController(new InfosController(ff4j, templateEngine));
     	addController(new NotFoundController(ff4j, templateEngine));
     }
-    
+
     private void addController(AbstractController ac) {
     	mapOfControllers.put(ac.getSuccessView(), ac);
     }
-    
+
     /**
      * Initialize FF4J configuration.
      *
@@ -135,7 +141,7 @@ public class FF4jServlet extends HttpServlet {
 	    } catch (ClassCastException ce) {
 	    	throw new IllegalArgumentException("ff4jProvider expected instance of " + FF4JProvider.class, ce);
 	    }
-	
+
 	    ff4j = ff4jProvider.getFF4j();
 	    servletConfig.getServletContext().setAttribute(FF4J_SESSIONATTRIBUTE_NAME, ff4j);
 	    LOGGER.debug("Servlet has been initialized and ff4j store in session with {} ", ff4j.getFeatures().size());
@@ -145,7 +151,7 @@ public class FF4jServlet extends HttpServlet {
 	        servletConfig.getServletContext().setAttribute(CSS_SESSIONATTRIBUTE_NAME, cssFile);
 	    }
     }
-    
+
     /**
      * Initialize Thymeleaf.
      *
@@ -157,11 +163,11 @@ public class FF4jServlet extends HttpServlet {
 	    templateResolver.setPrefix("views/view-");
 	    templateResolver.setSuffix(".html");
 	    templateResolver.setCacheTTLMs(3600000L);
-	    
+
 	    templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
         templateEngine.addMessageResolver(new CustomMessageResolver());
         LOGGER.info("Thymeleaf has been initialized");
     }
-    
+
 }

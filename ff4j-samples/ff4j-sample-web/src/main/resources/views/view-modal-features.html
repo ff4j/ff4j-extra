@@ -55,7 +55,7 @@
         style="color:#00ab8b;font-style:normal;font-weight:normal;">Feature Name</label>
       <div class="controls">   
         <input type="text" name="uid" id="uid" 
-            style="width:250px;height:30px;" required="required"/>  
+            style="width:250px;height:18px;color:#5C5EDC" required="required"/>  
       </div>
     </div>
 
@@ -63,8 +63,8 @@
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
       <label class="control-label" for="desc" style="color:#00ab8b;font-style:normal">Description</label>  
       <div class="controls">
-        <textarea class="field span4" style="width:250px"
-            name="desc" id="desc" rows="2" cols="33"></textarea>
+        <textarea class="field span4" style="width:350px;color:#5C5EDC"
+            name="desc" id="desc" rows="2" cols="30"></textarea>
       </div>
     </div>
 
@@ -73,12 +73,12 @@
       <label class="control-label" for="group" style="color:#00ab8b;font-style:normal">Group</label>  
         <div class="controls">
           <div class="btn-group">
-            <input type="text" name="groupName" id="groupName" style="width:250px;height:30px;" />
-            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-right:79px">
+            <input type="text" name="groupName" id="groupName" style="width:350px;height:18px;color:#5C5EDC" />
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-inbox icon-white" ></i></span>
             </button>
-            <ul class="dropdown-menu" role="menu" style="width:250px;font-style:normal;color:#696969">
+            <ul class="dropdown-menu" role="menu" style="width:350px;font-style:normal;color:#696969">
               <li th:each="group : ${groupList}">
                 <a href="#" onclick="$('#modalEdit #groupName').val('${group}');" >
                     <span th:text="${group}">group</span>
@@ -96,8 +96,8 @@
       <label class="control-label" for="strategy" style="color:#00ab8b;font-style:normal">Strategy</label>  
       <div class="controls">
         <div class="btn-group">
-            <input type="text" name="strategy" id="strategy" style="width:250px;height:30px;font-style:normal" />
-            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-right:79px">
+            <input type="text" name="strategy" id="strategy" style="width:350px;height:18px;font-style:normal;color:#5C5EDC" />
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-cog icon-white" ></i></span>
             </button>
@@ -132,9 +132,7 @@
           </div>
         </div>
          <div id="stratlist" class="controls hide" style="font-style:normal">
-         <p/><br/>
-          <span style="color:#00ab8b"><i class="icon-star"></i>&nbsp;Please Give init param :</span>
-          <br/><input type="text" name="initParams" id="initParams" style="width:250px;height:30px;font-style:normal" />
+          <input type="text" name="initParams" id="initParams" style="margin-top:8px;width:345px;height:18px;font-style:normal" />
       </div>
       </div>
 
@@ -143,79 +141,66 @@
       <label class="control-label" for="permission" style="color:#00ab8b;font-style:normal">Permissions</label>  
       <div class="controls">
         <div class="btn-group">
-            <input type="text" name="permission" id="permission" style="width:250px;height:30px;font-style:normal" 
+            <input type="text" name="permission" id="permission" style="width:350px;height:18px;font-style:normal;color:#5C5EDC" 
             value="Public" readonly="readonly" />
-            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-right:79px">
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-user icon-white" ></i></span>
             </button>
-            <ul class="dropdown-menu" role="menu" style="width:250px;font-style:normal">
+            <ul class="dropdown-menu" role="menu" style="width:350px;font-style:normal">
                 <li><a href="#" onclick="javascript:$('#modalEdit #permission').val('Public');$('#modalEdit #permlist').hide();">
                     <i class="icon-flag" ></i>&nbsp;Public</a></li>
                 <li><a href="#" onclick="javascript:$('#modalEdit #permission').val('Restricted');$('#modalEdit #permlist').show();">
-                    <i class="icon-lock" ></i>&nbsp;Restricted</a></li>
+                    <i class="icon-lock" ></i>&nbsp;Define required roles...</a></li>
             </ul>
         </div>
       </div>
       <div id="permlist" class="controls hide" style="font-style:normal">
-        <p/><br/><span style="color:#00ab8b"><i class="icon-list"></i>&nbsp;Please select your permissions :</span>
-        <br/>
+        <table class="table table-bordered table-condensed" style="margin-top:8px;width:345px">
+         <tbody id="modalEditFeaturePermissions">
+         </tbody>
+        </table>
       </div>
      </div><!-- Control group -->
+     
+     
+    <!-- Properties --> 
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
+      <label class="control-label" for="properties" style="color:#00ab8b;font-style:normal">Properties</label>  
+      <div class="controls"  id="propertyList">
+        <table class="table table-bordered table-condensed" style="margin-top:8px;width:345px">
+         <tbody id="modalEditFeatureProperties">
+           <tr>
+            <td style="width:300px">Property1 (int)</td>
+            <td><a href="#" ><i class="icon-trash"></i></a>
+           </td>
+           </tr>
+           <tr>
+            <td style="width:300px">Property1 (int)</td>
+            <td><a href="#" ><i class="icon-plus"></i></a>
+           </td>
+           </tr>
+         </tbody>
+        </table>
+      </div>
+     </div><!-- Control group -->
+     
     </div> <!-- Modal-body -->
     
     <div class="modal-footer">
       <button class="btn btn" data-dismiss="modal"><i class="icon-remove" ></i>&nbsp;Cancel</button>
       <button class="btn btn-green" type="submit"><i class="icon-refresh icon-white" ></i>&nbsp;Update </button>
     </div>
-
-     <script type="text/javascript" >
-     
-      $(document).on("click", ".open-EditFlipDialog", function () {
-        $("#modalEdit #uid").val($(this).data('id'));
-        $("#modalEdit #desc").val($(this).data('desc'));
-        $("#modalEdit #groupName").val($(this).data('group'));
-        
-        /* --------- */
-        /* Strategy  */
-        /* --------- */
-        var strategy = $(this).data('strategy');
-        $("#modalEdit #strategy").val(strategy);
-        if (strategy == '') {
-          $("#modalEdit #stratlist").hide();
-          $("#modalEdit #initParams").val('');
-        } else {
-          $("#modalEdit #stratlist").show();
-          var initParams = $(this).data('stratparams').replace("{", "").replace("}", "");
-          $("#modalEdit #initParams").val(initParams);
-        }
-        
-        /* ------------ */
-        /* Permissions. */
-        /* ------------ */
-        var permissions = $(this).data('permissions').replace("[", "").replace("]", "");
-        if (permissions == '') {
-          $("#modalEdit #permlist").hide();
-          $("#modalEdit #permission").val('Public');
-        } else {
-          $("#modalEdit #permission").val('Restricted');
-          $("#modalEdit #permlist").show();
-          // Split permissions
-          var arrayOfPermissions = permissions.split(',');
-          for(perm in arrayOfPermissions) {
-            $("#modalEdit #perm-check-" + arrayOfPermissions[perm].trim()).attr('checked', true);
-          }
-        }
-        
-        });
-      </script>
       
     <input type="hidden" name="op" value="update"  />
   </div>
 </form>
 
-
-
+<script type="text/javascript" >
+ $(document).on("click", ".open-EditFlipDialog", function () {
+	 ff4j_updateModalEditFeature($(this).data('id'));
+ });
+</script>
 
 </div> 
  
