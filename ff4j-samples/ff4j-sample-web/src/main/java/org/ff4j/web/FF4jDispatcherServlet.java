@@ -9,33 +9,18 @@ import static org.ff4j.web.FF4jWebConstants.VIEW_STATIC;
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_HTML;
 import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_JSON;
 import static org.ff4j.web.embedded.ConsoleConstants.FEATID;
-import static org.ff4j.web.embedded.ConsoleConstants.FLIPFILE;
-import static org.ff4j.web.embedded.ConsoleConstants.GROUPNAME;
-import static org.ff4j.web.embedded.ConsoleConstants.NAME;
 import static org.ff4j.web.embedded.ConsoleConstants.OPERATION;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_FIXEDVALUE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_DELETE_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_FEATURE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_READ_PROPERTY;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PROPERTY;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_TOGGLE_GROUP;
 import static org.ff4j.web.embedded.ConsoleConstants.PARAM_FIXEDVALUE;
-import static org.ff4j.web.embedded.ConsoleConstants.SUBOPERATION;
-import static org.ff4j.web.embedded.ConsoleOperations.createFeature;
-import static org.ff4j.web.embedded.ConsoleOperations.createProperty;
 import static org.ff4j.web.embedded.ConsoleOperations.exportFile;
-import static org.ff4j.web.embedded.ConsoleOperations.importFile;
-import static org.ff4j.web.embedded.ConsoleOperations.updateFeatureDescription;
-import static org.ff4j.web.embedded.ConsoleOperations.updateProperty;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 import static org.ff4j.web.embedded.ConsoleRenderer.renderMessageBox;
-import static org.ff4j.web.embedded.ConsoleRenderer.renderMsgGroup;
 import static org.ff4j.web.embedded.ConsoleRenderer.renderMsgProperty;
 import static org.ff4j.web.embedded.ConsoleRenderer.renderPage;
 
@@ -60,16 +45,11 @@ import static org.ff4j.web.embedded.ConsoleRenderer.renderPage;
  */
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.FilenameUtils;
 import org.ff4j.property.Property;
 import org.ff4j.web.embedded.ConsoleRenderer;
 import org.slf4j.Logger;
@@ -131,46 +111,27 @@ public class FF4jDispatcherServlet extends FF4jServlet {
     /** {@inheritDoc} */
     public void doPost(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {
-        String message = null;
-        String messagetype = "info";
-        
+       
         String targetView = getTargetView(req);
-        try {
-        	// Upload file is import
-            if (ServletFileUpload.isMultipartContent(req)) {
-                List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
-                for (FileItem item : items) {
-                    if (item.isFormField()) {
-                        if (OPERATION.equalsIgnoreCase(item.getFieldName())) {
-                            LOGGER.info("Processing action : " + item.getString());
-                        }
-                    } else if (FLIPFILE.equalsIgnoreCase(item.getFieldName())) {
-                        String filename = FilenameUtils.getName(item.getName());
-                        if (filename.toLowerCase().endsWith("xml")) {
-                            importFile(getFf4j(), item.getInputStream());
-                            message = "The file <b>" + filename + "</b> has been successfully imported";
-                        } else {
-                            messagetype = ERROR;
-                            message = "Invalid FILE, must be CSV, XML or PROPERTIES files";
-                        }
-                    }
-                }
-                mapOfControllers.get(VIEW_DEFAULT).get(req, res);
+        
+        if (VIEW_API.equals(targetView)) {
+            operationsController.post(req, res, null);
+        
+        } else if (!mapOfControllers.containsKey(targetView)) {
+            targetView = VIEW_404;
+        
+        } else {
+            mapOfControllers.get(targetView).post(req, res);
+        }
 
-            } else {
-
+        /*
                 String operation = req.getParameter(OPERATION);
-                String uid = req.getParameter(FEATID);
+                String uid       = req.getParameter(FEATID);
+                String message = null;
+                String messagetype = "info";
                 LOGGER.info("POST - op=" + operation + " feat=" + uid);
                 if (operation != null && !operation.isEmpty()) {
-
-                    if (OP_EDIT_FEATURE.equalsIgnoreCase(operation)) {
-                        updateFeatureDescription(getFf4j(), req);
-                        message = msg(uid, "UPDATED");
-
-                    } else if (OP_EDIT_PROPERTY.equalsIgnoreCase(operation)) {
-                        updateProperty(getFf4j(), req);
-                        message = renderMsgProperty(uid, "UPDATED");
+                    
 
                     } else if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
                         createProperty(getFf4j(), req);
@@ -203,15 +164,8 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                     LOGGER.error("No ID provided" + operation);
                     messagetype = ERROR;
                     message = "Invalid UID";
-                }
-                renderPage(ff4j, req, res, message, messagetype);
-            }
+                }*/
 
-        } catch (Exception e) {
-            messagetype = ERROR;
-            message = e.getMessage();
-            LOGGER.error("An error occured ", e);
-        }
     }
 
     public void pageCore(HttpServletRequest req, HttpServletResponse res) throws IOException {

@@ -1,5 +1,10 @@
 package org.ff4j.web.controller;
 
+import static org.ff4j.web.embedded.ConsoleConstants.DESCRIPTION;
+import static org.ff4j.web.embedded.ConsoleConstants.GROUPNAME;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_PERMISSION;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
+
 /*
  * #%L
  * ff4j-sample-web
@@ -22,16 +27,19 @@ package org.ff4j.web.controller;
 
 
 import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_PERMISSION;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PERMISSION;
+import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY;
+import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY_INIT;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +48,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
+import org.ff4j.core.FlippingStrategy;
+import org.ff4j.utils.MappingUtil;
 import org.ff4j.utils.Util;
 import org.ff4j.web.FF4jWebConstants;
+import org.ff4j.web.embedded.ConsoleOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
@@ -54,7 +65,7 @@ import org.thymeleaf.context.WebContext;
  */
 public class FeaturesController extends AbstractController {
 
-	 /** Logger for this class. */
+	/** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(FeaturesController.class);
 
     /** View name. */
@@ -68,7 +79,82 @@ public class FeaturesController extends AbstractController {
 	/** {@inheritDoc} */
     public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws IOException {
+        String msg       = null;
+        String msgType   = "success";
+        String operation = req.getParameter(FF4jWebConstants.OPERATION);
+        String featureId = req.getParameter(FF4jWebConstants.FEATID);
+        
+        if (OP_EDIT_FEATURE.equalsIgnoreCase(operation)) {
+            this.updateFeature(req, featureId);
+            msg = featureId + " has been UPDATED";
+            
+        } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
+            ConsoleOperations.createFeature(getFf4j(), req);
+            msg = featureId + " has been CREATED";
+        }
+        
+        ctx.setVariable("msgType", msgType);
+        ctx.setVariable("msgInfo", msg);
+        renderPage(ctx);
     }
+    
+    /**
+     * Allow to update feature.
+     *
+     * @param featureId
+     */
+    private void updateFeature(HttpServletRequest req, String featureId) {
+        Feature old = ff4j.getFeatureStore().read(featureId);
+        // Core
+        Feature fp = new Feature(featureId, old.isEnable());
+        fp.setPermissions(old.getPermissions());
+        fp.setCustomProperties(old.getCustomProperties());
+        fp.setFlippingStrategy(buildFlippingStrategy(req, fp.getUid()));
+        
+        // Description
+        final String featureDesc = req.getParameter(DESCRIPTION);
+        if (Util.hasLength(featureDesc)) {
+            fp.setDescription(featureDesc);
+        }
+        // GroupName
+        final String groupName = req.getParameter(GROUPNAME);
+        if (Util.hasLength(groupName)) {
+            fp.setGroup(groupName);
+        }
+        // Creation
+        ff4j.getFeatureStore().update(fp);
+    }
+  
+  /**
+   * Create Flipping Strategy from parameters.
+   *
+   * @param req
+   *        current http query
+   * @param fp
+   *        current feature
+   * @return
+   *        instance of strategy
+   */
+  private FlippingStrategy buildFlippingStrategy(HttpServletRequest req, String uid) {
+      String strategy       = req.getParameter(STRATEGY);
+      String strategyParams = req.getParameter(STRATEGY_INIT);
+      FlippingStrategy    fstrategy  = null;
+      Map<String, String> initParams = new HashMap<String, String>();
+      if (Util.hasLength(strategy)) {
+          if (Util.hasLength(strategyParams)) {
+            String[] params = strategyParams.split(";");
+            for (String currentP : params) {
+              String[] cur = currentP.split("=");
+              if (cur.length < 2) {
+                throw new IllegalArgumentException("Invalid Syntax : param1=val1,val2;param2=val3,val4");
+              }
+              initParams.put(cur[0], cur[1]);
+            }
+         }
+         fstrategy =  MappingUtil.instanceFlippingStrategy(uid, strategy, initParams);
+      }
+      return fstrategy;
+    } 
     
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
@@ -105,6 +191,16 @@ public class FeaturesController extends AbstractController {
                     getFf4j().getFeatureStore().update(feature);
                     LOGGER.info("Add new " + permName + " to " + featureId );
                 }
+                
+                if (OP_RMV_PERMISSION.equalsIgnoreCase(operation)) {
+                    String permName = req.getParameter(FF4jWebConstants.PERMISSION);
+                    Feature feature = getFf4j().getFeatureStore().read(featureId);
+                    feature.getPermissions().remove(permName);
+                    getFf4j().getFeatureStore().update(feature);
+                    LOGGER.info("Remove " + permName + " to " + featureId );
+                }
+                
+                //if (OP_CLEAR_PERMISSION.equalsIgnoreCase(operation)) {
                     
             } else {
                 msgType = "warning";
@@ -116,6 +212,12 @@ public class FeaturesController extends AbstractController {
         renderPage(ctx);
     }
 
+    /**
+     * Both get and post operation will render the page.
+     *
+     * @param ctx
+     *      current web context
+     */
 	private void renderPage(WebContext ctx) {
 	    ctx.setVariable(KEY_TITLE, "Features");
 

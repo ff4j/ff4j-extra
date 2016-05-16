@@ -62,6 +62,23 @@ public abstract class AbstractController {
     	this.templateEngine = te;
     }
 
+    private String getUptime() {
+        StringBuilder sb = new StringBuilder();
+        long uptime = System.currentTimeMillis() - ff4j.getStartTime();
+        long daynumber = uptime / (1000 * 3600 * 24L);
+        uptime = uptime - daynumber * 1000 * 3600 * 24L;
+        long hourNumber = uptime / (1000 * 3600L);
+        uptime = uptime - hourNumber * 1000 * 3600L;
+        long minutenumber = uptime / (1000 * 60L);
+        uptime = uptime - minutenumber * 1000 * 60L;
+        long secondnumber = uptime / 1000L;
+        sb.append(daynumber + " days ");
+        sb.append(hourNumber + " hours ");
+        sb.append(minutenumber + " min ");
+        sb.append(secondnumber + " sec");
+        return sb.toString();
+    }
+    
     /**
      * Invoked by dispatcher.
      *
@@ -75,21 +92,7 @@ public abstract class AbstractController {
     public void get(HttpServletRequest req, HttpServletResponse res)
     throws IOException {
     	WebContext ctx = new WebContext(req, res,  req.getSession().getServletContext(), req.getLocale());
-
-    	StringBuilder sb = new StringBuilder();
-    	long uptime = System.currentTimeMillis() - ff4j.getStartTime();
-    	long daynumber = uptime / (1000 * 3600 * 24L);
-    	uptime = uptime - daynumber * 1000 * 3600 * 24L;
-    	long hourNumber = uptime / (1000 * 3600L);
-    	uptime = uptime - hourNumber * 1000 * 3600L;
-    	long minutenumber = uptime / (1000 * 60L);
-    	uptime = uptime - minutenumber * 1000 * 60L;
-    	long secondnumber = uptime / 1000L;
-    	sb.append(daynumber + " days ");
-    	sb.append(hourNumber + " hours ");
-    	sb.append(minutenumber + " min ");
-    	sb.append(secondnumber + " sec");
-    	ctx.setVariable("uptime", sb.toString());
+    	ctx.setVariable("uptime",  getUptime());
     	ctx.setVariable("version", ff4j.getVersion());
 
     	// Adding attribute to response
@@ -102,6 +105,34 @@ public abstract class AbstractController {
 
     	// Render to view
     	templateEngine.process(getSuccessView(), ctx, res.getWriter());
+    }
+    
+    /**
+     * Invoked by dispatcher.
+     *
+     * @param req
+     *      current request
+     * @param res
+     *      current response
+     * @throws IOException
+     *      error occured.
+     */
+    public void post(HttpServletRequest req, HttpServletResponse res)
+    throws IOException {
+        WebContext ctx = new WebContext(req, res,  req.getSession().getServletContext(), req.getLocale());
+        ctx.setVariable("uptime",  getUptime());
+        ctx.setVariable("version", ff4j.getVersion());
+
+        // Adding attribute to response
+        try {
+            post(req, res, ctx);
+        } catch(Throwable t) {
+            ctx.setVariable("msgType", "error");
+            ctx.setVariable("msgInfo", t.getMessage());
+        }
+
+        // Render to view
+        templateEngine.process(getSuccessView(), ctx, res.getWriter());
     }
 
 	/**
@@ -129,7 +160,7 @@ public abstract class AbstractController {
      *      target error
      */
     public abstract void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-    throws IOException;
+    throws Exception;
 
 	/**
 	 * Getter accessor for attribute 'ff4j'.
