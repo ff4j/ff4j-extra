@@ -90,6 +90,39 @@
   </div>
 </div>
 
+<div th:fragment="subnavbarfeatures">
+ <div class="subnavbar-inner">
+  <div class="container">
+   <ul class="mainnav">
+    
+    <li >
+     <a href="" th:href="@{home}" >
+       <i class="icon-arrow-left"></i>
+      <span>Back</span>
+     </a>
+    </li>
+    <li >
+     <a class="open-AddFlipDialog" data-toggle="modal" href="#modalCreate">
+      <i class="icon-plus"></i>
+      <span>New Feature</span>
+     </a>
+    </li>    
+     <li >
+     <a class="open-ToggleDialog" data-toggle="modal" href="modalToggle">
+      <i class="icon-adjust"></i>
+      <span>Toggle Group</span>
+     </a>
+    </li>
+       
+      </ul>
+      
+      <div style="float:right;margin-top:20px;color:#687684">
+       <b>Uptime :</b> <span th:text="${uptime}">n/a</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div th:fragment="subnavbarback">
  <div class="subnavbar-inner">
   <div class="container">

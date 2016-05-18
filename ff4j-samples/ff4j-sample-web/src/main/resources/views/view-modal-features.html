@@ -52,28 +52,28 @@
   <div class="modal-body" style="height:500px;">    
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px"> 
       <label class="control-label" for="uid" 
-        style="color:#00ab8b;font-style:normal;font-weight:normal;">Feature Name</label>
+        style="color:#687684;font-style:normal;font-weight:normal;">Feature Name</label>
       <div class="controls">   
         <input type="text" name="uid" id="uid" 
-            style="width:350px;height:18px;color:#5C5EDC" required="required" readonly="true"/>  
+            style="width:350px;height:18px;color:#008bab;background-color:white" required="required" readonly="true"/>  
       </div>
     </div>
 
     <!-- Description --> 
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
-      <label class="control-label" for="desc" style="color:#00ab8b;font-style:normal">Description</label>  
+      <label class="control-label" for="desc" style="color:#687684;font-style:normal">Description</label>  
       <div class="controls">
-        <textarea class="field span4" style="width:350px;color:#5C5EDC"
+        <textarea class="field span4" style="width:350px;color:#008bab"
             name="desc" id="desc" rows="2" cols="30"></textarea>
       </div>
     </div>
 
     <!-- Group --> 
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
-      <label class="control-label" for="group" style="color:#00ab8b;font-style:normal">Group</label>  
+      <label class="control-label" for="group" style="color:#687684;font-style:normal">Group</label>  
         <div class="controls">
           <div class="btn-group">
-            <input type="text" name="groupName" id="groupName" style="width:350px;height:18px;color:#5C5EDC" />
+            <input type="text" name="groupName" id="groupName" style="width:350px;height:18px;color:#008bab" />
             <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-inbox icon-white" ></i></span>
@@ -93,10 +93,10 @@
 
     <!-- Strategy --> 
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
-      <label class="control-label" for="strategy" style="color:#00ab8b;font-style:normal">Strategy</label>  
+      <label class="control-label" for="strategy" style="color:#687684;font-style:normal">Strategy</label>  
       <div class="controls">
         <div class="btn-group">
-            <input type="text" name="strategy" id="strategy" style="width:350px;height:18px;font-style:normal;color:#5C5EDC" />
+            <input type="text" name="strategy" id="strategy" style="width:350px;height:18px;font-style:normal;color:#008bab" />
             <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-cog icon-white" ></i></span>
@@ -138,20 +138,20 @@
 
     <!-- Permissions --> 
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
-      <label class="control-label" for="permission" style="color:#00ab8b;font-style:normal">Permissions</label>  
+      <label class="control-label" for="permission" style="color:#687684;font-style:normal">Permissions</label>  
       <div class="controls">
         <div class="btn-group">
-            <input type="text" name="permission" id="permission" style="width:350px;height:18px;font-style:normal;color:#5C5EDC" 
+            <input type="text" name="permission" id="permission" style="width:350px;height:18px;font-style:normal;color:#008bab" 
             value="Public" readonly="readonly" />
             <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-user icon-white" ></i></span>
             </button>
             <ul class="dropdown-menu" role="menu" style="width:350px;font-style:normal">
-                <li><a href="#" onclick="javascript:$('#modalEdit #permission').val('Public');$('#modalEdit #permlist').hide();">
-                    <i class="icon-flag" ></i>&nbsp;Public</a></li>
-                <li><a href="#" onclick="javascript:$('#modalEdit #permission').val('Restricted');$('#modalEdit #permlist').show();">
-                    <i class="icon-lock" ></i>&nbsp;Define required roles...</a></li>
+                <li><a href="#" onclick="javascript:ff4j_clearPermissionsForFeature($('#modalEdit #uid').val());" >
+                    <i class="icon-off" ></i>&nbsp;No Permisssions</a></li>
+                <li><a href="#" onclick="javascript:$('#modalEdit #permission').val('Define roles...');$('#modalEdit #permlist').show();">
+                    <i class="icon-user" ></i>&nbsp;Define roles...</a></li>
             </ul>
         </div>
       </div>
@@ -170,16 +170,6 @@
       <div class="controls"  id="propertyList">
         <table class="table table-bordered table-condensed" style="margin-top:8px;width:345px">
          <tbody id="modalEditFeatureProperties">
-           <tr>
-            <td style="width:300px">Property1 (int)</td>
-            <td><a href="#" ><i class="icon-trash"></i></a>
-           </td>
-           </tr>
-           <tr>
-            <td style="width:300px">Property1 (int)</td>
-            <td><a href="#" ><i class="icon-plus"></i></a>
-           </td>
-           </tr>
          </tbody>
         </table>
       </div>
@@ -189,7 +179,7 @@
     
     <div class="modal-footer">
       <button class="btn btn" data-dismiss="modal"><i class="icon-remove" ></i>&nbsp;Cancel</button>
-      <button class="btn btn-green" type="submit"><i class="icon-refresh icon-white" ></i>&nbsp;Update </button>
+      <button class="btn btn-green" type="submit"><i class="icon-save icon-white" ></i>&nbsp;Update </button>
     </div>
       
     <input type="hidden" name="op" value="update"  />
@@ -202,7 +192,82 @@
  });
 </script>
 
-</div> 
+</div>
+
+<!-- ******************* -->
+<!-- FORM CREATE FEATURE -->
+<!-- ******************* -->
+<div th:fragment="modal-create">
+
+<!-- Creation FORM -->
+<form class="form-horizontal" th:action="@{features}" action="" method="POST" >
+ <div class="modal hide fade" id="modalCreate" tabindex="-1" 
+       role="dialog" aria-labelledby="labelCreate" aria-hidden="true">
+   <div class="modal-header">
+      <button class="close" data-dismiss="modal">x</button>
+      <h4 id="labelCreate">
+      <i class="icon-file"></i>&nbsp;
+      <span th:text="#{modal.createfeature.title}" >Create Feature</span></h4>
+   </div>
+   
+  <!-- Body -->
+  <div class="modal-body" style="height:150px;">    
+    
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px"> 
+      <label class="control-label" for="uid" 
+        style="color:#687684;font-style:normal;font-weight:normal;" th:text="#{modal.createfeature.featurename}" >Feature Name</label>
+      <div class="controls">   
+        <input type="text" name="uid" id="uid" 
+            style="width:350px;height:18px;color:#008bab;background-color:white" required="required" />  
+      </div>
+    </div>
+   
+   <!-- Description --> 
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
+      <label class="control-label" for="desc" style="color:#687684;font-style:normal" th:text="#{modal.createfeature.description}">Description</label>  
+      <div class="controls">
+        <textarea class="field span4" style="width:350px;color:#008bab"
+            name="desc" id="desc" rows="2" cols="30"></textarea>
+      </div>
+    </div>
+
+    <!-- Message --> 
+    <div class="control-group" style="margin-left:50px;float:left">
+     <span style="color:#008bab;font-style:italic" th:text="#{modal.createfeature.comment}">
+       Once created, you will access all attributes through edit button
+     </span>
+    </div>
+
+    </div> <!-- modeal body -->
+
+  <div class="modal-footer" >
+    <button class="btn btn" data-dismiss="modal">
+      <i class="icon-remove" ></i>&nbsp;
+      <span th:text="#{modal.createfeature.cancel}">Cancel</span>
+    </button>
+    <button class="btn btn-green" type="submit">
+      <i class="icon-ok icon-white" ></i>&nbsp;
+      <span th:text="#{modal.createfeature.create}">Create</span></button>
+  </div>
+
+   <script type="text/javascript" >
+    $(document).on("click", ".open-AddFlipDialog", function () { $(".modal-body #uid").focus();});
+   </script>
+
+   <input type="hidden" name="op" value="create"  />
+ </div>
+</form>
+
+
+
+</div>
+
+<!-- ******************** -->
+<!-- FORM CREATE FEATURE -->
+<!-- ******************* -->
+<div th:fragment="modal-toggle">
+</div>
+
  
     
 </body>

@@ -31,6 +31,7 @@ import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PERMISSION;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_CLEAR_PERMISSIONS;
 import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY;
 import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY_INIT;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
@@ -200,7 +201,12 @@ public class FeaturesController extends AbstractController {
                     LOGGER.info("Remove " + permName + " to " + featureId );
                 }
                 
-                //if (OP_CLEAR_PERMISSION.equalsIgnoreCase(operation)) {
+                if (OP_CLEAR_PERMISSIONS.equalsIgnoreCase(operation)) {
+                    Feature feature = getFf4j().getFeatureStore().read(featureId);
+                    feature.getPermissions().clear();
+                    getFf4j().getFeatureStore().update(feature);
+                    LOGGER.info("Clear permissions for " + featureId);
+                }
                     
             } else {
                 msgType = "warning";

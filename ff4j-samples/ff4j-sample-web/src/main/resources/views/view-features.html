@@ -5,13 +5,13 @@
   
 <div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
 
-<div class="subnavbar" th:include="navbar :: subnavbar"></div>
+<div class="subnavbar" th:include="navbar :: subnavbarfeatures"></div>
 
 <div id="wrapper" class="container" >
  <div class="row">
   <div class="span9"> 
    <div id="content" class="clearfix" >
-    <div class="main-inner" style="margin-top:60px">
+    <div class="main-inner" style="margin-top:60px;margin-left:-30px">
      <div class="container">
      
   <div th:if="${msgInfo} != null">
@@ -33,27 +33,15 @@
     </div>
 
    <div class="widget-content">
-    
-   <div style="float:right;margin:10px;font-size:10px">
-    <button type="button" class="btn btn-green" data-toggle="modal" href="#modalCreate">
-       <i class="icon-plus icon-white" style="margin-left:10px"></i>
-       <span>New</span>
-   </button>
-   <button type="button" class="btn btn-green" data-toggle="modal" href="#modalToggle" > 
-    <i class="icon-th-list icon-white"></i>
-    <span>Toggle Group</span>
-   </button>
-  </div>
-  
    
-   
-	<table class="table table-striped table-bordered">
+	<table class="table table-striped table-bordered" style="margin-top:10px;">
      <thead>
       <tr>
-       <th style="width:15%;text-align:center"><span th:text="#{feature.table.name}">Feature</span></th>
+       <th style="width:200px;text-align:center"><span th:text="#{feature.table.name}">Feature</span></th>
        <th style="width:15%;text-align:center"><span th:text="#{feature.table.group}">Group</span></th>
-       <th style="width:20%;text-align:center"><span th:text="#{feature.table.role}">Permissions</span></th>
-       <th style="width:32%;text-align:center"><span th:text="#{feature.table.strategy}">Strategy</span></th>
+       <th style="width:15%;text-align:center"><span th:text="#{feature.table.role}">Permissions</span></th>
+       <th style="width:20%;text-align:center"><span th:text="#{feature.table.strategy}">Strategy</span></th>
+       <th style="width:20%;text-align:center"><span th:text="#{feature.table.properties}">Properties</span></th>
        <th style="width:8%;text-align:center"><span th:text="#{feature.table.toggle}">Toggle</span></th>
        <th style="width:5%;text-align:center">E</th>
        <th style="width:5%;text-align:center">D</th>
@@ -61,20 +49,44 @@
     </thead>
     <tbody>
      <tr th:each="feat : ${listOfFeatures}">
-	  <td><a class="ff4j-tooltip" tooltip="" th:attr="tooltip=${feat.description}" style="color:#5C5EDC">
+	  <td><a class="ff4j-tooltip" tooltip="" th:attr="tooltip=${feat.description}" style="color:#008bab;font-weight:bold">
 	    <span th:text="${feat.uid}">uid</span></a>
 	  </td>
-	  <td>
+	  <td style="text-align:center">
 	   <span th:text="${feat.group}">---</span>
 	  </td>
-	  <td>
-	  	<span th:each="perm,iterStat : ${feat.permissions}">
-	  		<span th:text="${iterStat.index == 0} ? ${perm} : ',' + ${perm}" >element</span>
-	  	</span>
+	  <td style="text-align:center">	    
+	    <span th:if="${not #sets.isEmpty(feat.permissions)}" class="ff4j-tooltip" th:attr="tooltip=${feat.permissions}">
+	     <span style="color:#008bab" th:text="${#sets.size(feat.permissions)}" >x</span>
+	     element(s)
+	    </span>
 	  </td>
 	 <td style="word-break: break-all;">
-	   <span th:text="${feat.flippingStrategy}">---</span>
+	   <span th:if="${feat.flippingStrategy} != null">
+	     <b><span th:text="${feat.flippingStrategy.class.simpleName}">---</span></b>
+	     <span th:each="initParam : ${feat.flippingStrategy.initParams}">
+            <li type="square">
+            <span th:text="${initParam.key}"></span>=
+            <span style="color:#008bab" th:text="${initParam.value}"></span>
+            </li>
+         </span>
+       </span>
 	 </td>
+	 <td>
+	 <span th:if="${not #maps.isEmpty(feat.customProperties)}">
+         <span style="color:#008bab" th:text="${#maps.size(feat.customProperties)}" 
+                th:onclick="'javascript:show(\'detail-' + ${feat.uid} + '\')'">x</span>
+         element(s)
+        </span>
+        <div id="detail" th:id="'detail-' + ${feat.uid}" class="hide">
+		    <span id="OK" th:each="customProperty : ${feat.customProperties}">
+	            <li type="square">
+	             <span th:text="${customProperty.key}"></span>=
+	             <span style="color:#008bab" th:text="${customProperty.value.value}"></span>
+	            </li>
+	        </span>
+        </div>
+     </td>
 	 <td style="width:8%;text-align:center">
 	  <label class="switch switch-green">
 	   <input th:attr="id=${feat.uid}" id="x" 
@@ -112,6 +124,11 @@
 </div>
    
 <div th:include="modal-features :: modal-edit"></div>
+
+<div th:include="modal-features :: modal-create"></div>
+
+<div th:include="modal-features :: modal-toggle"></div>
+
 
 </body>
 </html>

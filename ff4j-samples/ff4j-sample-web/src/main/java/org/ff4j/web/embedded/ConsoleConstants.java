@@ -98,6 +98,9 @@ public class ConsoleConstants {
     
     /** User operation: remove feature. */
     public static final String OP_RMV_PERMISSION = "deletePermission";
+    
+    /** User operation: remove feature. */
+    public static final String OP_CLEAR_PERMISSIONS = "clearPermissions";
 
     /** User operation: remove feature. */
     public static final String OP_RMV_PROPERTY = "deleteProperty";
