@@ -258,17 +258,82 @@
  </div>
 </form>
 
-
-
 </div>
 
 <!-- ******************** -->
-<!-- FORM CREATE FEATURE -->
+<!-- FORM TOGGLE GROUP -->
 <!-- ******************* -->
 <div th:fragment="modal-toggle">
-</div>
 
- 
+<form class="form-horizontal" th:action="@{features}" action="" method="POST" >
+
+  <div class="modal hide fade" id="modalToggle" tabindex="-1" 
+       role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+    <div class="modal-header">   
+      <button class="close" data-dismiss="modal">x</button>   
+      <h4 id="myModalLabel">
+      <i class="icon-th-list icon-white"></i>&nbsp;
+      Toggle a group of features
+      </h4>
+    </div>
+
+    <div class="modal-body" style="height:120px">
+    
+     <!-- Group --> 
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
+      <label class="control-label" for="group" style="color:#687684;font-style:normal">Group</label>  
+        <div class="controls">
+          <div class="btn-group">
+            <input type="text" name="groupName" id="groupName" style="width:350px;height:18px;color:#008bab" />
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
+              <span class="caret"></span>
+              <span class="sr-only"><i class="icon-inbox icon-white" ></i></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="width:350px;font-style:normal;color:#696969">
+              <li th:each="group : ${groupList}">
+                <a href="#" th:onclick="'$(\'#modalToggle #groupName\').val(\'' + ${group} + '\');'">
+                    <span th:text="${group}">group</span>
+                </a>
+               </li>
+               <li class="divider"></li>
+              <li><a href="#" onclick="javascript:$('#modalToggle #groupName').val('');">None</a></li>
+            </ul>
+          </div> <!-- btn-group -->     
+        </div> <!-- controls -->
+      </div> <!-- control-group -->
+      
+       <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
+      <label class="control-label" for="ope" style="color:#687684;font-style:normal">Operation</label>  
+      <div class="controls">
+        <div class="btn-group">
+            <input type="text" name="ope" id="ope" style="width:350px;height:18px;color:#008bab;background-color:white" readonly="readonly" />
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
+              <span class="caret"></span>
+              <span class="sr-only"><i class="icon-cog icon-white" ></i></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="width:250px;">
+                <li><a href="#" onclick="javascript:$('#modalToggle #ope').val('enable');">enable</a></li>
+                <li><a href="#" onclick="javascript:$('#modalToggle #ope').val('disable');">disable</a></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="btn btn" data-dismiss="modal"><i class="icon-remove" ></i>&nbsp;Cancel</button>
+      <button class="btn btn-green" type="submit" ><i class="icon-check icon-white" ></i>&nbsp;Validate</button>
+    </div>
+    
+    
+   <input type="hidden" name="op" value="toggleGroup"  />
+
+  </div>
+</form>
+
+
+</div>
     
 </body>
 </html>

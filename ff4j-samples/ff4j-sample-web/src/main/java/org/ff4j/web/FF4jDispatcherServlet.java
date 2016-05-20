@@ -68,26 +68,7 @@ public class FF4jDispatcherServlet extends FF4jServlet {
     /** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(FF4jDispatcherServlet.class);
 
-    /**
-     * Current target view.
-     *
-     * @param req
-     *      current http request
-     * @return
-     *      target view
-     */
-    private String getTargetView(HttpServletRequest req) {
-        String targetView  = VIEW_DEFAULT;
-        String pathInfo    = req.getPathInfo();
-        if (pathInfo != null) {
-            String[] pathParts = pathInfo.split("/");
-            if (pathParts.length > 1) {
-                targetView = pathParts[1];
-            }
-        }
-        return targetView;
-    }
-    
+
     /** {@inheritDoc} */
     public void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {
@@ -136,25 +117,7 @@ public class FF4jDispatcherServlet extends FF4jServlet {
                     } else if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
                         createProperty(getFf4j(), req);
                         message = renderMsgProperty(req.getParameter(NAME), "ADDED");
-
-                    } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
-                        createFeature(getFf4j(), req);
-                        message = msg(uid, "ADDED");
-
-                    } else if (OP_TOGGLE_GROUP.equalsIgnoreCase(operation)) {
-                        String groupName = req.getParameter(GROUPNAME);
-                        if (groupName != null && !groupName.isEmpty()) {
-                            String operationGroup = req.getParameter(SUBOPERATION);
-                            if (OP_ENABLE.equalsIgnoreCase(operationGroup)) {
-                                getFf4j().getFeatureStore().enableGroup(groupName);
-                                message = renderMsgGroup(groupName, "ENABLED");
-                                LOGGER.info("Group '" + groupName + "' has been ENABLED.");
-                            } else if (OP_DISABLE.equalsIgnoreCase(operationGroup)) {
-                                getFf4j().getFeatureStore().disableGroup(groupName);
-                                message = renderMsgGroup(groupName, "DISABLED");
-                                LOGGER.info("Group '" + groupName + "' has been DISABLED.");
-                            }
-                        }
+                    
                     } else {
                         LOGGER.error("Invalid POST OPERATION" + operation);
                         messagetype = ERROR;
@@ -168,6 +131,27 @@ public class FF4jDispatcherServlet extends FF4jServlet {
 
     }
 
+    /**
+     * Current target view.
+     *
+     * @param req
+     *      current http request
+     * @return
+     *      target view
+     */
+    private String getTargetView(HttpServletRequest req) {
+        String targetView  = VIEW_DEFAULT;
+        String pathInfo    = req.getPathInfo();
+        if (pathInfo != null) {
+            String[] pathParts = pathInfo.split("/");
+            if (pathParts.length > 1) {
+                targetView = pathParts[1];
+            }
+        }
+        return targetView;
+    }
+    
+    
     public void pageCore(HttpServletRequest req, HttpServletResponse res) throws IOException {
     	String message = null;
         String messagetype = "info";

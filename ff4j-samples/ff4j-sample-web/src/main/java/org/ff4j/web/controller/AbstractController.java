@@ -70,12 +70,9 @@ public abstract class AbstractController {
         long hourNumber = uptime / (1000 * 3600L);
         uptime = uptime - hourNumber * 1000 * 3600L;
         long minutenumber = uptime / (1000 * 60L);
-        uptime = uptime - minutenumber * 1000 * 60L;
-        long secondnumber = uptime / 1000L;
         sb.append(daynumber + " days ");
         sb.append(hourNumber + " hours ");
         sb.append(minutenumber + " min ");
-        sb.append(secondnumber + " sec");
         return sb.toString();
     }
     

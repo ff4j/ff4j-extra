@@ -48,18 +48,35 @@
       </tr>
     </thead>
     <tbody>
-     <tr th:each="feat : ${listOfFeatures}">
+     <tr th:each="feat,indexFeat : ${listOfFeatures}">
 	  <td><a class="ff4j-tooltip" tooltip="" th:attr="tooltip=${feat.description}" style="color:#008bab;font-weight:bold">
 	    <span th:text="${feat.uid}">uid</span></a>
 	  </td>
 	  <td style="text-align:center">
-	   <span th:text="${feat.group}">---</span>
+	   <span style="color:#008bab" th:text="${feat.group}">---</span>
 	  </td>
-	  <td style="text-align:center">	    
-	    <span th:if="${not #sets.isEmpty(feat.permissions)}" class="ff4j-tooltip" th:attr="tooltip=${feat.permissions}">
-	     <span style="color:#008bab" th:text="${#sets.size(feat.permissions)}" >x</span>
-	     element(s)
-	    </span>
+	  <td >
+	    <div th:if="${not #sets.isEmpty(feat.permissions)}" >
+	      <span style="float:left;" 
+            th:text="${#sets.size(feat.permissions)} + ' items'">x</span>
+           <a th:id="'linkPerm-' + ${indexFeat.count}"
+             style="color:#00ab8b;float:left;" 
+             th:href="'javascript:showFeaturePermissions(' + ${indexFeat.count} + ')'">
+             &nbsp;(<i class="icon-eye-open"></i>)
+         </a>
+         <a th:id="'linkhidePerm-' + ${indexFeat.count}"
+             style="float:left;" 
+             th:href="'javascript:hideFeaturePermissions(' + ${indexFeat.count} + ')'"
+             class="hide">
+             &nbsp;(<i class="icon-eye-close"></i>)</a>
+           <p><br/>
+           <div id="detail" th:id="'detailPerm-' + ${indexFeat.count}" class="hide">
+             <span th:each="perm : ${feat.permissions}">
+              <li type="square"><span style="color:#008bab" th:text="${perm}">x</span></li>
+             </span>
+           </div></p>
+	    </div>
+	   
 	  </td>
 	 <td style="word-break: break-all;">
 	   <span th:if="${feat.flippingStrategy} != null">
@@ -72,19 +89,30 @@
          </span>
        </span>
 	 </td>
-	 <td>
-	 <span th:if="${not #maps.isEmpty(feat.customProperties)}">
-         <span style="color:#008bab" th:text="${#maps.size(feat.customProperties)}" 
-                th:onclick="'javascript:show(\'detail-' + ${feat.uid} + '\')'">x</span>
-         element(s)
-        </span>
-        <div id="detail" th:id="'detail-' + ${feat.uid}" class="hide">
-		    <span id="OK" th:each="customProperty : ${feat.customProperties}">
+	 <td >
+	 <div th:if="${not #maps.isEmpty(feat.customProperties)}" >
+         <span style="color:#008bab;float:left;" 
+         th:text="${#maps.size(feat.customProperties)} + ' items '">x</span>
+         <a th:id="'linkCustomP-' + ${indexFeat.count}"
+             style="color:#00ab8b;float:left;" 
+             th:href="'javascript:showCustomProperties(' + ${indexFeat.count} + ')'">
+             (<i class="icon-eye-open"></i>)
+         </a>
+         <a th:id="'linkhideCustomP-' + ${indexFeat.count}"
+             style="color:#00ab8b;float:left;" 
+             th:href="'javascript:hideCustomProperties(' + ${indexFeat.count} + ')'"
+             class="hide">
+             (<i class="icon-eye-close"></i>)</a>
+        </div>
+        <div id="detail" th:id="'detailCustomP-' + ${indexFeat.count}" class="hide">
+           <p><br/>
+           <span th:each="customProperty : ${feat.customProperties}">
 	            <li type="square">
 	             <span th:text="${customProperty.key}"></span>=
 	             <span style="color:#008bab" th:text="${customProperty.value.value}"></span>
 	            </li>
 	        </span>
+	        </p>
         </div>
      </td>
 	 <td style="width:8%;text-align:center">

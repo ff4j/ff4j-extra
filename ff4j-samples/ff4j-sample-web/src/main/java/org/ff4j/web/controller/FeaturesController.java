@@ -1,10 +1,5 @@
 package org.ff4j.web.controller;
 
-import static org.ff4j.web.embedded.ConsoleConstants.DESCRIPTION;
-import static org.ff4j.web.embedded.ConsoleConstants.GROUPNAME;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_PERMISSION;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
-
 /*
  * #%L
  * ff4j-sample-web
@@ -24,16 +19,20 @@ import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
  * limitations under the License.
  * #L%
  */
-
-
+import static org.ff4j.web.embedded.ConsoleConstants.DESCRIPTION;
+import static org.ff4j.web.embedded.ConsoleConstants.GROUPNAME;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_PERMISSION;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_CLEAR_PERMISSIONS;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PERMISSION;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_CLEAR_PERMISSIONS;
+import static org.ff4j.web.embedded.ConsoleConstants.OP_TOGGLE_GROUP;
 import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY;
 import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY_INIT;
+import static org.ff4j.web.embedded.ConsoleConstants.SUBOPERATION;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 
 import java.io.IOException;
@@ -76,87 +75,7 @@ public class FeaturesController extends AbstractController {
 	public FeaturesController(FF4j ff4j, TemplateEngine te) {
 		super(ff4j, VIEW_FEATURES, te);
 	}
-
-	/** {@inheritDoc} */
-    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-    throws IOException {
-        String msg       = null;
-        String msgType   = "success";
-        String operation = req.getParameter(FF4jWebConstants.OPERATION);
-        String featureId = req.getParameter(FF4jWebConstants.FEATID);
-        
-        if (OP_EDIT_FEATURE.equalsIgnoreCase(operation)) {
-            this.updateFeature(req, featureId);
-            msg = featureId + " has been UPDATED";
-            
-        } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
-            ConsoleOperations.createFeature(getFf4j(), req);
-            msg = featureId + " has been CREATED";
-        }
-        
-        ctx.setVariable("msgType", msgType);
-        ctx.setVariable("msgInfo", msg);
-        renderPage(ctx);
-    }
-    
-    /**
-     * Allow to update feature.
-     *
-     * @param featureId
-     */
-    private void updateFeature(HttpServletRequest req, String featureId) {
-        Feature old = ff4j.getFeatureStore().read(featureId);
-        // Core
-        Feature fp = new Feature(featureId, old.isEnable());
-        fp.setPermissions(old.getPermissions());
-        fp.setCustomProperties(old.getCustomProperties());
-        fp.setFlippingStrategy(buildFlippingStrategy(req, fp.getUid()));
-        
-        // Description
-        final String featureDesc = req.getParameter(DESCRIPTION);
-        if (Util.hasLength(featureDesc)) {
-            fp.setDescription(featureDesc);
-        }
-        // GroupName
-        final String groupName = req.getParameter(GROUPNAME);
-        if (Util.hasLength(groupName)) {
-            fp.setGroup(groupName);
-        }
-        // Creation
-        ff4j.getFeatureStore().update(fp);
-    }
-  
-  /**
-   * Create Flipping Strategy from parameters.
-   *
-   * @param req
-   *        current http query
-   * @param fp
-   *        current feature
-   * @return
-   *        instance of strategy
-   */
-  private FlippingStrategy buildFlippingStrategy(HttpServletRequest req, String uid) {
-      String strategy       = req.getParameter(STRATEGY);
-      String strategyParams = req.getParameter(STRATEGY_INIT);
-      FlippingStrategy    fstrategy  = null;
-      Map<String, String> initParams = new HashMap<String, String>();
-      if (Util.hasLength(strategy)) {
-          if (Util.hasLength(strategyParams)) {
-            String[] params = strategyParams.split(";");
-            for (String currentP : params) {
-              String[] cur = currentP.split("=");
-              if (cur.length < 2) {
-                throw new IllegalArgumentException("Invalid Syntax : param1=val1,val2;param2=val3,val4");
-              }
-              initParams.put(cur[0], cur[1]);
-            }
-         }
-         fstrategy =  MappingUtil.instanceFlippingStrategy(uid, strategy, initParams);
-      }
-      return fstrategy;
-    } 
-    
+	
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
         String operation = req.getParameter(FF4jWebConstants.OPERATION);
@@ -218,29 +137,123 @@ public class FeaturesController extends AbstractController {
         renderPage(ctx);
     }
 
+	/** {@inheritDoc} */
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException {
+        String msg       = null;
+        String msgType   = "success";
+        String operation = req.getParameter(FF4jWebConstants.OPERATION);
+        String featureId = req.getParameter(FF4jWebConstants.FEATID);
+        
+        if (OP_EDIT_FEATURE.equalsIgnoreCase(operation)) {
+            this.updateFeature(req, featureId);
+            msg = featureId + " has been UPDATED";
+            
+        } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
+            ConsoleOperations.createFeature(getFf4j(), req);
+            msg = featureId + " has been CREATED";
+            
+        } else if (OP_TOGGLE_GROUP.equalsIgnoreCase(operation)) {
+            String groupName = req.getParameter(GROUPNAME);
+            if (groupName != null && !groupName.isEmpty()) {
+                String operationGroup = req.getParameter(SUBOPERATION);
+                if (OP_ENABLE.equalsIgnoreCase(operationGroup)) {
+                    getFf4j().getFeatureStore().enableGroup(groupName);
+                    msg = groupName + " has been ENABLED";
+                    LOGGER.info("Group '" + groupName + "' has been ENABLED.");
+                } else if (OP_DISABLE.equalsIgnoreCase(operationGroup)) {
+                    getFf4j().getFeatureStore().disableGroup(groupName);
+                    msg = groupName + " has been DISABLED";
+                    LOGGER.info("Group '" + groupName + "' has been DISABLED.");
+                }
+            }
+        }
+        
+        ctx.setVariable("msgType", msgType);
+        ctx.setVariable("msgInfo", msg);
+        renderPage(ctx);
+    }
+    
+    /**
+     * Allow to update feature.
+     *
+     * @param featureId
+     */
+    private void updateFeature(HttpServletRequest req, String featureId) {
+        Feature old = ff4j.getFeatureStore().read(featureId);
+        // Core
+        Feature fp = new Feature(featureId, old.isEnable());
+        fp.setPermissions(old.getPermissions());
+        fp.setCustomProperties(old.getCustomProperties());
+        fp.setFlippingStrategy(buildFlippingStrategy(req, fp.getUid()));
+        
+        // Description
+        final String featureDesc = req.getParameter(DESCRIPTION);
+        if (Util.hasLength(featureDesc)) {
+            fp.setDescription(featureDesc);
+        }
+        // GroupName
+        final String groupName = req.getParameter(GROUPNAME);
+        if (Util.hasLength(groupName)) {
+            fp.setGroup(groupName);
+        }
+        // Creation
+        ff4j.getFeatureStore().update(fp);
+    }
+  
+    /**
+     * Create Flipping Strategy from parameters.
+     *
+     * @param req
+     *            current http query
+     * @param fp
+     *            current feature
+     * @return instance of strategy
+     */
+    private FlippingStrategy buildFlippingStrategy(HttpServletRequest req, String uid) {
+        String strategy = req.getParameter(STRATEGY);
+        String strategyParams = req.getParameter(STRATEGY_INIT);
+        FlippingStrategy fstrategy = null;
+        Map<String, String> initParams = new HashMap<String, String>();
+        if (Util.hasLength(strategy)) {
+            if (Util.hasLength(strategyParams)) {
+                String[] params = strategyParams.split(";");
+                for (String currentP : params) {
+                    String[] cur = currentP.split("=");
+                    if (cur.length < 2) {
+                        throw new IllegalArgumentException("Invalid Syntax : param1=val1,val2;param2=val3,val4");
+                    }
+                    initParams.put(cur[0], cur[1]);
+                }
+            }
+            fstrategy = MappingUtil.instanceFlippingStrategy(uid, strategy, initParams);
+        }
+        return fstrategy;
+    }
+
     /**
      * Both get and post operation will render the page.
      *
      * @param ctx
-     *      current web context
+     *            current web context
      */
-	private void renderPage(WebContext ctx) {
-	    ctx.setVariable(KEY_TITLE, "Features");
+    private void renderPage(WebContext ctx) {
+        ctx.setVariable(KEY_TITLE, "Features");
 
         // Sort natural Order
-        Map < String, Feature > mapOfFeatures = ff4j.getFeatureStore().readAll();
-        List < String > featuresNames = Arrays.asList(mapOfFeatures.keySet().toArray(new String[0]));
+        Map<String, Feature> mapOfFeatures = ff4j.getFeatureStore().readAll();
+        List<String> featuresNames = Arrays.asList(mapOfFeatures.keySet().toArray(new String[0]));
         Collections.sort(featuresNames);
-        List < Feature > orderedFeatures = new ArrayList<Feature>();
+        List<Feature> orderedFeatures = new ArrayList<Feature>();
         for (String featuName : featuresNames) {
             orderedFeatures.add(mapOfFeatures.get(featuName));
         }
         ctx.setVariable("listOfFeatures", orderedFeatures);
 
         // Get Group List
-        List <String > myGroupList = new ArrayList<String>(ff4j.getFeatureStore().readAllGroups());
+        List<String> myGroupList = new ArrayList<String>(ff4j.getFeatureStore().readAllGroups());
         Collections.sort(myGroupList);
         ctx.setVariable("groupList", myGroupList);
-	}
+    }
 
 }

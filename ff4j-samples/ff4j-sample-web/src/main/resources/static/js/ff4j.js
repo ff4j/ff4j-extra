@@ -206,14 +206,47 @@ function ff4j_createPropertiesForFeature(uid, propName) {
 	alert("CREATE PROPERTY " + propName);
 }
 
-function show (toBlock){
-    setDisplay(toBlock, 'block');
-  }
-  function hide (toNone) {
-    setDisplay(toNone, 'none');
-  }
-  function setDisplay (target, str) {
-    document.getElementById(target).style.display = str;
-  }
-  
+function showCustomProperties(uid) {
+ console.log(uid);
+ show('detailCustomP-' + uid);
+ show('linkhideCustomP-' + uid);
+ hide('linkCustomP-' + uid);
+}
 
+function hideCustomProperties(uid) {
+ hide('detailCustomP-' + uid);
+ hide('linkhideCustomP-' + uid);
+ show('linkCustomP-' + uid);
+}
+
+function showFeaturePermissions(uid) {
+ show('detailPerm-' + uid);
+ show('linkhidePerm-' + uid);
+ hide('linkPerm-' + uid);	
+}
+
+function hideFeaturePermissions(uid) {
+ hide('detailPerm-' + uid);
+ hide('linkhidePerm-' + uid);
+ show('linkPerm-' + uid);
+}
+  
+function show (toBlock){
+	  setDisplay(toBlock, 'block');
+	}
+	function hide (toNone) {
+	  setDisplay(toNone, 'none');
+	}
+
+	function setDisplay (target, str) {
+	  var targetObj = document.getElementById(target);
+	  if (targetObj) {
+		  if (targetObj.style) {
+			  targetObj.style.display = str;
+		  } else {
+			  console.log(target + ' does not have style property');
+		  }
+	  } else {
+		  console.log(target + ' does not exist');
+	  }
+	}
