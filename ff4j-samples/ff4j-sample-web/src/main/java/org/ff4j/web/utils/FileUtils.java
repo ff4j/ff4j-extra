@@ -19,9 +19,8 @@ package org.ff4j.web.utils;
  * limitations under the License.
  * #L%
  */
-
-import static org.ff4j.web.embedded.ConsoleConstants.NEW_LINE;
-import static org.ff4j.web.embedded.ConsoleConstants.UTF8_ENCODING;
+import static org.ff4j.web.WebConstants.NEW_LINE;
+import static org.ff4j.web.WebConstants.UTF8_ENCODING;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

@@ -1,9 +1,8 @@
 package org.ff4j.web.controller;
 
-import static org.ff4j.web.FF4jWebConstants.ERROR;
-import static org.ff4j.web.FF4jWebConstants.VIEW_DEFAULT;
-import static org.ff4j.web.embedded.ConsoleConstants.FLIPFILE;
-import static org.ff4j.web.embedded.ConsoleConstants.OPERATION;
+import static org.ff4j.web.WebConstants.ERROR;
+import static org.ff4j.web.WebConstants.FLIPFILE;
+import static org.ff4j.web.WebConstants.OPERATION;
 import static org.ff4j.web.embedded.ConsoleOperations.importFile;
 
 /*
@@ -28,7 +27,6 @@ import static org.ff4j.web.embedded.ConsoleOperations.importFile;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -46,8 +44,6 @@ import org.ff4j.audit.proxy.PropertyStoreAuditProxy;
 import org.ff4j.core.FeatureStore;
 import org.ff4j.property.store.PropertyStore;
 import org.ff4j.utils.TimeUtils;
-import org.ff4j.web.ApiConfig;
-import org.ff4j.web.FF4jWebConstants;
 import org.ff4j.web.bean.HomeBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

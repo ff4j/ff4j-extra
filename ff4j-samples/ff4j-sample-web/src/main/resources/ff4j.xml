@@ -42,7 +42,7 @@
 			
 			<custom-properties>
 			  <property name="ppint" 	  type="org.ff4j.property.PropertyInt" value="12"   />
-			  <property name="ppdouble"   value="12.5" />
+			  <property name="ppdouble"   value="12.5"/>
 			  <property name="ppboolean"  value="true" />
 			  <property name="ppstring"   value="hello" />
 			  <property name="ppListInt"  value="12,13,14" />
@@ -111,11 +111,11 @@
 	 	</fixedValues>
 	 </property>
 	 
-	 <property name="b" value="12"   />
+	 <property name="b" value="12" type="int"/>
 	
-	 <property name="c" value="12.5" />
+	 <property name="c" value="12.5" type="double"/>
 	
-	 <property name="d"  value="true" />
+	 <property name="d"  value="true" type="boolean"/>
 	
 	 <property name="e" value="hello" />
 	

@@ -1,10 +1,10 @@
-package org.ff4j.web.embedded;
+package org.ff4j.web;
 
 /*
  * #%L
- * ff4j-web
+ * ff4j-sample-web
  * %%
- * Copyright (C) 2013 - 2014 Ff4J
+ * Copyright (C) 2013 - 2016 FF4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,38 @@ package org.ff4j.web.embedded;
  * #L%
  */
 
-/**
- * Global constants to work with web console ff4j.
- *
- * @author <a href="mailto:cedrick.lunven@gmail.com">Cedrick LUNVEN</a>
- */
-public class ConsoleConstants {
 
-    // -------- CONTENT-TYPE ------------------------------
+/**
+ * All constants
+ *
+ * @author Cedrick LUNVEN (@clunven)
+ */
+public class WebConstants {
+
+	/**
+	 * Hide defaulf constructor.
+	 */
+	private WebConstants() {
+	}
+
+	// -------- VIEWS ------------------------------
+	
+	/** View for dispatch. */
+    public static final String VIEW = "view";
+    
+	/** constant. */
+	public static final String VIEW_404 = "404";
+	
+	/** constant. */
+	public static final String VIEW_DEFAULT = "home";
+
+	/** constant. */
+	public static final String VIEW_STATIC = "static";
+
+	/** constant. */
+	public static final String VIEW_API = "api";
+		
+	// -------- CONTENT-TYPE ------------------------------
 
     /** Content type for response. */
     public static final String CONTENT_TYPE_HTML = "text/html";
@@ -46,7 +70,6 @@ public class ConsoleConstants {
 
     /** Content type for response. */
     public static final String CONTENT_TYPE_FONT = "font/opentype";
-
 
 
     // -------- RESOURCES ------------------------------
@@ -69,15 +92,15 @@ public class ConsoleConstants {
 
     // -------- OPERATIONS ------------------------------
 
-    /** POST - Operation. */
-    public static final String OPERATION = "op";
+    /** User operation. */
+    public static final String OP_IMPORT = "import";
 
-    /** View for dispatch. */
-    public static final String VIEW = "view";
-
-    /** POST - Operation. */
-    public static final String SUBOPERATION = "ope";
-
+    /** User operation. */
+    public static final String OP_EXPORT = "export";
+    
+    /** User operation: remove feature. */
+    public static final String OP_READ_FEATURE = "readFeature";
+    
     /** User operation. */
     public static final String OP_CREATE_FEATURE = "create";
 
@@ -119,6 +142,9 @@ public class ConsoleConstants {
 
     /** User operation: remove feature. */
     public static final String OP_FEATURES = "features";
+
+    /** User operation: remove feature. */
+    public static final String OP_PROPERTIES = "properties";
 
     /** User operation. */
     public static final String OP_ENABLE = "enable";
@@ -202,6 +228,22 @@ public class ConsoleConstants {
     public static final String NAME = "name";
 
     // -------- MISC ------------------------------
+    
+    /** POST - Operation. */
+    public static final String OPERATION = "op";  
+
+    /** POST - Operation. */
+    public static final String SUBOPERATION = "ope";
+
+    /** POST - Langue. */
+    public static final String LANG = "lang";
+    
+    /** POST - Langue. */
+    public static final String LANG_ATTRIBUTE = "ff4j_console_language";
+    
+    /** constant. */
+    public static final String ERROR = "error";
+
 
     /** File encoding. */
     public static final String UTF8_ENCODING = "UTF-8";
@@ -244,7 +286,16 @@ public class ConsoleConstants {
 
     /** FixedValue to be remove. */
     public static final String PARAM_FIXEDVALUE = "fixedValue";
-
-    private ConsoleConstants() {}
+    
+    // -------- ROLES ------------------------------
+    
+    /** Read features state. */
+    public static final String ROLE_USER = "FF4J_CONSOLE_READ";
+    
+    /** Edit and create state. */
+    public static final String ROLE_MANAGER = "FF4J_CONSOLE_WRITE";
+    
+    /** Administration (audit, cache...). */
+    public static final String ROLE_ADMIN = "FF4J_CONSOLE_ADMIN";
 
 }

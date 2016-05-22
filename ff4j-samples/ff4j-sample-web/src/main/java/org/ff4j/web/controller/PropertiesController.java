@@ -1,5 +1,11 @@
 package org.ff4j.web.controller;
 
+import static org.ff4j.web.WebConstants.OP_ADD_FIXEDVALUE;
+import static org.ff4j.web.WebConstants.OP_DELETE_FIXEDVALUE;
+import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
+import static org.ff4j.web.WebConstants.PARAM_FIXEDVALUE;
+import static org.ff4j.web.embedded.ConsoleRenderer.msg;
+
 /*
  * #%L
  * ff4j-sample-web
@@ -22,11 +28,21 @@ package org.ff4j.web.controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
+import org.ff4j.property.Property;
+import org.ff4j.utils.Util;
+import org.ff4j.web.WebConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -36,7 +52,10 @@ import org.thymeleaf.context.WebContext;
  * @author Cedrick LUNVEN (@clunven)
  */
 public class PropertiesController extends AbstractController {
-	
+    
+    /** Logger for this class. */
+    public static final Logger LOGGER = LoggerFactory.getLogger(PropertiesController.class);
+    
 	/** View name. */
 	private static final String VIEW_PROPERTIES = "properties";
 	
@@ -48,12 +67,99 @@ public class PropertiesController extends AbstractController {
 	/** {@inheritDoc} */
     public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws IOException {
+        String msg       = null;
+        String msgType   = "success";
+        String operation = req.getParameter(WebConstants.OPERATION);
+        String featureId = req.getParameter(WebConstants.NAME);
+        
+        //createProperty
+        
+        /*
+        String operation = req.getParameter(OPERATION);
+        String uid       = req.getParameter(FEATID);
+        String message = null;
+        String messagetype = "info";
+        LOGGER.info("POST - op=" + operation + " feat=" + uid);
+        if (operation != null && !operation.isEmpty()) {
+            
+
+            } else if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
+                createProperty(getFf4j(), req);
+                message = renderMsgProperty(req.getParameter(NAME), "ADDED");
+            
+            } else {
+                LOGGER.error("Invalid POST OPERATION" + operation);
+                messagetype = ERROR;
+                message = "Invalid REQUEST";
+            }
+        } else {
+            LOGGER.error("No ID provided" + operation);
+            messagetype = ERROR;
+            message = "Invalid UID";
+        }*/
+    
+        renderPage(ctx);
     }
     
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException {
-		ctx.setVariable(KEY_TITLE, "Properties");
+        String operation    = req.getParameter(WebConstants.OPERATION);
+        String propertyName = req.getParameter(WebConstants.FEATID);
+
+        String msgType = "success";
+        String msg = null;
+        if (Util.hasLength(operation) && Util.hasLength(propertyName)) {
+            if (getFf4j().getPropertiesStore().existProperty(propertyName)) {
+                
+                if (OP_RMV_PROPERTY.equalsIgnoreCase(operation)) {
+                    getFf4j().getPropertiesStore().deleteProperty(propertyName);
+                    msg = msg(propertyName, "DELETED");
+                    LOGGER.info("Property '" + propertyName + "' has been disabled");
+                }
+
+                if (OP_DELETE_FIXEDVALUE.equalsIgnoreCase(operation)) {
+                    String fixedValue = req.getParameter(PARAM_FIXEDVALUE);
+                    Property<?> ap = getFf4j().getPropertiesStore().readProperty(propertyName);
+                    ap.getFixedValues().remove(fixedValue);
+                    getFf4j().getPropertiesStore().updateProperty(ap);
+                    LOGGER.info("Property '" + propertyName + "' remove fixedValue '" + fixedValue + "'");
+                }
+
+                if (OP_ADD_FIXEDVALUE.equalsIgnoreCase(operation)) {
+                    String fixedValue = req.getParameter(PARAM_FIXEDVALUE);
+                    Property<?> ap = getFf4j().getPropertiesStore().readProperty(propertyName);
+                    ap.add2FixedValueFromString(fixedValue);
+                    getFf4j().getPropertiesStore().updateProperty(ap);
+                    LOGGER.info("Property '" + propertyName + "' add fixedValue '" + fixedValue + "'");
+                }
+            }
+        }
+        ctx.setVariable("msgType", msgType);
+        ctx.setVariable("msgInfo", msg);
+		renderPage(ctx);
 	}
+
+    /**
+     * Both get and post operation will render the page.
+     *
+     * @param ctx
+     *            current web context
+     */
+    private void renderPage(WebContext ctx) {
+        ctx.setVariable(KEY_TITLE, "Properties");
+
+        // Sort natural Order
+        Map<String, Property<?>> mapOfProperties = ff4j.getPropertiesStore().readAllProperties();
+        List<String> propertyNames = Arrays.asList(mapOfProperties.keySet().toArray(new String[0]));
+        Collections.sort(propertyNames);
+        List<Property<?>> orderedProperties = new ArrayList<Property<?>>();
+        for (String propName : propertyNames) {
+            orderedProperties.add(mapOfProperties.get(propName));
+        }
+        ctx.setVariable("listOfProperties", orderedProperties);
+    }
+    
+    
 
 }

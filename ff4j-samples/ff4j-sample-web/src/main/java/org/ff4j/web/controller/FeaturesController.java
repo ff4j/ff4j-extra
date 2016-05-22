@@ -19,20 +19,20 @@ package org.ff4j.web.controller;
  * limitations under the License.
  * #L%
  */
-import static org.ff4j.web.embedded.ConsoleConstants.DESCRIPTION;
-import static org.ff4j.web.embedded.ConsoleConstants.GROUPNAME;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_ADD_PERMISSION;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_CLEAR_PERMISSIONS;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_CREATE_FEATURE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_DISABLE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_EDIT_FEATURE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_ENABLE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_FEATURE;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_RMV_PERMISSION;
-import static org.ff4j.web.embedded.ConsoleConstants.OP_TOGGLE_GROUP;
-import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY;
-import static org.ff4j.web.embedded.ConsoleConstants.STRATEGY_INIT;
-import static org.ff4j.web.embedded.ConsoleConstants.SUBOPERATION;
+import static org.ff4j.web.WebConstants.DESCRIPTION;
+import static org.ff4j.web.WebConstants.GROUPNAME;
+import static org.ff4j.web.WebConstants.OP_ADD_PERMISSION;
+import static org.ff4j.web.WebConstants.OP_CLEAR_PERMISSIONS;
+import static org.ff4j.web.WebConstants.OP_CREATE_FEATURE;
+import static org.ff4j.web.WebConstants.OP_DISABLE;
+import static org.ff4j.web.WebConstants.OP_EDIT_FEATURE;
+import static org.ff4j.web.WebConstants.OP_ENABLE;
+import static org.ff4j.web.WebConstants.OP_RMV_FEATURE;
+import static org.ff4j.web.WebConstants.OP_RMV_PERMISSION;
+import static org.ff4j.web.WebConstants.OP_TOGGLE_GROUP;
+import static org.ff4j.web.WebConstants.STRATEGY;
+import static org.ff4j.web.WebConstants.STRATEGY_INIT;
+import static org.ff4j.web.WebConstants.SUBOPERATION;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 
 import java.io.IOException;
@@ -51,7 +51,7 @@ import org.ff4j.core.Feature;
 import org.ff4j.core.FlippingStrategy;
 import org.ff4j.utils.MappingUtil;
 import org.ff4j.utils.Util;
-import org.ff4j.web.FF4jWebConstants;
+import org.ff4j.web.WebConstants;
 import org.ff4j.web.embedded.ConsoleOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,8 +78,8 @@ public class FeaturesController extends AbstractController {
 	
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
-        String operation = req.getParameter(FF4jWebConstants.OPERATION);
-        String featureId = req.getParameter(FF4jWebConstants.FEATID);
+        String operation = req.getParameter(WebConstants.OPERATION);
+        String featureId = req.getParameter(WebConstants.FEATID);
 
         String msgType = "success";
         String msg = null;
@@ -105,7 +105,7 @@ public class FeaturesController extends AbstractController {
                 }
                 
                 if (OP_ADD_PERMISSION.equalsIgnoreCase(operation)) {
-                    String permName = req.getParameter(FF4jWebConstants.PERMISSION);
+                    String permName = req.getParameter(WebConstants.PERMISSION);
                     Feature feature = getFf4j().getFeatureStore().read(featureId);
                     feature.getPermissions().add(permName);
                     getFf4j().getFeatureStore().update(feature);
@@ -113,7 +113,7 @@ public class FeaturesController extends AbstractController {
                 }
                 
                 if (OP_RMV_PERMISSION.equalsIgnoreCase(operation)) {
-                    String permName = req.getParameter(FF4jWebConstants.PERMISSION);
+                    String permName = req.getParameter(WebConstants.PERMISSION);
                     Feature feature = getFf4j().getFeatureStore().read(featureId);
                     feature.getPermissions().remove(permName);
                     getFf4j().getFeatureStore().update(feature);
@@ -142,8 +142,8 @@ public class FeaturesController extends AbstractController {
     throws IOException {
         String msg       = null;
         String msgType   = "success";
-        String operation = req.getParameter(FF4jWebConstants.OPERATION);
-        String featureId = req.getParameter(FF4jWebConstants.FEATID);
+        String operation = req.getParameter(WebConstants.OPERATION);
+        String featureId = req.getParameter(WebConstants.FEATID);
         
         if (OP_EDIT_FEATURE.equalsIgnoreCase(operation)) {
             this.updateFeature(req, featureId);

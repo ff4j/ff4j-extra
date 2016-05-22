@@ -23,7 +23,6 @@ package org.ff4j.web.thymeleaf;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Locale;
@@ -58,6 +57,9 @@ public class CustomMessageResolver implements IMessageResolver {
     /** Default properties "messages.properties". */
     protected final Properties defaultMessages;
     
+    /**
+     * Default constructor.
+     */
     public CustomMessageResolver() {
     	super();
         this.defaultMessages = new Properties();
@@ -106,15 +108,11 @@ public class CustomMessageResolver implements IMessageResolver {
 		final Locale locale = args.getContext().getLocale();
         String targetMsg = resolveProperties(locale).getProperty(key);
 		if (targetMsg == null) {
-			targetMsg = "<span style=\"color:red\">" + key + " not found</span>";
+			targetMsg = "'" + key + "' not found";
 		} else if (msgParams != null && msgParams.length > 0) {
 			targetMsg = new MessageFormat(targetMsg, args.getContext().getLocale()).format(msgParams);
 		}
-		try {
-			return new MessageResolution(new String(targetMsg.getBytes("ISO-8859-1"), "UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			return new MessageResolution(targetMsg);
-		}
+		return new MessageResolution(targetMsg);
 	}	
 
 	/** {@inheritDoc} */

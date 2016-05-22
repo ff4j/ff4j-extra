@@ -19,11 +19,9 @@ package org.ff4j.web.controller;
  * limitations under the License.
  * #L%
  */
-
-
-import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_CSS;
-import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_JS;
-import static org.ff4j.web.embedded.ConsoleConstants.CONTENT_TYPE_TEXT;
+import static org.ff4j.web.WebConstants.CONTENT_TYPE_CSS;
+import static org.ff4j.web.WebConstants.CONTENT_TYPE_JS;
+import static org.ff4j.web.WebConstants.CONTENT_TYPE_TEXT;
 
 import java.io.IOException;
 import java.util.HashMap;

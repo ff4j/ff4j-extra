@@ -1,5 +1,15 @@
 package org.ff4j.web.embedded;
 
+import static org.ff4j.web.WebConstants.BUFFER_SIZE;
+import static org.ff4j.web.WebConstants.DESCRIPTION;
+import static org.ff4j.web.WebConstants.FEATID;
+import static org.ff4j.web.WebConstants.GROUPNAME;
+import static org.ff4j.web.WebConstants.PERMISSION;
+import static org.ff4j.web.WebConstants.PERMISSION_RESTRICTED;
+import static org.ff4j.web.WebConstants.PREFIX_CHECKBOX;
+import static org.ff4j.web.WebConstants.STRATEGY;
+import static org.ff4j.web.WebConstants.STRATEGY_INIT;
+
 /*
  * #%L
  * ff4j-web
@@ -44,8 +54,6 @@ import org.ff4j.property.store.PropertyStore;
 import org.ff4j.property.util.PropertyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.ff4j.web.embedded.ConsoleConstants.*;
 
 public final class ConsoleOperations {
     

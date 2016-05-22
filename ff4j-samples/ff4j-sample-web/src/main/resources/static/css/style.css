@@ -1407,4 +1407,7 @@ color: #333;
   background: #00ab8b;
 }
 
+.modal { overflow: visible; }
+.modal-body { overflow-y: visible; }
+
 

@@ -1,5 +1,9 @@
 package org.ff4j.web.controller;
 
+import static org.ff4j.web.utils.WebUtils.getCookie;
+import static org.ff4j.web.utils.WebUtils.getSessionAttribute;
+import static org.ff4j.web.utils.WebUtils.setSessionAttribute;
+
 /*
  * #%L
  * ff4j-sample-web
@@ -21,11 +25,16 @@ package org.ff4j.web.controller;
  */
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response.Status;
 
 import org.ff4j.FF4j;
+import org.ff4j.web.WebConstants;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -62,6 +71,12 @@ public abstract class AbstractController {
     	this.templateEngine = te;
     }
 
+    /**
+     * Format uptime.
+     * 
+     * @return
+     *      current runtime
+     */
     private String getUptime() {
         StringBuilder sb = new StringBuilder();
         long uptime = System.currentTimeMillis() - ff4j.getStartTime();
@@ -77,6 +92,42 @@ public abstract class AbstractController {
     }
     
     /**
+     * Define response Locale (Cookie <-> HttpSession <-> Request)
+     *
+     * @param req
+     *      current request.
+     * @param res
+     *      current response.
+     */
+    private void i18n(HttpServletRequest req, HttpServletResponse res) {
+        
+        String lang = req.getParameter(WebConstants.LANG);
+        if (lang != null) {
+            // Update Request
+            res.setLocale(new Locale(lang));
+            // Update Session
+            setSessionAttribute(req, WebConstants.LANG_ATTRIBUTE, lang);
+            // Create Cookie
+            Cookie cookie = new Cookie(WebConstants.LANG_ATTRIBUTE, lang);
+            cookie.setMaxAge(365 * 24 * 60 * 60); // 1 years
+            res.addCookie(cookie);
+            
+        } else {
+            String langSession = (String) getSessionAttribute(req, WebConstants.LANG_ATTRIBUTE);
+            if (langSession != null) {
+                res.setLocale(new Locale(langSession));
+            } else {
+                // Not in session, look for cookie if cookie update session
+               Cookie cookie = getCookie(req, WebConstants.LANG_ATTRIBUTE);
+               if (cookie != null) {
+                   setSessionAttribute(req, WebConstants.LANG_ATTRIBUTE, cookie.getValue());
+                   res.setLocale(new Locale(cookie.getValue()));
+               }
+            }
+        }
+    }
+    
+    /**
      * Invoked by dispatcher.
      *
      * @param req
@@ -88,11 +139,28 @@ public abstract class AbstractController {
      */
     public void get(HttpServletRequest req, HttpServletResponse res)
     throws IOException {
-    	WebContext ctx = new WebContext(req, res,  req.getSession().getServletContext(), req.getLocale());
+        i18n(req, res);
+        
+        WebContext ctx = new WebContext(req, res,  req.getSession().getServletContext(), res.getLocale());
     	ctx.setVariable("uptime",  getUptime());
     	ctx.setVariable("version", ff4j.getVersion());
-
-    	// Adding attribute to response
+    	
+    	// Security
+    	ctx.setVariable("secure", false);
+        if (getFf4j().getAuthorizationsManager() != null) {
+    	    ctx.setVariable("secure", true);
+    	    ctx.setVariable("userName", getFf4j().getAuthorizationsManager().getCurrentUserName());
+    	    Set < String > permissions = getFf4j().getAuthorizationsManager().getCurrentUserPermissions();
+    	    ctx.setVariable("userPermissions", permissions);
+    	    
+    	    // If no role FF4J_CONSOLE_READ => 403
+    	    if (!permissions.contains(WebConstants.ROLE_USER)) {
+    	        res.setStatus(Status.FORBIDDEN.getStatusCode());
+    	        res.getWriter().println("You cannot access FF4J console, insuffisant permissions");
+    	        return;
+    	    }
+        }
+    	
     	try {
     	    get(req, res, ctx);
     	} catch(Throwable t) {
