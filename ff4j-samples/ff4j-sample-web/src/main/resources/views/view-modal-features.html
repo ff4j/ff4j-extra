@@ -186,9 +186,14 @@
      
     </div> <!-- Modal-body -->
     
-    <div class="modal-footer">
-      <button class="btn btn" data-dismiss="modal"><i class="icon-remove" ></i>&nbsp;Cancel</button>
-      <button class="btn btn-green" type="submit"><i class="icon-save icon-white" ></i>&nbsp;Update </button>
+    <div class="modal-footer" >
+    <button class="btn btn" data-dismiss="modal">
+      <i class="icon-remove" ></i>&nbsp;
+      <span th:text="#{modal.button.cancel}">Cancel</span>
+    </button>
+    <button class="btn btn-green" type="submit">
+      <i class="icon-ok icon-white" ></i>&nbsp;
+      <span th:text="#{modal.button.validate}">Validate</span></button>
     </div>
       
     <input type="hidden" name="op" value="update"  />
@@ -249,14 +254,14 @@
 
     </div> <!-- modeal body -->
 
-  <div class="modal-footer" >
+   <div class="modal-footer" >
     <button class="btn btn" data-dismiss="modal">
       <i class="icon-remove" ></i>&nbsp;
-      <span th:text="#{modal.createfeature.cancel}">Cancel</span>
+      <span th:text="#{modal.button.cancel}">Cancel</span>
     </button>
     <button class="btn btn-green" type="submit">
       <i class="icon-ok icon-white" ></i>&nbsp;
-      <span th:text="#{modal.createfeature.create}">Create</span></button>
+      <span th:text="#{modal.button.create}">Create</span></button>
   </div>
 
    <script type="text/javascript" >
@@ -330,10 +335,15 @@
         </div>
     </div>
     
-    <div class="modal-footer">
-      <button class="btn btn" data-dismiss="modal"><i class="icon-remove" ></i>&nbsp;Cancel</button>
-      <button class="btn btn-green" type="submit" ><i class="icon-check icon-white" ></i>&nbsp;Validate</button>
-    </div>
+     <div class="modal-footer" >
+    <button class="btn btn" data-dismiss="modal">
+      <i class="icon-remove" ></i>&nbsp;
+      <span th:text="#{modal.button.cancel}">Cancel</span>
+    </button>
+    <button class="btn btn-green" type="submit">
+      <i class="icon-ok icon-white" ></i>&nbsp;
+      <span th:text="#{modal.button.validate}">Validate</span></button>
+  </div>
     
     
    <input type="hidden" name="op" value="toggleGroup"  />

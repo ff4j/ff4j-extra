@@ -1,7 +1,9 @@
 package org.ff4j.web.controller;
 
 import static org.ff4j.web.WebConstants.OP_ADD_FIXEDVALUE;
+import static org.ff4j.web.WebConstants.OP_CREATE_PROPERTY;
 import static org.ff4j.web.WebConstants.OP_DELETE_FIXEDVALUE;
+import static org.ff4j.web.WebConstants.OP_EDIT_PROPERTY;
 import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
 import static org.ff4j.web.WebConstants.PARAM_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
@@ -41,6 +43,7 @@ import org.ff4j.FF4j;
 import org.ff4j.property.Property;
 import org.ff4j.utils.Util;
 import org.ff4j.web.WebConstants;
+import org.ff4j.web.embedded.ConsoleOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
@@ -72,32 +75,17 @@ public class PropertiesController extends AbstractController {
         String operation = req.getParameter(WebConstants.OPERATION);
         String featureId = req.getParameter(WebConstants.NAME);
         
-        //createProperty
-        
-        /*
-        String operation = req.getParameter(OPERATION);
-        String uid       = req.getParameter(FEATID);
-        String message = null;
-        String messagetype = "info";
-        LOGGER.info("POST - op=" + operation + " feat=" + uid);
-        if (operation != null && !operation.isEmpty()) {
+        if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
+            ConsoleOperations.createProperty(getFf4j(), req);
+            msg = featureId + " has been CREATED";
             
-
-            } else if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
-                createProperty(getFf4j(), req);
-                message = renderMsgProperty(req.getParameter(NAME), "ADDED");
-            
-            } else {
-                LOGGER.error("Invalid POST OPERATION" + operation);
-                messagetype = ERROR;
-                message = "Invalid REQUEST";
-            }
-        } else {
-            LOGGER.error("No ID provided" + operation);
-            messagetype = ERROR;
-            message = "Invalid UID";
-        }*/
-    
+        } else if (OP_EDIT_PROPERTY.equalsIgnoreCase(operation)) {
+            ConsoleOperations.updateProperty(getFf4j(), req);
+            msg = featureId + " has been UPDATED";
+        }
+       
+        ctx.setVariable("msgType", msgType);
+        ctx.setVariable("msgInfo", msg);
         renderPage(ctx);
     }
     

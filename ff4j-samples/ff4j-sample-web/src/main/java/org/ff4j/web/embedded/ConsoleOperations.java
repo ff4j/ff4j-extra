@@ -52,6 +52,7 @@ import org.ff4j.core.FlippingStrategy;
 import org.ff4j.property.Property;
 import org.ff4j.property.store.PropertyStore;
 import org.ff4j.property.util.PropertyFactory;
+import org.ff4j.utils.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -147,36 +148,27 @@ public final class ConsoleOperations {
         String type         = req.getParameter("pType");
         String description  = req.getParameter("desc");
         String value        = req.getParameter("pValue");
-        String uid          = req.getParameter("uid");
+        String featureUid   = req.getParameter("feature_uid");
         
-        Property<?> ap;
-        if (ff4j.getPropertiesStore().existProperty(uid)) {
-            // Do not change name, just and update
-            if (uid.equalsIgnoreCase(name)) {
-                ap = ff4j.getPropertiesStore().readProperty(uid);
-                // just an update for the value
-                if (ap.getType().equalsIgnoreCase(type)) {
-                    ap.setDescription(description);
-                    ap.setValueFromString(value);
-                    ff4j.getPropertiesStore().updateProperty(ap);
-                } else {
-                    ap = PropertyFactory.createProperty(name, type, value);
-                    ap.setDescription(description);
-                    // Note : Fixed Values are LOST if type changed => cannot cast ? to T
-                    LOGGER.warn("By changing property type you loose the fixedValues, cannot evaluate ? at runtime");
-                    ff4j.getPropertiesStore().deleteProperty(name);
-                    ff4j.getPropertiesStore().createProperty(ap);
-                }
-                
-            } else {
-                // Name change delete and create a new
-                ap = PropertyFactory.createProperty(name, type, value);
-                ap.setDescription(description);
-                // Note : Fixed Values are LOST if name changed => cannot cast ? to T
-                LOGGER.warn("By changing property name you loose the fixedValues, cannot evaluate generics at runtime (type inference)");
-                ff4j.getPropertiesStore().deleteProperty(uid);
-                ff4j.getPropertiesStore().createProperty(ap);
-            }
+        Property<?> ap = PropertyFactory.createProperty(name, type, value);
+        ap.setDescription(description);
+        
+        // Update Property for a Feature
+        if (Util.hasLength(featureUid) && ff4j.getFeatureStore().exist(featureUid)) {
+           Feature relfeat = ff4j.getFeatureStore().read(featureUid);
+           relfeat.addProperty(ap);
+           ff4j.getFeatureStore().update(relfeat);
+        
+        // Update Property standalone
+        } else if (ff4j.getPropertiesStore().existProperty(name)) {
+           Property<?> old = ff4j.getPropertiesStore().readProperty(name);
+           if (old.getType().equalsIgnoreCase(type)) {
+               old.setDescription(description);
+               old.setValueFromString(value);
+               ff4j.getPropertiesStore().updateProperty(old);
+           } else {
+               ff4j.getPropertiesStore().updateProperty(ap);
+           }
         }
     }
     
@@ -193,12 +185,20 @@ public final class ConsoleOperations {
         String type         = req.getParameter("pType");
         String description  = req.getParameter("desc");
         String value        = req.getParameter("pValue");
+        String featureUid   = req.getParameter("feature_uid");
+        
         Property<?> ap = PropertyFactory.createProperty(name, type, value);
         ap.setDescription(description);
-        ff4j.getPropertiesStore().createProperty(ap);
-    }
-
-  
+        
+        // Create Property for a Feature
+        if (Util.hasLength(featureUid) && ff4j.getFeatureStore().exist(featureUid)) {
+            Feature relfeat = ff4j.getFeatureStore().read(featureUid);
+            relfeat.addProperty(ap);
+            ff4j.getFeatureStore().update(relfeat);
+        } else {
+            ff4j.getPropertiesStore().createProperty(ap);
+        }
+    }  
     
    
     /**

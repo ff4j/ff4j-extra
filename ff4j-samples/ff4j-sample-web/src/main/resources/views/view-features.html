@@ -85,7 +85,7 @@
 	 <td>
 	  <!-- CustomProperties -->
 	  <div th:if="${not #maps.isEmpty(feat.customProperties)}" >
-         <span style="color:#008bab;float:left;" 
+         <span style="float:left;" 
          th:text="${#maps.size(feat.customProperties)} + ' items '">x</span>
          <a th:id="'linkCustomP-' + ${indexFeat.count}"
              style="color:#00ab8b;float:left;" 
@@ -151,6 +151,9 @@
 
 <div th:include="modal-features :: modal-toggle"></div>
 
+<div th:include="modal-properties :: modal-createProperty"></div>
+
+<div th:include="modal-properties :: modal-updateProperty"></div>
 
 </body>
 </html>

@@ -108,7 +108,7 @@ public class CustomMessageResolver implements IMessageResolver {
 		final Locale locale = args.getContext().getLocale();
         String targetMsg = resolveProperties(locale).getProperty(key);
 		if (targetMsg == null) {
-			targetMsg = "'" + key + "' not found";
+			targetMsg = key;
 		} else if (msgParams != null && msgParams.length > 0) {
 			targetMsg = new MessageFormat(targetMsg, args.getContext().getLocale()).format(msgParams);
 		}

@@ -29,9 +29,9 @@
     </encoder>
   </appender>
 
-  <logger name="org.springframework" level="WARN" />
-  
-  <logger name="org.ff4j" level="DEBUG" />
+  <logger name="org.springframework"    level="WARN"  />
+  <logger name="org.thymeleaf"          level="WARN"  />
+  <logger name="org.ff4j"               level="DEBUG" />
 
   <root level="INFO">
     <appender-ref ref="STDOUT" />

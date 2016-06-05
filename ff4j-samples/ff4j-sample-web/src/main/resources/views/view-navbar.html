@@ -100,13 +100,25 @@
       <span>Back</span>
      </a>
     </li>
-    <li >
+    <li>
      <a class="open-AddFlipDialog" data-toggle="modal" href="#modalCreate">
       <i class="icon-plus"></i>
-      <span>New Feature</span>
+      <span>New</span>
      </a>
-    </li>    
-     <li >
+    </li>
+    <li>
+     <a class="open-copyFeatureDialog" data-toggle="modal" href="#modalCopy">
+      <i class="icon-copy"></i>
+      <span>Copy</span>
+     </a>
+    </li>
+    <li>
+     <a class="open-renameFeatureDialog" data-toggle="modal" href="#modalCopy">
+      <i class="icon-random"></i>
+      <span>Rename</span>
+     </a>
+    </li>   
+    <li>
      <a class="open-ToggleDialog" data-toggle="modal" href="#modalToggle">
       <i class="icon-adjust"></i>
       <span>Toggle Group</span>
@@ -133,9 +145,21 @@
     <li >
      <a class="open-createPropertyDialog" data-toggle="modal" href="#modalCreateProperty">
       <i class="icon-plus"></i>
-      <span>New Property</span>
+      <span>New</span>
      </a>
     </li>
+    <li>
+     <a class="open-copyFeatureDialog" data-toggle="modal" href="#modalCopy">
+      <i class="icon-copy"></i>
+      <span>Copy</span>
+     </a>
+    </li>
+    <li>
+     <a class="open-renameFeatureDialog" data-toggle="modal" href="#modalCopy">
+      <i class="icon-random"></i>
+      <span>Rename</span>
+     </a>
+    </li> 
    </ul>
       <div style="float:right;margin-top:20px;color:#687684">
        <b>Uptime :</b> <span th:text="${uptime}">n/a</span>

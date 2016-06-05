@@ -59,6 +59,32 @@ function toggle(flip) {
   }
 }
 
+// Display Custom Properties for current feature in the table
+function showCustomProperties(uid) {
+  console.log(uid);
+  show('detailCustomP-' + uid);
+  show('linkhideCustomP-' + uid);
+  hide('linkCustomP-' + uid);
+}
+
+	function hideCustomProperties(uid) {
+	 hide('detailCustomP-' + uid);
+	 hide('linkhideCustomP-' + uid);
+	 show('linkCustomP-' + uid);
+	}
+
+	function showFeaturePermissions(uid) {
+	 show('detailPerm-' + uid);
+	 show('linkhidePerm-' + uid);
+	 hide('linkPerm-' + uid);	
+	}
+
+	function hideFeaturePermissions(uid) {
+	 hide('detailPerm-' + uid);
+	 hide('linkhidePerm-' + uid);
+	 show('linkPerm-' + uid);
+	}
+
 // ---------------------
 //  MODAL EDIT FEATURE
 // ---------------------
@@ -123,8 +149,8 @@ function ff4j_drawPermissions(uid) {
 		}
 	  }
 	  htmlForFixedValueList+= '<tr><td style="width:300px" colspan="2"><input type="text" id="nnfix" name="nnfix"  style="width:200px;height:18px;"/>';
-	  htmlForFixedValueList+= '    <a class="btn btn-green" href="#" onclick="javascript:ff4j_createPermissionForFeature(\'' + uid + '\', $(\'#modalEdit #nnfix\').val())"';
-	  htmlForFixedValueList+= '><i class="icon-plus" ></i>&nbsp;Add</a></td></tr>';
+	  htmlForFixedValueList+= '    <a class="color:#00ab8b" href="#" onclick="javascript:ff4j_createPermissionForFeature(\'' + uid + '\', $(\'#modalEdit #nnfix\').val())"';
+	  htmlForFixedValueList+= '><i class="icon-plus" ></i></a></td></tr>';
 	  $("#modalEditFeaturePermissions").html(htmlForFixedValueList);
 	 });
 }
@@ -160,6 +186,7 @@ function ff4j_clearPermissionsForFeature(uid) {
  
 }
 
+// Triggered when deleting a dedicated permission
 function ff4j_removePermissionForFeature(uid, permName) {
   $.ajax({
     type: 'GET',
@@ -172,6 +199,7 @@ function ff4j_removePermissionForFeature(uid, permName) {
   });
 }
 
+// Display inner permissions
 function ff4j_drawCustomProperties(uid) {
   $.get('api/features/' + uid,
     function(feature) {
@@ -187,66 +215,139 @@ function ff4j_drawCustomProperties(uid) {
 	      }
 		}
 	  }
-	  htmlForProperties+= '<tr><td style="width:300px" colspan="3"><input type="text" id="nnProp" name="nnProp"  style="width:250px;height:18px;"/>';
-	  htmlForProperties+= '    <a class="button btn-green" href="#" onclick="javascript:ff4j_createPropertiesForFeature(\'' + uid + '\', $(\'#modalEdit #nnProp\').val())"';
-	  htmlForProperties+= '><i class="icon-plus" ></i></a></td></tr>';
+	  htmlForProperties+= '<tr><td style="width:300px" colspan="3">';
+	  htmlForProperties+= '<a data-toggle="modal" href="#modalCreateProperty" class="open-createPropertyDialog color:#00ab8b" href="#" data-featureid="' + uid + '" >';
+	  htmlForProperties+= '<i class="icon-plus" ></i>&nbsp; News</a></td></tr>';
 	  $("#modalEditFeatureProperties").html(htmlForProperties);
   });
 }
 
+// --> Operations on feature custom properties
 function ff4j_editPropertiesForFeature(uid, propName) {
 	alert("EDIT PROPERTY " + propName);
 }
-
 function ff4j_removePropertiesForFeature(uid, propName) {
 	alert("RMV PROPERTY " + propName);
 }
-
 function ff4j_createPropertiesForFeature(uid, propName) {
 	alert("CREATE PROPERTY " + propName);
 }
+// <--
 
-function showCustomProperties(uid) {
- console.log(uid);
- show('detailCustomP-' + uid);
- show('linkhideCustomP-' + uid);
- hide('linkCustomP-' + uid);
+//---------------------
+// MODAL EDIT PROPERTY
+//---------------------
+
+function ff4j_updateModalEditProperty(name) {
+  var modalEditProperty = $("#modalEditProperty");
+  $.get('api/properties/' + name, 
+    function(myProperty) {
+	  modalEditProperty.find("#uid").val(myProperty.name);
+	  modalEditProperty.find("#name").val(myProperty.name);
+	  modalEditProperty.find("#desc").val(myProperty.description);
+	  modalEditProperty.find("#pType").val(myProperty.type);
+	  modalEditProperty.find("#pValue").val(myProperty.value);
+      ff4j_drawFixedValues(myProperty.name);
+ 	});
 }
 
-function hideCustomProperties(uid) {
- hide('detailCustomP-' + uid);
- hide('linkhideCustomP-' + uid);
- show('linkCustomP-' + uid);
+function ff4j_drawFixedValues(name) {
+  $("#modalEditPropertyFixedValues").html('');
+  $.get('api/properties/' + name, 
+    function(myProperty) {
+	  if (myProperty.fixedValues) {
+	 	var htmlForValues = '<div class="btn-group">';
+	 	htmlForValues+= '<input type="text" name="pValue" id="pValue" style="width:350px;height:18px;color:#008bab;background-color:white" value="' + myProperty.value + '" readonly="readonly">';
+	 	htmlForValues+= '<button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px" >'
+	 	htmlForValues+= '<span class="caret"></span>';
+	 	htmlForValues+= '<span class="sr-only"><i class="icon-cog icon-white" ></i></span>';
+	 	htmlForValues+= '</button>';
+	 	htmlForValues+= '<ul class="dropdown-menu" role="menu" style="width:350px;">';
+	 				    
+	 	var htmlForFixedValueList = '';
+	 	for (fixed in myProperty.fixedValues) {
+	 	  htmlForFixedValueList+= '<tr><td>' + myProperty.fixedValues[fixed] + '</td><td>';
+	 	  htmlForFixedValueList+= '<a href="#" onclick="javascript:ff4j_deleteFixedValue(\'' + myProperty.name + '\',\'' +  myProperty.fixedValues[fixed] + '\')" style="width:6px;" >';
+	 	  htmlForFixedValueList+= '<i class="icon-trash" style="margin-left:-5px;"></i></a></td></tr>';
+	 	  htmlForValues+= '<li><a href="#" onclick="javascript:$(\'#modalEditProperty #pValue\').val(\'' + myProperty.fixedValues[fixed] + '\');">' + myProperty.fixedValues[fixed] + '</a></li>';
+	 	}
+	 	htmlForValues+= '</ul></div> </div>';
+	 	$("#div-value-property").html(htmlForValues);
+	 			 	
+	 } else {
+	    // no myProperty.fixedValues
+	 	var htmlForValue = '<input type="text" name="pValue" id="pValue" style="width:350px;height:18px;color:#008bab;background-color:white" value="';
+	 	htmlForValue+= myProperty.value;
+	 	htmlForValue+= '" required/>';
+	 	$("#div-value-property").html(htmlForValue);
+	 }
+	 	
+	 htmlForFixedValueList+= '<tr><td><input type="text" id="nnfix" name="nnfix"  style="width:200px;height:18px;"/></td>';
+	 htmlForFixedValueList+= '    <td><a href="#" onclick="javascript:ff4j_createFixedValue(\'' + myProperty.name + '\', $(\'#modalEditProperty #nnfix\').val())"';
+	 htmlForFixedValueList+= ' style="width:6px;"><i class="icon-plus" style="margin-left:-5px;"></i></a></td></tr>';
+	 $("#modalEditPropertyFixedValues").html(htmlForFixedValueList);
+    	
+  });
 }
 
-function showFeaturePermissions(uid) {
- show('detailPerm-' + uid);
- show('linkhidePerm-' + uid);
- hide('linkPerm-' + uid);	
+function ff4j_deleteFixedValue(pName, fValue) {
+  $.ajax({
+   type : 'GET',
+   url : $(location).attr('href'),
+   data : 'op=deleteFixedValue&uid=' + pName + '&fixedValue=' + fValue,
+   dataType : 'html',
+   success : function(permissionList, statut) { 
+    ff4j_drawFixedValues(pName);
+   },
+   error : function(resultat, statut, erreur) {},
+   complete : function(resultat, statut) {	
+    console.log("Delete fixedValue for " + pName);
+   }
+ });
 }
+ 
+function ff4j_createFixedValue(pName, fValue) {
+  $.ajax({
+    type : 'GET',
+	url : $(location).attr('href'),
+	data : 'op=addFixedValue&uid=' + pName + '&fixedValue=' + fValue,
+	dataType : 'html',
+	success : function(permissionList, statut) { 
+		ff4j_drawFixedValues(pName);
+	},
+	error : function(resultat, statut, erreur) {},
+	complete : function(resultat, statut) {	
+		console.log("Create fixedValue for " + pName);
+	}
+  });
+}
+ 
+function ff4j_changePropertyType(pName, pType) {
+	 $('#modalEditProperty #pType').val(pType);
+	 ff4j_updateModalEditProperty(any)(pName);
+ }
 
-function hideFeaturePermissions(uid) {
- hide('detailPerm-' + uid);
- hide('linkhidePerm-' + uid);
- show('linkPerm-' + uid);
-}
-  
+//---------------------
+// Utilities
+//---------------------
+
 function show (toBlock){
-	  setDisplay(toBlock, 'block');
-	}
-	function hide (toNone) {
-	  setDisplay(toNone, 'none');
-	}
+  setDisplay(toBlock, 'block');
+}
+function hide (toNone) {
+  setDisplay(toNone, 'none');
+}
 
-	function setDisplay (target, str) {
-	  var targetObj = document.getElementById(target);
-	  if (targetObj) {
-		  if (targetObj.style) {
-			  targetObj.style.display = str;
-		  } else {
-			  console.log(target + ' does not have style property');
-		  }
-	  } else {
-		  console.log(target + ' does not exist');
-	  }
-	}
+function setDisplay (target, str) {
+  var targetObj = document.getElementById(target);
+  if (targetObj) {
+    if (targetObj.style) {
+	  targetObj.style.display = str;
+	} else {
+	  console.log(target + ' does not have style property');
+    }
+  } else {
+    console.log(target + ' does not exist');
+  }
+}
+
