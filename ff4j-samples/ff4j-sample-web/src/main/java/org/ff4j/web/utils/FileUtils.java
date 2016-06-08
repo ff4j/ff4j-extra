@@ -27,10 +27,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * Read file for HDD.
@@ -103,7 +103,7 @@ public class FileUtils {
 	 * @return encoded string
 	 */
 	public static String loadAndResizeImageAsBase64(String fileName) {
-		return new String(Base64.getEncoder().encode(loadAndResizeImageAsByteArray(fileName)));
+	    return DatatypeConverter.printBase64Binary(loadAndResizeImageAsByteArray(fileName));
 	}
 	
 	/**

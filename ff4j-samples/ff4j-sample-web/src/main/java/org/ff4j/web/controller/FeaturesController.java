@@ -29,6 +29,7 @@ import static org.ff4j.web.WebConstants.OP_EDIT_FEATURE;
 import static org.ff4j.web.WebConstants.OP_ENABLE;
 import static org.ff4j.web.WebConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.WebConstants.OP_RMV_PERMISSION;
+import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
 import static org.ff4j.web.WebConstants.OP_TOGGLE_GROUP;
 import static org.ff4j.web.WebConstants.STRATEGY;
 import static org.ff4j.web.WebConstants.STRATEGY_INIT;
@@ -126,6 +127,16 @@ public class FeaturesController extends AbstractController {
                     getFf4j().getFeatureStore().update(feature);
                     LOGGER.info("Clear permissions for " + featureId);
                 }
+                
+                if (OP_RMV_PROPERTY.equalsIgnoreCase(operation)) {
+                    String propertyName = req.getParameter(WebConstants.NAME);
+                    Feature feature     = getFf4j().getFeatureStore().read(featureId);
+                    feature.getCustomProperties().remove(propertyName);
+                    getFf4j().getFeatureStore().update(feature);
+                    LOGGER.info("Remove Property " + propertyName + " to " + featureId );
+                }
+                
+                
                     
             } else {
                 msgType = "warning";

@@ -23,4 +23,10 @@ public class MockAuthorisationManager extends AbstractAuthorizationManager {
         return auths;
     }
 
+    @Override
+    public String getCurrentUserName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

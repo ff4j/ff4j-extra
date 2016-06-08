@@ -1,10 +1,13 @@
 package org.ff4j.sample;
 
+import static org.ff4j.audit.EventConstants.SOURCE_JAVA;
+import static org.ff4j.audit.EventConstants.TARGET_FEATURE;
+
 import java.util.ArrayList;
 
 import org.ff4j.FF4j;
 import org.ff4j.audit.Event;
-import org.ff4j.audit.EventType;
+import org.ff4j.audit.EventConstants;
 import org.ff4j.core.Feature;
 import org.ff4j.web.ApiConfig;
 import org.ff4j.web.FF4JProvider;
@@ -35,8 +38,10 @@ public class SimpleFF4JJerseyApplication extends FF4JApiApplication implements F
         // Anytime from 12H
         long randomTimeStamp = System.currentTimeMillis() - (long) (Math.random() * 1000 * 3600 * nbHours);
         // Type ok or ko
-        EventType myType = (getRandomOffset(2) == 0) ? EventType.FEATURE_CHECK_ON : EventType.FEATURE_CHECK_OFF;
-        return new Event(randomUID, myType, randomTimeStamp);
+        String myType = (getRandomOffset(2) == 0) ? EventConstants.ACTION_CHECK_OK : EventConstants.ACTION_CHECK_OK;
+        Event event = new Event(SOURCE_JAVA, TARGET_FEATURE, randomUID, myType);
+        event.setTimestamp(randomTimeStamp);
+        return event;
     }
 
     private void initConf() {

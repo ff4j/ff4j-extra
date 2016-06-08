@@ -53,6 +53,7 @@ import org.ff4j.property.Property;
 import org.ff4j.property.store.PropertyStore;
 import org.ff4j.property.util.PropertyFactory;
 import org.ff4j.utils.Util;
+import org.ff4j.web.WebConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -148,7 +149,7 @@ public final class ConsoleOperations {
         String type         = req.getParameter("pType");
         String description  = req.getParameter("desc");
         String value        = req.getParameter("pValue");
-        String featureUid   = req.getParameter("feature_uid");
+        String featureUid   = req.getParameter(WebConstants.FEATURE_UID);
         
         Property<?> ap = PropertyFactory.createProperty(name, type, value);
         ap.setDescription(description);
@@ -185,7 +186,7 @@ public final class ConsoleOperations {
         String type         = req.getParameter("pType");
         String description  = req.getParameter("desc");
         String value        = req.getParameter("pValue");
-        String featureUid   = req.getParameter("feature_uid");
+        String featureUid   = req.getParameter(WebConstants.FEATURE_UID);
         
         Property<?> ap = PropertyFactory.createProperty(name, type, value);
         ap.setDescription(description);
@@ -198,7 +199,7 @@ public final class ConsoleOperations {
         } else {
             ff4j.getPropertiesStore().createProperty(ap);
         }
-    }  
+    }
     
    
     /**

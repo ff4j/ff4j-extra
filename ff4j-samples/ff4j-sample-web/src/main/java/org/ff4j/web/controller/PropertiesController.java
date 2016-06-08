@@ -72,16 +72,28 @@ public class PropertiesController extends AbstractController {
     throws IOException {
         String msg       = null;
         String msgType   = "success";
-        String operation = req.getParameter(WebConstants.OPERATION);
-        String featureId = req.getParameter(WebConstants.NAME);
+        String operation    = req.getParameter(WebConstants.OPERATION);
+        String propertyName = req.getParameter(WebConstants.NAME);
+        String featureId    = req.getParameter(WebConstants.FEATURE_UID);
         
         if (OP_CREATE_PROPERTY.equalsIgnoreCase(operation)) {
             ConsoleOperations.createProperty(getFf4j(), req);
-            msg = featureId + " has been CREATED";
+            msg = propertyName + " has been CREATED";
+            String logMessage = "Property '" + propertyName + "' has been created ";
+            if (Util.hasLength(featureId)) {
+                logMessage+= " for feature '" + featureId + "'";
+            }
+            LOGGER.info(logMessage);
             
         } else if (OP_EDIT_PROPERTY.equalsIgnoreCase(operation)) {
             ConsoleOperations.updateProperty(getFf4j(), req);
-            msg = featureId + " has been UPDATED";
+            msg = propertyName + " has been UPDATED";
+            String logMessage = "Property '" + propertyName + "' has been UPDATED ";
+            if (Util.hasLength(featureId)) {
+                logMessage+= " for feature '" + featureId + "'";
+            }
+            LOGGER.info(logMessage);
+            
         }
        
         ctx.setVariable("msgType", msgType);

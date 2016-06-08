@@ -7,9 +7,10 @@
 <!-- *********************** -->
 <div th:fragment="modal-createProperty">
  
-<form class="form-horizontal" th:action="@{properties}" action="" method="POST" >
- <input type="hidden" name="op" value="createProperty"  />
- <input type="hidden" name="featureid"  value=""  />
+<form id="createPropertyForm" 
+      class="form-horizontal" th:action="@{properties}" 
+      action="" 
+      method="POST" >
     
  <div class="modal hide fade" id="modalCreateProperty" tabindex="-1" role="dialog" 
     aria-labelledby="labelCreateProperty" aria-hidden="true">
@@ -22,8 +23,19 @@
    </div>
 
   <!-- Body -->
-  <div class="modal-body" style="height:230px">
+  <div class="modal-body" style="height:280px">
   
+    <input type="hidden" name="op" value="createProperty"  />
+    
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px" id="createPropertyFeatureControlGroup" > 
+      <label class="control-label" for="name" style="color:#687684;font-style:normal;font-weight:normal;" 
+        th:text="#{modal.createproperty.featureid}" >FeatureName</label>
+      <div class="controls">   
+        <input type="text" name="featureid" id="featureid" 
+               style="width:350px;height:18px;color:#00ab8b;background-color:white" readonly="readonly"/>  
+      </div>
+    </div>
+    
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px"> 
       <label class="control-label" for="name" style="color:#687684;font-style:normal;font-weight:normal;" 
         th:text="#{modal.createproperty.propertyname}" >Property Name</label>
@@ -96,24 +108,13 @@
       <i class="icon-remove" ></i>&nbsp;
       <span th:text="#{modal.button.cancel}">Cancel</span>
     </button>
-    <button class="btn btn-green" type="submit">
+    <button class="btn btn-green"  type="submit">
       <i class="icon-ok icon-white" ></i>&nbsp;
       <span th:text="#{modal.button.create}">Create</span></button>
   </div>
-
-   <script type="text/javascript" >
-    $(document).on("click", ".open-createPropertyDialog", function () { 
-    	$(".modal-body #name").focus();
-    	// If triggered from property
-    	if ($(this).data('featureid')) {
-    		$(".modal-body #name").value = 'feature:' + $(this).data('featureid');
-    	}
-    });
-   </script>
  
  </div>
 </form>
-
  
  </div>
 
@@ -123,9 +124,8 @@
 <!-- *********************** -->
 <div th:fragment="modal-updateProperty">
 
-<form class="form-horizontal" th:action="@{properties}" action="" method="POST" >
- <input type="hidden" name="op"          value="updateProperty"  />
- <input type="hidden" name="feature_uid" value=""  />
+<form id="updatePropertyForm" 
+      class="form-horizontal" th:action="@{properties}" action="" method="POST" >
  
  <div class="modal hide fade" id="modalEditProperty" 
       tabindex="-1" role="dialog" aria-hidden="true">
@@ -138,6 +138,17 @@
    </div>
     
    <div class="modal-body" style="height:500px">
+   
+   <input type="hidden" name="op" value="updateProperty"  />
+   
+   <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px" id="updatePropertyFeatureControlGroup" > 
+      <label class="control-label" for="name" style="color:#687684;font-style:normal;font-weight:normal;" 
+        th:text="#{modal.editproperty.featureid}" >FeatureName</label>
+      <div class="controls">   
+        <input type="text" name="featureid" id="featureid" 
+               style="width:350px;height:18px;color:#00ab8b;background-color:white" readonly="readonly"/>  
+      </div>
+    </div>
     
     <!-- Name -->
     <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px"> 
@@ -200,18 +211,12 @@
     </div>
        
     <!-- FixedValues --> 
-    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">  
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px" id="updatePropertyFixedValueControlGroup">  
       <label class="control-label" for="pValue" 
              style="color:#687684;font-style:normal;font-weight:normal;" 
              th:text="#{modal.editproperty.fixedValues}">FixedValue</label>  
       <div class="controls">
       <table class="table table-bordered table-condensed">
-         <thead>
-          <tr style="">
-           <th style="width:20%;text-align:center;background-color:#888888;color:white">Value</th>
-           <th style="width:20%;text-align:center;background-color:#888888;color:white">Edit</th>
-          </tr>
-        </thead>
         <tbody id="modalEditPropertyFixedValues">
         </tbody>
         </table>
@@ -227,7 +232,7 @@
     </button>
     <button class="btn btn-green" type="submit">
       <i class="icon-ok icon-white" ></i>&nbsp;
-      <span th:text="#{modal.button.create}">Create</span></button>
+      <span th:text="#{modal.button.validate}">Create</span></button>
   </div>
 
   </div>
@@ -235,9 +240,94 @@
 </form>
 
  <script type="text/javascript" >
+ 
     $(document).on("click", ".open-EditPropertyDialog", function () {
         ff4j_updateModalEditProperty($(this).data('id'));
     });
+    
+    $(document).on("click", ".open-EditFeaturePropertyDialog", function () {
+    	var featureId    = $(this).data('featureid');
+    	var propertyName = $(this).data('propertyname');
+    	var modalEditProperty = $("#modalEditProperty");
+        $("#updatePropertyFeatureControlGroup").show();
+        $("#updatePropertyFixedValueControlGroup").hide();
+        modalEditProperty.find("#name").val(propertyName);
+        modalEditProperty.find("#featureid").val(featureId);
+        // Fetch information from the feature
+        $.get('api/features/' + featureId, function(myFeature) {
+           var myProperty = myFeature.customProperties[propertyName];
+           modalEditProperty.find("#desc").val(myProperty.description);
+           modalEditProperty.find("#pType").val(myProperty.type);
+           modalEditProperty.find("#pValue").val(myProperty.value);
+        });
+    });
+    
+    $(document).on("click", ".open-createPropertyDialog", function () { 
+        $(".modal-body #name").val('');
+        $(".modal-body #desc").val('');
+        $(".modal-body #pType").val('');
+        $(".modal-body #pValue").val('');
+        var featId = $(this).data('featureid');
+        if(!featId){   
+             // Hide the FeatureName control
+             $("#createPropertyFeatureControlGroup").hide();
+         } else {
+             $("#createPropertyFeatureControlGroup").show();
+             $(".modal-body #featureid").val(featId);
+         }     
+     });
+    
+    $(document).ready(function() {
+        $('#updatePropertyForm').on('submit', function(e) {
+            // do something
+            var featId = $(".modal-body #featureid").val();
+            if(featId == "" || featId == null) {
+                e.submit();
+            } else {
+                e.preventDefault();
+                var $this = $(this);
+                 
+                // invoke controller only
+                $.ajax({
+                  url: $this.attr('action'),
+                  type: $this.attr('method'),
+                  data: $this.serialize(),
+                  async: false,
+                  success: function(html) {}
+                });
+                
+                // Update modal hide modal top
+                $('#modalEditProperty').modal("hide");
+                ff4j_drawCustomProperties(featId);
+            }
+        });
+    });
+     
+     $(document).ready(function() {
+        $('#createPropertyForm').on('submit', function(e) {
+        var featId = $(".modal-body #featureid").val();
+        if(featId == "" || featId == null) {
+            e.submit();
+            
+        } else {
+            e.preventDefault();
+            var $this = $(this);
+             
+            // invoke controller only
+            $.ajax({
+              url: $this.attr('action'),
+              type: $this.attr('method'),
+              data: $this.serialize(),
+              async: false,
+              success: function(html) {}
+             });
+            
+             $("#modalCreateProperty").modal("hide");
+             ff4j_drawCustomProperties(featId);
+        }   
+       });
+     });
+    
  </script>
 
 </div>

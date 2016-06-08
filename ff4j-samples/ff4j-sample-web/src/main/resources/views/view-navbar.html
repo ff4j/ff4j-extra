@@ -79,7 +79,7 @@
            <i class="icon-bar-chart"></i> 
            <span>FeatureUsage</span>
            </a>
-        </li>
+        </li>   
        
       </ul>
       
@@ -124,6 +124,12 @@
       <span>Toggle Group</span>
      </a>
     </li>
+    <li>
+     <a href="" th:href="@{features}" >
+      <i class="icon-refresh"></i>
+      <span>Refresh</span>
+     </a>
+    </li>
    </ul>
       <div style="float:right;margin-top:20px;color:#687684">
        <b>Uptime :</b> <span th:text="${uptime}">n/a</span>
@@ -159,7 +165,13 @@
       <i class="icon-random"></i>
       <span>Rename</span>
      </a>
-    </li> 
+    </li>
+     <li>
+     <a href="" th:href="@{properties}" >
+      <i class="icon-refresh"></i>
+      <span>Refresh</span>
+     </a>
+    </li>
    </ul>
       <div style="float:right;margin-top:20px;color:#687684">
        <b>Uptime :</b> <span th:text="${uptime}">n/a</span>

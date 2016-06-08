@@ -61,29 +61,31 @@ function toggle(flip) {
 
 // Display Custom Properties for current feature in the table
 function showCustomProperties(uid) {
-  console.log(uid);
   show('detailCustomP-' + uid);
   show('linkhideCustomP-' + uid);
   hide('linkCustomP-' + uid);
 }
 
-	function hideCustomProperties(uid) {
-	 hide('detailCustomP-' + uid);
-	 hide('linkhideCustomP-' + uid);
-	 show('linkCustomP-' + uid);
-	}
+// Hide the list of customProperties
+function hideCustomProperties(uid) {
+  hide('detailCustomP-' + uid);
+  hide('linkhideCustomP-' + uid);
+  show('linkCustomP-' + uid);
+}
 
-	function showFeaturePermissions(uid) {
-	 show('detailPerm-' + uid);
-	 show('linkhidePerm-' + uid);
-	 hide('linkPerm-' + uid);	
-	}
+// Show target permissions for feature
+function showFeaturePermissions(uid) {
+  show('detailPerm-' + uid);
+  show('linkhidePerm-' + uid);
+  hide('linkPerm-' + uid);	
+}
 
-	function hideFeaturePermissions(uid) {
-	 hide('detailPerm-' + uid);
-	 hide('linkhidePerm-' + uid);
-	 show('linkPerm-' + uid);
-	}
+// Hide target permission
+function hideFeaturePermissions(uid) {
+  hide('detailPerm-' + uid);
+  hide('linkhidePerm-' + uid);
+  show('linkPerm-' + uid);
+}
 
 // ---------------------
 //  MODAL EDIT FEATURE
@@ -208,7 +210,7 @@ function ff4j_drawCustomProperties(uid) {
 	    for (var key in feature.customProperties) {
 	      if (feature.customProperties.hasOwnProperty(key)) {
 	        htmlForProperties+= '<tr><td style="width:300px">' + feature.customProperties[key].name + '=' + feature.customProperties[key].value + '</td><td>';
-			htmlForProperties+= '<a href="#" onclick="javascript:ff4j_editPropertiesForFeature(\'' + uid + '\', \'' + feature.customProperties[key].name + '\')" >';
+			htmlForProperties+= '<a data-toggle="modal" href="#modalEditProperty" class="open-EditFeaturePropertyDialog" data-featureid="' + uid + '" data-propertyname="' + feature.customProperties[key].name + '" >';
 			htmlForProperties+= '<i class="icon-pencil"></i></a></td><td>';
 			htmlForProperties+= '<a href="#" onclick="javascript:ff4j_removePropertiesForFeature(\'' + uid + '\', \'' + feature.customProperties[key].name + '\')" >';
 			htmlForProperties+= '<i class="icon-trash"></i></a></td></tr>';
@@ -216,33 +218,38 @@ function ff4j_drawCustomProperties(uid) {
 		}
 	  }
 	  htmlForProperties+= '<tr><td style="width:300px" colspan="3">';
-	  htmlForProperties+= '<a data-toggle="modal" href="#modalCreateProperty" class="open-createPropertyDialog color:#00ab8b" href="#" data-featureid="' + uid + '" >';
-	  htmlForProperties+= '<i class="icon-plus" ></i>&nbsp; News</a></td></tr>';
+	  htmlForProperties+= '<a data-toggle="modal" href="#modalCreateProperty" class="open-createPropertyDialog" data-featureid="' + uid + '"  >';
+	  htmlForProperties+= '<i class="icon-plus" ></i>&nbsp; New Property</a></td></tr>';
 	  $("#modalEditFeatureProperties").html(htmlForProperties);
   });
 }
 
-// --> Operations on feature custom properties
-function ff4j_editPropertiesForFeature(uid, propName) {
-	alert("EDIT PROPERTY " + propName);
-}
+// Remove a property for a feature
 function ff4j_removePropertiesForFeature(uid, propName) {
-	alert("RMV PROPERTY " + propName);
+	$.ajax({
+	    type: 'GET',
+		url: $(location).attr('href'),
+		data : 'op=deleteProperty&uid=' + uid + '&name=' + propName,
+		dataType : 'html',
+		success : function(permissionList, statut) { ff4j_drawCustomProperties(uid); },
+	    error : function(resultat, statut, erreur) { },
+	    complete : function(resultat, statut){  console.log("Delete Custom Properties" + propName); }
+	  });
 }
-function ff4j_createPropertiesForFeature(uid, propName) {
-	alert("CREATE PROPERTY " + propName);
-}
+
 // <--
 
 //---------------------
 // MODAL EDIT PROPERTY
 //---------------------
 
+
+// Fill fields from dedicated property
 function ff4j_updateModalEditProperty(name) {
+  $("#updatePropertyFeatureControlGroup").hide();
   var modalEditProperty = $("#modalEditProperty");
   $.get('api/properties/' + name, 
     function(myProperty) {
-	  modalEditProperty.find("#uid").val(myProperty.name);
 	  modalEditProperty.find("#name").val(myProperty.name);
 	  modalEditProperty.find("#desc").val(myProperty.description);
 	  modalEditProperty.find("#pType").val(myProperty.type);
@@ -282,8 +289,8 @@ function ff4j_drawFixedValues(name) {
 	 	$("#div-value-property").html(htmlForValue);
 	 }
 	 	
-	 htmlForFixedValueList+= '<tr><td><input type="text" id="nnfix" name="nnfix"  style="width:200px;height:18px;"/></td>';
-	 htmlForFixedValueList+= '    <td><a href="#" onclick="javascript:ff4j_createFixedValue(\'' + myProperty.name + '\', $(\'#modalEditProperty #nnfix\').val())"';
+	 htmlForFixedValueList+= '<tr><td colspan="2" ><input type="text" id="nnfix" name="nnfix"  style="width:200px;height:18px;"/>';
+	 htmlForFixedValueList+= ' &nbsp;<a href="#" onclick="javascript:ff4j_createFixedValue(\'' + myProperty.name + '\', $(\'#modalEditProperty #nnfix\').val())"';
 	 htmlForFixedValueList+= ' style="width:6px;"><i class="icon-plus" style="margin-left:-5px;"></i></a></td></tr>';
 	 $("#modalEditPropertyFixedValues").html(htmlForFixedValueList);
     	
@@ -331,13 +338,17 @@ function ff4j_changePropertyType(pName, pType) {
 // Utilities
 //---------------------
 
+// show target div
 function show (toBlock){
   setDisplay(toBlock, 'block');
 }
+
+// hide target div
 function hide (toNone) {
   setDisplay(toNone, 'none');
 }
 
+// Toggle div
 function setDisplay (target, str) {
   var targetObj = document.getElementById(target);
   if (targetObj) {

@@ -226,6 +226,9 @@ public class WebConstants {
 
     /** HTTP Parameter. */
     public static final String NAME = "name";
+    
+    /** HTTP Parameter. */
+    public static final String FEATURE_UID = "featureid";
 
     // -------- MISC ------------------------------
     
