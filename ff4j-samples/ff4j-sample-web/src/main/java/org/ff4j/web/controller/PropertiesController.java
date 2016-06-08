@@ -1,9 +1,15 @@
 package org.ff4j.web.controller;
 
+import static org.ff4j.web.WebConstants.NEW_NAME;
 import static org.ff4j.web.WebConstants.OP_ADD_FIXEDVALUE;
+import static org.ff4j.web.WebConstants.OP_COPY_FEATURE;
 import static org.ff4j.web.WebConstants.OP_CREATE_PROPERTY;
 import static org.ff4j.web.WebConstants.OP_DELETE_FIXEDVALUE;
 import static org.ff4j.web.WebConstants.OP_EDIT_PROPERTY;
+import static org.ff4j.web.WebConstants.OP_RENAME_FEATURE;
+import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
+import static org.ff4j.web.WebConstants.OP_RENAME_PROPERTY;
+import static org.ff4j.web.WebConstants.OP_COPY_PROPERTY;
 import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
 import static org.ff4j.web.WebConstants.PARAM_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
@@ -33,14 +39,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
+import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
+import org.ff4j.property.util.PropertyFactory;
 import org.ff4j.utils.Util;
 import org.ff4j.web.WebConstants;
 import org.ff4j.web.embedded.ConsoleOperations;
@@ -94,6 +104,35 @@ public class PropertiesController extends AbstractController {
             }
             LOGGER.info(logMessage);
             
+        } else if (OP_RENAME_PROPERTY.equalsIgnoreCase(operation)) {
+            String newName = req.getParameter(NEW_NAME);
+            Set< String> propertiesNames = getFf4j().getPropertiesStore().listPropertyNames();
+            if (propertiesNames.contains(newName)) {
+                msgType = "warning";
+                msg = "Cannot rename " + propertyName + " to " + newName + " : it already exists";
+            } else {
+                Property<?> newProperty = getFf4j().getPropertiesStore().readProperty(propertyName);
+                newProperty.setName(newName);
+                getFf4j().getPropertiesStore().deleteProperty(propertyName);
+                getFf4j().getPropertiesStore().createProperty(newProperty);
+                msg = "Property " + propertyName + " has been renamed to " + newName;
+            }
+            
+        } else if (OP_COPY_PROPERTY.equalsIgnoreCase(operation)) {
+            String newName = req.getParameter(NEW_NAME);
+            Set< String> propertiesNames = getFf4j().getPropertiesStore().listPropertyNames();
+            if (propertiesNames.contains(newName)) {
+                msgType = "warning";
+                msg = "Cannot copy " + propertyName + " to " + newName + " : it already exists";
+            } else {
+                Property<?> p = getFf4j().getPropertiesStore().readProperty(propertyName);
+                Property<?> newProperty = PropertyFactory.createProperty(newName, p.getType(), p.asString(), p.getDescription(), null);
+                for(Object o : p.getFixedValues()) {
+                    newProperty.add2FixedValueFromString(o.toString());
+                }
+                getFf4j().getPropertiesStore().createProperty(newProperty);
+                msg = "Property " + propertyName + " has been copied to " + newName;
+            }
         }
        
         ctx.setVariable("msgType", msgType);

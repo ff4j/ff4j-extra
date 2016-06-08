@@ -139,7 +139,19 @@ public class WebConstants {
 
     /** User operation. */
     public static final String OP_TOGGLE_GROUP = "toggleGroup";
-
+    
+    /** User operation. */
+    public static final String OP_RENAME_FEATURE = "renameFeature";
+    
+    /** User operation. */
+    public static final String OP_COPY_FEATURE = "copyFeature";
+    
+    /** User operation. */
+    public static final String OP_RENAME_PROPERTY = "renameProperty";
+    
+    /** User operation. */
+    public static final String OP_COPY_PROPERTY = "copyProperty";
+    
     /** User operation: remove feature. */
     public static final String OP_FEATURES = "features";
 
@@ -229,6 +241,10 @@ public class WebConstants {
     
     /** HTTP Parameter. */
     public static final String FEATURE_UID = "featureid";
+    
+    /** HTTP Parameter. */
+    public static final String NEW_NAME = "newname";
+
 
     // -------- MISC ------------------------------
     
@@ -237,7 +253,7 @@ public class WebConstants {
 
     /** POST - Operation. */
     public static final String SUBOPERATION = "ope";
-
+    
     /** POST - Langue. */
     public static final String LANG = "lang";
     

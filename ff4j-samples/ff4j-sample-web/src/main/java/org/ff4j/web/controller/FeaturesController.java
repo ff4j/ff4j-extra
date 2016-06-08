@@ -21,12 +21,15 @@ package org.ff4j.web.controller;
  */
 import static org.ff4j.web.WebConstants.DESCRIPTION;
 import static org.ff4j.web.WebConstants.GROUPNAME;
+import static org.ff4j.web.WebConstants.NEW_NAME;
 import static org.ff4j.web.WebConstants.OP_ADD_PERMISSION;
 import static org.ff4j.web.WebConstants.OP_CLEAR_PERMISSIONS;
+import static org.ff4j.web.WebConstants.OP_COPY_FEATURE;
 import static org.ff4j.web.WebConstants.OP_CREATE_FEATURE;
 import static org.ff4j.web.WebConstants.OP_DISABLE;
 import static org.ff4j.web.WebConstants.OP_EDIT_FEATURE;
 import static org.ff4j.web.WebConstants.OP_ENABLE;
+import static org.ff4j.web.WebConstants.OP_RENAME_FEATURE;
 import static org.ff4j.web.WebConstants.OP_RMV_FEATURE;
 import static org.ff4j.web.WebConstants.OP_RMV_PERMISSION;
 import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
@@ -43,6 +46,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -135,8 +139,6 @@ public class FeaturesController extends AbstractController {
                     getFf4j().getFeatureStore().update(feature);
                     LOGGER.info("Remove Property " + propertyName + " to " + featureId );
                 }
-                
-                
                     
             } else {
                 msgType = "warning";
@@ -163,6 +165,33 @@ public class FeaturesController extends AbstractController {
         } else if (OP_CREATE_FEATURE.equalsIgnoreCase(operation)) {
             ConsoleOperations.createFeature(getFf4j(), req);
             msg = featureId + " has been CREATED";
+            
+        } else if (OP_RENAME_FEATURE.equalsIgnoreCase(operation)) {
+            String newName = req.getParameter(NEW_NAME);
+            Set< String> featureNames = getFf4j().getFeatureStore().readAll().keySet();
+            if (featureNames.contains(newName)) {
+                msgType = "warning";
+                msg = "Cannot rename " + featureId + " to " + newName + " : it already exists";
+            } else {
+                Feature newFeature = getFf4j().getFeatureStore().read(featureId);
+                newFeature.setUid(newName);
+                getFf4j().getFeatureStore().delete(featureId);
+                getFf4j().getFeatureStore().create(newFeature);
+                msg = "Feature " + featureId + " has been renamed to " + newName;
+            }
+            
+        } else if (OP_COPY_FEATURE.equalsIgnoreCase(operation)) {
+            String newName = req.getParameter(NEW_NAME);
+            Set< String> featureNames = getFf4j().getFeatureStore().readAll().keySet();
+            if (featureNames.contains(newName)) {
+                msgType = "warning";
+                msg = "Cannot copy " + featureId + " with name " + newName + " : it already exists";
+            } else {
+                Feature newFeature = new Feature(getFf4j().getFeatureStore().read(featureId));
+                newFeature.setUid(newName);
+                getFf4j().getFeatureStore().create(newFeature);
+                msg = "Feature " + featureId + " has been copied to " + newName;
+            }
             
         } else if (OP_TOGGLE_GROUP.equalsIgnoreCase(operation)) {
             String groupName = req.getParameter(GROUPNAME);
