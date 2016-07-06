@@ -20,13 +20,15 @@ package org.ff4j.web.controller;
  * #L%
  */
 
-
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
+import org.ff4j.web.bean.WebConstants;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -36,24 +38,59 @@ import org.thymeleaf.context.WebContext;
  * @author Cedrick LUNVEN (@clunven)
  */
 public class FeatureUsageController extends AbstractController {
-	
-	/** View name. */
-	private static final String VIEW_FEATURE_USAGE = "featureUsage";
+    
+    /** Date format. */
+    public static SimpleDateFormat SDF = new SimpleDateFormat("YYYYMMdd-HHmmss");
 	
 	/** {@inheritDoc} */
 	public FeatureUsageController(FF4j ff4j, TemplateEngine te) {
-		super(ff4j, VIEW_FEATURE_USAGE, te);
+		super(ff4j, WebConstants.VIEW_FEATURE_USAGE, te);
 	}
 
 	/** {@inheritDoc} */
     public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-    throws IOException {
+    throws Exception {
     }
     
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-	throws IOException {
+	throws Exception {
 		ctx.setVariable(KEY_TITLE, "Feature Usage");
+		
+		 // Today MidNight
+        long startTime = 0;
+        String startParam = req.getParameter(WebConstants.START_DATE);
+        if (startParam == null) {
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            startTime = c.getTimeInMillis();
+        } else {
+            startTime = SDF.parse(startParam).getTime(); 
+        }
+        
+        // Tomorrow 00:00
+        long endTime   = 0; 
+        String endDate = req.getParameter(WebConstants.END_DATE);
+        if (endDate == null) {
+            Calendar c2 = Calendar.getInstance();
+            c2.setTime(new Date(System.currentTimeMillis() + 1000 * 3600 * 24));
+            c2.set(Calendar.HOUR_OF_DAY, 0);
+            c2.set(Calendar.MINUTE, 0);
+            c2.set(Calendar.SECOND, 0);
+            endTime = c2.getTimeInMillis();
+        } else {
+            startTime = SDF.parse(endDate).getTime();
+        }
+        
+        // Distribution PIE (Percent per feature)
+        ff4j.getEventRepository().getFeatureUsagePieChart(startTime, endTime);
+		/* BarChart barChart  = ff4j.getEventRepository().getFeatureUsageBarChart(startTime, endTime);
+		 ctx.setVariable("pieChart", pieChart);
+		 ctx.setVariable("barChart", barChart);
+		*/
+		
 	}
 
 }

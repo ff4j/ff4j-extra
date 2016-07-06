@@ -126,7 +126,7 @@ textarea {
 
 .subnavbar .container > ul {
 	display: inline-block;
-	height: 55px;
+	height: 51px;
 	padding: 0;
 	margin: 0;
 }
@@ -134,10 +134,10 @@ textarea {
 .subnavbar .container > ul > li {
 	float: left;
 	min-width: 90px;
-	height: 50px;
+	height: 55px;
 	padding: 0;
 	margin: 0;
-	margin-bottom:-10px;
+	margin-bottom:5px;
 	text-align: center;
 	list-style: none;
 	border-left: 1px solid #d9d9d9;
@@ -164,7 +164,6 @@ textarea {
 	width: 24px;
 	height: 24px;
 	margin-top: 11px;
-	margin-bottom: -3px;
 	font-size: 20px;
 }
 

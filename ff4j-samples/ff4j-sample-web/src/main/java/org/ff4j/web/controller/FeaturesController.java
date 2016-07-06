@@ -19,24 +19,25 @@ package org.ff4j.web.controller;
  * limitations under the License.
  * #L%
  */
-import static org.ff4j.web.WebConstants.DESCRIPTION;
-import static org.ff4j.web.WebConstants.GROUPNAME;
-import static org.ff4j.web.WebConstants.NEW_NAME;
-import static org.ff4j.web.WebConstants.OP_ADD_PERMISSION;
-import static org.ff4j.web.WebConstants.OP_CLEAR_PERMISSIONS;
-import static org.ff4j.web.WebConstants.OP_COPY_FEATURE;
-import static org.ff4j.web.WebConstants.OP_CREATE_FEATURE;
-import static org.ff4j.web.WebConstants.OP_DISABLE;
-import static org.ff4j.web.WebConstants.OP_EDIT_FEATURE;
-import static org.ff4j.web.WebConstants.OP_ENABLE;
-import static org.ff4j.web.WebConstants.OP_RENAME_FEATURE;
-import static org.ff4j.web.WebConstants.OP_RMV_FEATURE;
-import static org.ff4j.web.WebConstants.OP_RMV_PERMISSION;
-import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
-import static org.ff4j.web.WebConstants.OP_TOGGLE_GROUP;
-import static org.ff4j.web.WebConstants.STRATEGY;
-import static org.ff4j.web.WebConstants.STRATEGY_INIT;
-import static org.ff4j.web.WebConstants.SUBOPERATION;
+
+import static org.ff4j.web.bean.WebConstants.DESCRIPTION;
+import static org.ff4j.web.bean.WebConstants.GROUPNAME;
+import static org.ff4j.web.bean.WebConstants.NEW_NAME;
+import static org.ff4j.web.bean.WebConstants.OP_ADD_PERMISSION;
+import static org.ff4j.web.bean.WebConstants.OP_CLEAR_PERMISSIONS;
+import static org.ff4j.web.bean.WebConstants.OP_COPY_FEATURE;
+import static org.ff4j.web.bean.WebConstants.OP_CREATE_FEATURE;
+import static org.ff4j.web.bean.WebConstants.OP_DISABLE;
+import static org.ff4j.web.bean.WebConstants.OP_EDIT_FEATURE;
+import static org.ff4j.web.bean.WebConstants.OP_ENABLE;
+import static org.ff4j.web.bean.WebConstants.OP_RENAME_FEATURE;
+import static org.ff4j.web.bean.WebConstants.OP_RMV_FEATURE;
+import static org.ff4j.web.bean.WebConstants.OP_RMV_PERMISSION;
+import static org.ff4j.web.bean.WebConstants.OP_RMV_PROPERTY;
+import static org.ff4j.web.bean.WebConstants.OP_TOGGLE_GROUP;
+import static org.ff4j.web.bean.WebConstants.STRATEGY;
+import static org.ff4j.web.bean.WebConstants.STRATEGY_INIT;
+import static org.ff4j.web.bean.WebConstants.SUBOPERATION;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ import org.ff4j.core.Feature;
 import org.ff4j.core.FlippingStrategy;
 import org.ff4j.utils.MappingUtil;
 import org.ff4j.utils.Util;
-import org.ff4j.web.WebConstants;
+import org.ff4j.web.bean.WebConstants;
 import org.ff4j.web.embedded.ConsoleOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

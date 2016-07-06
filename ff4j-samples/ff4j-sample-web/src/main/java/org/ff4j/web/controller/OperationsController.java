@@ -1,7 +1,5 @@
 package org.ff4j.web.controller;
 
-import static org.ff4j.web.WebConstants.CONTENT_TYPE_JSON;
-
 /*
  * #%L
  * ff4j-sample-web
@@ -22,13 +20,23 @@ import static org.ff4j.web.WebConstants.CONTENT_TYPE_JSON;
  * #L%
  */
 
-
-import static org.ff4j.web.WebConstants.OP_EXPORT;
-import static org.ff4j.web.WebConstants.OP_FEATURES;
-import static org.ff4j.web.WebConstants.OP_PROPERTIES;
+import static org.ff4j.web.bean.WebConstants.CONTENT_TYPE_JSON;
+import static org.ff4j.web.bean.WebConstants.END_DATE;
+import static org.ff4j.web.bean.WebConstants.GRAPH_BAR_HITRATIO;
+import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_HITRATIO;
+import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_HOST;
+import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_SOURCE;
+import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_USER;
+import static org.ff4j.web.bean.WebConstants.OP_EXPORT;
+import static org.ff4j.web.bean.WebConstants.OP_FEATURES;
+import static org.ff4j.web.bean.WebConstants.OP_FEATUREUSAGE;
+import static org.ff4j.web.bean.WebConstants.OP_PROPERTIES;
+import static org.ff4j.web.bean.WebConstants.START_DATE;
 import static org.ff4j.web.embedded.ConsoleOperations.exportFile;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +44,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response.Status;
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.chart.BarChart;
+import org.ff4j.audit.chart.PieChart;
 import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
+import org.ff4j.utils.TimeUtils;
+import org.ff4j.utils.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -47,6 +61,12 @@ import org.thymeleaf.context.WebContext;
  * @author Cedrick LUNVEN (@clunven)
  */
 public class OperationsController extends AbstractController {
+    
+    /** Date format. */
+    private static SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd-HH:mm:ss");
+    
+    /** Logger for this class. */
+    public static final Logger LOGGER = LoggerFactory.getLogger(OperationsController.class);
 
     /** {@inheritDoc} */
     public OperationsController(FF4j ff4j, TemplateEngine te) {
@@ -75,9 +95,66 @@ public class OperationsController extends AbstractController {
         } else if (OP_PROPERTIES.equalsIgnoreCase(operation)) {
             propertiesAsJson(req, res);
             return;
-        }   
+            
+        } else if (OP_FEATUREUSAGE.equalsIgnoreCase(operation)) {
+            hitRatioGraphAsJson(req, res);
+            return;
+        }
     }
    
+    /**
+     * Generation of JSON to render Features.
+     *
+     * @param req
+     *      current request
+     * @param res
+     *      current response
+     * @throws IOException 
+     */
+    private void hitRatioGraphAsJson(HttpServletRequest req, HttpServletResponse res)
+    throws IOException {
+        res.setContentType(CONTENT_TYPE_JSON);
+        String[] pathParts = req.getPathInfo().split("/");
+        if (pathParts.length > 3) {
+            
+            long startTime = TimeUtils.getTodayMidnightTime();
+            long endTime   = System.currentTimeMillis();
+            try {
+                if (Util.hasLength(req.getParameter(START_DATE))) {
+                    startTime = SDF.parse(req.getParameter(START_DATE)).getTime();
+                }
+                if (Util.hasLength(req.getParameter(END_DATE))) {
+                    endTime = SDF.parse(req.getParameter(END_DATE)).getTime();
+                }
+            } catch (ParseException pe) {
+                LOGGER.warn("Cannot parse incoming date, use default", pe);
+            }
+            
+            String graphName = pathParts[3];
+            if (GRAPH_PIE_HITRATIO.equalsIgnoreCase(graphName)) {
+                PieChart pc = getFf4j().getEventRepository().getFeatureUsagePieChart(startTime, endTime);
+                res.getWriter().println(pc.toJson());
+                
+            } else if (GRAPH_BAR_HITRATIO.equalsIgnoreCase(graphName)) {
+                BarChart bc = getFf4j().getEventRepository().getFeatureUsageBarChart(startTime, endTime);
+                res.getWriter().println(bc.toJson());
+                
+            } else if (GRAPH_PIE_HOST.equalsIgnoreCase(graphName)) {
+                PieChart pc = getFf4j().getEventRepository().getHostPieChart(startTime, endTime);
+                res.getWriter().println(pc.toJson());
+                
+            } else if (GRAPH_PIE_SOURCE.equalsIgnoreCase(graphName)) {
+                PieChart pc = getFf4j().getEventRepository().getSourcePieChart(startTime, endTime);
+                res.getWriter().println(pc.toJson());
+                
+            } else if (GRAPH_PIE_USER.equalsIgnoreCase(graphName)) {
+                PieChart pc = getFf4j().getEventRepository().getUserPieChart(startTime, endTime);
+                res.getWriter().println(pc.toJson());
+            }
+        }
+        
+    }
+    
     /**
      * Generation of JSON to render Features.
      *

@@ -1,9 +1,9 @@
 package org.ff4j.web;
 
-import static org.ff4j.web.WebConstants.VIEW_404;
-import static org.ff4j.web.WebConstants.VIEW_API;
-import static org.ff4j.web.WebConstants.VIEW_DEFAULT;
-import static org.ff4j.web.WebConstants.VIEW_STATIC;
+import static org.ff4j.web.bean.WebConstants.VIEW_404;
+import static org.ff4j.web.bean.WebConstants.VIEW_API;
+import static org.ff4j.web.bean.WebConstants.VIEW_DEFAULT;
+import static org.ff4j.web.bean.WebConstants.VIEW_STATIC;
 
 /*
  * #%L

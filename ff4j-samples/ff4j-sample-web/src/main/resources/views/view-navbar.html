@@ -8,7 +8,7 @@
 
    <a class="brand" href="" th:href="@{home}" style="">
     <img src="" th:src="@{static/img/ff4j.png}" height="45px" width="70px" style="height:45px;margin-top:10px"/>
-    &nbsp;Administration Console
+    &nbsp;<span th:text="#{navbar.title}" >Administration Console</span>
    </a>
         
    <div class="nav-collapse"  style="margin-top:15px">
@@ -59,32 +59,32 @@
     <li class="active2">
      <a href="" th:href="@{home}" >
       <i class="icon-home"></i>
-      <span>Home</span>
+       <span th:text="#{navbar.main.home}" >Home</span>
      </a>
     </li>
     <li>
      <a href="" th:href="@{features}" >
       <i class="icon-check"></i>
-      <span>Features</span>
+      <span th:text="#{navbar.main.features}" >Features</span>
      </a>
     </li>
     <li>
      <a href="" th:href="@{properties}" >
       <i class="icon-list-alt"></i> 
-      <span>Properties</span>
+      <span th:text="#{navbar.main.properties}" >Properties</span>
      </a>
     </li>
         <li>
           <a href="" th:href="@{featureUsage}" >
            <i class="icon-bar-chart"></i> 
-           <span>FeatureUsage</span>
+           <span th:text="#{navbar.main.supervision}" >FeatureUsage</span>
            </a>
         </li>   
        
       </ul>
       
       <div style="float:right;margin-top:20px;color:#687684">
-       <b>Uptime :</b> <span th:text="${uptime}">n/a</span>
+       <span th:text="#{navbar.main.uptime}" >Uptime</span> : <span th:text="${uptime}">n/a</span>
       </div>
     </div>
   </div>
@@ -94,45 +94,51 @@
  <div class="subnavbar-inner">
   <div class="container">
    <ul class="mainnav">
+     <li class="active2">
+     <a href="" th:href="@{features}" >
+      <i class="icon-check"></i>
+      <span th:text="#{navbar.main.features}" >Features</span>
+     </a>
+    </li>
     <li>
      <a href="" th:href="@{home}" >
        <i class="icon-arrow-left"></i>
-      <span>Back</span>
+       <span th:text="#{navbar.main.back}" >Back</span> 
      </a>
     </li>
     <li>
      <a class="open-AddFlipDialog" data-toggle="modal" href="#modalCreate">
       <i class="icon-plus"></i>
-      <span>New</span>
+      <span th:text="#{navbar.feature.new}" >New</span>
      </a>
     </li>
     <li>
      <a class="open-copyFeatureDialog" data-toggle="modal" href="#modalCopyFeature">
       <i class="icon-copy"></i>
-      <span>Copy</span>
+      <span th:text="#{navbar.feature.copy}" >Copy</span>
      </a>
     </li>
     <li>
      <a class="open-renameFeatureDialog" data-toggle="modal" href="#modalRenameFeature">
       <i class="icon-random"></i>
-      <span>Rename</span>
+      <span th:text="#{navbar.feature.rename}" >Rename</span>
      </a>
     </li>   
     <li>
      <a class="open-ToggleDialog" data-toggle="modal" href="#modalToggle">
       <i class="icon-adjust"></i>
-      <span>Toggle Group</span>
+      <span th:text="#{navbar.feature.togglegroup}" >Toggle Group</span>
      </a>
     </li>
     <li>
      <a href="" th:href="@{features}" >
       <i class="icon-refresh"></i>
-      <span>Refresh</span>
+      <span th:text="#{navbar.main.refresh}" >Refresh</span>
      </a>
     </li>
    </ul>
       <div style="float:right;margin-top:20px;color:#687684">
-       <b>Uptime :</b> <span th:text="${uptime}">n/a</span>
+       <span th:text="#{navbar.main.uptime}" >Uptime</span> : <span th:text="${uptime}">n/a</span>
       </div>
     </div>
   </div>
@@ -142,39 +148,94 @@
  <div class="subnavbar-inner">
   <div class="container">
    <ul class="mainnav">
+    <li class="active2">
+     <a href="" th:href="@{properties}" >
+      <i class="icon-list-alt"></i> 
+      <span th:text="#{navbar.main.properties}" >Properties</span>
+     </a>
+    </li>
     <li>
      <a href="" th:href="@{home}" >
        <i class="icon-arrow-left"></i>
-      <span>Back</span>
+      <span th:text="#{navbar.main.back}" >Back</span>
      </a>
     </li>
     <li >
      <a class="open-createPropertyDialog" data-toggle="modal" href="#modalCreateProperty">
       <i class="icon-plus"></i>
-      <span>New</span>
+      <span th:text="#{navbar.property.new}" >New</span>
      </a>
     </li>
     <li>
      <a class="open-copyFeatureDialog" data-toggle="modal" href="#modalCopyProperty">
       <i class="icon-copy"></i>
-      <span>Copy</span>
+      <span th:text="#{navbar.property.copy}" >Copy</span>
      </a>
     </li>
     <li>
      <a class="open-renameFeatureDialog" data-toggle="modal" href="#modalRenameProperty">
       <i class="icon-random"></i>
-      <span>Rename</span>
+      <span th:text="#{navbar.property.rename}" >Rename</span>
      </a>
     </li>
      <li>
      <a href="" th:href="@{properties}" >
       <i class="icon-refresh"></i>
-      <span>Refresh</span>
+      <span th:text="#{navbar.main.refresh}" >Refresh</span>
      </a>
     </li>
    </ul>
       <div style="float:right;margin-top:20px;color:#687684">
-       <b>Uptime :</b> <span th:text="${uptime}">n/a</span>
+       <span th:text="#{navbar.main.uptime}" >Uptime</span> : <span th:text="${uptime}">n/a</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="subnavbarsupervision">
+ <div class="subnavbar-inner">
+  <div class="container">
+   <ul class="mainnav">
+     <li class="active2">
+      <a href="" th:href="@{featureUsage}" >
+      <i class="icon-bar-chart"></i> 
+      <span th:text="#{navbar.main.supervision}" >FeatureUsage</span>
+      </a>
+    </li>  
+    <li>
+     <a href="" th:href="@{home}" >
+      <i class="icon-home"></i>
+      <span th:text="#{navbar.main.back}" >Back</span>
+     </a>
+    </li>
+    <li>
+     <a href="" th:href="@{featureUsage}" >
+      <i class="icon-dashboard"></i>
+      <span >DashBoard</span>
+     </a>
+    </li> 
+    <li>
+     <a href="" th:href="@{featureUsage}" >
+      <i class="icon-dashboard"></i>
+      <span >Aggregation</span>
+     </a>
+    </li>
+    <li>
+     <a href="" th:href="@{featureUsage}" >
+      <i class="icon-dashboard"></i>
+      <span >TimeSeries</span>
+      <span class="icon-white icon-music"></span>
+     </a>
+    </li> 
+     <li>
+     <a href="" th:href="@{featureUsage}" >
+      <i class="icon-refresh"></i>
+      <span th:text="#{navbar.main.refresh}" >Refresh</span>
+     </a>
+    </li>
+   </ul>
+      <div style="float:right;margin-top:20px;color:#687684">
+       <span th:text="#{navbar.main.uptime}" >Uptime</span> : <span th:text="${uptime}">n/a</span>
       </div>
     </div>
   </div>
@@ -188,7 +249,7 @@
     <li class="active2" style="border-right:1px solid #CCCCCC">
      <a href="" th:href="@{home}" >
       <i class="icon-arrow-left"></i>
-      <span>Back</span>
+      <span th:text="#{navbar.main.back}" >Back</span>
      </a>
     </li>
     

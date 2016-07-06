@@ -1,14 +1,14 @@
 package org.ff4j.web.embedded;
 
-import static org.ff4j.web.WebConstants.BUFFER_SIZE;
-import static org.ff4j.web.WebConstants.DESCRIPTION;
-import static org.ff4j.web.WebConstants.FEATID;
-import static org.ff4j.web.WebConstants.GROUPNAME;
-import static org.ff4j.web.WebConstants.PERMISSION;
-import static org.ff4j.web.WebConstants.PERMISSION_RESTRICTED;
-import static org.ff4j.web.WebConstants.PREFIX_CHECKBOX;
-import static org.ff4j.web.WebConstants.STRATEGY;
-import static org.ff4j.web.WebConstants.STRATEGY_INIT;
+import static org.ff4j.web.bean.WebConstants.BUFFER_SIZE;
+import static org.ff4j.web.bean.WebConstants.DESCRIPTION;
+import static org.ff4j.web.bean.WebConstants.FEATID;
+import static org.ff4j.web.bean.WebConstants.GROUPNAME;
+import static org.ff4j.web.bean.WebConstants.PERMISSION;
+import static org.ff4j.web.bean.WebConstants.PERMISSION_RESTRICTED;
+import static org.ff4j.web.bean.WebConstants.PREFIX_CHECKBOX;
+import static org.ff4j.web.bean.WebConstants.STRATEGY;
+import static org.ff4j.web.bean.WebConstants.STRATEGY_INIT;
 
 /*
  * #%L
@@ -53,7 +53,7 @@ import org.ff4j.property.Property;
 import org.ff4j.property.store.PropertyStore;
 import org.ff4j.property.util.PropertyFactory;
 import org.ff4j.utils.Util;
-import org.ff4j.web.WebConstants;
+import org.ff4j.web.bean.WebConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

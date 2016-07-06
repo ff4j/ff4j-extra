@@ -332,12 +332,81 @@
 
 </div>
 
+<!-- ********************* -->
+<!-- MODAL RENAME PROPERTY -->
+<!-- ********************* -->
+<div th:fragment="modal-rename">
+
+<form class="form-horizontal" th:action="@{properties}" action="" method="POST" >
+
+  <div class="modal hide fade" id="modalRenameProperty" tabindex="-1" 
+       role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+    <div class="modal-header">   
+      <button class="close" data-dismiss="modal">x</button>   
+      <h4 id="myModalLabel">
+      <i class="icon-th-list icon-white"></i>&nbsp;
+      <span th:text="#{modal.renameproperty.title}" >Rename Property</span>
+      </h4>
+    </div>
+
+    <div class="modal-body" style="height:120px">
+    
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px">   
+      <label class="control-label" for="group" style="color:#687684;font-style:normal">
+        <span th:text="#{modal.renameproperty.list}" >Property List</span>
+      </label> 
+        <div class="controls">
+          <div class="btn-group">
+            <input type="text" name="name" id="name" style="width:350px;height:18px;color:#008bab" />
+            <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
+              <span class="caret"></span>
+              <span class="sr-only"><i class="icon-inbox icon-white" ></i></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="width:350px;font-style:normal;color:#696969">
+              <li th:each="myProperty : ${listOfProperties}">
+                <a href="#" th:onclick="'$(\'#modalRenameProperty #name\').val(\'' + ${myProperty.name} + '\');'">
+                    <span th:text="${myProperty.name}">Property</span>
+                </a>
+               </li>
+            </ul>
+          </div> <!-- btn-group -->     
+        </div> <!-- controls -->
+      </div> <!-- control-group -->      
+    <div class="control-group" style="margin-left:0px;float:left;margin-left:-45px"> 
+      <label class="control-label" for="uid" 
+        style="color:#687684;font-style:normal;font-weight:normal;" th:text="#{modal.renameproperty.new}" >New Name </label>
+      <div class="controls">   
+        <input type="text" name="newname" id="newname" 
+            style="width:350px;height:18px;color:#008bab;background-color:white" required="required" />  
+      </div>
+    </div> 
+    </div>
+    
+     <div class="modal-footer" >
+    <button class="btn btn" data-dismiss="modal">
+      <i class="icon-remove" ></i>&nbsp;
+      <span th:text="#{modal.button.cancel}">Cancel</span>
+    </button>
+    <button class="btn btn-green" type="submit">
+      <i class="icon-ok icon-white" ></i>&nbsp;
+      <span th:text="#{modal.button.validate}">Validate</span></button>
+  </div>
+    
+   <input type="hidden" name="op" value="renameProperty"  />
+
+  </div>
+</form>
+
+
+</div>
+
 <!-- ******************** -->
-<!-- MODAL COPY Property  -->
+<!-- MODAL COPY FEATURE -->
 <!-- ******************** -->
 <div th:fragment="modal-copy">
 
-<form class="form-horizontal" th:action="@{features}" action="" method="POST" >
+<form class="form-horizontal" th:action="@{properties}" action="" method="POST" >
 
   <div class="modal hide fade" id="modalCopyProperty" tabindex="-1" 
        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -358,15 +427,15 @@
       </label> 
         <div class="controls">
           <div class="btn-group">
-            <input type="text" name="uid" id="uid" style="width:350px;height:18px;color:#008bab" />
+            <input type="text" name="name" id="name" style="width:350px;height:18px;color:#008bab" />
             <button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" style="float:right;margin-left:-5px">
               <span class="caret"></span>
               <span class="sr-only"><i class="icon-inbox icon-white" ></i></span>
             </button>
             <ul class="dropdown-menu" role="menu" style="width:350px;font-style:normal;color:#696969">
-              <li th:each="myproperty : ${listOfProperties}">
-                <a href="#" th:onclick="'$(\'#modalCopyProperty #name\').val(\'' + ${myproperty.name} + '\');'">
-                    <span th:text="${myproperty.name}">Property</span>
+              <li th:each="myProperty : ${listOfProperties}">
+                <a href="#" th:onclick="'$(\'#modalCopyProperty #name\').val(\'' + ${myProperty.name} + '\');'">
+                    <span th:text="${myProperty.name}">Property</span>
                 </a>
                </li>
             </ul>
@@ -393,13 +462,14 @@
       <span th:text="#{modal.button.validate}">Validate</span></button>
   </div>
     
-   <input type="hidden" name="op" value="copyFeature"  />
+   <input type="hidden" name="op" value="copyProperty"  />
 
   </div>
 </form>
 
 
 </div>
+
 
 
 </body>

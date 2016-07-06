@@ -1,17 +1,14 @@
 package org.ff4j.web.controller;
 
-import static org.ff4j.web.WebConstants.NEW_NAME;
-import static org.ff4j.web.WebConstants.OP_ADD_FIXEDVALUE;
-import static org.ff4j.web.WebConstants.OP_COPY_FEATURE;
-import static org.ff4j.web.WebConstants.OP_CREATE_PROPERTY;
-import static org.ff4j.web.WebConstants.OP_DELETE_FIXEDVALUE;
-import static org.ff4j.web.WebConstants.OP_EDIT_PROPERTY;
-import static org.ff4j.web.WebConstants.OP_RENAME_FEATURE;
-import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
-import static org.ff4j.web.WebConstants.OP_RENAME_PROPERTY;
-import static org.ff4j.web.WebConstants.OP_COPY_PROPERTY;
-import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
-import static org.ff4j.web.WebConstants.PARAM_FIXEDVALUE;
+import static org.ff4j.web.bean.WebConstants.NEW_NAME;
+import static org.ff4j.web.bean.WebConstants.OP_ADD_FIXEDVALUE;
+import static org.ff4j.web.bean.WebConstants.OP_COPY_PROPERTY;
+import static org.ff4j.web.bean.WebConstants.OP_CREATE_PROPERTY;
+import static org.ff4j.web.bean.WebConstants.OP_DELETE_FIXEDVALUE;
+import static org.ff4j.web.bean.WebConstants.OP_EDIT_PROPERTY;
+import static org.ff4j.web.bean.WebConstants.OP_RENAME_PROPERTY;
+import static org.ff4j.web.bean.WebConstants.OP_RMV_PROPERTY;
+import static org.ff4j.web.bean.WebConstants.PARAM_FIXEDVALUE;
 import static org.ff4j.web.embedded.ConsoleRenderer.msg;
 
 /*
@@ -39,7 +36,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,11 +44,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
-import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
 import org.ff4j.property.util.PropertyFactory;
 import org.ff4j.utils.Util;
-import org.ff4j.web.WebConstants;
+import org.ff4j.web.bean.WebConstants;
 import org.ff4j.web.embedded.ConsoleOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

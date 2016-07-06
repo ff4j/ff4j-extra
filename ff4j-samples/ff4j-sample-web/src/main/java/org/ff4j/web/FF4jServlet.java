@@ -1,9 +1,9 @@
 package org.ff4j.web;
 
-import static org.ff4j.web.WebConstants.CSS_SESSIONATTRIBUTE_NAME;
-import static org.ff4j.web.WebConstants.FF4J_SESSIONATTRIBUTE_NAME;
-import static org.ff4j.web.WebConstants.SERVLETPARAM_CSS;
-import static org.ff4j.web.WebConstants.SERVLETPARAM_FF4JPROVIDER;
+import static org.ff4j.web.bean.WebConstants.CSS_SESSIONATTRIBUTE_NAME;
+import static org.ff4j.web.bean.WebConstants.FF4J_SESSIONATTRIBUTE_NAME;
+import static org.ff4j.web.bean.WebConstants.SERVLETPARAM_CSS;
+import static org.ff4j.web.bean.WebConstants.SERVLETPARAM_FF4JPROVIDER;
 
 import java.util.HashMap;
 import java.util.Map;

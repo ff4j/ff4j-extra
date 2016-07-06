@@ -1,10 +1,5 @@
 package org.ff4j.web.controller;
 
-import static org.ff4j.web.WebConstants.ERROR;
-import static org.ff4j.web.WebConstants.FLIPFILE;
-import static org.ff4j.web.WebConstants.OPERATION;
-import static org.ff4j.web.embedded.ConsoleOperations.importFile;
-
 /*
  * #%L
  * ff4j-sample-web
@@ -25,8 +20,11 @@ import static org.ff4j.web.embedded.ConsoleOperations.importFile;
  * #L%
  */
 
+import static org.ff4j.web.bean.WebConstants.ERROR;
+import static org.ff4j.web.bean.WebConstants.FLIPFILE;
+import static org.ff4j.web.bean.WebConstants.OPERATION;
+import static org.ff4j.web.embedded.ConsoleOperations.importFile;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -38,12 +36,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.ff4j.FF4j;
-import org.ff4j.audit.graph.PieSector;
-import org.ff4j.audit.proxy.FeatureStoreAuditProxy;
-import org.ff4j.audit.proxy.PropertyStoreAuditProxy;
+import org.ff4j.audit.repository.EventRepository;
 import org.ff4j.core.FeatureStore;
 import org.ff4j.property.store.PropertyStore;
-import org.ff4j.utils.TimeUtils;
 import org.ff4j.web.bean.HomeBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +55,9 @@ public class HomeController extends AbstractController {
     /** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
     
+    /** Resolver for images. */
+    public static final String START_PICTURE_URL = "static/img/db/db-";
+    
 	/** View name. */
 	private static final String VIEW_HOME = "home";
 	
@@ -67,7 +65,7 @@ public class HomeController extends AbstractController {
 	public HomeController(FF4j ff4j, TemplateEngine te) {
 		super(ff4j, VIEW_HOME, te);
 	}
-
+	
 	/** {@inheritDoc} */
     public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws Exception {
@@ -101,7 +99,7 @@ public class HomeController extends AbstractController {
     
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-	throws IOException {
+	throws Exception {
 
 		ctx.setVariable(KEY_TITLE, "Home");
 		
@@ -127,22 +125,16 @@ public class HomeController extends AbstractController {
         // Feature Store
         hb.setFeatureStore("---");
         if (ff4j.getFeatureStore() != null) {
-        	FeatureStore fs = ff4j.getFeatureStore();
-        	if (fs instanceof FeatureStoreAuditProxy) {
-        		fs = ((FeatureStoreAuditProxy) fs).getTarget();
-        	}
-            hb.setFeatureStore(fs.getClass().getSimpleName());
-            hb.setNbFeature(ff4j.getFeatureStore().readAll().size());
-            hb.setNbGroup(ff4j.getFeatureStore().readAllGroups().size());
+        	FeatureStore fs = ff4j.getConcreteFeatureStore();
+        	hb.setFeatureStore(fs.getClass().getSimpleName().replaceAll("FeatureStore", ""));
+            hb.setNbFeature(fs.readAll().size());
+            hb.setNbGroup(fs.readAllGroups().size());
          }
         
         // PropertyStore
         if (ff4j.getPropertiesStore() != null) {
-        	PropertyStore ps = ff4j.getPropertiesStore();
-        	if (ps instanceof PropertyStoreAuditProxy) {
-        		ps = ((PropertyStoreAuditProxy) ps).getTarget();
-        	}
-        	hb.setPropertyStore(ps.getClass().getSimpleName());
+        	PropertyStore ps = ff4j.getConcretePropertyStore();
+        	hb.setPropertyStore(ps.getClass().getSimpleName().replaceAll("PropertyStore", ""));
         	hb.setNbProperties(ff4j.getPropertiesStore().listPropertyNames().size());
         }
         
@@ -155,27 +147,8 @@ public class HomeController extends AbstractController {
         // Audit
         hb.setMonitoring("---");
         if (ff4j.getEventRepository() != null) {
-            hb.setMonitoring(ff4j.getEventRepository().getClass().getSimpleName());
-            hb.setNbEvents(ff4j.getEventRepository().getTotalEventCount());
-            
-            StringBuilder sbData = new StringBuilder("[");
-            StringBuilder sbColor = new StringBuilder("[");
-            List < PieSector > sectors = ff4j.getEventRepository().featuresListDistributionPie(
-            		TimeUtils.getTodayMidnightTime(), System.currentTimeMillis()).getSectors();
-            boolean first = true;
-            for (PieSector sector : sectors) {
-                if (!first) {
-                    sbData.append(",");
-                    sbColor.append(",");
-                }
-                sbData.append("['" + sector.getLabel() + "', " + String.valueOf(sector.getValue()) + "]");
-                sbColor.append("\"#" + sector.getColor() + "\"");
-                first = false;
-            }
-            sbData.append("]");
-            hb.setTodayHitCountData(sbData.toString());
-            sbColor.append("]");
-            hb.setTodayHitCountColors(sbColor.toString());
+            EventRepository er = ff4j.getEventRepository();
+            hb.setMonitoring(er.getClass().getSimpleName().replaceAll("EventRepository", ""));
         }
         
     	ctx.setVariable("homebean", hb);

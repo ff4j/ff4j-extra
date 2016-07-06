@@ -362,3 +362,92 @@ function setDisplay (target, str) {
   }
 }
 
+
+function ff4j_computePieHitRatio(url, startTime, endTime) {
+	var pieHitRatio   = new Object();
+	pieHitRatio.data  = new Array();
+	pieHitRatio.color = new Array();
+	$.ajax({
+	    type : 'GET',
+		url : url,
+		async: false,
+		data : 'sd=' + startTime + "&ed=" + endTime,
+		dataType : 'json',
+		success : function(pie, statut) {
+			pieHitRatio.title  = pie.title;
+			for (var idx in pie.sectors) {
+				var data = new Array(2);
+				data[0] = pie.sectors[idx].label;
+				data[1] = pie.sectors[idx].value;
+				pieHitRatio.data.push(data);
+				pieHitRatio.color.push(pie.sectors[idx].color);
+			}
+		}
+	});
+	return pieHitRatio;
+}
+
+function ff4j_renderPie(div_id, pie) {
+	$.jqplot(div_id, [pie.data], {
+	  	title: pie.title, 
+	      animate: true,
+	      animateReplot: true,
+	      seriesDefaults:{ 
+	          renderer:$.jqplot.PieRenderer,
+	          shadow:true,
+	          rendererOptions: {
+	              fill:true,
+	              showDataLabels: true, 
+	              dataLabelPositionFactor: 0.75,
+	              sliceMargin: 5,
+	              seriesColors: pie.color
+	          },
+	          trendline:{ show: true }
+	      },
+	      legend:{ 
+	          show: false, 
+	          location: 'w'
+	      },
+	      grid: {
+	          drawGridlines: false,
+	          drawBorder: false, 
+	          shadow:false, 
+	          background: '#FFFFFF'
+	      },
+	      highlighter: {
+	          show: true,
+	          formatString:'%s',
+	          tooltipLocation: 'n',
+	          useAxesFormatters:false
+	      }
+	  });
+}
+
+//Page Feature Usage - Request Data from API and transform for jqplot
+function getBarHitRatio(startTime, endTime) {
+	console.log("Create Bar Graph");
+	var barHitRatio   = new Object();
+	barHitRatio.data  = new Array();
+	barHitRatio.color = new Array();
+	$.ajax({
+	    type : 'GET',
+		url : 'api/featureUsage/barHitRatio',
+		async: false,
+		data : 'sd=' + startTime + "&ed=" + endTime,
+		dataType : 'json',
+		success : function(bar, statut) {
+			barHitRatio.title=bar.title;
+			for (var idx in bar.bars) {
+				var data = new Array(2);
+				data[0] = bar.bars[idx].label;
+				data[1] = bar.bars[idx].value;
+				barHitRatio.data.push(data);
+				barHitRatio.color.push(bar.bars[idx].color);
+				console.log(idx);
+			}
+		}
+	});
+	return barHitRatio;
+}
+
+

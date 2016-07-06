@@ -1,11 +1,26 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:include="header :: head"></head>
+
+<link rel="stylesheet" type="text/css" media="all" href="" th:href="@{static/js/jqplot/jquery.jqplot.min.css}" />
+
+
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/jquery.jqplot.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.barRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pieRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.highlighter.min.js}"></script>
+
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.categoryAxisRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.canvasTextRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.BezierCurveRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pointLabels.min.js}"></script>
 <body>
   
 <div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
 
-<div class="subnavbar" th:include="navbar :: subnavbar"></div>
+<div class="subnavbar" th:include="navbar :: subnavbarsupervision"></div>
 
 <div id="wrapper" class="container" >
  <div class="row">
@@ -13,13 +28,192 @@
    <div id="content" class="clearfix" >
     <div class="main-inner" style="margin-top:60px">
      <div class="container">
-    	<p>Features</p>
-	 </div>
-	</div>
+ 
+        <div class="row">
+         <div class="span4">
+
+ <div class="widget widget-nopad">
+  <div class="widget-header">
+   <i class="icon-bar-chart"></i>
+   <h3>Feature Usage</h3>
+  </div>
+  <div class="widget-content">
+   <div id="pie" class="divpie"></div>
+    <script  type="text/javascript">
+        $(document).ready(ff4j_renderPie('pie',  
+        		ff4j_computePieHitRatio('api/featureUsage/pieHitRatio', null, null)));
+    </script>  
+   </div>
+</div>
+</div>
+                        
+ <div class="span8">
+  <div class="widget widget-nopad">
+   <div class="widget-header">
+    <i class="icon-bar-chart"></i>
+    <h3>Feature Usage</h3>
+   </div>
+   <div class="widget-content" style="padding:15x;">
+   <div id="chart2" style="margin:20px"></div>
+   <script>
+   
+   $(document).ready(function() {
+     var barChart = getBarHitRatio(null, null);
+	 
+     $('#chart2').jqplot([barChart.data], {
+	   title: barChart.title,
+	   seriesColors: barChart.color,
+	   seriesDefaults:{
+	      renderer:        $.jqplot.BarRenderer,
+	      pointLabels:     { show: true },
+	      rendererOptions: { varyBarColor: true }
+	    },
+	    axesDefaults: {
+	        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+	        tickOptions: {
+	          angle: -30,
+	          fontSize: '8pt'
+	        }
+	    },
+	    axes:{
+	      xaxis:{
+	        renderer: $.jqplot.CategoryAxisRenderer
+	      },
+	      yaxis: {
+              min:0
+	      }
+	    }
+	 });
+   });
+   </script>
+   
    </div>
   </div>
  </div>
+
 </div>
+<div class="row">
+                    
+<div class="span4">
+ <div class="widget widget-nopad">
+  <div class="widget-header">
+   <i class="icon-bar-chart"></i>
+   <h3>Repartition per User</h3>
+  </div>
+  <div class="widget-content">
+   <div id="pie-user" class="divpie"></div>
+    <script  type="text/javascript">
+        $(document).ready(ff4j_renderPie('pie-user',  
+                ff4j_computePieHitRatio('api/featureUsage/pieUserRatio', null, null)));
+    </script> 
+  </div>
+ </div>
+</div>
+
+<div class="span4">
+ <div class="widget widget-nopad">
+  <div class="widget-header">
+   <i class="icon-bar-chart"></i>
+   <h3>Repartition per Host</h3>
+  </div>
+  <div class="widget-content">
+   <div id="pie-host" class="divpie"></div>
+     <script  type="text/javascript">
+        $(document).ready(ff4j_renderPie('pie-host',  
+                ff4j_computePieHitRatio('api/featureUsage/pieHostRatio', null, null)));
+    </script>  
+  </div>
+ </div>
+</div>
+
+<div class="span4">
+ <div class="widget widget-nopad">
+  <div class="widget-header">
+   <i class="icon-bar-chart"></i>
+   <h3>Repartition per Source</h3>
+  </div>
+  <div class="widget-content">
+    <div id="pie-source" class="divpie"></div>
+   <script  type="text/javascript">
+        $(document).ready(ff4j_renderPie('pie-source',  
+                ff4j_computePieHitRatio('api/featureUsage/pieSourceRatio', null, null)));
+    </script> 
+  </div>
+ </div>
+</div>
+
+</div>
+<div class="row">
+                   <div class="span12">     
+                        <!-- /widget -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <i class="icon-bar-chart"></i>
+                                <h3>
+                                    A Chart</h3>
+                            </div>
+                            <!-- /widget-header -->
+                            <div class="widget-content">
+                            
+                            
+                                <div id="maincurve" class="maincurveStyle"></div>
+                                <script  type="text/javascript">
+                                
+                                $(document).ready(function(){
+                                    $.jqplot.config.enablePlugins = true;
+                                    var s1 = [0.0,0.0,0.0,0.0,318.0,409.0,435.0,386.0,427.0,380.0,415.0,384.0,436.0,395.0,401.0,422.0,115.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s2 = [0.0,0.0,0.0,0.0,264.0,403.0,441.0,379.0,443.0,364.0,399.0,445.0,401.0,397.0,411.0,407.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s3 = [0.0,0.0,0.0,0.0,299.0,436.0,417.0,405.0,435.0,418.0,428.0,348.0,396.0,436.0,416.0,437.0,117.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s4 = [0.0,0.0,0.0,0.0,301.0,417.0,418.0,398.0,412.0,419.0,415.0,405.0,410.0,424.0,393.0,389.0,127.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s5 = [0.0,0.0,0.0,0.0,294.0,414.0,429.0,421.0,427.0,409.0,401.0,389.0,447.0,404.0,441.0,410.0,132.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s6 = [0.0,0.0,0.0,0.0,264.0,432.0,407.0,394.0,420.0,464.0,382.0,404.0,392.0,384.0,387.0,436.0,121.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s7 = [0.0,0.0,0.0,0.0,261.0,415.0,396.0,435.0,405.0,382.0,417.0,393.0,413.0,404.0,389.0,417.0,122.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s8 = [0.0,0.0,0.0,0.0,275.0,389.0,438.0,418.0,435.0,431.0,440.0,403.0,437.0,423.0,437.0,425.0,143.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+var s9 = [0.0,0.0,0.0,0.0,290.0,427.0,384.0,360.0,385.0,409.0,403.0,384.0,389.0,404.0,423.0,405.0,111.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+                                    
+                                    var ticks = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
+                                     
+                                    plot1 = $.jqplot('maincurve',  [s1,s2,s3,s4,s5,s6,s7,s8,s9], {
+                                        // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                                        animate: !$.jqplot.use_excanvas,
+                                        stackSeries: true,
+                                        seriesDefaults:{
+                                            renderer:$.jqplot.BarRenderer,
+                                            pointLabels: { show: false }
+                                        },
+                                        seriesColors:["#0ab8b","#1ab496","#34bda1","#4ec6ac","#68cfb7","#82d8c2","#9ce1cd","#b6ead8","#d0f3e3"],
+                                        grid: { backgroundColor: '#eeffee'},
+                                        axes: {
+                                            xaxis: {
+                                                renderer: $.jqplot.CategoryAxisRenderer,
+                                                ticks: ticks
+                                            }
+                                        },
+                                        highlighter: { show: false }
+                                    });
+                                });
+                                
+                                
+                                </script>       
+                                
+                            
+                            
+                               
+                            </div>
+                            <!-- /widget-content -->
+                        </div>
+                        <!-- /widget -->
+                    </div>
+                    <!-- /span6 -->
+                </div>
+                <!-- /row -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
    
 </body>
 </html>

@@ -16,7 +16,7 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<properties>
 		<encoding>UTF-8</encoding>
-		<version.ff4j>1.5.2-SNAPSHOT</version.ff4j>
+		<version.ff4j>1.5.1</version.ff4j>
 	</properties>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

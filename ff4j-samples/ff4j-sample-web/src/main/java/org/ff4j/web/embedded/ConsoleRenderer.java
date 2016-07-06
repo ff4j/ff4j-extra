@@ -1,36 +1,36 @@
 package org.ff4j.web.embedded;
 
-import static org.ff4j.web.WebConstants.CONTENT_TYPE_CSS;
-import static org.ff4j.web.WebConstants.CONTENT_TYPE_HTML;
-import static org.ff4j.web.WebConstants.CONTENT_TYPE_JS;
-import static org.ff4j.web.WebConstants.CSS_SESSIONATTRIBUTE_NAME;
-import static org.ff4j.web.WebConstants.FEATID;
-import static org.ff4j.web.WebConstants.KEY_ALERT_MESSAGE;
-import static org.ff4j.web.WebConstants.KEY_AUDIT_ROWS;
-import static org.ff4j.web.WebConstants.KEY_CSS_URL;
-import static org.ff4j.web.WebConstants.KEY_FEATURE_ROWS;
-import static org.ff4j.web.WebConstants.KEY_GROUP_LIST_CREATE;
-import static org.ff4j.web.WebConstants.KEY_GROUP_LIST_EDIT;
-import static org.ff4j.web.WebConstants.KEY_GROUP_LIST_TOGGLE;
-import static org.ff4j.web.WebConstants.KEY_PERMISSIONLIST;
-import static org.ff4j.web.WebConstants.KEY_PROPERTIES_ROWS;
-import static org.ff4j.web.WebConstants.KEY_SERVLET_CONTEXT;
-import static org.ff4j.web.WebConstants.KEY_VERSION;
-import static org.ff4j.web.WebConstants.MODAL_CREATE;
-import static org.ff4j.web.WebConstants.MODAL_EDIT;
-import static org.ff4j.web.WebConstants.MODAL_TOGGLE;
-import static org.ff4j.web.WebConstants.NEW_LINE;
-import static org.ff4j.web.WebConstants.OP_RMV_FEATURE;
-import static org.ff4j.web.WebConstants.OP_RMV_PROPERTY;
-import static org.ff4j.web.WebConstants.PREFIX_CHECKBOX;
-import static org.ff4j.web.WebConstants.RESOURCE;
-import static org.ff4j.web.WebConstants.RESOURCE_CSS_FILE;
-import static org.ff4j.web.WebConstants.RESOURCE_CSS_PARAM;
-import static org.ff4j.web.WebConstants.RESOURCE_JS_FILE;
-import static org.ff4j.web.WebConstants.RESOURCE_JS_PARAM;
-import static org.ff4j.web.WebConstants.TEMPLATE_FILE;
-import static org.ff4j.web.WebConstants.TEMPLATE_FILE_MONITORING;
-import static org.ff4j.web.WebConstants.UTF8_ENCODING;
+import static org.ff4j.web.bean.WebConstants.CONTENT_TYPE_CSS;
+import static org.ff4j.web.bean.WebConstants.CONTENT_TYPE_HTML;
+import static org.ff4j.web.bean.WebConstants.CONTENT_TYPE_JS;
+import static org.ff4j.web.bean.WebConstants.CSS_SESSIONATTRIBUTE_NAME;
+import static org.ff4j.web.bean.WebConstants.FEATID;
+import static org.ff4j.web.bean.WebConstants.KEY_ALERT_MESSAGE;
+import static org.ff4j.web.bean.WebConstants.KEY_AUDIT_ROWS;
+import static org.ff4j.web.bean.WebConstants.KEY_CSS_URL;
+import static org.ff4j.web.bean.WebConstants.KEY_FEATURE_ROWS;
+import static org.ff4j.web.bean.WebConstants.KEY_GROUP_LIST_CREATE;
+import static org.ff4j.web.bean.WebConstants.KEY_GROUP_LIST_EDIT;
+import static org.ff4j.web.bean.WebConstants.KEY_GROUP_LIST_TOGGLE;
+import static org.ff4j.web.bean.WebConstants.KEY_PERMISSIONLIST;
+import static org.ff4j.web.bean.WebConstants.KEY_PROPERTIES_ROWS;
+import static org.ff4j.web.bean.WebConstants.KEY_SERVLET_CONTEXT;
+import static org.ff4j.web.bean.WebConstants.KEY_VERSION;
+import static org.ff4j.web.bean.WebConstants.MODAL_CREATE;
+import static org.ff4j.web.bean.WebConstants.MODAL_EDIT;
+import static org.ff4j.web.bean.WebConstants.MODAL_TOGGLE;
+import static org.ff4j.web.bean.WebConstants.NEW_LINE;
+import static org.ff4j.web.bean.WebConstants.OP_RMV_FEATURE;
+import static org.ff4j.web.bean.WebConstants.OP_RMV_PROPERTY;
+import static org.ff4j.web.bean.WebConstants.PREFIX_CHECKBOX;
+import static org.ff4j.web.bean.WebConstants.RESOURCE;
+import static org.ff4j.web.bean.WebConstants.RESOURCE_CSS_FILE;
+import static org.ff4j.web.bean.WebConstants.RESOURCE_CSS_PARAM;
+import static org.ff4j.web.bean.WebConstants.RESOURCE_JS_FILE;
+import static org.ff4j.web.bean.WebConstants.RESOURCE_JS_PARAM;
+import static org.ff4j.web.bean.WebConstants.TEMPLATE_FILE;
+import static org.ff4j.web.bean.WebConstants.TEMPLATE_FILE_MONITORING;
+import static org.ff4j.web.bean.WebConstants.UTF8_ENCODING;
 
 import java.io.IOException;
 
@@ -411,7 +411,7 @@ public final class ConsoleRenderer {
     	StringBuilder sb = new StringBuilder();
     	EventRepository er = ff4j.getEventRepository();
     	EventQueryDefinition query = new EventQueryDefinition();
-    	for (Event event : er.search(query)) {
+    	for (Event event : er.searchFeatureUsageEvents(query)) {
     		sb.append("<tr>" + END_OF_LINE);
         	sb.append("<td>" + SDF.format(new Date(event.getTimestamp())) + "</td>");
         	sb.append("<td>" + event.getType() + "</td>");

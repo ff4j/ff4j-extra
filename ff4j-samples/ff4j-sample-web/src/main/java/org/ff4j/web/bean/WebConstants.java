@@ -1,4 +1,4 @@
-package org.ff4j.web;
+package org.ff4j.web.bean;
 
 /*
  * #%L
@@ -50,6 +50,9 @@ public class WebConstants {
 
 	/** constant. */
 	public static final String VIEW_API = "api";
+	
+	/** View name. */
+    public static final String VIEW_FEATURE_USAGE = "featureUsage";
 		
 	// -------- CONTENT-TYPE ------------------------------
 
@@ -88,7 +91,6 @@ public class WebConstants {
 
     /** static resource file. */
     public static final String RESOURCE_JS_FILE = "ff4j-embedded-js.dat";
-
 
     // -------- OPERATIONS ------------------------------
 
@@ -166,8 +168,27 @@ public class WebConstants {
 
     /** User operation. */
     public static final String OP_MONITORING = "monitoring";
+    
+    /** User operation. */
+    public static final String OP_FEATUREUSAGE = "featureUsage";
+    
+    // -------- GraphNames ------------------------------
 
-
+    /** hit ratio. */
+    public static final String GRAPH_PIE_HITRATIO = "pieHitRatio";
+    
+    /** hit ratio. */
+    public static final String GRAPH_BAR_HITRATIO = "barHitRatio";
+    
+    /** hit ratio. */
+    public static final String GRAPH_PIE_USER = "pieUserRatio";
+    
+    /** hit ratio. */
+    public static final String GRAPH_PIE_HOST = "pieHostRatio";
+    
+    /** hit ratio. */
+    public static final String GRAPH_PIE_SOURCE = "pieSourceRatio";
+    
     // -------- TEMPLATING ------------------------------
 
     /** Header. */
@@ -244,8 +265,13 @@ public class WebConstants {
     
     /** HTTP Parameter. */
     public static final String NEW_NAME = "newname";
-
-
+    
+    /** HTTP Parameter. */
+    public static final String START_DATE = "sd";
+    
+    /** HTTP Parameter. */
+    public static final String END_DATE = "ed";
+    
     // -------- MISC ------------------------------
     
     /** POST - Operation. */

@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response.Status;
 
 import org.ff4j.FF4j;
-import org.ff4j.web.WebConstants;
+import org.ff4j.web.bean.WebConstants;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -211,7 +211,7 @@ public abstract class AbstractController {
 	 * 		target error
 	 */
 	public abstract void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-	throws IOException;
+	throws Exception;
 	
 
     /**
