@@ -25,6 +25,8 @@ import static org.ff4j.web.utils.WebUtils.setSessionAttribute;
  */
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Set;
 
@@ -34,6 +36,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response.Status;
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.EventQueryDefinition;
+import org.ff4j.utils.Util;
 import org.ff4j.web.bean.WebConstants;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -45,6 +49,9 @@ import org.thymeleaf.context.WebContext;
  */
 public abstract class AbstractController {
 
+    /** Date format. */
+    protected static SimpleDateFormat SDF = new SimpleDateFormat("YYYYMMdd-HHmmss");
+    
 	/** KEY. */
 	protected static final String KEY_TITLE =  "TITLE";
 
@@ -226,6 +233,44 @@ public abstract class AbstractController {
      */
     public abstract void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws Exception;
+    
+    /**
+     * Check parameter for date.
+     *
+     * @param req
+     *      current http request.
+     * @param param
+     *      parameter name
+     * @return
+     *      if the param exist and is not null
+     */
+    protected boolean isValidParam(HttpServletRequest req, String param) {
+        String pValue = req.getParameter(param);
+        return (Util.hasLength(pValue) && !"null".equals(pValue));
+    }
+    
+    /**
+     * Retrieve time interval for audit events in history by parsing incoming http request.
+     *
+     * @param req
+     *      current http request
+     * @return
+     *      a time intervale startTime - endTime
+     */
+    protected EventQueryDefinition parseQuery(HttpServletRequest req) {
+        EventQueryDefinition def = new EventQueryDefinition();
+        try {
+            if (isValidParam(req, WebConstants.START_DATE)) {
+                def.setFrom(SDF.parse(req.getParameter(WebConstants.START_DATE)).getTime());
+            }
+            if (isValidParam(req, WebConstants.END_DATE)) {
+                def.setTo(SDF.parse(req.getParameter(WebConstants.END_DATE)).getTime());
+            }
+        } catch(ParseException pe) {
+            // Nothing to raise, use default values.
+        }
+        return def;
+    }
 
 	/**
 	 * Getter accessor for attribute 'ff4j'.

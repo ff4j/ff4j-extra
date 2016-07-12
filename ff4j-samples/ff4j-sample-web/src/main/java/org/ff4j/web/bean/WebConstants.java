@@ -53,6 +53,12 @@ public class WebConstants {
 	
 	/** View name. */
     public static final String VIEW_FEATURE_USAGE = "featureUsage";
+    
+    /** View name. */
+    public static final String VIEW_TIME_SERIES = "timeSeries";
+    
+    /** View name. */
+    public static final String VIEW_AUDIT = "audit";
 		
 	// -------- CONTENT-TYPE ------------------------------
 

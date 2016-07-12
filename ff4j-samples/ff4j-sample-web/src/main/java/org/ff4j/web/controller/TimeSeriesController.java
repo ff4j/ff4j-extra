@@ -28,27 +28,22 @@ import org.ff4j.web.bean.WebConstants;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
-/**
- * Controller for main class
- *
- * @author Cedrick LUNVEN (@clunven)
- */
-public class FeatureUsageController extends AbstractController {
+public class TimeSeriesController extends AbstractController {
     
-	/** {@inheritDoc} */
-	public FeatureUsageController(FF4j ff4j, TemplateEngine te) {
-		super(ff4j, WebConstants.VIEW_FEATURE_USAGE, te);
-	}
+    /** {@inheritDoc} */
+    public TimeSeriesController(FF4j ff4j, TemplateEngine te) {
+        super(ff4j, WebConstants.VIEW_TIME_SERIES, te);
+    }
 
-	/** {@inheritDoc} */
+    /** {@inheritDoc} */
     public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws Exception {
     }
     
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-	throws Exception {
-		ctx.setVariable(KEY_TITLE, "Feature Usage");
-	}
+    throws Exception {
+        ctx.setVariable(KEY_TITLE, "Time Series");
+    }
 
 }

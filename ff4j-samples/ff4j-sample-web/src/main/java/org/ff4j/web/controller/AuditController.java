@@ -20,35 +20,41 @@ package org.ff4j.web.controller;
  * #L%
  */
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
 import org.ff4j.web.bean.WebConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 /**
- * Controller for main class
+ * Audit Controller to display audit information
  *
  * @author Cedrick LUNVEN (@clunven)
  */
-public class FeatureUsageController extends AbstractController {
-    
-	/** {@inheritDoc} */
-	public FeatureUsageController(FF4j ff4j, TemplateEngine te) {
-		super(ff4j, WebConstants.VIEW_FEATURE_USAGE, te);
-	}
+public class AuditController extends AbstractController {
 
-	/** {@inheritDoc} */
-    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-    throws Exception {
+    /** Logger for this class. */
+    public static final Logger LOGGER = LoggerFactory.getLogger(FeaturesController.class);
+    
+    /** {@inheritDoc} */
+    public AuditController(FF4j ff4j, TemplateEngine te) {
+        super(ff4j, WebConstants.VIEW_AUDIT, te);
     }
     
     /** {@inheritDoc} */
-    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-	throws Exception {
-		ctx.setVariable(KEY_TITLE, "Feature Usage");
-	}
+    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
+        ctx.setVariable(KEY_TITLE, "AuditTrail");
+    }
+
+    /** {@inheritDoc} */
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws IOException {
+    }
 
 }

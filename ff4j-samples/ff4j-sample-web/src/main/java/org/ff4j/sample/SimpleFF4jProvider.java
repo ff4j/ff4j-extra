@@ -30,6 +30,7 @@ import java.util.List;
 
 import org.ff4j.FF4j;
 import org.ff4j.audit.Event;
+import org.ff4j.audit.EventConstants;
 import org.ff4j.audit.repository.EventRepository;
 import org.ff4j.core.Feature;
 import org.ff4j.utils.TimeUtils;
@@ -41,9 +42,22 @@ public class SimpleFF4jProvider implements FF4JProvider {
     /** ff4j instance. */
     private final FF4j ff4j;
     
+    private List < String > sources = new ArrayList<String>();
+    
+    private List < String > hostNames = new ArrayList<String>();
+    
+    private List < String > users = new ArrayList<String>();
+    
+    
     // Utility to generate event
     protected Event generateFeatureUsageEvent(String uid) {
-        return new Event(SOURCE_JAVA, TARGET_FEATURE, uid, ACTION_CHECK_OK);
+        Event evt = new Event(SOURCE_JAVA, TARGET_FEATURE, uid, ACTION_CHECK_OK);
+        if (System.currentTimeMillis() % 2 == 0) {
+            evt.setHostName(Util.getRandomElement(hostNames));
+            evt.setSource(Util.getRandomElement(sources));
+            evt.setUser( Util.getRandomElement(users));
+        }
+        return evt;
     }
     
     // Generate a random event during the period
@@ -79,7 +93,20 @@ public class SimpleFF4jProvider implements FF4JProvider {
      */
     public SimpleFF4jProvider() {
         ff4j = new FF4j("ff4j.xml").audit(true);
-        // Create data for today
+        
+        sources.add(SOURCE_JAVA);
+        sources.add(EventConstants.SOURCE_SSH);
+        sources.add(EventConstants.SOURCE_WEB);
+        sources.add(EventConstants.SOURCE_WEBAPI);
+        
+        hostNames.add("node1");
+        hostNames.add("node2");
+        
+        users.add("Pierre");
+        users.add("Paul");
+        users.add("Jacques");
+        
+        // Create random DATA for today
         populateRepository(ff4j, 100);
     }
 

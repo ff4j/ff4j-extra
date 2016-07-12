@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServlet;
 
 import org.ff4j.FF4j;
 import org.ff4j.web.controller.AbstractController;
+import org.ff4j.web.controller.AuditController;
 import org.ff4j.web.controller.FeatureUsageController;
 import org.ff4j.web.controller.FeaturesController;
 import org.ff4j.web.controller.HomeController;
@@ -43,6 +44,7 @@ import org.ff4j.web.controller.OperationsController;
 import org.ff4j.web.controller.PropertiesController;
 import org.ff4j.web.controller.SettingsController;
 import org.ff4j.web.controller.StaticResourceController;
+import org.ff4j.web.controller.TimeSeriesController;
 import org.ff4j.web.thymeleaf.CustomMessageResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,14 +109,24 @@ public class FF4jServlet extends HttpServlet {
     	operationsController = new OperationsController(ff4j, templateEngine);
 
     	addController(new HomeController(ff4j, templateEngine));
+    	addController(new InfosController(ff4j, templateEngine));
+        
     	addController(new FeaturesController(ff4j, templateEngine));
-    	addController(new FeatureUsageController(ff4j, templateEngine));
     	addController(new PropertiesController(ff4j, templateEngine));
     	addController(new SettingsController(ff4j, templateEngine));
-    	addController(new InfosController(ff4j, templateEngine));
     	addController(new NotFoundController(ff4j, templateEngine));
+        
+    	addController(new AuditController(ff4j, templateEngine));
+        addController(new FeatureUsageController(ff4j, templateEngine));
+        addController(new TimeSeriesController(ff4j, templateEngine));
     }
 
+    /**
+     * Syntaxic to add controller to map.
+     *
+     * @param ac
+     *      current controller
+     */
     private void addController(AbstractController ac) {
     	mapOfControllers.put(ac.getSuccessView(), ac);
     }

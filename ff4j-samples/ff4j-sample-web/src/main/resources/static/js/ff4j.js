@@ -389,7 +389,7 @@ function ff4j_computePieHitRatio(url, startTime, endTime) {
 
 function ff4j_renderPie(div_id, pie) {
 	$.jqplot(div_id, [pie.data], {
-	  	title: pie.title, 
+	  	  //title: pie.title, 
 	      animate: true,
 	      animateReplot: true,
 	      seriesDefaults:{ 

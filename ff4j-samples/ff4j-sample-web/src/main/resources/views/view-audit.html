@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header :: head"></head>
+
+<link rel="stylesheet" type="text/css" media="all" href="" th:href="@{static/js/jqplot/jquery.jqplot.min.css}" />
+
+
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/jquery.jqplot.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.barRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pieRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.highlighter.min.js}"></script>
+
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.categoryAxisRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.canvasTextRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.BezierCurveRenderer.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pointLabels.min.js}"></script>
+<body>
+  
+<div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
+
+<div class="subnavbar" th:include="navbar :: subnavbarsupervision"></div>
+
+<div id="wrapper" class="container" >
+ <div class="row">
+  <div class="span9"> 
+   <div id="content" class="clearfix" >
+    <div class="main-inner" style="margin-top:60px">
+     <div class="container">
+ 
+<div class="row">
+                   <div class="span12">     
+                        <!-- /widget -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <i class="icon-bar-chart"></i>
+                                <h3>
+                                    Audit</h3>
+                            </div>
+                            <!-- /widget-header -->
+                            <div class="widget-content">
+                             Here will be a table for audit
+                             
+                            </div>
+                            <!-- /widget-content -->
+                        </div>
+                        <!-- /widget -->
+                    </div>
+                    <!-- /span6 -->
+                </div>
+                <!-- /row -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   
+</body>
+</html>
