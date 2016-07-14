@@ -33,6 +33,18 @@
 		</feature>
 	
 		<feature uid="AwesomeFeature" enable="true" description="some desc" />
+		
+		<feature uid="f1" enable="true" description="some desc" />
+		
+		<feature uid="f2" enable="true" description="some desc" />
+		
+		<feature uid="f3" enable="true" description="some desc" />
+		
+		<feature uid="f4" enable="true" description="some desc" />
+		
+		<feature uid="f5" enable="true" description="some desc" />
+		
+		<feature uid="f6" enable="true" description="some desc" />
 	
 		<feature uid="first" enable="true" description="description" >
 			

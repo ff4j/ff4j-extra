@@ -2,20 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:include="header :: head"></head>
 
-<link rel="stylesheet" type="text/css" media="all" href="" th:href="@{static/js/jqplot/jquery.jqplot.min.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="" th:href="@{static/css/daterangepicker.css}" />
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+      
+<script type="text/javascript" src="" th:src="@{static/js/daterangepicker/moment.min.js}"></script>
+<script type="text/javascript" src="" th:src="@{static/js/daterangepicker/daterangepicker.js}"></script>
 
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/jquery.jqplot.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.barRenderer.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pieRenderer.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.highlighter.min.js}"></script>
-
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.categoryAxisRenderer.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.canvasTextRenderer.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.BezierCurveRenderer.min.js}"></script>
-<script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pointLabels.min.js}"></script>
 <body>
   
 <div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
@@ -40,7 +34,26 @@
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                             Here will be a table for audit
+                             
+                             
+            <input type="text" id="config-demo" class="form-control" />
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            
+                     
+<script type="text/javascript">
+    	  
+	$('#config-demo').daterangepicker({
+	    "timePicker": true,
+	    "timePicker24Hour": true,
+	    "timePickerIncrement": 5,
+	    "startDate": "07/09/2016",
+	    "endDate": "07/15/2016"
+	}, function(start, end, label) {
+	   console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') ");
+	});
+	
+</script>
+                             
                              
                             </div>
                             <!-- /widget-content -->

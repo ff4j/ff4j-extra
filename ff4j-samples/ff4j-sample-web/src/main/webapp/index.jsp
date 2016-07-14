@@ -39,7 +39,7 @@ body {
 		<p>2 features are created <b>'sayHello'</b> and <b>'sayGoodBye'.</b>
 
 		<p> 
-		 <a href="<%=request.getContextPath()%>/ff4j-console" class="btn btn-primary" >
+		 <a href="<%=request.getContextPath()%>/ff4j-console/" class="btn btn-primary" >
 			<i class="icon-th-large icon-white"></i>&nbsp;Access embedded Web Console
 		</a>
 		

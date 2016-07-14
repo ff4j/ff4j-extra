@@ -13,6 +13,7 @@
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.canvasTextRenderer.min.js}"></script>
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js}"></script>
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pointLabels.min.js}"></script>
+
 <body>
   
 <div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
@@ -25,7 +26,7 @@
    <div id="content" class="clearfix" >
     <div class="main-inner" style="margin-top:60px">
      <div class="container">
- 
+
         <div class="row">
          <div class="span4">
 
@@ -51,19 +52,25 @@
     <h3>Feature Usage</h3>
    </div>
    <div class="widget-content" style="padding:15x;">
-   <div id="chart2" style="margin:20px"></div>
+   <div id="featureUsageBar" style="margin:20px"></div>
    <script>
    
    $(document).ready(function() {
      var barChart = getBarHitRatio(null, null);
 	 
-     $('#chart2').jqplot([barChart.data], {
+     $('#featureUsageBar').jqplot([barChart.data], {
 	   //title: barChart.title,
 	   seriesColors: barChart.color,
 	   seriesDefaults:{
 	      renderer:        $.jqplot.BarRenderer,
 	      pointLabels:     { show: true },
-	      rendererOptions: { varyBarColor: true }
+	      rendererOptions: { 
+	    	  varyBarColor: true,
+	    	  barWidth: 25,
+              barPadding: -25,
+              barMargin: 0,
+              highlightMouseOver: false
+	      }
 	    },
 	    axesDefaults: {
 	        tickRenderer: $.jqplot.CanvasAxisTickRenderer,

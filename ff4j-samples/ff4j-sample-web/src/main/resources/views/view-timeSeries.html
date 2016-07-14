@@ -29,6 +29,61 @@
     <div class="main-inner" style="margin-top:60px">
      <div class="container">
  
+ <div class="row">
+    <div class="span12">     
+        <div class="widget">
+            <div class="widget-header">
+                <i class="icon-bar-chart"></i>
+                <h3>Spark</h3>
+            </div>
+            <div class="widget-content">
+            
+            <div id="graph1" class="maincurveStyle"></div>
+<script  type="text/javascript">
+$(document).ready(function(){
+	  var plot2 = $.jqplot ('graph1', [[3,7,9,1,5,3,8,2,5]], {
+	      // Give the plot a title.
+	      title: 'Plot With Options',
+	      // You can specify options for all axes on the plot at once with
+	      // the axesDefaults object.  Here, we're using a canvas renderer
+	      // to draw the axis label which allows rotated text.
+	      axesDefaults: {
+	        labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+	      },
+	      // Likewise, seriesDefaults specifies default options for all
+	      // series in a plot.  Options specified in seriesDefaults or
+	      // axesDefaults can be overridden by individual series or
+	      // axes options.
+	      // Here we turn on smoothing for the line.
+	      seriesDefaults: {
+	          rendererOptions: {
+	              smooth: true
+	          }
+	      },
+	      // An axes object holds options for all axes.
+	      // Allowable axes are xaxis, x2axis, yaxis, y2axis, y3axis, ...
+	      // Up to 9 y axes are supported.
+	      axes: {
+	        // options for each axis are specified in seperate option objects.
+	        xaxis: {
+	          label: "X Axis",
+	          // Turn off "padding".  This will allow data point to lie on the
+	          // edges of the grid.  Default padding is 1.2 and will keep all
+	          // points inside the bounds of the grid.
+	          pad: 0
+	        },
+	        yaxis: {
+	          label: "Y Axis"
+	        }
+	      }
+	    });
+	});
+</script>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
                    <div class="span12">     
                         <!-- /widget -->
@@ -56,8 +111,7 @@ var s6 = [0.0,0.0,0.0,0.0,264.0,432.0,407.0,394.0,420.0,464.0,382.0,404.0,392.0,
 var s7 = [0.0,0.0,0.0,0.0,261.0,415.0,396.0,435.0,405.0,382.0,417.0,393.0,413.0,404.0,389.0,417.0,122.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 var s8 = [0.0,0.0,0.0,0.0,275.0,389.0,438.0,418.0,435.0,431.0,440.0,403.0,437.0,423.0,437.0,425.0,143.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 var s9 = [0.0,0.0,0.0,0.0,290.0,427.0,384.0,360.0,385.0,409.0,403.0,384.0,389.0,404.0,423.0,405.0,111.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
-                                    
-                                    var ticks = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
+var ticks = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
                                      
                                     plot1 = $.jqplot('maincurve',  [s1,s2,s3,s4,s5,s6,s7,s8,s9], {
                                         // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
