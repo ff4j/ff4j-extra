@@ -27,7 +27,47 @@
     <div class="main-inner" style="margin-top:60px">
      <div class="container">
 
+<div class="row">
+       <div class="span12">     
+        <div class="widget">
+       
+        <div class="widget-header">
+         <i class="icon-bar-chart"></i>
+         <h3>Audit</h3>
+        </div>
+       
+        <div class="widget-content" style="text-align:center">
+         <form class="form-horizontal" action="" th:action="@{featureUsage}" method="POST">  
+          
+       <h4 style="color:#00AB8B">
+        <i class="icon-calendar" style="width:40px"></i>
+        &nbsp; From &nbsp;
+        <input type="text" name="slotfrom" id="slotfrom" 
+           class="form-control" style="width:160px" value="01/01/2015 00:00:00"/>
+        
+        &nbsp;
+        <i class="icon-calendar" style="width:40px;color:#00AB8B"></i>
+        &nbsp;To : &nbsp;
+        
+        <input type="text" name="slotto" id="slotto" 
+            class="form-control" style="width:160px" value="12/31/2016 00:00:00"/>
+        
+        &nbsp;
+          <button class="btn btn-green" type="submit" style="margin-top:-10px">
+           <i class="icon-calendar icon-white" ></i>
+           &nbsp;<span th:text="#{modal.button.validate}">s</span>
+          </button>
+          </h4>
+     </form>
+     </div>
+     </div>
+     </div>
+     </div>
+     
+
+
         <div class="row">
+        
          <div class="span4">
 
  <div class="widget widget-nopad">

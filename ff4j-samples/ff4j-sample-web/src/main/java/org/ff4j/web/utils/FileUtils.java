@@ -165,8 +165,12 @@ public class FileUtils {
 			throw new IllegalArgumentException("Cannot convert image to base64", e);
 		} finally {
 			try {
-				bos.close();
-				is.close();
+			    if (bos != null) {
+			        bos.close();
+			    }
+			    if (is != null) {
+			        is.close();
+			    }
 			} catch (IOException e) {}
 		}
 	    return bos;

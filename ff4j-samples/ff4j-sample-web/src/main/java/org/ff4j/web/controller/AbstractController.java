@@ -27,6 +27,7 @@ import static org.ff4j.web.utils.WebUtils.setSessionAttribute;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
@@ -51,6 +52,9 @@ public abstract class AbstractController {
 
     /** Date format. */
     protected static SimpleDateFormat SDF = new SimpleDateFormat("YYYYMMdd-HHmmss");
+    
+    /** Slot for the date. */
+    public static final SimpleDateFormat SDFSLOT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     
 	/** KEY. */
 	protected static final String KEY_TITLE =  "TITLE";
@@ -270,6 +274,18 @@ public abstract class AbstractController {
             // Nothing to raise, use default values.
         }
         return def;
+    }
+    
+    protected EventQueryDefinition buildQuery(HttpServletRequest req) {
+        EventQueryDefinition edf = new EventQueryDefinition();
+        try {
+            Date from = SDFSLOT.parse(req.getParameter("slotfrom"));
+            Date to   = SDFSLOT.parse(req.getParameter("slotto"));
+            edf = new EventQueryDefinition(from.getTime(), to.getTime());
+        }  catch(ParseException pe) {
+            // Nothing to raise, use default values.
+        }
+        return edf;
     }
 
 	/**

@@ -178,6 +178,9 @@ public class WebConstants {
     /** User operation. */
     public static final String OP_FEATUREUSAGE = "featureUsage";
     
+    /** User operation. */
+    public static final String OP_AUDIT = "audit";
+    
     // -------- GraphNames ------------------------------
 
     /** hit ratio. */
@@ -235,6 +238,9 @@ public class WebConstants {
 
     /** custom css if defined in web.xml. */
     public static final String KEY_CSS_URL = "URL_CSS";
+    
+    /** context name in audit bean. */
+    public static final String KEY_AUDITTRAIL = "auditTrail";
 
 
     // -------- FORM PARAM ------------------------------
@@ -278,6 +284,9 @@ public class WebConstants {
     /** HTTP Parameter. */
     public static final String END_DATE = "ed";
     
+    /** HTTP Parameter. */
+    public static final String KEY_DATE = "key";
+    
     // -------- MISC ------------------------------
     
     /** POST - Operation. */
@@ -294,7 +303,6 @@ public class WebConstants {
     
     /** constant. */
     public static final String ERROR = "error";
-
 
     /** File encoding. */
     public static final String UTF8_ENCODING = "UTF-8";
@@ -335,8 +343,6 @@ public class WebConstants {
     /** modal ID. */
     public static final String MODAL_TOGGLE = "modalToggle";
 
-    /** FixedValue to be remove. */
-    public static final String PARAM_FIXEDVALUE = "fixedValue";
     
     // -------- ROLES ------------------------------
     
@@ -348,5 +354,13 @@ public class WebConstants {
     
     /** Administration (audit, cache...). */
     public static final String ROLE_ADMIN = "FF4J_CONSOLE_ADMIN";
-
+    
+    // -------- PARAMS -------------------------------
+    
+    /** FixedValue to be remove. */
+    public static final String PARAM_FIXEDVALUE = "fixedValue";
+    
+    /** Picture name for empty field. */
+    public static final String PIC_DISABLE = "disabled";
+  
 }

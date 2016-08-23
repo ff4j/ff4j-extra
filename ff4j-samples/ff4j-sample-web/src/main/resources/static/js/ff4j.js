@@ -450,4 +450,24 @@ function getBarHitRatio(startTime, endTime) {
 	return barHitRatio;
 }
 
+//Toggle OFF a feature through AXAJ call
+function ff4j_updateSlot(start, end) {
+  console.log('sd=' + start.format('YYYYMMDD-HHmmss') + '&ed=' + end.format('YYYYMMDD-HHmmss'));
+  
+  $.ajax({
+    type: 'GET',
+    url: $(location).attr('href'),
+    data : 'sd=' + start.format('YYYYMMDD-HHmmss') + '&ed=' + end.format('YYYYMMDD-HHmmss'),
+    dataType : 'html',
+    success : function(code_html, statut){
+    	ff4j_displayMessage("success", "Slot defined");
+    },
+    error : function(resultat, statut, erreur){
+    	ff4j_displayMessage("error", statut + "-" + erreur);
+    },
+    complete : function(resultat, statut){
+    	console.log('ended');
+    }
+  });
+}
 

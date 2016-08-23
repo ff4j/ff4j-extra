@@ -1,5 +1,7 @@
 package org.ff4j.web.bean;
 
+import static org.ff4j.web.bean.WebConstants.PIC_DISABLE;
+
 /*
  * #%L
  * ff4j-console
@@ -21,8 +23,13 @@ package org.ff4j.web.bean;
  */
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.ff4j.FF4j;
+import org.ff4j.audit.repository.EventRepository;
+import org.ff4j.cache.FF4jCacheProxy;
+import org.ff4j.core.FeatureStore;
+import org.ff4j.property.store.PropertyStore;
+import org.ff4j.security.AuthorizationsManager;
 
 /**
  * Webbean to display home information
@@ -38,19 +45,22 @@ public class HomeBean implements Serializable {
     private String uptime;
     
     /** class of store. */
-    private String featureStore;
+    private String featureStore = PIC_DISABLE;
     
     /** class of store. */
-    private String propertyStore;
+    private String propertyStore = PIC_DISABLE;
 
     /** authorizationManager. */
-    private String security;
-
+    private String security = PIC_DISABLE;
+    
     /** class of monitoring. */
-    private String monitoring;
+    private String monitoring = PIC_DISABLE;
+    
+    /** cmass of cache Manager if available. */
+    private String caching = PIC_DISABLE;
 
     /** version of target ff4j. */
-    private String version;
+    private String version = PIC_DISABLE;
     
     /** number of features to display. */
     private int nbFeature = 0;
@@ -63,23 +73,57 @@ public class HomeBean implements Serializable {
 
     /** number of events used. */
     private int nbEvents = 0;
-    
-    /** data for pie. */
-    private String todayHitCountData;
-    
-    /** color of sector from pie. */
-    private String todayHitCountColors;
-    
-    /** if cache is enabled. */
-    private boolean cache = false;
-    
-    /** list of cached features. */
-    private List < String > cacheFeature = new ArrayList<String>();
-    
+   
     /**
      * Default constructor.
      */
     public HomeBean() {
+    }
+    
+    /**
+     * Default constructor.
+     */
+    public HomeBean(FF4j ff4j) {
+        this.version = ff4j.getVersion();
+        
+        setUptime(ff4j.getStartTime());
+        
+        // Feature Store
+        if (ff4j.getFeatureStore() != null) {
+            FeatureStore fs = ff4j.getConcreteFeatureStore();
+            this.featureStore = fs.getClass().getSimpleName();
+            this.nbFeature = fs.readAll().size();
+            this.nbGroup   = fs.readAllGroups().size();
+            featureStore = featureStore.replaceAll("FeatureStore", "");
+         }
+        
+        // Property Store
+        if (ff4j.getPropertiesStore() != null) {
+            PropertyStore ps = ff4j.getConcretePropertyStore();
+            this.propertyStore = ps.getClass().getSimpleName();
+            this.nbProperties = ps.listPropertyNames().size();
+            propertyStore = propertyStore.replaceAll("PropertyStore", "");
+        }
+        
+        // Monitoring
+        EventRepository evtRepository = ff4j.getEventRepository();
+        if (evtRepository != null) {
+            this.monitoring = evtRepository.getClass().getSimpleName();
+            monitoring = monitoring.replaceAll("EventRepository", "");
+        }
+        
+        // Security
+        AuthorizationsManager authManager = ff4j.getAuthorizationsManager();
+        if (authManager != null) {
+            this.security = authManager.getClass().getSimpleName();
+            security = security.replaceAll("AuthorisationManager", "");
+        }
+        
+        // Caching
+        FF4jCacheProxy cacheProxy = ff4j.getCacheProxy();
+        if (cacheProxy != null) {
+           this.caching = cacheProxy.getCacheManager().getCacheProviderName();
+        }
     }
    
     /**
@@ -92,16 +136,6 @@ public class HomeBean implements Serializable {
     }
 
     /**
-     * Setter accessor for attribute 'security'.
-     * 
-     * @param security
-     *            new value for 'security '
-     */
-    public void setSecurity(String security) {
-        this.security = security;
-    }
-
-    /**
      * Getter accessor for attribute 'monitoring'.
      *
      * @return current value of 'monitoring'
@@ -111,32 +145,12 @@ public class HomeBean implements Serializable {
     }
 
     /**
-     * Setter accessor for attribute 'monitoring'.
-     * 
-     * @param monitoring
-     *            new value for 'monitoring '
-     */
-    public void setMonitoring(String monitoring) {
-        this.monitoring = monitoring;
-    }
-
-    /**
      * Getter accessor for attribute 'version'.
      *
      * @return current value of 'version'
      */
     public String getVersion() {
         return version;
-    }
-
-    /**
-     * Setter accessor for attribute 'version'.
-     * 
-     * @param version
-     *            new value for 'version '
-     */
-    public void setVersion(String version) {
-        this.version = version;
     }
 
     /**
@@ -154,8 +168,21 @@ public class HomeBean implements Serializable {
      * @param uptime
      *            new value for 'uptime '
      */
-    public void setUptime(String uptime) {
-        this.uptime = uptime;
+    public void setUptime(long ff4jStartTime) {
+        StringBuilder sb = new StringBuilder();
+        long uptime = System.currentTimeMillis() - ff4jStartTime;
+        long daynumber = uptime / (1000 * 3600 * 24L);
+        uptime = uptime - daynumber * 1000 * 3600 * 24L;
+        long hourNumber = uptime / (1000 * 3600L);
+        uptime = uptime - hourNumber * 1000 * 3600L;
+        long minutenumber = uptime / (1000 * 60L);
+        uptime = uptime - minutenumber * 1000 * 60L;
+        long secondnumber = uptime / 1000L;
+        sb.append(daynumber + " days ");
+        sb.append(hourNumber + " hours ");
+        sb.append(minutenumber + " min ");
+        sb.append(secondnumber + " sec");
+        this.uptime = sb.toString();
     }
 
     /**
@@ -168,32 +195,12 @@ public class HomeBean implements Serializable {
     }
 
     /**
-     * Setter accessor for attribute 'nbFeature'.
-     * 
-     * @param nbFeature
-     *            new value for 'nbFeature '
-     */
-    public void setNbFeature(int nbFeature) {
-        this.nbFeature = nbFeature;
-    }
-
-    /**
      * Getter accessor for attribute 'nbGroup'.
      *
      * @return current value of 'nbGroup'
      */
     public int getNbGroup() {
         return nbGroup;
-    }
-
-    /**
-     * Setter accessor for attribute 'nbGroup'.
-     * 
-     * @param nbGroup
-     *            new value for 'nbGroup '
-     */
-    public void setNbGroup(int nbGroup) {
-        this.nbGroup = nbGroup;
     }
 
     /**
@@ -205,93 +212,6 @@ public class HomeBean implements Serializable {
         return nbEvents;
     }
 
-    /**
-     * Setter accessor for attribute 'nbEvents'.
-     * 
-     * @param nbEvents
-     *            new value for 'nbEvents '
-     */
-    public void setNbEvents(int nbEvents) {
-        this.nbEvents = nbEvents;
-    }
-
-    /**
-     * Getter accessor for attribute 'todayHitCountData'.
-     *
-     * @return
-     *       current value of 'todayHitCountData'
-     */
-    public String getTodayHitCountData() {
-        return todayHitCountData;
-    }
-
-    /**
-     * Setter accessor for attribute 'todayHitCountData'.
-     * @param todayHitCountData
-     * 		new value for 'todayHitCountData '
-     */
-    public void setTodayHitCountData(String todayHitCountData) {
-        this.todayHitCountData = todayHitCountData;
-    }
-
-    /**
-     * Getter accessor for attribute 'todayHitCountColors'.
-     *
-     * @return
-     *       current value of 'todayHitCountColors'
-     */
-    public String getTodayHitCountColors() {
-        return todayHitCountColors;
-    }
-
-    /**
-     * Setter accessor for attribute 'todayHitCountColors'.
-     * @param todayHitCountColors
-     * 		new value for 'todayHitCountColors '
-     */
-    public void setTodayHitCountColors(String todayHitCountColors) {
-        this.todayHitCountColors = todayHitCountColors;
-    }
-
-    /**
-     * Getter accessor for attribute 'cache'.
-     *
-     * @return
-     *       current value of 'cache'
-     */
-    public boolean isCache() {
-        return cache;
-    }
-
-    /**
-     * Setter accessor for attribute 'cache'.
-     * @param cache
-     * 		new value for 'cache '
-     */
-    public void setCache(boolean cache) {
-        this.cache = cache;
-    }
-
-    /**
-     * Getter accessor for attribute 'cacheFeature'.
-     *
-     * @return
-     *       current value of 'cacheFeature'
-     */
-    public List<String> getCacheFeature() {
-        return cacheFeature;
-    }
-
-    /**
-     * Setter accessor for attribute 'cacheFeature'.
-     * @param cacheFeature
-     * 		new value for 'cacheFeature '
-     */
-    public void setCacheFeature(List<String> cacheFeature) {
-        this.cacheFeature = cacheFeature;
-    }
-
-
 	/**
 	 * Getter accessor for attribute 'featureStore'.
 	 *
@@ -302,17 +222,6 @@ public class HomeBean implements Serializable {
 		return featureStore;
 	}
 
-
-	/**
-	 * Setter accessor for attribute 'featureStore'.
-	 * @param featureStore
-	 * 		new value for 'featureStore '
-	 */
-	public void setFeatureStore(String featureStore) {
-		this.featureStore = featureStore;
-	}
-
-
 	/**
 	 * Getter accessor for attribute 'propertyStore'.
 	 *
@@ -322,18 +231,7 @@ public class HomeBean implements Serializable {
 	public String getPropertyStore() {
 		return propertyStore;
 	}
-
-
-	/**
-	 * Setter accessor for attribute 'propertyStore'.
-	 * @param propertyStore
-	 * 		new value for 'propertyStore '
-	 */
-	public void setPropertyStore(String propertyStore) {
-		this.propertyStore = propertyStore;
-	}
-
-
+	
 	/**
 	 * Getter accessor for attribute 'nbProperties'.
 	 *
@@ -344,14 +242,14 @@ public class HomeBean implements Serializable {
 		return nbProperties;
 	}
 
-
-	/**
-	 * Setter accessor for attribute 'nbProperties'.
-	 * @param nbProperties
-	 * 		new value for 'nbProperties '
-	 */
-	public void setNbProperties(int nbProperties) {
-		this.nbProperties = nbProperties;
-	}
+    /**
+     * Getter accessor for attribute 'caching'.
+     *
+     * @return
+     *       current value of 'caching'
+     */
+    public String getCaching() {
+        return caching;
+    }
 
 }

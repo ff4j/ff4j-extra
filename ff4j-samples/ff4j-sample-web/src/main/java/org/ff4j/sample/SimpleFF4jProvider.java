@@ -5,6 +5,7 @@ import static org.ff4j.audit.EventConstants.SOURCE_JAVA;
 import static org.ff4j.audit.EventConstants.TARGET_FEATURE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -78,14 +79,35 @@ public class SimpleFF4jProvider implements FF4JProvider {
     }
     
     // Populate repository for test
-    protected void populateRepository(FF4j ff4j, int totalEvent) {
-        EventRepository repo      = ff4j.getEventRepository(); 
-        List < Feature > features = new ArrayList<Feature>(ff4j.getFeatures().values());
+    public void populateRepository(int totalEvent) {
+        EventRepository repo      = getFF4j().getEventRepository(); 
+        
+        List < Feature > features = new ArrayList<Feature>(getFF4j().getFeatures().values());
         for (int i = 0; i < totalEvent; i++) {
             repo.saveEvent(generateRandomFeatureUsageEvent(features,
                     TimeUtils.getTodayMidnightTime(), 
                     TimeUtils.getTomorrowMidnightTime()));
         }
+
+        List < String >  actions  = new ArrayList<String>(Arrays.asList(EventConstants.ACTION_CREATE, 
+                EventConstants.ACTION_CREATE, EventConstants.ACTION_DELETE, EventConstants.ACTION_CONNECT));
+        // Events for audit trail today
+        for (int j = 0; j < 9; j++) {
+            Event evt = generateRandomFeatureUsageEvent(features,
+                    TimeUtils.getTodayMidnightTime(), 
+                    TimeUtils.getTomorrowMidnightTime());
+            evt.setAction(Util.getRandomElement(actions));
+            repo.saveEvent(evt);
+        }
+        // Events for audit trail 100 days
+        for (int k = 0; k < 100; k++) {
+            Event evt = generateRandomFeatureUsageEvent(features,
+                    TimeUtils.getTodayMidnightTime() - (1000 * 3600) * 24 * 100 * k, 
+                    TimeUtils.getTodayMidnightTime());
+            evt.setAction(Util.getRandomElement(actions));
+            repo.saveEvent(evt);
+        }
+        
     }
 
     /**
@@ -107,7 +129,7 @@ public class SimpleFF4jProvider implements FF4JProvider {
         users.add("Jacques");
         
         // Create random DATA for today
-        populateRepository(ff4j, 100);
+        populateRepository(100);
     }
 
     /**

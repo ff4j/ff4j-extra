@@ -26,6 +26,7 @@ import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_HITRATIO;
 import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_HOST;
 import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_SOURCE;
 import static org.ff4j.web.bean.WebConstants.GRAPH_PIE_USER;
+import static org.ff4j.web.bean.WebConstants.OP_AUDIT;
 import static org.ff4j.web.bean.WebConstants.OP_EXPORT;
 import static org.ff4j.web.bean.WebConstants.OP_FEATURES;
 import static org.ff4j.web.bean.WebConstants.OP_FEATUREUSAGE;
@@ -40,11 +41,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response.Status;
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.Event;
 import org.ff4j.audit.EventQueryDefinition;
 import org.ff4j.audit.chart.BarChart;
 import org.ff4j.audit.chart.PieChart;
 import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
+import org.ff4j.web.bean.WebConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
@@ -91,6 +94,42 @@ public class OperationsController extends AbstractController {
         } else if (OP_FEATUREUSAGE.equalsIgnoreCase(operation)) {
             graphFeatureUsageHitCountasJson(req, res);
             return;
+        } else if (OP_AUDIT.equalsIgnoreCase(operation)) {
+            auditEventasJson(req, res); 
+            return;
+        } else {
+            res.setStatus(Status.BAD_REQUEST.getStatusCode());
+            res.getWriter().println("Invalid request please check URL");
+            return;
+        }
+    }
+    
+    /**
+     * Generation of JSON to render Features.
+     *
+     * @param req
+     *      current request
+     * @param res
+     *      current response
+     * @throws IOException 
+     */
+    private void auditEventasJson(HttpServletRequest req, HttpServletResponse res)
+    throws IOException {
+        res.setContentType(CONTENT_TYPE_JSON);
+        String[] pathParts = req.getPathInfo().split("/");
+        if (pathParts.length > 3) {
+            String eventUUId = pathParts[3];
+            Long eventTime = null;
+            if (isValidParam(req, WebConstants.KEY_DATE)) {
+                eventTime = Long.valueOf(req.getParameter(WebConstants.KEY_DATE));
+            }
+            Event event = getFf4j().getEventRepository().getEventByUUID(eventUUId, eventTime);
+            if (event != null) {
+                res.getWriter().println(event.toString());
+            } else {
+                res.setStatus(Status.NOT_FOUND.getStatusCode());
+                res.getWriter().println("Event " + eventUUId + " does not exist in event repository." );
+            }
         }
     }
    
@@ -132,7 +171,6 @@ public class OperationsController extends AbstractController {
                 res.getWriter().println(pc.toJson());
             }
         }
-        
     }
     
     /**

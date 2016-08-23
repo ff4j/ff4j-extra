@@ -36,9 +36,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.ff4j.FF4j;
-import org.ff4j.audit.repository.EventRepository;
-import org.ff4j.core.FeatureStore;
-import org.ff4j.property.store.PropertyStore;
 import org.ff4j.web.bean.HomeBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,9 +51,6 @@ public class HomeController extends AbstractController {
 	
     /** Logger for this class. */
     public static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-    
-    /** Resolver for images. */
-    public static final String START_PICTURE_URL = "static/img/db/db-";
     
 	/** View name. */
 	private static final String VIEW_HOME = "home";
@@ -100,59 +94,9 @@ public class HomeController extends AbstractController {
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws Exception {
-
 		ctx.setVariable(KEY_TITLE, "Home");
-		
-		HomeBean hb = new HomeBean();
-		
-		// General
-		StringBuilder sb = new StringBuilder();
-        long uptime = System.currentTimeMillis() - ff4j.getStartTime();
-        long daynumber = uptime / (1000 * 3600 * 24L);
-        uptime = uptime - daynumber * 1000 * 3600 * 24L;
-        long hourNumber = uptime / (1000 * 3600L);
-        uptime = uptime - hourNumber * 1000 * 3600L;
-        long minutenumber = uptime / (1000 * 60L);
-        uptime = uptime - minutenumber * 1000 * 60L;
-        long secondnumber = uptime / 1000L;
-        sb.append(daynumber + " days ");
-        sb.append(hourNumber + " hours ");
-        sb.append(minutenumber + " min ");
-        sb.append(secondnumber + " sec");
-        hb.setUptime(sb.toString());
-        hb.setVersion(ff4j.getVersion());
-        
-        // Feature Store
-        hb.setFeatureStore("---");
-        if (ff4j.getFeatureStore() != null) {
-        	FeatureStore fs = ff4j.getConcreteFeatureStore();
-        	hb.setFeatureStore(fs.getClass().getSimpleName().replaceAll("FeatureStore", ""));
-            hb.setNbFeature(fs.readAll().size());
-            hb.setNbGroup(fs.readAllGroups().size());
-         }
-        
-        // PropertyStore
-        if (ff4j.getPropertiesStore() != null) {
-        	PropertyStore ps = ff4j.getConcretePropertyStore();
-        	hb.setPropertyStore(ps.getClass().getSimpleName().replaceAll("PropertyStore", ""));
-        	hb.setNbProperties(ff4j.getPropertiesStore().listPropertyNames().size());
-        }
-        
-        // Security
-        hb.setSecurity("---");
-        if (ff4j.getAuthorizationsManager() != null) {
-            hb.setSecurity(ff4j.getAuthorizationsManager().getClass().getSimpleName());
-        }
-        
-        // Audit
-        hb.setMonitoring("---");
-        if (ff4j.getEventRepository() != null) {
-            EventRepository er = ff4j.getEventRepository();
-            hb.setMonitoring(er.getClass().getSimpleName().replaceAll("EventRepository", ""));
-        }
-        
-    	ctx.setVariable("homebean", hb);
-    	ctx.setVariable("today", Calendar.getInstance());
+		ctx.setVariable("today", Calendar.getInstance());
+        ctx.setVariable("homebean", new HomeBean(ff4j));
 	}
 
 }

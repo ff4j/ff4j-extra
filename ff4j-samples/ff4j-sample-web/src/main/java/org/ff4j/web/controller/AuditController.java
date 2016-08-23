@@ -21,11 +21,16 @@ package org.ff4j.web.controller;
  */
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.EventQueryDefinition;
+import org.ff4j.audit.EventSeries;
 import org.ff4j.web.bean.WebConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,12 +54,28 @@ public class AuditController extends AbstractController {
     
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx) throws IOException {
-        ctx.setVariable(KEY_TITLE, "AuditTrail");
+        createPage(ctx,  new EventQueryDefinition());
     }
 
     /** {@inheritDoc} */
     public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws IOException {
+        createPage(ctx, buildQuery(req));
+    }
+    
+    /**
+     * Define output context for audit.
+     *
+     * @param ctx
+     *      current web contetx
+     * @param eqd
+     *      curren query
+     */
+    private void createPage(WebContext ctx, EventQueryDefinition eqd) {
+        ctx.setVariable(KEY_TITLE, "AuditTrail");
+        ctx.setVariable("from", SDFSLOT.format(new Date(eqd.getFrom())));
+        ctx.setVariable("to",   SDFSLOT.format(new Date(eqd.getTo())));
+        ctx.setVariable(WebConstants.KEY_AUDITTRAIL, ff4j.getEventRepository().getAuditTrail(eqd));
     }
 
 }
