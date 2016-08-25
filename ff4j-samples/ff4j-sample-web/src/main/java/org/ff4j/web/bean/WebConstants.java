@@ -171,12 +171,18 @@ public class WebConstants {
 
     /** User operation. */
     public static final String OP_DISABLE = "disable";
+    
+    /** User operation. */
+    public static final String TOGGLE_AUDIT = "toggleAudit";
 
     /** User operation. */
     public static final String OP_MONITORING = "monitoring";
     
     /** User operation. */
     public static final String OP_FEATUREUSAGE = "featureUsage";
+    
+    /** User operation. */
+    public static final String OP_TIMESERIES = "timeSeries";
     
     /** User operation. */
     public static final String OP_AUDIT = "audit";
@@ -242,7 +248,10 @@ public class WebConstants {
     /** context name in audit bean. */
     public static final String KEY_AUDITTRAIL = "auditTrail";
 
+    /** context name in audit bean. */
+    public static final String KEY_AUDITENABLE = "auditEnable";
 
+    
     // -------- FORM PARAM ------------------------------
 
     /** HTTP Parameter. */

@@ -1,5 +1,8 @@
 package org.ff4j.web.controller;
 
+import static org.ff4j.web.bean.WebConstants.KEY_AUDITENABLE;
+import static org.ff4j.web.bean.WebConstants.TOGGLE_AUDIT;
+
 /*
  * #%L
  * ff4j-sample-web
@@ -27,6 +30,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
+import org.ff4j.utils.Util;
+import org.ff4j.web.bean.WebConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -37,6 +44,9 @@ import org.thymeleaf.context.WebContext;
  */
 public class SettingsController extends AbstractController {
 	
+    /** Logger for this class. */
+    public static final Logger LOGGER = LoggerFactory.getLogger(SettingsController.class);
+    
 	/** View name. */
 	private static final String VIEW_SETTINGS = "settings";
 	
@@ -54,6 +64,25 @@ public class SettingsController extends AbstractController {
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
 	throws IOException {
 		ctx.setVariable(KEY_TITLE, "Settings");
+		String operation = req.getParameter(WebConstants.OPERATION);
+        String msgType = "success";
+        String msg = null;
+        if (Util.hasLength(operation)) {
+          if (TOGGLE_AUDIT.equalsIgnoreCase(operation)) {
+              if (getFf4j().isEnableAudit()) {
+                  getFf4j().audit(false);
+                  msg = "Audit is now DISABLED";
+                  LOGGER.info("Audit has been disabled");
+              } else {
+                  getFf4j().audit(true);
+                  msg = "Audit is now ENABLED";
+                  LOGGER.info("Audit has been enabled");
+              }
+          }
+        }
+        ctx.setVariable(KEY_AUDITENABLE, getFf4j().isEnableAudit());
+        ctx.setVariable("msgType", msgType);
+        ctx.setVariable("msgInfo", msg);
 	}
 
 }

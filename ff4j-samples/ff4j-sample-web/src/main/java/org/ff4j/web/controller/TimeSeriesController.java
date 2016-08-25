@@ -1,4 +1,5 @@
 package org.ff4j.web.controller;
+import java.util.Date;
 
 /*
  * #%L
@@ -24,10 +25,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.EventQueryDefinition;
 import org.ff4j.web.bean.WebConstants;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+/**
+ * Display features metaData. 
+ *
+ * @author Cedrick LUNVEN (@clunven)
+ */
 public class TimeSeriesController extends AbstractController {
     
     /** {@inheritDoc} */
@@ -38,12 +45,27 @@ public class TimeSeriesController extends AbstractController {
     /** {@inheritDoc} */
     public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws Exception {
+        createPage(ctx, buildQuery(req));
     }
     
     /** {@inheritDoc} */
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws Exception {
+        createPage(ctx,  new EventQueryDefinition());
+    }
+    
+    /**
+     * Define output context for audit.
+     *
+     * @param ctx
+     *      current web contetx
+     * @param eqd
+     *      curren query
+     */
+    private void createPage(WebContext ctx, EventQueryDefinition eqd) {
         ctx.setVariable(KEY_TITLE, "Time Series");
+        ctx.setVariable("from", SDFSLOT.format(new Date(eqd.getFrom())));
+        ctx.setVariable("to",   SDFSLOT.format(new Date(eqd.getTo())));
     }
 
 }

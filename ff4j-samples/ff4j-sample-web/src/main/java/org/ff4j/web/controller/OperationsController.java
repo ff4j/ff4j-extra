@@ -31,6 +31,7 @@ import static org.ff4j.web.bean.WebConstants.OP_EXPORT;
 import static org.ff4j.web.bean.WebConstants.OP_FEATURES;
 import static org.ff4j.web.bean.WebConstants.OP_FEATUREUSAGE;
 import static org.ff4j.web.bean.WebConstants.OP_PROPERTIES;
+import static org.ff4j.web.bean.WebConstants.OP_TIMESERIES;
 import static org.ff4j.web.embedded.ConsoleOperations.exportFile;
 
 import java.io.IOException;
@@ -94,6 +95,11 @@ public class OperationsController extends AbstractController {
         } else if (OP_FEATUREUSAGE.equalsIgnoreCase(operation)) {
             graphFeatureUsageHitCountasJson(req, res);
             return;
+            
+        } else if (OP_TIMESERIES.equalsIgnoreCase(operation)) {
+            graphTimeSeriesasJson(req, res);
+            return;
+            
         } else if (OP_AUDIT.equalsIgnoreCase(operation)) {
             auditEventasJson(req, res); 
             return;
@@ -129,6 +135,28 @@ public class OperationsController extends AbstractController {
             } else {
                 res.setStatus(Status.NOT_FOUND.getStatusCode());
                 res.getWriter().println("Event " + eventUUId + " does not exist in event repository." );
+            }
+        }
+    }
+    
+    /**
+     * Generation of JSON to render Features.
+     *
+     * @param req
+     *      current request
+     * @param res
+     *      current response
+     * @throws IOException 
+     */
+    private void graphTimeSeriesasJson(HttpServletRequest req, HttpServletResponse res)
+    throws IOException {
+        res.setContentType(CONTENT_TYPE_JSON);
+        String[] pathParts = req.getPathInfo().split("/");
+        EventQueryDefinition query = parseQuery(req);
+        if (pathParts.length > 3) {
+            String graphName = pathParts[3];
+            if (GRAPH_PIE_HITRATIO.equalsIgnoreCase(graphName)) {
+                
             }
         }
     }

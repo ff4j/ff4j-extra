@@ -30,6 +30,8 @@ function ff4j_disable(flip) {
   });
 }
 
+
+
 // Toggle ON a feature through AXAJ call
 function ff4j_enable(flip) {
   $.ajax({
@@ -424,7 +426,7 @@ function ff4j_renderPie(div_id, pie) {
 }
 
 //Page Feature Usage - Request Data from API and transform for jqplot
-function getBarHitRatio(startTime, endTime) {
+function ff4j_getBarHitRatio(startTime, endTime) {
 	console.log("Create Bar Graph");
 	var barHitRatio   = new Object();
 	barHitRatio.data  = new Array();
@@ -443,7 +445,6 @@ function getBarHitRatio(startTime, endTime) {
 				data[1] = bar.bars[idx].value;
 				barHitRatio.data.push(data);
 				barHitRatio.color.push(bar.bars[idx].color);
-				console.log(idx);
 			}
 		}
 	});
@@ -470,4 +471,23 @@ function ff4j_updateSlot(start, end) {
     }
   });
 }
+
+//Toggle OFF a feature through AXAJ call
+function ff4j_toggleAudit() {
+  $.ajax({
+    type: 'GET',
+    url: $(location).attr('href'),
+    data : 'op=toggleAudit',
+    dataType : 'html',
+    success : function(code_html, statut){
+    	ff4j_displayMessage("success", "FF4J Audit is toggled");
+    },
+    error : function(resultat, statut, erreur){
+       displayMessage("error", statut + "-" + erreur);
+ 	   $(flip).prop('checked', false);
+    },
+    complete : function(resultat, statut){}
+  });
+}
+
 

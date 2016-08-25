@@ -17,7 +17,7 @@
             <div class="widget widget-nopad">
             <div class="widget-header"> 
               <i class="icon-cogs"></i>
-              <h3>Others Settings</h3>
+              <h3><span th:text="#{navbar.main.settings}" >Settings</span></h3>
             </div>
              <div class="widget-content">
                  
@@ -29,14 +29,15 @@
        <h4>
         <a class="ff4j-tooltip" th:attr="tooltip=#{home.general.version.comment}" >
         Audit &nbsp;
-       </a></h4>
+        </a>
+       </h4>
       </td>
       <td style="width:30px;text-align:center">
         <h2> <i class="icon-dashboard" style="width:40px;color:#00AB8B"></i></h2>
       </td>
       <td class="homebean-info">
       <label class="switch switch-green" style="margin-top:5px">
-       <input id="f3" type="checkbox" class="switch-input" onclick="toggleAudit()" checked="checked" />
+       <input id="f3" type="checkbox" class="switch-input" onclick="ff4j_toggleAudit()" th:checked="${auditEnable}" />
         <span class="switch-label" data-on="On" data-off="Off"></span>
         <span class="switch-handle"></span>
       </label>
@@ -45,10 +46,7 @@
      
     </table>
     
-    </h6>
-    
-                  
-                  
+    </h6>              
                 </div>
                 <!-- /widget-content --> 
 

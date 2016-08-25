@@ -1,5 +1,7 @@
 package org.ff4j.web.controller;
 
+import java.util.Date;
+
 /*
  * #%L
  * ff4j-sample-web
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.EventQueryDefinition;
 import org.ff4j.web.bean.WebConstants;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -41,14 +44,33 @@ public class FeatureUsageController extends AbstractController {
 	}
 
 	/** {@inheritDoc} */
-    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws Exception {
+        createPage(ctx,  new EventQueryDefinition());
     }
     
-    /** {@inheritDoc} */
-    public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
-	throws Exception {
-		ctx.setVariable(KEY_TITLE, "Feature Usage");
-	}
+	/** {@inheritDoc} */
+    public void post(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
+    throws Exception {
+        createPage(ctx, buildQuery(req));
+    }
+    
+    /**
+     * Define output context for audit.
+     *
+     * @param ctx
+     *      current web contetx
+     * @param eqd
+     *      curren query
+     */
+    private void createPage(WebContext ctx, EventQueryDefinition eqd) {
+        ctx.setVariable(KEY_TITLE, "Feature Usage");
+        ctx.setVariable("from", SDFSLOT.format(new Date(eqd.getFrom())));
+        ctx.setVariable("to",   SDFSLOT.format(new Date(eqd.getTo())));
+        ctx.setVariable("fromJS", SDF.format(new Date(eqd.getFrom())));
+        ctx.setVariable("toJS",   SDF.format(new Date(eqd.getTo())));
+        
+        
+    }
 
 }

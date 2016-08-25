@@ -14,6 +14,10 @@
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js}"></script>
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pointLabels.min.js}"></script>
 
+<!-- Date Picker -->
+<script type="text/javascript" src="" th:src="@{static/js/bootstrap-datetimepicker.min.js}"></script>
+<link rel="stylesheet" type="text/css" media="all" href="" th:href="@{static/css/bootstrap-datetimepicker.min.css}" />
+
 <body>
   
 <div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
@@ -27,7 +31,7 @@
     <div class="main-inner" style="margin-top:60px">
      <div class="container">
 
-<div class="row">
+        <div class="row">
        <div class="span12">     
         <div class="widget">
        
@@ -37,35 +41,36 @@
         </div>
        
         <div class="widget-content" style="text-align:center">
-         <form class="form-horizontal" action="" th:action="@{featureUsage}" method="POST">  
-          
-       <h4 style="color:#00AB8B">
-        <i class="icon-calendar" style="width:40px"></i>
-        &nbsp; From &nbsp;
-        <input type="text" name="slotfrom" id="slotfrom" 
-           class="form-control" style="width:160px" value="01/01/2015 00:00:00"/>
         
-        &nbsp;
-        <i class="icon-calendar" style="width:40px;color:#00AB8B"></i>
-        &nbsp;To : &nbsp;
+         <form class="form-horizontal" action="" th:action="@{featureUsage}" method="POST">
+    <h4 style="color:#00AB8B">
+      <div id="datetimepickerFrom1" class="input-append date">
+         &nbsp; From : &nbsp;
+        <input data-format="MM/dd/yyyy hh:mm:ss" type="text" name="slotfrom" id="slotfrom" th:value="${from}"></input>
+        <span class="add-on" style="background-color:#00AB8B;margin-left:-6px">
+         <i class="icon-calendar" style="width:40px;color:white"></i>
+        </span>
+      </div>
+      <div id="datetimepickerTo1" class="input-append date">
+         &nbsp; TO : &nbsp;
+        <input data-format="MM/dd/yyyy hh:mm:ss" type="text" name="slotto" id="slotto" th:value="${to}"></input>
+        <span class="add-on" style="background-color:#00AB8B;margin-left:-6px">
+         <i class="icon-calendar" style="width:40px;color:white"></i>
+        </span>
+      </div>
+      &nbsp;
+      <button class="btn " type="submit" style="background-color:#00AB8B;color:white;">
+        &nbsp;<span th:text="#{modal.button.validate}"></span>
+      </button>
+   </h4>
+ </form>
+ 
         
-        <input type="text" name="slotto" id="slotto" 
-            class="form-control" style="width:160px" value="12/31/2016 00:00:00"/>
-        
-        &nbsp;
-          <button class="btn btn-green" type="submit" style="margin-top:-10px">
-           <i class="icon-calendar icon-white" ></i>
-           &nbsp;<span th:text="#{modal.button.validate}">s</span>
-          </button>
-          </h4>
-     </form>
      </div>
      </div>
      </div>
      </div>
      
-
-
         <div class="row">
         
          <div class="span4">
@@ -77,9 +82,11 @@
   </div>
   <div class="widget-content" style="padding:15x;">
    <div id="pie" class="divpie" style="margin:20px"></div>
-    <script  type="text/javascript">
-        $(document).ready(ff4j_renderPie('pie',  
-        		ff4j_computePieHitRatio('api/featureUsage/pieHitRatio', null, null)));
+    <script th:inline="javascript">
+        var startTime = /*[[${fromJS}]]*/ null;
+        var endTime   = /*[[${toJS}]]*/ null;
+        $(document).ready(ff4j_renderPie('pie', 
+        		ff4j_computePieHitRatio('api/featureUsage/pieHitRatio', startTime, endTime)));
     </script>  
    </div>
 </div>
@@ -96,7 +103,7 @@
    <script>
    
    $(document).ready(function() {
-     var barChart = getBarHitRatio(null, null);
+     var barChart = ff4j_getBarHitRatio(null, null);
 	 
      $('#featureUsageBar').jqplot([barChart.data], {
 	   //title: barChart.title,
@@ -194,6 +201,13 @@
   </div>
 </div>
 
+
+ <script type="text/javascript">
+  $(document).ready(function() {
+    $('#datetimepickerFrom1').datetimepicker({});
+    $('#datetimepickerTo1').datetimepicker({});
+  });
+</script>
    
 </body>
 </html>

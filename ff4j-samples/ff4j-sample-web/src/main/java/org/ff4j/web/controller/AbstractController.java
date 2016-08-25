@@ -40,6 +40,8 @@ import org.ff4j.FF4j;
 import org.ff4j.audit.EventQueryDefinition;
 import org.ff4j.utils.Util;
 import org.ff4j.web.bean.WebConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -50,8 +52,11 @@ import org.thymeleaf.context.WebContext;
  */
 public abstract class AbstractController {
 
+    /** Logger for this class. */
+    public static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
+   
     /** Date format. */
-    protected static SimpleDateFormat SDF = new SimpleDateFormat("YYYYMMdd-HHmmss");
+    protected static SimpleDateFormat SDF = new SimpleDateFormat("yyyyMM-ddHHmmss");
     
     /** Slot for the date. */
     public static final SimpleDateFormat SDFSLOT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
@@ -265,7 +270,9 @@ public abstract class AbstractController {
         EventQueryDefinition def = new EventQueryDefinition();
         try {
             if (isValidParam(req, WebConstants.START_DATE)) {
+                LOGGER.info("StartDate " + req.getParameter(WebConstants.START_DATE));
                 def.setFrom(SDF.parse(req.getParameter(WebConstants.START_DATE)).getTime());
+                LOGGER.info("StartDate " + new Date(def.getFrom()));
             }
             if (isValidParam(req, WebConstants.END_DATE)) {
                 def.setTo(SDF.parse(req.getParameter(WebConstants.END_DATE)).getTime());

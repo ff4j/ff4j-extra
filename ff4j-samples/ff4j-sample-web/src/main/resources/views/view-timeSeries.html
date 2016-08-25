@@ -16,6 +16,11 @@
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js}"></script>
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.BezierCurveRenderer.min.js}"></script>
 <script type="text/javascript" src="" th:src="@{static/js/jqplot/plugins/jqplot.pointLabels.min.js}"></script>
+
+<!-- Date Picker -->
+<script type="text/javascript" src="" th:src="@{static/js/bootstrap-datetimepicker.min.js}"></script>
+<link rel="stylesheet" type="text/css" media="all" href="" th:href="@{static/css/bootstrap-datetimepicker.min.css}" />
+
 <body>
   
 <div class="navbar navbar-fixed-top" th:include="navbar :: navbar"></div>
@@ -28,6 +33,55 @@
    <div id="content" class="clearfix" >
     <div class="main-inner" style="margin-top:60px">
      <div class="container">
+ 
+ <div class="row">
+       <div class="span12">     
+        <div class="widget">
+       
+        <div class="widget-header">
+         <i class="icon-bar-chart"></i>
+         <h3>Audit</h3>
+        </div>
+       
+        <div class="widget-content" style="text-align:center">
+        
+         <form class="form-horizontal" action="" th:action="@{timeSeries}" method="POST">
+    <h4 style="color:#00AB8B">
+      <div id="datetimepickerFrom1" class="input-append date">
+         &nbsp; From : &nbsp;
+        <input data-format="MM/dd/yyyy hh:mm:ss" type="text" name="slotfrom" id="slotfrom" th:value="${from}"></input>
+        <span class="add-on" style="background-color:#00AB8B;margin-left:-6px">
+         <i class="icon-calendar" style="width:40px;color:white"></i>
+        </span>
+      </div>
+      <div id="datetimepickerTo1" class="input-append date">
+         &nbsp; TO : &nbsp;
+        <input data-format="MM/dd/yyyy hh:mm:ss" type="text" name="slotto" id="slotto" th:value="${to}"></input>
+        <span class="add-on" style="background-color:#00AB8B;margin-left:-6px">
+         <i class="icon-calendar" style="width:40px;color:white"></i>
+        </span>
+      </div>
+      &nbsp;
+      <button class="btn " type="submit" style="background-color:#00AB8B;color:white;">
+        &nbsp;<span th:text="#{modal.button.validate}"></span>
+      </button>
+   </h4>
+ </form>
+ 
+ <script type="text/javascript">
+  $(function() {
+    $('#datetimepickerFrom1').datetimepicker({});
+    $('#datetimepickerTo1').datetimepicker({});
+  });
+</script>
+        
+     </div>
+     </div>
+     </div>
+     </div>
+     
+ 
+ 
  
  <div class="row">
     <div class="span12">     
