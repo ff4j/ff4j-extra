@@ -22,9 +22,11 @@ package org.ff4j.test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.ff4j.audit.EventQueryDefinition;
 import org.ff4j.audit.EventSeries;
+import org.ff4j.audit.chart.TimeSeriesChart;
 import org.ff4j.sample.SimpleFF4jProvider;
 import org.junit.Test;
 
@@ -37,25 +39,32 @@ public class AuditTrailTest {
     public void testAudit() {
         SimpleFF4jProvider p = new SimpleFF4jProvider();
         p.populateRepository(100);
+        EventQueryDefinition edf = buildQuery("12/31/2015 00:00:00 - 12/31/2016 00:00:00");
+        EventSeries auditTrail = p.getFF4j().getEventRepository().getAuditTrail(edf);
+        System.out.println(auditTrail.size());
+    }
+    
+    @Test
+    public void testSparkTimeSeries()  {
+        SimpleFF4jProvider p = new SimpleFF4jProvider();
+        p.populateRepository(100);
         
-        String value = "12/31/2015 00:00:00 - 12/31/2016 00:00:00";
+        EventQueryDefinition edf = buildQuery("08/25/2016 00:00:00 - 08/27/2016 00:00:00");
+        TimeSeriesChart tsc =  p.getFF4j().getEventRepository().getFeatureUsageHistory(edf, TimeUnit.HOURS);
+        System.out.println(tsc.toString());
+    }
+   
+    
+    
+    private EventQueryDefinition buildQuery(String slot) {
         EventQueryDefinition edf = new EventQueryDefinition();
-        String[] borders = value.split(" - ");
+        String[] borders = slot.split(" - ");
         try {
             Date from = SDFSLOT.parse(borders[0]);
             Date to   = SDFSLOT.parse(borders[1]);
             edf = new EventQueryDefinition(from.getTime(), to.getTime());
-            System.out.println(from.getTime());
-            System.out.println(to.getTime());
-            
-        } catch (ParseException e) {
-        }
-        
-        EventSeries auditTrail = p.getFF4j().getEventRepository().getAuditTrail(edf);
-        System.out.println(auditTrail.size());
-        
-        
-        
+        } catch (ParseException e) {}
+        return edf;
     }
 
 }

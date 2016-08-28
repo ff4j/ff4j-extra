@@ -103,10 +103,10 @@
    <script>
    
    $(document).ready(function() {
-     var barChart = ff4j_getBarHitRatio(null, null);
+     var barChart = ff4j_getBarHitRatio(startTime, endTime);
 	 
      $('#featureUsageBar').jqplot([barChart.data], {
-	   //title: barChart.title,
+	   title: barChart.title,
 	   seriesColors: barChart.color,
 	   seriesDefaults:{
 	      renderer:        $.jqplot.BarRenderer,
@@ -155,7 +155,7 @@
    <div id="pie-user" class="divpie"></div>
     <script  type="text/javascript">
         $(document).ready(ff4j_renderPie('pie-user',  
-                ff4j_computePieHitRatio('api/featureUsage/pieUserRatio', null, null)));
+                ff4j_computePieHitRatio('api/featureUsage/pieUserRatio', startTime, endTime)));
     </script> 
   </div>
  </div>
@@ -171,7 +171,7 @@
    <div id="pie-host" class="divpie"></div>
      <script  type="text/javascript">
         $(document).ready(ff4j_renderPie('pie-host',  
-                ff4j_computePieHitRatio('api/featureUsage/pieHostRatio', null, null)));
+                ff4j_computePieHitRatio('api/featureUsage/pieHostRatio', startTime, endTime)));
     </script>  
   </div>
  </div>
@@ -187,7 +187,7 @@
     <div id="pie-source" class="divpie"></div>
    <script  type="text/javascript">
         $(document).ready(ff4j_renderPie('pie-source',  
-                ff4j_computePieHitRatio('api/featureUsage/pieSourceRatio', null, null)));
+                ff4j_computePieHitRatio('api/featureUsage/pieSourceRatio', startTime, endTime)));
     </script> 
   </div>
  </div>

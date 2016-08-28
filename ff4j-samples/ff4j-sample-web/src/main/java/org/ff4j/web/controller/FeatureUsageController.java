@@ -47,6 +47,7 @@ public class FeatureUsageController extends AbstractController {
     public void get(HttpServletRequest req, HttpServletResponse res, WebContext ctx)
     throws Exception {
         createPage(ctx,  new EventQueryDefinition());
+        LOGGER.info("Display feature usage");
     }
     
 	/** {@inheritDoc} */
@@ -69,8 +70,6 @@ public class FeatureUsageController extends AbstractController {
         ctx.setVariable("to",   SDFSLOT.format(new Date(eqd.getTo())));
         ctx.setVariable("fromJS", SDF.format(new Date(eqd.getFrom())));
         ctx.setVariable("toJS",   SDF.format(new Date(eqd.getTo())));
-        
-        
     }
 
 }

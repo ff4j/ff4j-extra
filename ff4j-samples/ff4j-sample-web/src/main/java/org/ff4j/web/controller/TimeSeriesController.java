@@ -66,6 +66,8 @@ public class TimeSeriesController extends AbstractController {
         ctx.setVariable(KEY_TITLE, "Time Series");
         ctx.setVariable("from", SDFSLOT.format(new Date(eqd.getFrom())));
         ctx.setVariable("to",   SDFSLOT.format(new Date(eqd.getTo())));
+        ctx.setVariable("fromJS", SDF.format(new Date(eqd.getFrom())));
+        ctx.setVariable("toJS",   SDF.format(new Date(eqd.getTo())));
     }
 
 }

@@ -56,7 +56,7 @@ public abstract class AbstractController {
     public static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
    
     /** Date format. */
-    protected static SimpleDateFormat SDF = new SimpleDateFormat("yyyyMM-ddHHmmss");
+    protected static SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd-HHmmss");
     
     /** Slot for the date. */
     public static final SimpleDateFormat SDFSLOT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
@@ -270,16 +270,12 @@ public abstract class AbstractController {
         EventQueryDefinition def = new EventQueryDefinition();
         try {
             if (isValidParam(req, WebConstants.START_DATE)) {
-                LOGGER.info("StartDate " + req.getParameter(WebConstants.START_DATE));
                 def.setFrom(SDF.parse(req.getParameter(WebConstants.START_DATE)).getTime());
-                LOGGER.info("StartDate " + new Date(def.getFrom()));
             }
             if (isValidParam(req, WebConstants.END_DATE)) {
                 def.setTo(SDF.parse(req.getParameter(WebConstants.END_DATE)).getTime());
             }
-        } catch(ParseException pe) {
-            // Nothing to raise, use default values.
-        }
+        } catch(ParseException pe) {}
         return def;
     }
     

@@ -389,9 +389,77 @@ function ff4j_computePieHitRatio(url, startTime, endTime) {
 	return pieHitRatio;
 }
 
+function ff4j_renderSparkline(div_id, timeSeriesChart) {
+	 console.log(timeSeriesChart);
+	 $.jqplot.config.enablePlugins = true;
+	 $.jqplot(div_id,  timeSeriesChart.serieValues, {
+	   animate: !$.jqplot.use_excanvas,
+	   //stackSeries: true,
+	   seriesDefaults: {
+		 renderer:$.jqplot.BarRenderer,
+	     rendererOptions: {
+	    	 //varyBarColor: true
+	     },
+	     pointLabels: { 
+	    	 show: false 
+	     }
+	   },
+	  
+	   seriesColors: timeSeriesChart.serieColors,
+	   grid: { 
+		   backgroundColor: '#eeffee'
+	   },
+	   axesDefaults: {
+	        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+	        tickOptions: {
+	          angle: -20,
+	          fontSize: '8pt'
+	        }
+	    },
+	   axes: {
+		   xaxis: {
+			   renderer: $.jqplot.CategoryAxisRenderer,
+	           ticks: timeSeriesChart.slots
+	       }
+	   },
+	   legend: {
+		   renderer: $.jqplot.EnhancedLegendRenderer,
+		   	show:true, 
+		    seriesToggle:true,
+		    rendererOptions: {
+		        numberColumns: 1
+		    },
+		    border:    '1px solid #CCCCCC',
+		    rowSpacing:'0.2em',
+		    textColor: 'black',
+		    marginLeft:'20px',
+		    placement: 'outside',
+		    location:  'e',
+		    showSwatch:true,
+		    showLabels:true,
+		    labels:timeSeriesChart.serieNames
+	   }
+	 });
+}
+
+function ff4j_computeSparkline(url, startTime, endTime) {
+	var timeSeriesChart   = new Object();
+	$.ajax({
+	    type : 'GET',
+		url : url,
+		async: false,
+		data : 'sd=' + startTime + "&ed=" + endTime,
+		dataType : 'json',
+		success : function(jsonObj, statut) {
+			timeSeriesChart = jsonObj;
+		}
+	});
+	return timeSeriesChart;
+}
+
 function ff4j_renderPie(div_id, pie) {
 	$.jqplot(div_id, [pie.data], {
-	  	  //title: pie.title, 
+	  	  title: pie.title, 
 	      animate: true,
 	      animateReplot: true,
 	      seriesDefaults:{ 

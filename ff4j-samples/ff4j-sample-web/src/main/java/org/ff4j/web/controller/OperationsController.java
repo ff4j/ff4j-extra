@@ -36,6 +36,7 @@ import static org.ff4j.web.embedded.ConsoleOperations.exportFile;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +47,7 @@ import org.ff4j.audit.Event;
 import org.ff4j.audit.EventQueryDefinition;
 import org.ff4j.audit.chart.BarChart;
 import org.ff4j.audit.chart.PieChart;
+import org.ff4j.audit.chart.TimeSeriesChart;
 import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
 import org.ff4j.web.bean.WebConstants;
@@ -151,14 +153,9 @@ public class OperationsController extends AbstractController {
     private void graphTimeSeriesasJson(HttpServletRequest req, HttpServletResponse res)
     throws IOException {
         res.setContentType(CONTENT_TYPE_JSON);
-        String[] pathParts = req.getPathInfo().split("/");
         EventQueryDefinition query = parseQuery(req);
-        if (pathParts.length > 3) {
-            String graphName = pathParts[3];
-            if (GRAPH_PIE_HITRATIO.equalsIgnoreCase(graphName)) {
-                
-            }
-        }
+        TimeSeriesChart tsc = getFf4j().getEventRepository().getFeatureUsageHistory(query, TimeUnit.HOURS);
+        res.getWriter().println(tsc.toString());
     }
    
     /**
@@ -181,11 +178,9 @@ public class OperationsController extends AbstractController {
             if (GRAPH_PIE_HITRATIO.equalsIgnoreCase(graphName)) {
                 PieChart pc = getFf4j().getEventRepository().getFeatureUsagePieChart(query);
                 res.getWriter().println(pc.toJson());
-                
             } else if (GRAPH_BAR_HITRATIO.equalsIgnoreCase(graphName)) {
                 BarChart bc = getFf4j().getEventRepository().getFeatureUsageBarChart(query);
                 res.getWriter().println(bc.toJson());
-                
             } else if (GRAPH_PIE_HOST.equalsIgnoreCase(graphName)) {
                 PieChart pc = getFf4j().getEventRepository().getHostPieChart(query);
                 res.getWriter().println(pc.toJson());
