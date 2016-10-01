@@ -33,7 +33,7 @@
 
 		<!-- Wev & CORE -->
 		<dependency>
-			<artifactId>ff4j-core</artifactId>
+			<artifactId>ff4j-web</artifactId>
 			<groupId>org.ff4j</groupId>
 			<version>${project.version}</version>
 		</dependency>

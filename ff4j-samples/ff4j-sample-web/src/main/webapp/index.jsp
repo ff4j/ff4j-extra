@@ -13,7 +13,6 @@ body {
 </style>
 <script src="js/jquery.js"></script>
 </head>
-
 <body>
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -36,7 +35,7 @@ body {
 
 	   <div class="jumbotron">
     	
-		<p>Welcome to sample application running console with InMemoryStore</b>
+		<p>Welcome to sample application running console with InMemoryStore</p>
 
 		<p> 
 		 <a href="<%=request.getContextPath()%>/ff4j-console/" class="btn btn-primary" >

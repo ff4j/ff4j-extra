@@ -36,9 +36,9 @@ import org.ff4j.audit.repository.EventRepository;
 import org.ff4j.core.Feature;
 import org.ff4j.utils.TimeUtils;
 import org.ff4j.utils.Util;
-import org.ff4j.web.FF4JProvider;
+import org.ff4j.web.FF4jProvider;
 
-public class SimpleFF4jProvider implements FF4JProvider {
+public class SimpleFF4jProvider implements FF4jProvider {
 
     /** ff4j instance. */
     private final FF4j ff4j;
@@ -47,8 +47,7 @@ public class SimpleFF4jProvider implements FF4JProvider {
     
     private List < String > hostNames = new ArrayList<String>();
     
-    private List < String > users = new ArrayList<String>();
-    
+    private List < String > users = new ArrayList<String>();    
     
     // Utility to generate event
     protected Event generateFeatureUsageEvent(String uid) {
