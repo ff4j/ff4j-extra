@@ -2,7 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ff4j-console-standalone</artifactId>
-    <name>Wrap FF4J application</name>
+    <name>ff4j-console-standalone</name>
+    <description>Wrap FF4J application</description>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- ~         PARENT           ~ -->
@@ -10,12 +11,12 @@
 	<parent>
 		<groupId>org.ff4j</groupId>
 		<artifactId>ff4j-parent</artifactId>
-		<version>1.4</version>
+		<version>1.8.1</version>
 	</parent>
 	
     <properties>
         <bundle.name>ff4j-console-standalone-${project.version}</bundle.name>
-        <jetty.version>9.1.2.v20140210</jetty.version>
+        <jetty.version>9.3.24.v20180605</jetty.version>
     </properties>
 
     <dependencies>
@@ -51,7 +52,7 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-jsp</artifactId>
-			<version>${jetty.version}</version>
+			<version>9.1.2.v20140210</version>
 		</dependency>
         <dependency>
             <groupId>commons-io</groupId>

@@ -34,6 +34,7 @@ import org.ff4j.console.conf.xml.Connection;
 import org.ff4j.console.domain.FeaturesBean;
 import org.ff4j.console.domain.HomeBean;
 import org.ff4j.console.domain.StatisticsBean;
+import org.ff4j.web.api.utils.ClientHttpUtils;
 import org.ff4j.web.jersey2.store.FeatureStoreHttp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,10 +100,10 @@ public class ConsoleHttpClient implements ApplicationConstants  {
      */
     private ClientResponse buildPOSTRequest(String url) {
         if (null != ff4jConnection.getAuthKey() && !"".equals(ff4jConnection.getAuthKey())) {
-            String header = FeatureStoreHttp.buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
+            String header = ClientHttpUtils.buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).post(ClientResponse.class);
         } else if (null != ff4jConnection.getUserName() && !"".equals(ff4jConnection.getUserName())) {
-            String header = FeatureStoreHttp.buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
+            String header = ClientHttpUtils.buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).post(ClientResponse.class);
         }
         return jerseyClient.resource(url).post(ClientResponse.class);
@@ -118,10 +119,10 @@ public class ConsoleHttpClient implements ApplicationConstants  {
      */
     private ClientResponse buildGETRequest(String url) {
         if (null != ff4jConnection.getAuthKey() && !"".equals(ff4jConnection.getAuthKey())) {
-            String header = FeatureStoreHttp.buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
+            String header = ClientHttpUtils.buildAuthorization4ApiKey(ff4jConnection.getAuthKey());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).get(ClientResponse.class);
         } else if (null != ff4jConnection.getUserName() && !"".equals(ff4jConnection.getUserName())) {
-            String header = FeatureStoreHttp.buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
+            String header = ClientHttpUtils.buildAuthorization4UserName(ff4jConnection.getUserName(), ff4jConnection.getPassword());
             return jerseyClient.resource(url).header(HEADER_AUTHORIZATION, header).get(ClientResponse.class);
         }
         return jerseyClient.resource(url).get(ClientResponse.class);

@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.ff4j</groupId>
 		<artifactId>ff4j-parent</artifactId>
-		<version>1.5</version>
+		<version>1.8.1</version>
 	</parent>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -58,6 +58,11 @@
 		<dependency>
 			<groupId>org.ff4j</groupId>
 			<artifactId>ff4j-security-spring</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-webapi</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -232,7 +237,7 @@
 					<plugin>
 						<groupId>org.jvnet.jaxb2.maven2</groupId>
 						<artifactId>maven-jaxb2-plugin</artifactId>
-						<version>0.8.0</version>
+						<version>0.14.0</version>
 						<executions>
 							<execution>
 								<id>generation-bean-console</id>
