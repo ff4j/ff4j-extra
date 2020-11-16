@@ -16,7 +16,7 @@
 	
     <properties>
         <bundle.name>ff4j-console-standalone-${project.version}</bundle.name>
-        <jetty.version>9.3.24.v20180605</jetty.version>
+        <jetty.version>9.4.34.v20201102</jetty.version>
     </properties>
 
     <dependencies>
