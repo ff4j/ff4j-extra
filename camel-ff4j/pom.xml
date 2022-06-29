@@ -34,7 +34,7 @@
    <dependency>
       <groupId>org.ff4j</groupId>
       <artifactId>ff4j-core</artifactId>
-      <version>1.4</version>
+      <version>1.8.13</version>
     </dependency>  
     <dependency>
       <groupId>org.apache.camel</groupId>
